@@ -120,6 +120,7 @@ test('per-candidate fetch failures are counted and later automatic candidates st
  assert.equal(result.coverage.failed,1);assert.equal(result.coverage.completed,3);assert.equal(result.results.length,3);assert.equal(result.coverage.failures.length,1);assert.equal(result.coverage.cancelled,false);
 });
 test('coastal automatic windows remain in excluded records rather than receiving a score',async()=>{
- mockTiles();const result=await scanEarthRegion({bounds:{north:0.1,south:-0.1,west:0,east:0.1},stepDegrees:1,maxCandidates:1,targetTerrain:target,landmask:polygon(0,-5,5,5)});
+ mockTiles();const seen=[],controller=new AbortController();const result=await scanEarthRegion({bounds:{north:0.1,south:-0.1,west:0,east:0.2},stepDegrees:0.1,maxCandidates:4,targetTerrain:target,landmask:polygon(0,-5,5,5),signal:controller.signal,onResult:item=>{seen.push(item);controller.abort();}});
  assert.equal(result.coverage.excluded,1);assert.equal(result.results.length,0);assert.equal(result.excluded.length,1);assert.equal(result.excluded[0].data.comparisonEligible,false);
+ assert.equal(result.coverage.cancelled,true);assert.equal(result.coverage.completed,1);assert.equal(result.coverage.planned,4);assert.equal(seen.length,1);assert.equal(seen[0].comparison,undefined);assert.equal(seen[0].data.source.landScreening.samples.length,25);assert.ok(!seen[0].data.source.landScreening.samples[0].mappedLand);
 });

@@ -30,6 +30,11 @@ GeoJSON coordinates use longitude, latitude order in geographic degrees. A
 point-in-polygon implementation must respect polygon holes. Coastline boundary
 points are intrinsically uncertain at this scale.
 
+New runtime screening records retain all 25 coordinates and mapped-land results.
+Coverage-review windows stay selectable in Compare, with no score or rank. The
+full DEM statistics can include water/bathymetry. Historical cached summaries
+remain summaries until re-analysis; missing point records are not reconstructed.
+
 ## Validation
 
 - Parsed successfully as a GeoJSON FeatureCollection: 127 Polygon features,

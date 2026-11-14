@@ -56,7 +56,11 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
 7. Switch **Surface / Slope / Elevation** layers. Inspect and save geolocated
    terrain observations with optional notes. Notes persist in browser local storage.
 8. Use **Compare** for measurements, profiles, slope histograms and candidate
-   rankings. Earth candidates can also be explored in 3D.
+   rankings. All successfully loaded Earth windows remain selectable, including
+   windows marked **Coverage review required**. Their terrain score and ranking
+   are withheld; measurements describe the full DEM window and may include water
+   or bathymetry. New searches record all 25 coarse land-screen sample locations
+   for inspection. Earth candidates can also be explored in 3D.
 9. Export the Markdown comparison report, evidence JSON or field notebook. Each
    contains source information; reports include the method, candidate origin,
    recorded survey coverage and interpretation limits.
@@ -146,7 +150,8 @@ On-demand windows use RGB-encoded Mapzen / Tilezen Terrarium mixed-source DEM ti
 Direct PNG decoding avoids color conversion, retains negative land elevations,
 and samples pixel centers across tile seams. Search supports centers between
 84° S and 84° N. A 5 × 5 Natural Earth land-mask screen excludes windows containing
-mapped non-land samples from inland ranking. It is a coarse screen, not proof
+mapped non-land samples from scores and inland ranking, while retaining access
+to Compare, provenance, exports and 3D inspection. It is a coarse screen, not proof
 that every point is dry land, and it does not reliably classify inland lakes.
 
 ## Scope and scientific interpretation

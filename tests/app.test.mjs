@@ -21,7 +21,7 @@ test('mission, comparison, source records, filters and exports work together',as
   try{
     await import('../dist/js/app.js');
     for(let i=0;i<100&&!browser.__TERRAMATCH__;i++)await new Promise(resolve=>setTimeout(resolve,5));
-    const api=browser.__TERRAMATCH__;assert.ok(api,'app initialization finished');assert.equal(api.state.terrains.size,6);assert.equal(api.state.ready,true);assert.equal(api.state.rankings.length,3);assert.equal(document.querySelectorAll('.candidate-card').length,3);
+    const api=browser.__TERRAMATCH__;assert.ok(api,'app initialization finished');assert.equal(api.state.terrains.size,6);assert.equal(api.state.ready,true);assert.equal(api.state.rankings.length,3);assert.equal(document.querySelectorAll('.candidate-card').length,4);
     assert.ok(!api.state.rankings.some(r=>r.site.id==='lanzarote'));
     document.querySelector('[data-view="compare"]').click();assert.equal(api.state.view,'compare');assert.equal(document.querySelectorAll('.chart-svg').length,2);assert.match(document.querySelector('#comparison-workspace').textContent,/Terrain resemblance index/);
     const target=document.querySelector('#comparison-target');target.value='shackleton';target.dispatchEvent(new browser.Event('change'));assert.equal(api.state.targetId,'shackleton');assert.equal(api.state.body,'moon');assert.match(document.querySelector('#comparison-workspace').textContent,/Shackleton/);

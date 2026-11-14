@@ -497,3 +497,51 @@ Source opened atdf03733 before edits. A bounded agent owned only procedural
 model, model tests and LANDER-MODEL.md; root integrated arrival/effects/app/tests
 and publication. Preserve prior source provenance, collaborators and Site
 audience. Publish this source and synchronize the same commit to GitHub.
+
+## 2026-11-14 — Compare access for all loaded Earth windows
+
+The owner approved the general Compare coverage-review change, for all manual and
+automatic searches. Site source was opened/synchronized at `caf12eb` before edits.
+
+- All loaded Earth windows, including coastal Lanzarote and excluded search
+  results, remain selectable in Compare and the expedition comparison sidebar.
+  Explore cards distinguish ranked windows from unranked coverage-review windows.
+- `comparison-status.js` conservatively combines site, terrain and recorded
+  land-screen exclusions. The ranking filter and numerical `compareTerrains`
+  guard remain active. No override marks coverage validated.
+- Review windows display **Coverage review required**, their screening summary,
+  source inspection, and a clear full-window DEM/bathymetry caveat. Charts and
+  raw terrain statistics remain inspectable. Score and ranking are withheld.
+  JSON exports use null score/similarity, an empty component list and explicit
+  review status; Markdown exports state that the index is withheld.
+- New search records retain all 25 land-mask sample coordinates/results. Old
+  cached summary-only records stay inspectable and request re-analysis for point
+  details; coordinates are not invented. At example center 1.5535 N, 110.3593 E,
+  the actual bundled mask returns 22/25 mapped-land samples, with non-land at
+  zero-based row 0, columns 2/3/4. This is a specified example window, not a claim
+  to have recovered the owner's exact previous cached Kuching center or a city-wide
+  suitability decision.
+- Automatic search emits completed review windows through `onResult`, retains
+  them in `excluded`, registers/caches them, and exposes evidence actions without
+  scores. Survey candidate IDs and discovery provenance include them. An all-review
+  survey is explicitly distinguished from a failed or empty survey.
+- Select values are explicitly synchronized after rebuilding comparison HTML.
+  Switching between eligible and review windows, tasks and exports preserves the
+  appropriate score state. Failed fetches never register a substitute window.
+
+Validation: `npm run check` passed (34 JSON files), `npm test` passed **108/108**,
+and `git diff --check` passed. Expanded DOM workflow tests exercise manual coastal
+search, all-review automatic search, source details, both exports, sidebar,
+summary-only cache restoration, eligible-window switching and failed fetches.
+Terrain tests verify source-screen guards and delivery of excluded scan results.
+Network terrain responses in these tests are fixtures; the Kuching screening uses
+the real bundled Natural Earth mask. No production dataset was regenerated.
+
+Current CUA inventory reports no browser surfaces: "The browser access host is
+unavailable". Browser/GPU visual QA for this release remains unverified. No
+alternate browser automation was used. No robot redesign, additional planetary
+target, ice module, audience change or unrelated feature is included.
+
+Publication uses the existing Site project and owner-only access, with the source
+helper owning commit/push/archive and the same source commit synchronized to
+GitHub. Actual commit/deployment IDs are reported from tool results separately.

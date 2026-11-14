@@ -155,9 +155,9 @@ export function isLand(lon,lat,geojson){if(!Number.isFinite(lon)||!Number.isFini
 function windowBounds(lat,lon){const dlat=EXTENT/2/R/DEG,dlon=dlat/Math.cos(lat*DEG),west=lon-dlon,east=lon+dlon;return {north:lat+dlat,south:lat-dlat,west,east,crossesAntimeridian:west < -180||east>180};}
 export function landWindowCoverage(bounds,geojson){
   if(!geojson)throw new Error('A land-mask GeoJSON is required for coastal screening.');
-  const b=normalizeBounds(bounds,{allowWindowLatitude:true});let land=0;
-  for(let row=0;row<5;row++)for(let col=0;col<5;col++){const lat=b.north+(b.south-b.north)*row/4,lon=b.west+(b.east-b.west)*col/4;if(isLand(lon,lat,geojson))land++;}
-  return {land,total:25,fraction:land/25,allLand:land===25,method:'5 × 5 samples against Natural Earth 1:110m land polygons; coarse coastline screen only, not a detailed inland-water classification.'};
+  const b=normalizeBounds(bounds,{allowWindowLatitude:true});let land=0;const samples=[];
+  for(let row=0;row<5;row++)for(let col=0;col<5;col++){const lat=b.north+(b.south-b.north)*row/4,lon=wrapLon(b.west+(b.east-b.west)*col/4),mappedLand=isLand(lon,lat,geojson);if(mappedLand)land++;samples.push({row,col,lat,lon,mappedLand});}
+  return {samples,land,total:25,fraction:land/25,allLand:land===25,method:'5 × 5 samples against Natural Earth 1:110m land polygons; coarse coastline screen only, not a detailed inland-water classification.'};
 }
 
 export function parseCoordinates(text){
@@ -256,7 +256,7 @@ export async function scanEarthRegion({bounds,stepDegrees=2,maxCandidates=24,tar
       try{
         const item=await loadEarthWindow({...center,name:`Earth ${center.lat.toFixed(3)}°, ${center.lon.toFixed(3)}°`,origin:'automatic',signal,landmask:mask,onProgress:tileProgress=>emit(onProgress,{phase:'scan',stage:'scan',...coverage,current:center,tileProgress,message:tileProgress.message})});
         coverage.completed++;
-        if(!item.site.comparisonEligible){coverage.excluded++;excluded.push({...item,reason:'Coarse land screen includes non-land samples.'});}
+        if(!item.site.comparisonEligible){coverage.excluded++;const review={...item,reason:'Coarse land screen includes non-land samples.'};excluded.push(review);emit(onResult,review);}
         else{const result={...item,comparison:compareTerrains(targetTerrain,item.data,weights)};results.push(result);emit(onResult,result);}
       }catch(error){if(isAbort(error,signal))throw error;coverage.failed++;coverage.failures.push({...center,message:error.message});}
     }

@@ -1,3 +1,4 @@
+import {comparisonStatus} from './comparison-status.js';
 /** TerraMatch's reproducible terrain comparison. All terrain heights are sourced, not generated. */
 export const SOURCES = [
   { id: 'mola', title: 'MGS MOLA MEGDR, 128 pixels per degree', agency: 'NASA / PDS Geosciences', url: 'https://pds-geosciences.wustl.edu/missions/mgs/megdr.html', license: 'NASA planetary archive; cite MOLA science team and dataset.', note: 'Altimeter-derived gridded topography relative to the Mars areoid. Cells without observations can be interpolated. Native north–south spacing is approximately 463 m.' },
@@ -92,7 +93,7 @@ export function analyzeTerrain(data) {
 }
 
 export function compareTerrains(target, earth, weights = {}) {
-  if(target.comparisonEligible===false||earth.comparisonEligible===false)throw new Error('This terrain window is excluded from ranking because it includes coastal bathymetry.');
+  if(!comparisonStatus(null,target).scoreEligible||!comparisonStatus(null,earth).scoreEligible)throw new Error('This terrain window is excluded from ranking because its land coverage needs review (coastal bathymetry or coarse land-screen exclusion).');
   const a=target.heights?analyzeTerrain(target):target,b=earth.heights?analyzeTerrain(earth):earth;
   if(a.slopeHistogram?.length!==b.slopeHistogram?.length)throw new Error('Matched slope histogram bins are required.');
   const distance=0.5*a.slopeHistogram.reduce((sum,p,index)=>sum+Math.abs(p-b.slopeHistogram[index]),0);

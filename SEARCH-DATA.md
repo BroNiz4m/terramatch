@@ -48,6 +48,21 @@ https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
 
 The land screen uses **25 sample positions** across the window. A window with any sample outside the approximate land polygons remains inspectable but is excluded from terrestrial ranking. Polygon holes and antimeridian-crossing rings are handled explicitly.
 
+Every successfully loaded manual or automatic window can be selected in Compare.
+Excluded windows show **Coverage review required**, with no terrain score or rank.
+Their measurements and charts describe the whole DEM window, potentially including
+water or bathymetry; they are not land-only statistics. The same status appears in
+the expedition comparison sidebar and exports. Evidence JSON uses
+`comparison.status: "coverage-review-required"`, null `score`/`similarity`, and no
+scored components. No manual override declares the window validated.
+
+New `source.landScreening.samples` records contain each point's zero-based row and
+column, latitude, normalized longitude, and `mappedLand` result. Compare lists all
+25 points, their counts and the original mask/terrain provenance. Older cached
+records retain their recorded summary; missing point coordinates are not invented.
+Analyze the location again to record those details. The bundled coastal Lanzarote
+window is also inspectable without becoming eligible for ranking.
+
 This is coarse coastal screening. It does not resolve every small island, coastline, inland lake or other water body. Passing the screen is not proof that an entire window is dry land, accessible or suitable for field operations. Detailed land-cover/water masks would be needed to make those claims.
 
 **Negative elevations are retained.** Below-sea-level terrestrial sites such as Death Valley are not classified as ocean merely because their heights are negative.
@@ -73,6 +88,14 @@ Each selected window is fetched and analyzed independently. Results are ranked b
 This is a **bounded sampled regional search**, not an exhaustive global search or proof that the best possible Earth analog has been found. Terrain similarity alone does not establish geological, mineralogical, thermal, biological or operational equivalence.
 
 Cancellation returns the results that completed before cancellation, marked with `coverage.cancelled: true`. Per-candidate data errors are counted and recorded; later candidates continue. There is no fallback to invented terrain or to silently ranking the bundled catalogue.
+
+`onResult` now receives every completed window, including coverage-review windows.
+Only eligible items have a `comparison` object and enter `results`; review items
+remain in `excluded`, also reach the UI/cache, and have evidence buttons without
+scores. Completed review windows remain available after cancellation. Survey
+`candidateIds` includes both sets so discovery provenance is retained. A survey
+with only review windows reports that state explicitly; it does not report a
+fetch failure or assign a zero score.
 
 ## Resource and cancellation behavior
 
