@@ -4,3 +4,6 @@ node_modules/
 .env
 tmp/
 test-results/
+.openai/
+HANDOFF.md
+
