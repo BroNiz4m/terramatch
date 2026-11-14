@@ -270,3 +270,68 @@ Unchanged: all work is local and uncommitted. Nothing was committed, pushed or d
 - Live URL: https://terramatch-expedition.nizamkasema.chatgpt.site
 - Source files do not themselves certify a deployment. The GitHub commit history
   and Sites deployment result identify the final published revision and status.
+
+## 2026-11-14 — Codex: ice-source audit, before implementation
+
+### Scope
+
+The owner approved the next step specifically as a source audit before writing
+the ice module. GitHub and the working tree were checked first; the current
+application baseline was `58b1fbc`. No application file, bundled production
+dataset, score, dependency or hosting configuration was changed by this audit.
+
+### New files
+
+- `ICE-SOURCE-AUDIT.md`: source decisions, primary references, evidence classes,
+  access limits, candidate geography checks and release gates.
+- `scripts/audit-ice-sources.mjs`: bounded public-source probes; writes only
+  research evidence, not application datasets.
+- `research/ice-audit-2026-11-14/probes.json`: this run's response metadata,
+  hashes, five exact Diviner facet probes and selected glacier/COG metadata.
+
+### Main findings
+
+- Diviner `ice_depth` is modelled sublimation-stability depth, not detection.
+  Three sampled depths were positive; two were `-1`, including the Shackleton
+  centre facet. The meaning of `-1` was not established. The product XML lists
+  `-999` for excluded depths while the SIS lists `-32768`; do not guess a complete
+  classifier or infer ice presence/absence from these values.
+- Published M3 spectral detection evidence is relevant, but an attributable
+  georeferenced detection mask was not acquired. Do not digitise the publication
+  illustration into a claimed detection layer.
+- GLIMS REST discovery, search and bounds work with the current Site origin.
+  Three tested WFS/WMS endpoints returned 404. Metadata and bounds were obtained
+  for Longyearbreen analysis `994985`, observation date `2016-08-23`. Full outline
+  geometry was not verified. Duplicate contributor rows, historical/split
+  outlines, ambiguous names and observation dates require explicit handling.
+- A Taylor Glacier name query returned Alaska metadata; the tested `country=AQ`
+  parameter did not remove it. Coordinates must validate the intended region.
+- ESA WorldCover 2021 v200 class 70 combines persistent snow and glaciers. The
+  Svalbard tile returned an exact 4 KiB TIFF range, but no allow-origin header.
+  No numerical class pixels or quality layer were decoded. Antarctica is outside
+  this product's coverage.
+- MOD10A1.061 can provide seasonal snow context; its scientific data access
+  requires Earthdata Login, and cloud/polar-night flags are not no-snow evidence.
+- These sources are incompatible quantities, so no common ice-match score is
+  justified. Longyearbreen is an access example, not a verified new lunar analog.
+
+### Verification and next implementation step
+
+- `node --check scripts/audit-ice-sources.mjs`: passed.
+- `node scripts/audit-ice-sources.mjs`: passed; all three bounded source probes
+  completed and produced the research report. The five facet temperatures match
+  the existing thermal provenance exactly.
+- `git diff --check`: passed.
+- No application tests or browser/GPU tests were rerun: application code was
+  unchanged. The previous integration release passed 63 automated tests.
+- Next: resolve or visibly quarantine unknown model values, acquire real dated
+  glacier geometry or decode/quality-screen actual Earth classification pixels,
+  then implement separately labelled evidence with provenance and no-data states.
+  Check the complete candidate terrain window and existing land screen first.
+
+### Publication scope
+
+The audit files are intended for the collaboration GitHub repository. They do
+not constitute an ice feature or a new Site release; the live application
+remains the integration release. Verify final GitHub publication from its commit
+history rather than assuming an audit document changes the live application.

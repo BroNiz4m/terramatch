@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-11-14T12:22:57.224Z",
+  "scope": "Source audit only; no application ice layer or ice score implemented.",
+  "results": [
+    {
+      "name": "Diviner PRP",
+      "evidenceType": "modelled_stability",
+      "label": {
+        "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/dlre_prp_south.xml",
+        "status": 200,
+        "contentType": "application/xml",
+        "accessControlAllowOrigin": null,
+        "contentRange": null,
+        "bytes": 14561,
+        "sha256": "24a7bba837bbf013f59dc657a8766b6c4d1d06c0d4eea35a5f497908b17beece"
+      },
+      "field": {
+        "name": "ice_depth",
+        "oneBasedByte": 198,
+        "widthBytes": 11,
+        "unit": "m",
+        "modelSublimationCriterion": "1 kg m^-2 per billion years",
+        "productLabelInvalidConstant": -999,
+        "sisInvalidConstant": -32768,
+        "negativeOneMeaning": "Not established by inspected documentation; do not infer ice presence or absence."
+      },
+      "samples": [
+        {
+          "index": 0,
+          "sourceRecord": 1395568,
+          "range": [
+            293069280,
+            293069489
+          ],
+          "sha256": "fc24a9ab960903653304841d8d91a2f78addf3378f946081c4db31c87a078f31",
+          "latitude": -89.58555603,
+          "longitude": -41.185901642,
+          "tempMaxK": 163.9,
+          "iceDepthRaw": "0.00670",
+          "iceDepthMeters": 0.0067,
+          "interpretation": "model_positive_stability_depth",
+          "iceDetectionClaim": false
+        },
+        {
+          "index": 2112,
+          "sourceRecord": 1470031,
+          "range": [
+            308706510,
+            308706719
+          ],
+          "sha256": "4e03cdb3ba6ec1185455d8e98ca81708a6a6035f4de2db93b061728cc40f7388",
+          "latitude": -89.667678833,
+          "longitude": 129.559707642,
+          "tempMaxK": 85.199,
+          "iceDepthRaw": "-1.00000",
+          "iceDepthMeters": -1,
+          "interpretation": "unresolved_negative_value",
+          "iceDetectionClaim": false
+        },
+        {
+          "index": 387,
+          "sourceRecord": 1407690,
+          "range": [
+            295614900,
+            295615109
+          ],
+          "sha256": "87f875cd25cc047c7e54940ddb1b675645c8c620fc7bb194fb1fd32f22af1219",
+          "latitude": -89.219520569,
+          "longitude": 72.987442017,
+          "tempMaxK": 45.332,
+          "iceDepthRaw": "-1.00000",
+          "iceDepthMeters": -1,
+          "interpretation": "unresolved_negative_value",
+          "iceDetectionClaim": false
+        },
+        {
+          "index": 1068,
+          "sourceRecord": 1431623,
+          "range": [
+            300640830,
+            300641039
+          ],
+          "sha256": "70b0fce53206fe8869b5733f4b4930b0133ab54b50e7dafeda902fe2423232e5",
+          "latitude": -89.802612305,
+          "longitude": 73.610092163,
+          "tempMaxK": 347.495,
+          "iceDepthRaw": "0.10419",
+          "iceDepthMeters": 0.10419,
+          "interpretation": "model_positive_stability_depth",
+          "iceDetectionClaim": false
+        },
+        {
+          "index": 4224,
+          "sourceRecord": 1546894,
+          "range": [
+            324847740,
+            324847949
+          ],
+          "sha256": "b3dbcdd1d628ee93db1ee8aee3563cd1f4d668b9074a7475c22164405bda6127",
+          "latitude": -88.924507141,
+          "longitude": 133.531204224,
+          "tempMaxK": 211.361,
+          "iceDepthRaw": "0.03767",
+          "iceDepthMeters": 0.03767,
+          "interpretation": "model_positive_stability_depth",
+          "iceDetectionClaim": false
+        }
+      ]
+    },
+    {
+      "name": "GLIMS",
+      "evidenceType": "mapped_glacier_extent",
+      "serviceDiscovery": {
+        "url": "https://www.glims.org/services",
+        "status": 200,
+        "contentType": "application/json",
+        "accessControlAllowOrigin": "https://terramatch-expedition.nizamkasema.chatgpt.site",
+        "contentRange": null,
+        "bytes": 1222,
+        "sha256": "bdbd1b9171396eaa32629fd00af28f7e8a2868eb86826baa1ae1e41f30d5ed69"
+      },
+      "search": {
+        "url": "https://www.glims.org/services/search?glac_name=Longyearbreen&results_count=50",
+        "status": 200,
+        "contentType": "application/json",
+        "accessControlAllowOrigin": "https://terramatch-expedition.nizamkasema.chatgpt.site",
+        "contentRange": null,
+        "bytes": 14921,
+        "sha256": "5c268948d0ac3dde34c1a2fc9a9f7b5196c4af4287f858b2642eded6173aaa4c"
+      },
+      "reportedRows": 20,
+      "returnedRows": 20,
+      "uniqueAnalyses": [
+        {
+          "analysisId": 104167,
+          "glacierId": "G015474E78170N",
+          "name": "Longyearbreen",
+          "sourceDate": "2003-07-12",
+          "analysisDate": "2010-01-01",
+          "calculatedAreaKm2": 2.95007
+        },
+        {
+          "analysisId": 521096,
+          "glacierId": "G015474E78170N",
+          "name": "Longyearbreen",
+          "sourceDate": "1936-01-01",
+          "analysisDate": "2017-10-01",
+          "calculatedAreaKm2": 3.9742
+        },
+        {
+          "analysisId": 522329,
+          "glacierId": "G015474E78170N",
+          "name": "Longyearbreen",
+          "sourceDate": "1990-07-31",
+          "analysisDate": "2017-10-01",
+          "calculatedAreaKm2": 3.13063
+        },
+        {
+          "analysisId": 994985,
+          "glacierId": "G015474E78170N",
+          "name": "Longyearbreen",
+          "sourceDate": "2016-08-23",
+          "analysisDate": "2020-07-13",
+          "calculatedAreaKm2": 1.59787
+        },
+        {
+          "analysisId": 994979,
+          "glacierId": "G015410E78171N",
+          "name": "Longyearbreen",
+          "sourceDate": "2016-08-23",
+          "analysisDate": "2020-07-13",
+          "calculatedAreaKm2": 0.641008
+        }
+      ],
+      "selectedAnalysis": {
+        "analysisId": 994985,
+        "glacierId": "G015474E78170N",
+        "name": "Longyearbreen",
+        "sourceDate": "2016-08-23",
+        "analysisDate": "2020-07-13",
+        "calculatedAreaKm2": 1.59787
+      },
+      "boundsProbe": {
+        "url": "https://www.glims.org/services/glacierbounds?anlys_id=994985",
+        "status": 200,
+        "contentType": "application/json",
+        "accessControlAllowOrigin": "https://terramatch-expedition.nizamkasema.chatgpt.site",
+        "contentRange": null,
+        "bytes": 102,
+        "sha256": "a92084f0d27f7fa3a63ad3d586d9521fa9ca8d09c162d2145e5855501033f8cd",
+        "glacierId": "G015474E78170N",
+        "west": 15.421543,
+        "south": 78.161203,
+        "east": 15.532312,
+        "north": 78.189819
+      },
+      "fullOutlineGeometryVerified": false,
+      "serviceProbes": [
+        {
+          "url": "https://www.glims.org/geoserver/ows?service=WFS&version=2.0.0&request=GetCapabilities",
+          "status": 404,
+          "contentType": "text/plain; charset=utf-8",
+          "accessControlAllowOrigin": null,
+          "contentRange": null,
+          "bytes": 19,
+          "sha256": "b16e15764b8bc06c5c3f9f19bc8b99fa48e7894aa5a6ccdad65da49bbf564793"
+        },
+        {
+          "url": "https://www.glims.org/geoserver/GLIMS/wfs?service=WFS&version=2.0.0&request=GetCapabilities",
+          "status": 404,
+          "contentType": "text/plain; charset=utf-8",
+          "accessControlAllowOrigin": null,
+          "contentRange": null,
+          "bytes": 19,
+          "sha256": "b16e15764b8bc06c5c3f9f19bc8b99fa48e7894aa5a6ccdad65da49bbf564793"
+        },
+        {
+          "url": "https://www.glims.org/geoserver/GLIMS/wms?service=WMS&version=1.3.0&request=GetCapabilities",
+          "status": 404,
+          "contentType": "text/plain; charset=utf-8",
+          "accessControlAllowOrigin": null,
+          "contentRange": null,
+          "bytes": 19,
+          "sha256": "b16e15764b8bc06c5c3f9f19bc8b99fa48e7894aa5a6ccdad65da49bbf564793"
+        }
+      ],
+      "limitations": [
+        "Search rows can repeat an analysis for multiple contributors; deduplicate by glacier ID and analysis ID.",
+        "Prefer observation/source date over processing date; geometry and topology can differ between analyses.",
+        "The bounds endpoint is not a glacier polygon. No area mask or no-ice claim can be inferred from it.",
+        "A zero-result name query does not establish absence of ice."
+      ]
+    },
+    {
+      "name": "ESA WorldCover",
+      "evidenceType": "classified_persistent_snow_or_ice",
+      "probe": {
+        "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N78E015_Map.tif",
+        "status": 206,
+        "contentType": "binary/octet-stream",
+        "accessControlAllowOrigin": null,
+        "contentRange": "bytes 0-4095/20245485",
+        "bytes": 4096,
+        "sha256": "362ccc2f6f12a13be05de7b3772fdab5ea328163ae3058276cd1ff9e56b71c2f"
+      },
+      "tiff": {
+        "signature": "II/42",
+        "ifdOffset": 192,
+        "widthPixels": 36000,
+        "heightPixels": 36000,
+        "bitsPerSample": 8,
+        "compressionCode": 8,
+        "samplesPerPixel": 1
+      },
+      "referenceYear": 2021,
+      "algorithmVersion": "v200",
+      "snowIceClass": 70,
+      "numericalClassPixelsDecoded": false,
+      "limitations": [
+        "Metadata/range access only: no class-70 area or point values were calculated.",
+        "This source excludes Antarctica and is limited to 82.75 degrees north.",
+        "Class 70 combines persistent snow and glaciers; it is not an ice-purity or subsurface-ice measurement.",
+        "Missing Access-Control-Allow-Origin on this probe means direct browser access is not established; offline bundled ingestion is an alternative."
+      ]
+    }
+  ]
+}
