@@ -23,7 +23,8 @@ test('bilinear interpolation preserves corners, midpoint and bounds',()=>{
 test('changing weights affects the chosen measures and cannot create an empty index',()=>{
   const a=flat(0),b=flat(0);b.heights=b.heights.map((_,i)=>i%5*20);
   assert.throws(()=>compareTerrains(a,b,{slope:0,relief:0}),/at least one/i);
-  const r=compareTerrains(a,b,{slope:1,relief:0});assert.equal(r.components[0].weight,1);assert.equal(r.components[1].weight,0);assert.equal(r.score,Math.round(r.components[0].score*10)/10);
+  const r=compareTerrains(a,b,{slope:1,relief:0});assert.equal(r.components[0].weight,1);assert.equal(r.components[1].weight,0);assert.equal(r.score,Math.round(r.components[0].score*10)/10);assert.match(r.method,/1\.000000 × slope/);assert.match(r.method,/0\.000000 × normalized log relief/);
+  const reliefOnly=compareTerrains(a,b,{slope:0,relief:1});assert.match(reliefOnly.method,/0\.000000 × slope/);assert.match(reliefOnly.method,/1\.000000 × normalized log relief/);
 });
 test('incomplete and nonfinite grids are rejected instead of silently filling values',()=>{
   assert.throws(()=>analyzeTerrain({...flat(0),heights:[0,1,2]}));const data=flat(0);data.heights[5]=NaN;assert.throws(()=>analyzeTerrain(data));

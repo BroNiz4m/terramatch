@@ -34,7 +34,7 @@ export const METHOD = {
   gridSpacingMeters: 500,
   gradientBaselineMeters: 1000,
   extentMeters: 32000,
-  description: 'All terrain windows are sampled to a 65 × 65 grid with 500 m spacing. Interior slopes use central differences over a 1,000 m baseline. Score = 100 × [1 − (0.65 × slope-distribution total-variation distance + 0.35 × normalized log relief difference)].',
+  description: 'All terrain windows are sampled to a 65 × 65 grid with 500 m spacing. Interior slopes use central differences over a 1,000 m baseline. Default index = 100 × [1 − (0.65 × slope-distribution total-variation distance + 0.35 × normalized log relief difference)]. Active weights are recorded with each comparison.',
   limitations: 'A transparent terrain-only heuristic, not a probability, validated mission-suitability model, discovery claim or assessment of landing/base safety. Material, temperature, ice and biological similarity are not scored.',
 };
 
@@ -99,5 +99,6 @@ export function compareTerrains(target, earth, weights = {}) {
   const sw=Number.isFinite(weights.slope)?Math.max(0,weights.slope):0.65,rw=Number.isFinite(weights.relief)?Math.max(0,weights.relief):0.35,total=sw+rw;
   if(total===0)throw new Error('At least one terrain comparison weight must be positive.');
   const score=100*(1-(sw*distance+rw*reliefDistance)/total);
-  return {score:Math.round(score*10)/10,similarity:Math.round(score*10)/10,slopeDistance:distance,reliefDistance,components:[{id:'slope',name:'Slope distribution',score:100*(1-distance),weight:sw/total,target:a.slopeMean,earth:b.slopeMean,unit:'degrees'},{id:'relief',name:'Relative relief',score:100*(1-reliefDistance),weight:rw/total,target:a.relief,earth:b.relief,unit:'m'}],method:METHOD.description,scope:'Terrain only',limitations:METHOD.limitations,unassessed:['Surface materials','Temperature','Water or ice','Biology','Accessibility','Landing or base safety'],targetStats:a,earthStats:b};
+  const activeMethod=`Index = 100 × [1 − (${(sw/total).toFixed(6)} × slope-distribution total-variation distance + ${(rw/total).toFixed(6)} × normalized log relief difference)]. All windows use 500 m sampling and 1,000 m gradient baselines.`;
+  return {score:Math.round(score*10)/10,similarity:Math.round(score*10)/10,slopeDistance:distance,reliefDistance,components:[{id:'slope',name:'Slope distribution',score:100*(1-distance),weight:sw/total,target:a.slopeMean,earth:b.slopeMean,unit:'degrees'},{id:'relief',name:'Relative relief',score:100*(1-reliefDistance),weight:rw/total,target:a.relief,earth:b.relief,unit:'m'}],method:activeMethod,scope:'Terrain only',limitations:METHOD.limitations,unassessed:['Surface materials','Temperature','Water or ice','Biology','Accessibility','Landing or base safety'],targetStats:a,earthStats:b};
 }
