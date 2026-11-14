@@ -14,12 +14,26 @@ world Y, and each leg solves a two-link joint pose to its own grounded foot.
 `userData.animate({dt,time,walking,speed,terrainHeight})` is an equivalent alias.
 `userData.setWalking(bool)`, `legs`, `body`, `head`, `footCount` are also exposed.
 
-The cargo lander has an actual payload opening, interior, a top-hinged cargo door,
-and a ramp that unfolds to the ground. Call `lander.userData.setDeployment(0..1)`
-to open the door and then lower the ramp. Call `setThrust(0..2)` to show the visual
-exhaust. The closed model is about 11.9 visual metres high; its ramp is 4.15 metres
-long with a sill at 1.24 metres. Ground feet are at Y=0. The lander exposes
-`doorPivot`, `rampPivot`, `flames`, `rampLength`, and `rampHeight`.
+The **TerraMatch Cargo Lander** now uses a low ivory/orange box hull, four
+articulated landing legs, two side-hinged cargo doors, six engine bells and a
+wide two-fold ramp. Both sides carry the exact stacked credit **powered by
+Wh0Knows**. Labels are generated locally as text textures, with a genuine
+pixel-font fallback; no generated concept image is used as vehicle geometry.
+The 6.4 × 5.2 m hull has a 4.5 m clear bay/ramp, a 0.85 m nominal deck and
+a 4.1 m ramp. See [LANDER-MODEL.md](LANDER-MODEL.md) for dimensions and APIs.
+
+`createCargoLander()` is the preferred factory; `createRocket()` is retained as
+a compatibility alias. `setDeployment(0..1)` opens the real side doors and
+unfolds the ramp. `setLandingGear`, `setGrounding` and `setCompression` position
+the legs/pads; `setRampGroundHeight` and `rampSurfaceHeight` keep the ramp and
+walking surface in agreement. `setThrust` drives model throat glow.
+
+`landing-effects.js` adds six downward exhaust plumes, a small engine light and
+a bounded particle pool: diffuse dust for Mars/Earth and separate ballistic
+grains for the Moon. Effects fade after shutdown, respect pause and clear on
+Skip arrival/site reload. `cargo-arrival.js` owns the 15-second visual sequence
+and the camera transition. None of these effects are observations or a validated
+flight, soil or plume simulation. Source DEM heights remain unchanged.
 
 These models illustrate navigation and deployment. Their appearance, gait,
 decorative rocks and rocket dynamics are not validated engineering or geological

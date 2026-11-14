@@ -42,6 +42,13 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
    manual/automatic origin. The latest 24 valid search windows are cached locally.
 5. Choose **Explore in 3D**. Watch the lander arrive, its door open, the ramp
    unfold, and the hexapod deploy. **Skip arrival** starts exploration immediately.
+   The low **TerraMatch Cargo Lander**, **powered by Wh0Knows**, has four
+   terrain-grounded legs, two side-opening cargo doors and a wide folding ramp.
+   Its 15-second arrival includes engine exhaust, touchdown compression and
+   fading surface dust; lunar grains use a separate ballistic visual style.
+   The robot walks down the same ramp geometry used for foot contact, then
+   transfers to keyboard control. This is an original fictional vehicle and
+   illustrative arrival, rather than a validated spacecraft/soil simulation.
 6. **W/S** move; **A/D** turn; **Shift** accelerates navigation. Drag to orbit the
    follow camera; scroll to zoom. **E** inspects terrain, **C** opens the Earth
    comparison sidebar, and **Escape** pauses. Touch movement controls appear on

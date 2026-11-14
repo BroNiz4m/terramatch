@@ -445,3 +445,55 @@ not pixel/GPU browser QA. Previous Firefox URL-policy limitation remains.
 The preceding scientific-data release passed97tests; no data sources changed.
 Site source opened atbf43a02 before edits. Publish to the existing private
 Site and push the same source commit to GitHub.
+
+
+## 2026-11-14 — Wh0Knows Cargo Lander implementation
+
+User approved the generated low cargo-lander reference as the implementation
+reference. Active 3D hardware is now original procedural mesh geometry: ivory
+6.4×5.2m hull, orange corner armor, four splayed/grounded legs, six nozzle bells,
+two real side-hinged doors and a 4.5m-wide/4.1m-long folding ramp. Both sidewalls
+carry stacked exact text 'powered by Wh0Knows' (numeral0); front lintel TerraMatch.
+The reference picture is NOT used as a substitute model/scene. Local canvas text
+textures have a real pixel-font fallback. Full-stance hexapod (~3.953m wide) and
+head actually clear the door/lamp/ramp geometry. Hexapod and rocks preserved.
+See LANDER-MODEL.md for complete model API, dimensions and grounding limits.
+
+New modules: lander-arrival.js (15s timeline), cargo-arrival.js (source-terrain
+placement, camera, cargo floor/ramp sampling and transition), landing-effects.js
+(six bounded procedural plumes + one engine light + bounded dust pool).
+Mars/Earth use diffuse low dust with drag; Moon uses separate ballistic grains
+and no atmospheric scene fog. Plume lengths stop at terrain clearance; engine
+light/glow/exhaust stop after touchdown. Dust expires, pauses correctly and is
+cleared by Skip arrival or site reload. No browser global random particle leak.
+
+The lander settles before doors/ramp deploy; the robot remains on its cargo
+floor and traverses the actual ramp walking plane before keyboard control.
+Pad contacts and ramp endpoints adapt to source DEM heights without modifying
+the elevation data. Existing findSpawn is an interface staging choice and
+NOT a scientific landing-safety assessment. createRocket and expedition.rocket
+remain compatibility aliases. No old tall rocket geometry is loaded.
+
+Verification: full suite106tests passed; focused13hardware/effects/expedition
+tests also passed after stronger transit/foot-contact assertions. Tests include
+doorway raycasts, branding pixels, foot/ramp agreement, source-data preservation
+for all6bundled studywindows, cargo-floor placement, keyboard movement, pause,
+thermal layers, skip/reload cleanup, pool limits, lifetime and lunar/Mars styles.
+All6bundled windows ground all4pads without reach clamps and the ramp without
+extreme-angle clamps. Script syntax/JSON and diff checks are required before
+packaging. Decorative plume/ejecta and spacecraft motion are illustrative; no
+engine, dust, wind, soil or flight validation is claimed.
+
+Actual asset geometry was visually inspected with deterministic CPU triangle/
+texture projection (scripts/render-lander-preview.mjs), open and closed. Outputs
+are outside the Git checkout under ../output/lander-geometry-preview.png and
+../output/lander-closed-geometry-preview.png. This checks silhouette, real meshes
+and text. It is NOT a WebGL/browser/GPU lighting or performance test. Existing
+Firefox URL-policy limitation still prevents that verification; do not claim
+pixel-identical output to generated art. Runtime material/shadow rendering can
+differ from the concept and the CPU review. Mobile layout remains last priority.
+
+Source opened atdf03733 before edits. A bounded agent owned only procedural
+model, model tests and LANDER-MODEL.md; root integrated arrival/effects/app/tests
+and publication. Preserve prior source provenance, collaborators and Site
+audience. Publish this source and synchronize the same commit to GitHub.
