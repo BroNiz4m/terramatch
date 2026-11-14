@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="search.css">
   <link rel="stylesheet" href="thermal.css">
+  <link rel="stylesheet" href="planet.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 </head>
 <body>
@@ -20,6 +21,7 @@
       <button data-view="explore" class="nav-item active">Explore</button>
       <button data-view="compare" class="nav-item">Compare</button>
       <button data-view="expedition" class="nav-item">Expedition<span class="nav-dot"></span></button>
+      <button data-view="planet" class="nav-item">Planet data</button>
       <button data-view="sources" class="nav-item">Sources</button>
     </nav>
     <div class="topbar-actions"><span class="project-tag"><span></span> SPACE APPS 2026</span><button class="button button-outline button-small" id="export-report"></button></div>
@@ -47,9 +49,11 @@
         <section class="globe-panel" aria-label="Interactive planetary globe">
           <div id="globe-canvas" class="canvas-host"></div>
           <div class="globe-top"><div class="segmented globe-toggle"><button data-globe="earth" class="active">Earth</button><button data-globe="target">Mars</button></div><span class="globe-instruction">DRAG TO ROTATE · SCROLL TO ZOOM</span></div>
+          <div class="globe-data-controls"><button data-globe-layer="surface" class="active">Agency imagery</button><button data-globe-layer="elevation">Elevation</button><select id="globe-scale" aria-label="Globe camera scale"><option value="shared">Same physical scale</option><option value="fit">Fit body to view</option></select><button id="open-planet-data">Data &amp; Earth layers ↗</button></div>
+          <div class="globe-observation-key hidden" id="globe-observation-key"></div><span id="globe-event-key" class="globe-event-key hidden"></span>
           <div class="globe-toolbar"><button class="map-tool" id="globe-reset" aria-label="Reset globe view">N<span>↑</span></button><button class="map-tool" id="globe-zoom-in" aria-label="Zoom in">+</button><button class="map-tool" id="globe-zoom-out" aria-label="Zoom out">−</button></div>
           <div class="globe-place-label" id="globe-place-label"></div>
-          <div class="globe-bottom"><div class="globe-caption"><span class="eyebrow">A WORLD OF POSSIBILITIES</span><p>Different worlds.<br>Shared terrain.</p></div><span class="globe-source">NASA Blue Marble · Earth texture</span></div>
+          <div class="globe-bottom"><div class="globe-caption"><span class="eyebrow">A WORLD OF POSSIBILITIES</span><p>Different worlds.<br>Shared terrain.</p></div><span class="globe-source">Loading original agency sources…</span></div>
           <div class="candidate-tray"><div class="tray-heading"><h2>Earth analog candidates</h2><span id="candidate-count">Loading terrain…</span></div><div class="candidate-cards" id="candidate-cards"></div></div>
           <div class="canvas-loading" id="globe-loading"><span class="loader"></span><p>Bringing Earth into view…</p></div>
         </section>
@@ -82,6 +86,7 @@
       <div class="pause-overlay hidden" id="pause-overlay"><div class="panel"><p class="eyebrow">TAKE A BREATH</p><h2>Expedition paused</h2><p>Your explorer is right where you left it.</p><button class="button button-primary" id="resume-expedition">Continue exploring</button><button class="button button-outline" id="leave-expedition">Return to globe</button></div></div>
     </section>
     <section id="compare-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SIMILARITIES WITH THE EVIDENCE ATTACHED</p><h1>Different worlds. Shared terrain<span>.</span></h1><p class="page-subtitle">Compare an Earth candidate with your selected planetary study area.</p></div><button class="button button-primary button-small" id="compare-export">Export comparison</button></div><div id="comparison-workspace"></div></section>
+    <section id="planet-view" class="view content-view hidden"><div id="planet-content"></div></section>
     <section id="sources-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SCIENCE YOU CAN TRACE</p><h1>Every comparison has a source<span>.</span></h1><p class="page-subtitle">What we measured, how we compared it, and what we cannot conclude.</p></div></div><div id="sources-content"></div></section>
   </main>
   <div id="modal-root"></div><div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>

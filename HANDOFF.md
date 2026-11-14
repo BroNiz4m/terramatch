@@ -335,3 +335,83 @@ The audit files are intended for the collaboration GitHub repository. They do
 not constitute an ice feature or a new Site release; the live application
 remains the integration release. Verify final GitHub publication from its commit
 history rather than assuming an audit document changes the live application.
+
+
+## 2026-11-14 — Official scientific globe and environment integration
+
+This release replaces the active third-party globe textures with unchanged agency
+images: NASA BMNG November 2004 (5400×2700), NASA/JPL Viking Mars texture
+(1440×720), and the USGS/NASA LROC global morphology mosaic (1024×512).
+Legacy assets remain for attribution/history but are not loaded by GlobeView.
+See GLOBE-IMAGERY.md and the imagery JSON manifest for original-byte SHA256,
+registration checks, dimensions, acquisition periods and limitations. Mars'
+exact MDIM revision and geodetic control accuracy are not published with its JPEG;
+only global map layout is verified. Moon is a historical grayscale image mosaic.
+
+### Geometry and positioning
+
+- All three bodies share one metres-to-scene factor. Shared camera framing is
+  the default; Fit body changes the camera, not planetary radii.
+- Earth: WGS84 ellipsoid + NOAA ETOPO1 topography/bathymetry. ETOPO1 is MSL
+  height applied as geodetic height with geoid undulation omitted: approximate,
+  not survey-grade. The undersea mesh represents bathymetry, not moving water.
+- Mars: original MOLA MEGR absolute radius, with MEGT areoid topography kept
+  separate for elevation colouring. Never add areoid heights to an ellipsoid
+  to produce the Mars surface. Moon: LOLA radial heights + 1737400m sphere.
+- Global data are resampled to 361×181 nodes at 1°. These are not full-native
+  resolution globes. Finer existing study-window analytics remain separate.
+- No relief exaggeration, artificial terminator/atmosphere or procedural stars
+  are presented as observations. Imagery is unlit and ungraded. Optical pixels,
+  elevation, temperature and classifications remain separate quantities.
+- Three.js axes map standard geophysical XYZ to [X,Z,-Y]. Picking inverts the
+  same reference convention used for the geometry. Polar mission focus now
+  centres the actual lunar coordinates rather than clamping their latitude.
+- Globe renderer supports surface/elevation, source failures without generated
+  fallback, observation overlays, and dated EONET point markers.
+
+### New Planet data workspace
+
+- Original global map previews, physical figure comparison, frames, DEM datum,
+  source URLs and full provenance. Data remain readable without WebGL.
+- Earth: five NASA POWER daily variables for the selected candidate over 2025
+  (skin and 2m air temperature, 10m wind, pressure, precipitation). Four exact
+  reference sites use bundled original responses; new coordinates request NASA.
+  This is coarse historical model/reanalysis, not current local weather.
+- Earth layers: original dated NASA GIBS global PNGs (2048×1024) and original
+  legends. Truecolour and daytime temperature reference date 2026-11-13;
+  annual water reference 2015-01-01. Other advertised dates request NASA.
+  Date gaps/future dates fail explicitly. No numbers are decoded from colours.
+  Neutral background shows transparent areas, without undated base-image fill.
+- The older GIBS water browse shows unreliable Antarctic land detail. Its overlay
+  is conservatively hidden outside 60°S–80°N; this is a project display guard,
+  not an official coverage boundary or a water absence result. PNG bytes remain
+  original. No local quantitative water classifier or lunar ice detector added.
+- EONET defaults to a labelled 2026-11-14 snapshot, with Refresh from NASA.
+  Open severe-storm catalogue query: global, 30 days, limit100. Approximate
+  dated points are not live storm footprints, forecasts or local all-clear.
+- Mars: original PDS MEDA calibrated sol29 pressure CSV/XML, all50926rows,
+  Barocap channels separate (sampled means751.2609/742.0936/742.0259Pa).
+  Date2021-03-19–21UTC; 37 occupied half-hour bins and11gaps, uncertainty blank.
+  Does not infer current dust storms or conditions elsewhere on Mars.
+- Existing mission thermal evidence remains accessible and separate from terrain
+  ranking. Planet/environment records are included in evidence JSON and report
+  when loaded; viewing these layers does not modify terrain resemblance scores.
+
+### Validation and collaboration
+
+- 97 automated tests passed, including real bundled-source hashes, numeric
+  coordinate/mesh tests, renderer integration with an injected renderer, source
+  failure/cancellation, date intervals, polar overlay guard, and real DOM flows
+  through all three Planet data bodies, dated weather records and exports.
+- Application syntax/JSON checks passed. 15 representative local static routes
+  returned HTTP200. Original source maps and NASA legends visually inspected.
+- Browser/GPU rendering QA is NOT verified for this release. Computer Use could
+  read an old Firefox screenshot, then stopped input because URL policy is not
+  supported by the current Windows browser. No alternative automation bypass.
+- No mobile layout redesign: that remains last priority per the user.
+- No changes to the ice-source audit classification gates. Follow
+  ICE-SOURCE-AUDIT.md before implementing ice evidence.
+- Sources were opened at4a4c378; GitHub fetched with no collaborator divergence
+  before packaging. Preserve all collaboration files and existing Site audience.
+  Site helper commits/synchronizes this source, then the same commit is pushed
+  to GitHub and privately deployed to the existing TerraMatch URL.

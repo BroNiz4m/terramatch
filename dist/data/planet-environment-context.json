@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-14",
+  "recordType": "agency_reference_facts_not_current_conditions",
+  "bodies": {
+    "earth": {
+      "body": "earth", "status": "reference",
+      "atmosphere": {"status":"reference","label":"Earth atmosphere","text":"Earth has a substantial atmosphere and a water cycle. Local conditions vary with place and time.","sourceIds":["nasa-earth-facts"]},
+      "weather": {"status":"available-historical-and-catalogue","label":"Dated Earth records","text":"NASA POWER provides historical daily meteorological model/reanalysis values. NASA EONET supplies dated natural-event catalogue entries. These products do not establish current conditions at every selected point.","sourceIds":["nasa-power","nasa-eonet"]},
+      "water": {"status":"reference-only","label":"Local water not classified","text":"Earth has oceans, surface water and ice. This layer does not yet retrieve a spatial land/water or ice mask. Daily precipitation is not a measurement of standing water.","sourceIds":["nasa-earth-facts","nasa-power"]},
+      "temperature": {"status":"historical-model","label":"2025 daily meteorological context","text":"Skin temperature and 2 m air temperature are separate physical variables. The original POWER native meteorological grid is approximately 0.5° latitude by 0.625° longitude.","sourceIds":["nasa-power"]},
+      "availability": {"historicalEarthMeteorology":true,"eventsCatalogue":true,"liveWeather":false,"spatialWaterMask":false,"localStormDetection":false,"historicalLocalPressure":true},
+      "sources": [
+        {"id":"nasa-earth-facts","title":"NASA Earth facts","url":"https://science.nasa.gov/earth/facts/"},
+        {"id":"nasa-power","title":"NASA POWER meteorological sources and Daily API","url":"https://power.larc.nasa.gov/docs/methodology/data/sources_meteorology/","apiDocumentationUrl":"https://power.larc.nasa.gov/docs/services/api/temporal/daily/"},
+        {"id":"nasa-eonet","title":"NASA EONET v3 and catalogue limitations","url":"https://eonet.gsfc.nasa.gov/docs/v3","limitationsUrl":"https://eonet.gsfc.nasa.gov/what-is-eonet"}
+      ]
+    },
+    "mars": {
+      "body":"mars", "status":"reference",
+      "atmosphere":{"status":"reference","label":"Thin, mostly carbon-dioxide atmosphere","text":"Mars has a thin atmosphere, largely carbon dioxide. Its surface pressure and wind cannot be replaced with Earth weather values.","sourceIds":["nasa-mars-facts"]},
+      "weather":{"status":"not-currently-retrieved","label":"Current storm status unavailable","text":"Mars experiences winds, seasons and dust storms. This application has no current global Martian storm feed; Earth EONET markers do not apply to Mars.","sourceIds":["nasa-mars-facts"]},
+      "water":{"status":"reference-only","label":"Water-ice evidence; no local water map","text":"NASA describes water ice in the polar regions and beneath the surface. This reference does not establish ice or liquid water at the selected terrain footprint.","sourceIds":["nasa-mars-facts"]},
+      "temperature":{"status":"historical-local-measurement","label":"Historical MEDA ground-temperature record","text":"The separate temperature module uses a dated, local Perseverance MEDA record. It is not a current global temperature map or an air-temperature measurement.","sourceIds":["nasa-meda-archive"]},
+      "availability":{"historicalEarthMeteorology":false,"eventsCatalogue":false,"liveWeather":false,"spatialWaterMask":false,"localStormDetection":false,"historicalLocalPressure":true},
+      "sources":[
+        {"id":"nasa-mars-facts","title":"NASA Mars facts","url":"https://science.nasa.gov/mars/facts/"},
+        {"id":"nasa-meda-archive","title":"NASA PDS Mars 2020 MEDA calibrated environmental data, sol 29","url":"https://atmos.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/data_calibrated_env/sol_0000_0089/sol_0029/"}
+      ]
+    },
+    "moon": {
+      "body":"moon", "status":"reference",
+      "atmosphere":{"status":"reference","label":"Extremely thin exosphere","text":"The Moon has an extremely thin exosphere rather than an Earth-like atmosphere.","sourceIds":["nasa-lunar-atmosphere"]},
+      "weather":{"status":"not-applicable-earth-weather","label":"No Earth-style wind or rainstorms","text":"The lunar exosphere is too thin to produce Earth-style wind, rain or snowstorms. Space weather is a separate phenomenon and is not monitored by this layer.","sourceIds":["nasa-lunar-weather"]},
+      "water":{"status":"reference-only","label":"Polar water-ice evidence","text":"NASA reports evidence of water ice in permanently shadowed polar regions. This reference does not verify ice abundance, accessibility or presence at an arbitrary selected coordinate.","sourceIds":["nasa-lunar-water"]},
+      "temperature":{"status":"separate-thermal-product","label":"Diviner product; no live weather","text":"The separate lunar thermal comparison uses a dated Diviner-derived product with its own spatial resolution and physical definition. It is not an instantaneous thermometer reading.","sourceIds":["nasa-diviner-archive"]},
+      "availability":{"historicalEarthMeteorology":false,"eventsCatalogue":false,"liveWeather":false,"spatialWaterMask":false,"localStormDetection":false,"historicalLocalPressure":false},
+      "sources":[
+        {"id":"nasa-lunar-atmosphere","title":"NASA Lunar Atmosphere","url":"https://science.nasa.gov/moon/lunar-atmosphere/"},
+        {"id":"nasa-lunar-weather","title":"NASA Weather on the Moon","url":"https://science.nasa.gov/moon/weather-on-the-moon/"},
+        {"id":"nasa-lunar-water","title":"NASA Moon Water and Ices","url":"https://science.nasa.gov/moon/moon-water-and-ices/"},
+        {"id":"nasa-diviner-archive","title":"NASA PDS LRO Diviner archive","url":"https://pds-geosciences.wustl.edu/missions/lro/diviner.htm"}
+      ]
+    }
+  }
+}

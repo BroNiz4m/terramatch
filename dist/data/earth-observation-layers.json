@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "provider": "NASA GIBS / MODIS Terra",
+  "endpoint": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi",
+  "capabilitiesUrl": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.3.0",
+  "capabilitiesSHA256": "aaff27e8b9e896acc1bf6474ce1046ebaac35d9aaa91127238b5bb748ba83c92",
+  "verifiedAt": "2026-11-14T12:58:56.670Z",
+  "layers": [
+    {
+      "id": "truecolor",
+      "layer": "MODIS_Terra_CorrectedReflectance_TrueColor",
+      "title": "Daily satellite imagery",
+      "date": "2026-11-13",
+      "note": "MODIS Terra corrected reflectance. Clouds and swath gaps belong to the dated image; this is not continuous live coverage.",
+      "documentationUrl": "https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/near-real-time/near-real-time-data/corrected-reflectance",
+      "reference": {
+        "date": "2026-11-13",
+        "path": "assets/earth-truecolor-reference.png",
+        "requestUrl": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=MODIS_Terra_CorrectedReflectance_TrueColor&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=TRUE&TIME=2026-11-13",
+        "bytes": 4360167,
+        "sha256": "de0d294579e4495bda806d9645a2a3be43acb2be16aa6bbeeb3ef66772be3807",
+        "retrievedAt": "2026-11-14T12:58:51.680Z"
+      },
+      "legendPath": null,
+      "legendSourceUrl": null,
+      "colormapSourceUrl": null,
+      "time": {
+        "latestAdvertised": "2026-11-14",
+        "intervals": [
+          "2000-02-24/2000-04-25/P1D",
+          "2000-04-28/2000-08-06/P1D",
+          "2000-08-18/2001-06-15/P1D",
+          "2001-07-03/2002-03-19/P1D",
+          "2002-03-28/2003-12-16/P1D",
+          "2003-12-24/2008-12-20/P1D",
+          "2008-12-23/2016-02-18/P1D",
+          "2016-02-27/2022-10-10/P1D",
+          "2022-10-23/2026-11-14/P1D"
+        ]
+      },
+      "rendering": {
+        "width": 2048,
+        "height": 1024,
+        "projection": "EPSG:4326",
+        "bounds": [
+          -180,
+          -90,
+          180,
+          90
+        ],
+        "method": "Unchanged NASA GIBS server-rendered PNG",
+        "quantitativePixelAnalysis": false
+      },
+      "cors": "*"
+    },
+    {
+      "id": "temperature",
+      "layer": "MODIS_Terra_L3_Land_Surface_Temp_Daily_Day",
+      "title": "Daytime land surface temperature",
+      "date": "2026-11-13",
+      "note": "Dated daytime land-surface retrievals, not air temperature. Clouds, polar night and missing retrievals leave gaps. This is a browse visualization; no numeric temperature is decoded from colours.",
+      "documentationUrl": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/MOD11A1/",
+      "reference": {
+        "date": "2026-11-13",
+        "path": "assets/earth-temperature-reference.png",
+        "requestUrl": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=MODIS_Terra_L3_Land_Surface_Temp_Daily_Day&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=TRUE&TIME=2026-11-13",
+        "bytes": 357132,
+        "sha256": "bd2fe629b51403f2242315acf8608dedd7589ef4fd33628f0ecaa9cbd1e89fc9",
+        "retrievedAt": "2026-11-14T12:58:54.322Z"
+      },
+      "legendPath": "assets/earth-temperature-legend.png",
+      "legendSourceUrl": "https://gibs.earthdata.nasa.gov/legends/MODIS_Land_Surface_Temp_H.png",
+      "colormapSourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_Land_Surface_Temp.xml",
+      "time": {
+        "latestAdvertised": "2026-11-13",
+        "intervals": [
+          "2000-02-25/2000-04-25/P1D",
+          "2000-04-28/2000-08-05/P1D",
+          "2000-08-18/2001-06-15/P1D",
+          "2001-07-03/2002-03-19/P1D",
+          "2002-03-28/2002-04-14/P1D",
+          "2002-04-16/2003-12-16/P1D",
+          "2003-12-24/2008-12-20/P1D",
+          "2008-12-23/2016-02-18/P1D",
+          "2016-02-28/2022-10-10/P1D",
+          "2022-10-23/2026-02-08/P1D",
+          "2026-02-10/2026-11-13/P1D"
+        ]
+      },
+      "rendering": {
+        "width": 2048,
+        "height": 1024,
+        "projection": "EPSG:4326",
+        "bounds": [
+          -180,
+          -90,
+          180,
+          90
+        ],
+        "method": "Unchanged NASA GIBS server-rendered PNG",
+        "quantitativePixelAnalysis": false
+      },
+      "cors": "*"
+    },
+    {
+      "id": "water",
+      "layer": "MODIS_Terra_L3_Land_Water_Mask",
+      "title": "Annual land / water mask",
+      "date": "2015-01-01",
+      "note": "Historical annual MODIS land/water browse classification. It does not show current floods, water depth, ice, purity or drinkability. Transparent land is not missing water evidence. This older GIBS rendition shows unreliable Antarctic land detail; TerraMatch conservatively hides it south of 60°S and north of 80°N. This display guard is not an official product coverage boundary; no classification is inferred in the hidden regions.",
+      "documentationUrl": "https://modis.gsfc.nasa.gov/data/dataprod/mod44w.php",
+      "reference": {
+        "date": "2015-01-01",
+        "path": "assets/earth-water-reference.png",
+        "requestUrl": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=MODIS_Terra_L3_Land_Water_Mask&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=TRUE&TIME=2015-01-01",
+        "bytes": 61051,
+        "sha256": "e1238b89e5dea2d844c7cef49915b1d3bd07a0ca7a9f7bc01a76a8ddd7b3dc26",
+        "retrievedAt": "2026-11-14T12:58:56.665Z"
+      },
+      "legendPath": "assets/earth-water-legend.png",
+      "legendSourceUrl": "https://gibs.earthdata.nasa.gov/legends/MODIS_Land_Water_Mask_H.png",
+      "colormapSourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_Land_Water_Mask.xml",
+      "time": {
+        "latestAdvertised": "2015-01-01",
+        "intervals": [
+          "2000-01-01/2015-01-01/P1Y"
+        ]
+      },
+      "rendering": {
+        "width": 2048,
+        "height": 1024,
+        "projection": "EPSG:4326",
+        "bounds": [
+          -180,
+          -90,
+          180,
+          90
+        ],
+        "method": "Unchanged NASA GIBS server-rendered PNG",
+        "quantitativePixelAnalysis": false,
+        "displayLatitudeBounds": [
+          -60,
+          80
+        ],
+        "displayGuard": "Conservative TerraMatch polar quarantine; not an official coverage boundary or a no-water classification."
+      },
+      "cors": "*"
+    }
+  ]
+}

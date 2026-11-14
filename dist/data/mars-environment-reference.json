@@ -1,0 +1,1372 @@
+{
+  "schemaVersion": 1,
+  "status": "partial",
+  "body": "mars",
+  "siteId": "jezero",
+  "recordType": "historical_rover_instrument_pressure",
+  "unit": "Pa",
+  "sol": 29,
+  "period": {
+    "startUTC": "2021-03-19T23:33:19.096Z",
+    "endUTC": "2021-03-21T00:11:52.795Z",
+    "timeStandard": "LMST",
+    "firstLocalMeanSolarTime": "00029M00:00:59.576",
+    "lastLocalMeanSolarTime": "00029M23:59:59.678"
+  },
+  "summary": {
+    "retainedRows": 50926,
+    "sourceRows": 50926,
+    "modeCounts": {
+      "nominal": 50926
+    },
+    "transducerCounts": {
+      "1": 50926
+    },
+    "channels": {
+      "BAROCAP1_PRESSURE": {
+        "meanPa": 751.2609038605096,
+        "minPa": 738.36,
+        "maxPa": 764.71,
+        "validCount": 50926,
+        "uncertaintyValidCount": 0
+      },
+      "BAROCAP2_PRESSURE": {
+        "meanPa": 742.0935812748019,
+        "minPa": 729.11,
+        "maxPa": 755.77,
+        "validCount": 50926,
+        "uncertaintyValidCount": 0
+      },
+      "BAROCAP3_PRESSURE": {
+        "meanPa": 742.0258901150671,
+        "minPa": 729.16,
+        "maxPa": 755.36,
+        "validCount": 50926,
+        "uncertaintyValidCount": 0
+      }
+    },
+    "occupiedHalfHourBins": 37
+  },
+  "series": [
+    {
+      "hour": 0.25,
+      "time": "Sol 29 00:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 752.6579373951904,
+          "minPa": 751.11,
+          "maxPa": 754.2,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 743.1897261039713,
+          "minPa": 741.43,
+          "maxPa": 744.95,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 743.2176020122969,
+          "minPa": 741.66,
+          "maxPa": 744.8,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 0.75,
+      "time": "Sol 29 00:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 755.7268090859959,
+          "minPa": 754.13,
+          "maxPa": 757,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 746.4025365062237,
+          "minPa": 744.7,
+          "maxPa": 747.78,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 746.3502055164945,
+          "minPa": 744.72,
+          "maxPa": 747.59,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 1.25,
+      "time": "Sol 29 01:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 757.6916540540643,
+          "minPa": 756.88,
+          "maxPa": 758.18,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 748.3481135135096,
+          "minPa": 747.37,
+          "maxPa": 749.02,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 748.2888810810687,
+          "minPa": 747.5,
+          "maxPa": 748.75,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 1.75,
+      "time": "Sol 29 01:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 757.4305786911845,
+          "minPa": 756.69,
+          "maxPa": 758.12,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 748.0912276906441,
+          "minPa": 747.18,
+          "maxPa": 748.91,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 748.0330611141177,
+          "minPa": 747.25,
+          "maxPa": 748.7,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 2.25,
+      "time": "Sol 29 02:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 756.6242628205116,
+          "minPa": 756.53,
+          "maxPa": 756.73,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 747.2887820512826,
+          "minPa": 746.99,
+          "maxPa": 747.58,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 747.2298076923081,
+          "minPa": 747.09,
+          "maxPa": 747.34,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 2.75,
+      "time": "Sol 29 02:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 3.25,
+      "time": "Sol 29 03:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 754.8443879262126,
+          "minPa": 754.4,
+          "maxPa": 755.36,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 745.3081498043618,
+          "minPa": 744.92,
+          "maxPa": 745.87,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 745.3383398546698,
+          "minPa": 744.99,
+          "maxPa": 745.87,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 3.75,
+      "time": "Sol 29 03:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 754.6997782585182,
+          "minPa": 754.3,
+          "maxPa": 755.18,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 745.4367820443447,
+          "minPa": 744.78,
+          "maxPa": 746.14,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 745.3674472687898,
+          "minPa": 744.91,
+          "maxPa": 745.87,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 4.25,
+      "time": "Sol 29 04:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 755.1838141025643,
+          "minPa": 755.06,
+          "maxPa": 755.33,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 745.9707051282071,
+          "minPa": 745.65,
+          "maxPa": 746.28,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 745.8793910256421,
+          "minPa": 745.74,
+          "maxPa": 746.08,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 4.75,
+      "time": "Sol 29 04:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 5.25,
+      "time": "Sol 29 05:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 756.8557774049262,
+          "minPa": 756.56,
+          "maxPa": 757.33,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 747.4225615212539,
+          "minPa": 746.78,
+          "maxPa": 748.12,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 747.4158948545861,
+          "minPa": 747.08,
+          "maxPa": 747.97,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 5.75,
+      "time": "Sol 29 05:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 757.5088324324364,
+          "minPa": 757.11,
+          "maxPa": 757.93,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 748.2758648648669,
+          "minPa": 747.69,
+          "maxPa": 748.92,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 748.1834162162082,
+          "minPa": 747.73,
+          "maxPa": 748.64,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 6.25,
+      "time": "Sol 29 06:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 757.9502884615395,
+          "minPa": 757.84,
+          "maxPa": 758.05,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 748.7436538461556,
+          "minPa": 748.5,
+          "maxPa": 748.95,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 748.6438141025643,
+          "minPa": 748.56,
+          "maxPa": 748.75,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 6.75,
+      "time": "Sol 29 06:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 7.25,
+      "time": "Sol 29 07:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 762.1572651006736,
+          "minPa": 761.3,
+          "maxPa": 762.93,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 752.6967114093956,
+          "minPa": 751.61,
+          "maxPa": 753.82,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 752.6679418344548,
+          "minPa": 751.74,
+          "maxPa": 753.53,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 7.75,
+      "time": "Sol 29 07:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 763.6987459459451,
+          "minPa": 762.78,
+          "maxPa": 764.6,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 754.5200216216213,
+          "minPa": 753.37,
+          "maxPa": 755.59,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 754.3510108108092,
+          "minPa": 753.38,
+          "maxPa": 755.26,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 8.25,
+      "time": "Sol 29 08:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 764.5911746031743,
+          "minPa": 764.51,
+          "maxPa": 764.71,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 755.4861587301586,
+          "minPa": 755.23,
+          "maxPa": 755.77,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 755.2542222222214,
+          "minPa": 755.16,
+          "maxPa": 755.36,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 8.75,
+      "time": "Sol 29 08:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 9.25,
+      "time": "Sol 29 09:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 761.6589429530204,
+          "minPa": 759.69,
+          "maxPa": 763.12,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 752.3267729306478,
+          "minPa": 750.46,
+          "maxPa": 753.76,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 752.267891498882,
+          "minPa": 750.46,
+          "maxPa": 753.62,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 9.75,
+      "time": "Sol 29 09:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 757.275589189189,
+          "minPa": 754.66,
+          "maxPa": 759.75,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 748.3112108108094,
+          "minPa": 745.76,
+          "maxPa": 750.76,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 748.1772162162135,
+          "minPa": 745.67,
+          "maxPa": 750.57,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 10.25,
+      "time": "Sol 29 10:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 754.2587301587291,
+          "minPa": 753.79,
+          "maxPa": 754.72,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 745.4134920634924,
+          "minPa": 744.81,
+          "maxPa": 745.97,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 745.2817142857143,
+          "minPa": 744.8,
+          "maxPa": 745.71,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 10.75,
+      "time": "Sol 29 10:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 11.25,
+      "time": "Sol 29 11:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 746.8895136948046,
+          "minPa": 746.09,
+          "maxPa": 747.54,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 738.2383901621009,
+          "minPa": 737.59,
+          "maxPa": 739,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 738.1412800447155,
+          "minPa": 737.51,
+          "maxPa": 738.75,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 11.75,
+      "time": "Sol 29 11:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 746.1827513513505,
+          "minPa": 745.88,
+          "maxPa": 746.55,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 737.7514432432417,
+          "minPa": 737.32,
+          "maxPa": 738.2,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 737.588535135135,
+          "minPa": 737.29,
+          "maxPa": 737.92,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 12.25,
+      "time": "Sol 29 12:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 746.2283333333336,
+          "minPa": 745.96,
+          "maxPa": 746.42,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 737.7980448717947,
+          "minPa": 737.52,
+          "maxPa": 738.13,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 737.6083653846154,
+          "minPa": 737.36,
+          "maxPa": 737.78,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 12.75,
+      "time": "Sol 29 12:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 13.25,
+      "time": "Sol 29 13:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 748.1141834451894,
+          "minPa": 747.51,
+          "maxPa": 748.5,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 739.3710570469789,
+          "minPa": 738.7,
+          "maxPa": 739.95,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 739.2181096196865,
+          "minPa": 738.61,
+          "maxPa": 739.59,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 13.75,
+      "time": "Sol 29 13:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 746.7914440237942,
+          "minPa": 746.03,
+          "maxPa": 747.65,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 738.0751054624124,
+          "minPa": 737.11,
+          "maxPa": 739.17,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 737.8764629529471,
+          "minPa": 737.05,
+          "maxPa": 738.72,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 14.25,
+      "time": "Sol 29 14:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 746.0709265175708,
+          "minPa": 745.89,
+          "maxPa": 746.28,
+          "validCount": 313,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 737.2542172523957,
+          "minPa": 736.9,
+          "maxPa": 737.55,
+          "validCount": 313,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 737.0496805111819,
+          "minPa": 736.88,
+          "maxPa": 737.25,
+          "validCount": 313,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 14.75,
+      "time": "Sol 29 14:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 15.25,
+      "time": "Sol 29 15:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 742.3212465064285,
+          "minPa": 741.4,
+          "maxPa": 743.04,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 733.2086864169928,
+          "minPa": 732.12,
+          "maxPa": 734.16,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 733.1007937395194,
+          "minPa": 732.15,
+          "maxPa": 733.91,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 15.75,
+      "time": "Sol 29 15:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 741.1113628988592,
+          "minPa": 740.68,
+          "maxPa": 741.62,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 731.9381395348831,
+          "minPa": 731.33,
+          "maxPa": 732.54,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 731.8166252028144,
+          "minPa": 731.38,
+          "maxPa": 732.34,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 16.25,
+      "time": "Sol 29 16:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 740.5109523809526,
+          "minPa": 740.31,
+          "maxPa": 740.83,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 731.3170158730152,
+          "minPa": 730.96,
+          "maxPa": 731.67,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 731.1990476190471,
+          "minPa": 730.99,
+          "maxPa": 731.48,
+          "validCount": 315,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 16.75,
+      "time": "Sol 29 16:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 17.25,
+      "time": "Sol 29 17:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 739.0917104527663,
+          "minPa": 738.69,
+          "maxPa": 739.35,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 729.8968082727777,
+          "minPa": 729.48,
+          "maxPa": 730.33,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 729.8740022358829,
+          "minPa": 729.46,
+          "maxPa": 730.22,
+          "validCount": 1789,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 17.75,
+      "time": "Sol 29 17:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 738.616576527856,
+          "minPa": 738.37,
+          "maxPa": 738.86,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 729.4990048674946,
+          "minPa": 729.13,
+          "maxPa": 729.88,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 729.417452677131,
+          "minPa": 729.2,
+          "maxPa": 729.69,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 18.25,
+      "time": "Sol 29 18:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 738.4539490445873,
+          "minPa": 738.36,
+          "maxPa": 738.57,
+          "validCount": 314,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 729.3357324840769,
+          "minPa": 729.11,
+          "maxPa": 729.58,
+          "validCount": 314,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 729.255828025478,
+          "minPa": 729.16,
+          "maxPa": 729.38,
+          "validCount": 314,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 18.75,
+      "time": "Sol 29 18:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 19.25,
+      "time": "Sol 29 19:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 741.9458270270313,
+          "minPa": 740.13,
+          "maxPa": 744.4,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 732.7283081081066,
+          "minPa": 730.7,
+          "maxPa": 735.46,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 732.77188108108,
+          "minPa": 730.99,
+          "maxPa": 735.32,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 19.75,
+      "time": "Sol 29 19:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 747.4450189291499,
+          "minPa": 744.36,
+          "maxPa": 750.42,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 738.2949594375337,
+          "minPa": 735.08,
+          "maxPa": 741.33,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 738.2637641968653,
+          "minPa": 735.26,
+          "maxPa": 741.17,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 20.25,
+      "time": "Sol 29 20:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 750.8472870662459,
+          "minPa": 750.38,
+          "maxPa": 751.33,
+          "validCount": 317,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 741.6225552050469,
+          "minPa": 741.06,
+          "maxPa": 742.24,
+          "validCount": 317,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 741.5854889589905,
+          "minPa": 741.13,
+          "maxPa": 742.03,
+          "validCount": 317,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 20.75,
+      "time": "Sol 29 20:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 21.25,
+      "time": "Sol 29 21:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 753.8245805369112,
+          "minPa": 752.71,
+          "maxPa": 754.59,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 744.4255201342282,
+          "minPa": 743.41,
+          "maxPa": 745.24,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 744.4348601789738,
+          "minPa": 743.41,
+          "maxPa": 745.21,
+          "validCount": 1788,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 21.75,
+      "time": "Sol 29 21:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 751.3461243243265,
+          "minPa": 749.51,
+          "maxPa": 752.83,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 742.1216918918933,
+          "minPa": 740.21,
+          "maxPa": 743.61,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 742.0571243243256,
+          "minPa": 740.23,
+          "maxPa": 743.49,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 22.25,
+      "time": "Sol 29 22:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 749.285448717949,
+          "minPa": 748.96,
+          "maxPa": 749.64,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 740.0548397435895,
+          "minPa": 739.65,
+          "maxPa": 740.49,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 739.9931089743591,
+          "minPa": 739.68,
+          "maxPa": 740.33,
+          "validCount": 312,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 22.75,
+      "time": "Sol 29 22:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": null,
+          "minPa": null,
+          "maxPa": null,
+          "validCount": 0,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 23.25,
+      "time": "Sol 29 23:15 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 747.6914764737716,
+          "minPa": 746.87,
+          "maxPa": 748.93,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 738.3611952406717,
+          "minPa": 737.29,
+          "maxPa": 739.73,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 738.3813304488926,
+          "minPa": 737.57,
+          "maxPa": 739.65,
+          "validCount": 1849,
+          "uncertaintyValidCount": 0
+        }
+      }
+    },
+    {
+      "hour": 23.75,
+      "time": "Sol 29 23:45 LMST",
+      "channels": {
+        "BAROCAP1_PRESSURE": {
+          "meanPa": 750.0604540540528,
+          "minPa": 748.83,
+          "maxPa": 751.31,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP2_PRESSURE": {
+          "meanPa": 740.8365189189191,
+          "minPa": 739.51,
+          "maxPa": 742.32,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        },
+        "BAROCAP3_PRESSURE": {
+          "meanPa": 740.8192324324331,
+          "minPa": 739.57,
+          "maxPa": 742.18,
+          "validCount": 1850,
+          "uncertaintyValidCount": 0
+        }
+      }
+    }
+  ],
+  "source": {
+    "id": "nasa-pds-meda-pressure",
+    "agency": "NASA PDS / Mars 2020 MEDA team",
+    "title": "Mars 2020 MEDA calibrated pressure, sol 29, P02",
+    "url": "https://atmos.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/data_calibrated_env/sol_0000_0089/sol_0029/WE__0029___________CAL_PS__________________P02.CSV",
+    "labelUrl": "https://atmos.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/data_calibrated_env/sol_0000_0089/sol_0029/WE__0029___________CAL_PS__________________P02.xml",
+    "retrievedAt": "2026-11-14T12:50:07.217Z",
+    "rawFile": "mars-pressure-sol29-original.CSV",
+    "labelFile": "mars-pressure-sol29-original.xml",
+    "rawResponseSHA256": "c3b501fa56524da5819a5dd62a90fbaf7580a914c2155c2b98a925065fc178c8",
+    "labelSHA256": "7c8a0bc8b06f7041745b507f992ca23ff210f240bada8e1c22c72596529fd870",
+    "publishedMD5": "00b5ec5a4a85a92434181688b07391f1",
+    "verifiedMD5": "00b5ec5a4a85a92434181688b07391f1",
+    "method": "Unchanged positive finite pressure samples grouped by original pressure channel; arithmetic means of available samples. Half-hour LMST bins retain missing intervals as null.",
+    "retrievalTimestampBasis": "Completion time from original downloaded files; derivation does not refresh observations."
+  },
+  "limitations": [
+    "Historical local measurements at Perseverance in Jezero, 19–21 March 2021 UTC, not current or global Martian weather.",
+    "Three Barocap channels are retained separately. They are not averaged together or represented as a calibration-selected authoritative pressure.",
+    "Uncertainty values are absent in this product. Positive finite-value screening does not constitute full mission quality validation.",
+    "Means are means of available samples, not complete-sol time-weighted means. Empty half-hour bins are not interpolated.",
+    "Thermocap instrument temperatures are not atmospheric temperatures and are not used. This pressure product does not establish wind, storms, precipitation, water or ice."
+  ],
+  "derivedAt": "2026-11-14T12:52:40.578Z"
+}

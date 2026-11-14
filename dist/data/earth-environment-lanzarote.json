@@ -1,0 +1,3055 @@
+{
+  "schemaVersion": 1,
+  "status": "ready",
+  "body": "earth",
+  "siteId": "lanzarote",
+  "location": {
+    "lat": 28.995,
+    "lon": -13.74,
+    "elevationMeters": 26.63
+  },
+  "requestedPeriod": {
+    "start": "2025-01-01",
+    "end": "2025-12-31",
+    "days": 365
+  },
+  "actualPeriod": {
+    "start": "2025-01-01",
+    "end": "2025-12-31"
+  },
+  "metrics": {
+    "TS": {
+      "field": "skinTemperatureK",
+      "label": "Surface skin temperature",
+      "unit": "K",
+      "statistic": "daily_mean",
+      "nativeUnit": "C",
+      "providerLongName": "Earth Skin Temperature"
+    },
+    "T2M": {
+      "field": "airTemperatureK",
+      "label": "Air temperature at 2 m",
+      "unit": "K",
+      "statistic": "daily_mean",
+      "nativeUnit": "C",
+      "providerLongName": "Temperature at 2 Meters"
+    },
+    "PRECTOTCORR": {
+      "field": "precipitationMmPerDay",
+      "label": "Corrected precipitation",
+      "unit": "mm/day",
+      "statistic": "daily_rate",
+      "nativeUnit": "mm/day",
+      "providerLongName": "Precipitation Corrected"
+    },
+    "WS10M": {
+      "field": "windSpeed10mMps",
+      "label": "Wind speed at 10 m",
+      "unit": "m/s",
+      "statistic": "daily_mean",
+      "nativeUnit": "m/s",
+      "providerLongName": "Wind Speed at 10 Meters"
+    },
+    "PS": {
+      "field": "surfacePressurePa",
+      "label": "Surface pressure",
+      "unit": "Pa",
+      "statistic": "daily_mean",
+      "nativeUnit": "kPa",
+      "providerLongName": "Surface Pressure"
+    }
+  },
+  "series": [
+    {
+      "time": "2025-01-01",
+      "skinTemperatureK": 293.03,
+      "airTemperatureK": 291.35,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.27,
+      "surfacePressurePa": 101980
+    },
+    {
+      "time": "2025-01-02",
+      "skinTemperatureK": 292.92,
+      "airTemperatureK": 291.01,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3,
+      "surfacePressurePa": 102000
+    },
+    {
+      "time": "2025-01-03",
+      "skinTemperatureK": 292.7,
+      "airTemperatureK": 292.21,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.92,
+      "surfacePressurePa": 102090
+    },
+    {
+      "time": "2025-01-04",
+      "skinTemperatureK": 292.4,
+      "airTemperatureK": 292.04,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.21,
+      "surfacePressurePa": 101960
+    },
+    {
+      "time": "2025-01-05",
+      "skinTemperatureK": 292.69,
+      "airTemperatureK": 292.52,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.93,
+      "surfacePressurePa": 101610
+    },
+    {
+      "time": "2025-01-06",
+      "skinTemperatureK": 293.28,
+      "airTemperatureK": 292.65,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.82,
+      "surfacePressurePa": 101720
+    },
+    {
+      "time": "2025-01-07",
+      "skinTemperatureK": 293.05,
+      "airTemperatureK": 291.73,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.62,
+      "surfacePressurePa": 101880
+    },
+    {
+      "time": "2025-01-08",
+      "skinTemperatureK": 292.73,
+      "airTemperatureK": 291.3,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.56,
+      "surfacePressurePa": 102020
+    },
+    {
+      "time": "2025-01-09",
+      "skinTemperatureK": 293.11,
+      "airTemperatureK": 292.18,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.25,
+      "surfacePressurePa": 102100
+    },
+    {
+      "time": "2025-01-10",
+      "skinTemperatureK": 293.14,
+      "airTemperatureK": 292.08,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.47,
+      "surfacePressurePa": 102210
+    },
+    {
+      "time": "2025-01-11",
+      "skinTemperatureK": 293.14,
+      "airTemperatureK": 292.62,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.74,
+      "surfacePressurePa": 102260
+    },
+    {
+      "time": "2025-01-12",
+      "skinTemperatureK": 293.14,
+      "airTemperatureK": 292.22,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.33,
+      "surfacePressurePa": 102120
+    },
+    {
+      "time": "2025-01-13",
+      "skinTemperatureK": 293.14,
+      "airTemperatureK": 292.26,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 10.06,
+      "surfacePressurePa": 101700
+    },
+    {
+      "time": "2025-01-14",
+      "skinTemperatureK": 292.8,
+      "airTemperatureK": 291.87,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.29,
+      "surfacePressurePa": 101520
+    },
+    {
+      "time": "2025-01-15",
+      "skinTemperatureK": 292.53,
+      "airTemperatureK": 291.71,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.03,
+      "surfacePressurePa": 101750
+    },
+    {
+      "time": "2025-01-16",
+      "skinTemperatureK": 292.67,
+      "airTemperatureK": 291.51,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.12,
+      "surfacePressurePa": 102140
+    },
+    {
+      "time": "2025-01-17",
+      "skinTemperatureK": 292.67,
+      "airTemperatureK": 290.67,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.34,
+      "surfacePressurePa": 102160
+    },
+    {
+      "time": "2025-01-18",
+      "skinTemperatureK": 292.83,
+      "airTemperatureK": 291.56,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.19,
+      "surfacePressurePa": 102020
+    },
+    {
+      "time": "2025-01-19",
+      "skinTemperatureK": 293.28,
+      "airTemperatureK": 291.99,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.06,
+      "surfacePressurePa": 101870
+    },
+    {
+      "time": "2025-01-20",
+      "skinTemperatureK": 292.96,
+      "airTemperatureK": 292.26,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.55,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-01-21",
+      "skinTemperatureK": 293.14,
+      "airTemperatureK": 292.78,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 7.38,
+      "surfacePressurePa": 101160
+    },
+    {
+      "time": "2025-01-22",
+      "skinTemperatureK": 293.11,
+      "airTemperatureK": 292.58,
+      "precipitationMmPerDay": 0.65,
+      "windSpeed10mMps": 4.73,
+      "surfacePressurePa": 101010
+    },
+    {
+      "time": "2025-01-23",
+      "skinTemperatureK": 293,
+      "airTemperatureK": 291.91,
+      "precipitationMmPerDay": 0.18,
+      "windSpeed10mMps": 4.68,
+      "surfacePressurePa": 101430
+    },
+    {
+      "time": "2025-01-24",
+      "skinTemperatureK": 293.18,
+      "airTemperatureK": 292.08,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 4.86,
+      "surfacePressurePa": 101750
+    },
+    {
+      "time": "2025-01-25",
+      "skinTemperatureK": 292.88,
+      "airTemperatureK": 291.47,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 4.89,
+      "surfacePressurePa": 102040
+    },
+    {
+      "time": "2025-01-26",
+      "skinTemperatureK": 293.26,
+      "airTemperatureK": 292.09,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 2.85,
+      "surfacePressurePa": 102120
+    },
+    {
+      "time": "2025-01-27",
+      "skinTemperatureK": 293.22,
+      "airTemperatureK": 292.43,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 3.56,
+      "surfacePressurePa": 102280
+    },
+    {
+      "time": "2025-01-28",
+      "skinTemperatureK": 292.97,
+      "airTemperatureK": 291.91,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.76,
+      "surfacePressurePa": 102490
+    },
+    {
+      "time": "2025-01-29",
+      "skinTemperatureK": 292.73,
+      "airTemperatureK": 291.41,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.44,
+      "surfacePressurePa": 102470
+    },
+    {
+      "time": "2025-01-30",
+      "skinTemperatureK": 292.64,
+      "airTemperatureK": 291.34,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 10.48,
+      "surfacePressurePa": 102590
+    },
+    {
+      "time": "2025-01-31",
+      "skinTemperatureK": 292.55,
+      "airTemperatureK": 291.07,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 11,
+      "surfacePressurePa": 102430
+    },
+    {
+      "time": "2025-02-01",
+      "skinTemperatureK": 292.47,
+      "airTemperatureK": 290.72,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.56,
+      "surfacePressurePa": 102310
+    },
+    {
+      "time": "2025-02-02",
+      "skinTemperatureK": 292.39,
+      "airTemperatureK": 290.9,
+      "precipitationMmPerDay": 0.11,
+      "windSpeed10mMps": 7.69,
+      "surfacePressurePa": 102090
+    },
+    {
+      "time": "2025-02-03",
+      "skinTemperatureK": 292.47,
+      "airTemperatureK": 291.04,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 7.11,
+      "surfacePressurePa": 101930
+    },
+    {
+      "time": "2025-02-04",
+      "skinTemperatureK": 292.33,
+      "airTemperatureK": 290.83,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.43,
+      "surfacePressurePa": 102070
+    },
+    {
+      "time": "2025-02-05",
+      "skinTemperatureK": 292.26,
+      "airTemperatureK": 291.27,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 8.57,
+      "surfacePressurePa": 102060
+    },
+    {
+      "time": "2025-02-06",
+      "skinTemperatureK": 292.48,
+      "airTemperatureK": 291.62,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.31,
+      "surfacePressurePa": 102020
+    },
+    {
+      "time": "2025-02-07",
+      "skinTemperatureK": 292.62,
+      "airTemperatureK": 291.16,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.73,
+      "surfacePressurePa": 102010
+    },
+    {
+      "time": "2025-02-08",
+      "skinTemperatureK": 292.36,
+      "airTemperatureK": 290.19,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.08,
+      "surfacePressurePa": 102080
+    },
+    {
+      "time": "2025-02-09",
+      "skinTemperatureK": 292.51,
+      "airTemperatureK": 290.57,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.08,
+      "surfacePressurePa": 101940
+    },
+    {
+      "time": "2025-02-10",
+      "skinTemperatureK": 292.89,
+      "airTemperatureK": 291.41,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 1.68,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-02-11",
+      "skinTemperatureK": 293.05,
+      "airTemperatureK": 292.11,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.21,
+      "surfacePressurePa": 101490
+    },
+    {
+      "time": "2025-02-12",
+      "skinTemperatureK": 292.52,
+      "airTemperatureK": 291.5,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.2,
+      "surfacePressurePa": 101670
+    },
+    {
+      "time": "2025-02-13",
+      "skinTemperatureK": 292.51,
+      "airTemperatureK": 291.12,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.32,
+      "surfacePressurePa": 101670
+    },
+    {
+      "time": "2025-02-14",
+      "skinTemperatureK": 292.74,
+      "airTemperatureK": 291.21,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.93,
+      "surfacePressurePa": 101370
+    },
+    {
+      "time": "2025-02-15",
+      "skinTemperatureK": 292.41,
+      "airTemperatureK": 291.51,
+      "precipitationMmPerDay": 0.06,
+      "windSpeed10mMps": 5.56,
+      "surfacePressurePa": 101090
+    },
+    {
+      "time": "2025-02-16",
+      "skinTemperatureK": 292.35,
+      "airTemperatureK": 290.74,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.27,
+      "surfacePressurePa": 101500
+    },
+    {
+      "time": "2025-02-17",
+      "skinTemperatureK": 293.03,
+      "airTemperatureK": 291.09,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 3.31,
+      "surfacePressurePa": 101230
+    },
+    {
+      "time": "2025-02-18",
+      "skinTemperatureK": 292.74,
+      "airTemperatureK": 292.15,
+      "precipitationMmPerDay": 0.4,
+      "windSpeed10mMps": 7.16,
+      "surfacePressurePa": 101170
+    },
+    {
+      "time": "2025-02-19",
+      "skinTemperatureK": 292.49,
+      "airTemperatureK": 291.36,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.8,
+      "surfacePressurePa": 101820
+    },
+    {
+      "time": "2025-02-20",
+      "skinTemperatureK": 292.64,
+      "airTemperatureK": 291.36,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.25,
+      "surfacePressurePa": 101990
+    },
+    {
+      "time": "2025-02-21",
+      "skinTemperatureK": 292.97,
+      "airTemperatureK": 291.65,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.49,
+      "surfacePressurePa": 101970
+    },
+    {
+      "time": "2025-02-22",
+      "skinTemperatureK": 292.94,
+      "airTemperatureK": 291.67,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.82,
+      "surfacePressurePa": 102150
+    },
+    {
+      "time": "2025-02-23",
+      "skinTemperatureK": 292.7,
+      "airTemperatureK": 291.49,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.19,
+      "surfacePressurePa": 102200
+    },
+    {
+      "time": "2025-02-24",
+      "skinTemperatureK": 292.55,
+      "airTemperatureK": 291.59,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.39,
+      "surfacePressurePa": 102300
+    },
+    {
+      "time": "2025-02-25",
+      "skinTemperatureK": 292.76,
+      "airTemperatureK": 291.72,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.2,
+      "surfacePressurePa": 102470
+    },
+    {
+      "time": "2025-02-26",
+      "skinTemperatureK": 292.8,
+      "airTemperatureK": 291.47,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 5.74,
+      "surfacePressurePa": 102160
+    },
+    {
+      "time": "2025-02-27",
+      "skinTemperatureK": 293.28,
+      "airTemperatureK": 291.88,
+      "precipitationMmPerDay": 0.13,
+      "windSpeed10mMps": 4.48,
+      "surfacePressurePa": 101800
+    },
+    {
+      "time": "2025-02-28",
+      "skinTemperatureK": 292.8,
+      "airTemperatureK": 291.6,
+      "precipitationMmPerDay": 0.38,
+      "windSpeed10mMps": 8.16,
+      "surfacePressurePa": 101450
+    },
+    {
+      "time": "2025-03-01",
+      "skinTemperatureK": 292.62,
+      "airTemperatureK": 291.2,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 5.43,
+      "surfacePressurePa": 101170
+    },
+    {
+      "time": "2025-03-02",
+      "skinTemperatureK": 293.12,
+      "airTemperatureK": 291.26,
+      "precipitationMmPerDay": 0.57,
+      "windSpeed10mMps": 1.78,
+      "surfacePressurePa": 100840
+    },
+    {
+      "time": "2025-03-03",
+      "skinTemperatureK": 293.09,
+      "airTemperatureK": 291.23,
+      "precipitationMmPerDay": 1.48,
+      "windSpeed10mMps": 2.72,
+      "surfacePressurePa": 100720
+    },
+    {
+      "time": "2025-03-04",
+      "skinTemperatureK": 292.21,
+      "airTemperatureK": 290.5,
+      "precipitationMmPerDay": 4.84,
+      "windSpeed10mMps": 4.81,
+      "surfacePressurePa": 100770
+    },
+    {
+      "time": "2025-03-05",
+      "skinTemperatureK": 292.5,
+      "airTemperatureK": 291.13,
+      "precipitationMmPerDay": 1.44,
+      "windSpeed10mMps": 6.12,
+      "surfacePressurePa": 100860
+    },
+    {
+      "time": "2025-03-06",
+      "skinTemperatureK": 292.69,
+      "airTemperatureK": 291.41,
+      "precipitationMmPerDay": 0.17,
+      "windSpeed10mMps": 5.47,
+      "surfacePressurePa": 101230
+    },
+    {
+      "time": "2025-03-07",
+      "skinTemperatureK": 292.82,
+      "airTemperatureK": 291.91,
+      "precipitationMmPerDay": 0.28,
+      "windSpeed10mMps": 5.9,
+      "surfacePressurePa": 101120
+    },
+    {
+      "time": "2025-03-08",
+      "skinTemperatureK": 292.58,
+      "airTemperatureK": 291.73,
+      "precipitationMmPerDay": 1.25,
+      "windSpeed10mMps": 8.61,
+      "surfacePressurePa": 100890
+    },
+    {
+      "time": "2025-03-09",
+      "skinTemperatureK": 292.62,
+      "airTemperatureK": 291.49,
+      "precipitationMmPerDay": 0.16,
+      "windSpeed10mMps": 7.97,
+      "surfacePressurePa": 100950
+    },
+    {
+      "time": "2025-03-10",
+      "skinTemperatureK": 292.71,
+      "airTemperatureK": 292.01,
+      "precipitationMmPerDay": 0.19,
+      "windSpeed10mMps": 6.09,
+      "surfacePressurePa": 101010
+    },
+    {
+      "time": "2025-03-11",
+      "skinTemperatureK": 292.9,
+      "airTemperatureK": 292.17,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 4.91,
+      "surfacePressurePa": 101260
+    },
+    {
+      "time": "2025-03-12",
+      "skinTemperatureK": 293.05,
+      "airTemperatureK": 292.64,
+      "precipitationMmPerDay": 0.17,
+      "windSpeed10mMps": 5.62,
+      "surfacePressurePa": 101150
+    },
+    {
+      "time": "2025-03-13",
+      "skinTemperatureK": 292.87,
+      "airTemperatureK": 292.33,
+      "precipitationMmPerDay": 0.7,
+      "windSpeed10mMps": 8.88,
+      "surfacePressurePa": 100790
+    },
+    {
+      "time": "2025-03-14",
+      "skinTemperatureK": 292.74,
+      "airTemperatureK": 291.41,
+      "precipitationMmPerDay": 0.14,
+      "windSpeed10mMps": 6.29,
+      "surfacePressurePa": 101100
+    },
+    {
+      "time": "2025-03-15",
+      "skinTemperatureK": 292.88,
+      "airTemperatureK": 291.13,
+      "precipitationMmPerDay": 0.14,
+      "windSpeed10mMps": 2.26,
+      "surfacePressurePa": 101640
+    },
+    {
+      "time": "2025-03-16",
+      "skinTemperatureK": 292.93,
+      "airTemperatureK": 291.95,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.66,
+      "surfacePressurePa": 101730
+    },
+    {
+      "time": "2025-03-17",
+      "skinTemperatureK": 293.05,
+      "airTemperatureK": 292.3,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 7.32,
+      "surfacePressurePa": 101700
+    },
+    {
+      "time": "2025-03-18",
+      "skinTemperatureK": 293.17,
+      "airTemperatureK": 292,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 3.74,
+      "surfacePressurePa": 101550
+    },
+    {
+      "time": "2025-03-19",
+      "skinTemperatureK": 293.04,
+      "airTemperatureK": 292.38,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.33,
+      "surfacePressurePa": 101010
+    },
+    {
+      "time": "2025-03-20",
+      "skinTemperatureK": 293.04,
+      "airTemperatureK": 292.44,
+      "precipitationMmPerDay": 0.09,
+      "windSpeed10mMps": 6.36,
+      "surfacePressurePa": 101260
+    },
+    {
+      "time": "2025-03-21",
+      "skinTemperatureK": 292.94,
+      "airTemperatureK": 291.54,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 6.4,
+      "surfacePressurePa": 101800
+    },
+    {
+      "time": "2025-03-22",
+      "skinTemperatureK": 292.55,
+      "airTemperatureK": 291.02,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 10.17,
+      "surfacePressurePa": 101860
+    },
+    {
+      "time": "2025-03-23",
+      "skinTemperatureK": 292.44,
+      "airTemperatureK": 290.94,
+      "precipitationMmPerDay": 0.07,
+      "windSpeed10mMps": 10.68,
+      "surfacePressurePa": 101840
+    },
+    {
+      "time": "2025-03-24",
+      "skinTemperatureK": 292.55,
+      "airTemperatureK": 291.35,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 10.53,
+      "surfacePressurePa": 101920
+    },
+    {
+      "time": "2025-03-25",
+      "skinTemperatureK": 292.57,
+      "airTemperatureK": 291.23,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 9.8,
+      "surfacePressurePa": 101860
+    },
+    {
+      "time": "2025-03-26",
+      "skinTemperatureK": 292.68,
+      "airTemperatureK": 291.65,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 8.65,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-03-27",
+      "skinTemperatureK": 292.57,
+      "airTemperatureK": 291.6,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.58,
+      "surfacePressurePa": 101170
+    },
+    {
+      "time": "2025-03-28",
+      "skinTemperatureK": 293.38,
+      "airTemperatureK": 292.16,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 4.24,
+      "surfacePressurePa": 100830
+    },
+    {
+      "time": "2025-03-29",
+      "skinTemperatureK": 293.84,
+      "airTemperatureK": 292.92,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.34,
+      "surfacePressurePa": 100960
+    },
+    {
+      "time": "2025-03-30",
+      "skinTemperatureK": 293.76,
+      "airTemperatureK": 293.17,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.51,
+      "surfacePressurePa": 101050
+    },
+    {
+      "time": "2025-03-31",
+      "skinTemperatureK": 293.6,
+      "airTemperatureK": 292.82,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 4.52,
+      "surfacePressurePa": 101090
+    },
+    {
+      "time": "2025-04-01",
+      "skinTemperatureK": 293.49,
+      "airTemperatureK": 292.38,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 6.78,
+      "surfacePressurePa": 101080
+    },
+    {
+      "time": "2025-04-02",
+      "skinTemperatureK": 292.89,
+      "airTemperatureK": 291.41,
+      "precipitationMmPerDay": 0.38,
+      "windSpeed10mMps": 6.67,
+      "surfacePressurePa": 100600
+    },
+    {
+      "time": "2025-04-03",
+      "skinTemperatureK": 292.97,
+      "airTemperatureK": 292.54,
+      "precipitationMmPerDay": 0.07,
+      "windSpeed10mMps": 8.17,
+      "surfacePressurePa": 100450
+    },
+    {
+      "time": "2025-04-04",
+      "skinTemperatureK": 293.5,
+      "airTemperatureK": 292.6,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.75,
+      "surfacePressurePa": 101180
+    },
+    {
+      "time": "2025-04-05",
+      "skinTemperatureK": 293.96,
+      "airTemperatureK": 292.65,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.27,
+      "surfacePressurePa": 101310
+    },
+    {
+      "time": "2025-04-06",
+      "skinTemperatureK": 294.59,
+      "airTemperatureK": 292.72,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.58,
+      "surfacePressurePa": 101310
+    },
+    {
+      "time": "2025-04-07",
+      "skinTemperatureK": 294.61,
+      "airTemperatureK": 292.88,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 2.75,
+      "surfacePressurePa": 101130
+    },
+    {
+      "time": "2025-04-08",
+      "skinTemperatureK": 294.41,
+      "airTemperatureK": 293.18,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 3.23,
+      "surfacePressurePa": 100950
+    },
+    {
+      "time": "2025-04-09",
+      "skinTemperatureK": 294.35,
+      "airTemperatureK": 293.08,
+      "precipitationMmPerDay": 3.21,
+      "windSpeed10mMps": 3.39,
+      "surfacePressurePa": 100630
+    },
+    {
+      "time": "2025-04-10",
+      "skinTemperatureK": 294.29,
+      "airTemperatureK": 293.72,
+      "precipitationMmPerDay": 1.51,
+      "windSpeed10mMps": 7.01,
+      "surfacePressurePa": 100260
+    },
+    {
+      "time": "2025-04-11",
+      "skinTemperatureK": 294.27,
+      "airTemperatureK": 293.25,
+      "precipitationMmPerDay": 0.21,
+      "windSpeed10mMps": 3.75,
+      "surfacePressurePa": 100580
+    },
+    {
+      "time": "2025-04-12",
+      "skinTemperatureK": 294.18,
+      "airTemperatureK": 292.94,
+      "precipitationMmPerDay": 0.29,
+      "windSpeed10mMps": 3.97,
+      "surfacePressurePa": 100910
+    },
+    {
+      "time": "2025-04-13",
+      "skinTemperatureK": 294.11,
+      "airTemperatureK": 292.81,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 7.14,
+      "surfacePressurePa": 101300
+    },
+    {
+      "time": "2025-04-14",
+      "skinTemperatureK": 294.09,
+      "airTemperatureK": 292.41,
+      "precipitationMmPerDay": 0.05,
+      "windSpeed10mMps": 6.67,
+      "surfacePressurePa": 101470
+    },
+    {
+      "time": "2025-04-15",
+      "skinTemperatureK": 293.88,
+      "airTemperatureK": 292.65,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 8.15,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-04-16",
+      "skinTemperatureK": 293.53,
+      "airTemperatureK": 291.64,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.73,
+      "surfacePressurePa": 101760
+    },
+    {
+      "time": "2025-04-17",
+      "skinTemperatureK": 293.16,
+      "airTemperatureK": 292.24,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.29,
+      "surfacePressurePa": 101420
+    },
+    {
+      "time": "2025-04-18",
+      "skinTemperatureK": 293.33,
+      "airTemperatureK": 292.3,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.98,
+      "surfacePressurePa": 101350
+    },
+    {
+      "time": "2025-04-19",
+      "skinTemperatureK": 293.45,
+      "airTemperatureK": 291.97,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.14,
+      "surfacePressurePa": 101540
+    },
+    {
+      "time": "2025-04-20",
+      "skinTemperatureK": 293.27,
+      "airTemperatureK": 291.47,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 10.41,
+      "surfacePressurePa": 101580
+    },
+    {
+      "time": "2025-04-21",
+      "skinTemperatureK": 293.24,
+      "airTemperatureK": 291.61,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.81,
+      "surfacePressurePa": 101520
+    },
+    {
+      "time": "2025-04-22",
+      "skinTemperatureK": 293.13,
+      "airTemperatureK": 292.04,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.62,
+      "surfacePressurePa": 101500
+    },
+    {
+      "time": "2025-04-23",
+      "skinTemperatureK": 293.13,
+      "airTemperatureK": 291.93,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.14,
+      "surfacePressurePa": 101460
+    },
+    {
+      "time": "2025-04-24",
+      "skinTemperatureK": 293.61,
+      "airTemperatureK": 292.2,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.37,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-04-25",
+      "skinTemperatureK": 293.65,
+      "airTemperatureK": 292.5,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.11,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-04-26",
+      "skinTemperatureK": 293.51,
+      "airTemperatureK": 292.29,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 8.57,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-04-27",
+      "skinTemperatureK": 293.38,
+      "airTemperatureK": 291.83,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.28,
+      "surfacePressurePa": 101250
+    },
+    {
+      "time": "2025-04-28",
+      "skinTemperatureK": 293.44,
+      "airTemperatureK": 291.85,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.14,
+      "surfacePressurePa": 101070
+    },
+    {
+      "time": "2025-04-29",
+      "skinTemperatureK": 293.46,
+      "airTemperatureK": 292.12,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.18,
+      "surfacePressurePa": 101130
+    },
+    {
+      "time": "2025-04-30",
+      "skinTemperatureK": 293.81,
+      "airTemperatureK": 291.59,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.61,
+      "surfacePressurePa": 101170
+    },
+    {
+      "time": "2025-05-01",
+      "skinTemperatureK": 293.67,
+      "airTemperatureK": 292.58,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 6.45,
+      "surfacePressurePa": 100940
+    },
+    {
+      "time": "2025-05-02",
+      "skinTemperatureK": 294.03,
+      "airTemperatureK": 292.88,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.42,
+      "surfacePressurePa": 101280
+    },
+    {
+      "time": "2025-05-03",
+      "skinTemperatureK": 294.45,
+      "airTemperatureK": 292.85,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 4.32,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-05-04",
+      "skinTemperatureK": 294.22,
+      "airTemperatureK": 292.33,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 4.41,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-05-05",
+      "skinTemperatureK": 293.94,
+      "airTemperatureK": 292.09,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.49,
+      "surfacePressurePa": 101390
+    },
+    {
+      "time": "2025-05-06",
+      "skinTemperatureK": 294.73,
+      "airTemperatureK": 292.64,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.91,
+      "surfacePressurePa": 101210
+    },
+    {
+      "time": "2025-05-07",
+      "skinTemperatureK": 295.1,
+      "airTemperatureK": 293.29,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 2.78,
+      "surfacePressurePa": 101140
+    },
+    {
+      "time": "2025-05-08",
+      "skinTemperatureK": 294.58,
+      "airTemperatureK": 293.44,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.84,
+      "surfacePressurePa": 101160
+    },
+    {
+      "time": "2025-05-09",
+      "skinTemperatureK": 294.67,
+      "airTemperatureK": 293.32,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.23,
+      "surfacePressurePa": 100930
+    },
+    {
+      "time": "2025-05-10",
+      "skinTemperatureK": 295.15,
+      "airTemperatureK": 294.42,
+      "precipitationMmPerDay": 0.07,
+      "windSpeed10mMps": 4.54,
+      "surfacePressurePa": 100920
+    },
+    {
+      "time": "2025-05-11",
+      "skinTemperatureK": 295.4,
+      "airTemperatureK": 293.78,
+      "precipitationMmPerDay": 0.06,
+      "windSpeed10mMps": 3.94,
+      "surfacePressurePa": 101290
+    },
+    {
+      "time": "2025-05-12",
+      "skinTemperatureK": 295.57,
+      "airTemperatureK": 293.57,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.02,
+      "surfacePressurePa": 101370
+    },
+    {
+      "time": "2025-05-13",
+      "skinTemperatureK": 294.83,
+      "airTemperatureK": 293.51,
+      "precipitationMmPerDay": 0.11,
+      "windSpeed10mMps": 6.41,
+      "surfacePressurePa": 101430
+    },
+    {
+      "time": "2025-05-14",
+      "skinTemperatureK": 294.76,
+      "airTemperatureK": 293.07,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.84,
+      "surfacePressurePa": 101640
+    },
+    {
+      "time": "2025-05-15",
+      "skinTemperatureK": 294.63,
+      "airTemperatureK": 292.95,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.6,
+      "surfacePressurePa": 101560
+    },
+    {
+      "time": "2025-05-16",
+      "skinTemperatureK": 294.63,
+      "airTemperatureK": 292.66,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.36,
+      "surfacePressurePa": 101270
+    },
+    {
+      "time": "2025-05-17",
+      "skinTemperatureK": 294.7,
+      "airTemperatureK": 292.97,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.74,
+      "surfacePressurePa": 101240
+    },
+    {
+      "time": "2025-05-18",
+      "skinTemperatureK": 294.76,
+      "airTemperatureK": 293.15,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.82,
+      "surfacePressurePa": 101400
+    },
+    {
+      "time": "2025-05-19",
+      "skinTemperatureK": 294.54,
+      "airTemperatureK": 293,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.67,
+      "surfacePressurePa": 101610
+    },
+    {
+      "time": "2025-05-20",
+      "skinTemperatureK": 293.88,
+      "airTemperatureK": 292.78,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.53,
+      "surfacePressurePa": 101680
+    },
+    {
+      "time": "2025-05-21",
+      "skinTemperatureK": 294.51,
+      "airTemperatureK": 293.29,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.47,
+      "surfacePressurePa": 101610
+    },
+    {
+      "time": "2025-05-22",
+      "skinTemperatureK": 294.65,
+      "airTemperatureK": 293.35,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.66,
+      "surfacePressurePa": 101560
+    },
+    {
+      "time": "2025-05-23",
+      "skinTemperatureK": 294.65,
+      "airTemperatureK": 293.37,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.65,
+      "surfacePressurePa": 101460
+    },
+    {
+      "time": "2025-05-24",
+      "skinTemperatureK": 294.68,
+      "airTemperatureK": 293.23,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.39,
+      "surfacePressurePa": 101420
+    },
+    {
+      "time": "2025-05-25",
+      "skinTemperatureK": 294.84,
+      "airTemperatureK": 293.57,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.91,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-05-26",
+      "skinTemperatureK": 294.79,
+      "airTemperatureK": 293.65,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.05,
+      "surfacePressurePa": 101490
+    },
+    {
+      "time": "2025-05-27",
+      "skinTemperatureK": 294.59,
+      "airTemperatureK": 293.57,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.16,
+      "surfacePressurePa": 101540
+    },
+    {
+      "time": "2025-05-28",
+      "skinTemperatureK": 294.66,
+      "airTemperatureK": 293.24,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.15,
+      "surfacePressurePa": 101580
+    },
+    {
+      "time": "2025-05-29",
+      "skinTemperatureK": 295.16,
+      "airTemperatureK": 293.73,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.51,
+      "surfacePressurePa": 101480
+    },
+    {
+      "time": "2025-05-30",
+      "skinTemperatureK": 295.38,
+      "airTemperatureK": 293.6,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.57,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-05-31",
+      "skinTemperatureK": 294.9,
+      "airTemperatureK": 293.34,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.6,
+      "surfacePressurePa": 101550
+    },
+    {
+      "time": "2025-06-01",
+      "skinTemperatureK": 294.67,
+      "airTemperatureK": 293.44,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.68,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-06-02",
+      "skinTemperatureK": 294.48,
+      "airTemperatureK": 293.24,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.09,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-06-03",
+      "skinTemperatureK": 294.62,
+      "airTemperatureK": 293.38,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.48,
+      "surfacePressurePa": 101650
+    },
+    {
+      "time": "2025-06-04",
+      "skinTemperatureK": 294.76,
+      "airTemperatureK": 293.31,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.17,
+      "surfacePressurePa": 101620
+    },
+    {
+      "time": "2025-06-05",
+      "skinTemperatureK": 294.94,
+      "airTemperatureK": 293.94,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.1,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-06-06",
+      "skinTemperatureK": 294.86,
+      "airTemperatureK": 293.63,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.06,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-06-07",
+      "skinTemperatureK": 295.23,
+      "airTemperatureK": 293.83,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.72,
+      "surfacePressurePa": 101420
+    },
+    {
+      "time": "2025-06-08",
+      "skinTemperatureK": 295.45,
+      "airTemperatureK": 293.92,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.82,
+      "surfacePressurePa": 101470
+    },
+    {
+      "time": "2025-06-09",
+      "skinTemperatureK": 295.62,
+      "airTemperatureK": 294.29,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.01,
+      "surfacePressurePa": 101580
+    },
+    {
+      "time": "2025-06-10",
+      "skinTemperatureK": 295.37,
+      "airTemperatureK": 294.36,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.09,
+      "surfacePressurePa": 101560
+    },
+    {
+      "time": "2025-06-11",
+      "skinTemperatureK": 295.67,
+      "airTemperatureK": 294.55,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.71,
+      "surfacePressurePa": 101380
+    },
+    {
+      "time": "2025-06-12",
+      "skinTemperatureK": 295.75,
+      "airTemperatureK": 294.22,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.8,
+      "surfacePressurePa": 101370
+    },
+    {
+      "time": "2025-06-13",
+      "skinTemperatureK": 295.55,
+      "airTemperatureK": 294.73,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.46,
+      "surfacePressurePa": 101540
+    },
+    {
+      "time": "2025-06-14",
+      "skinTemperatureK": 295.6,
+      "airTemperatureK": 294.55,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.68,
+      "surfacePressurePa": 101700
+    },
+    {
+      "time": "2025-06-15",
+      "skinTemperatureK": 295.43,
+      "airTemperatureK": 293.87,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.01,
+      "surfacePressurePa": 101560
+    },
+    {
+      "time": "2025-06-16",
+      "skinTemperatureK": 295.91,
+      "airTemperatureK": 294.66,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.8,
+      "surfacePressurePa": 101490
+    },
+    {
+      "time": "2025-06-17",
+      "skinTemperatureK": 295.61,
+      "airTemperatureK": 294.51,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.57,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-06-18",
+      "skinTemperatureK": 295,
+      "airTemperatureK": 294.31,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.77,
+      "surfacePressurePa": 101520
+    },
+    {
+      "time": "2025-06-19",
+      "skinTemperatureK": 295.23,
+      "airTemperatureK": 294.38,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.66,
+      "surfacePressurePa": 101460
+    },
+    {
+      "time": "2025-06-20",
+      "skinTemperatureK": 295.36,
+      "airTemperatureK": 294.24,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.04,
+      "surfacePressurePa": 101670
+    },
+    {
+      "time": "2025-06-21",
+      "skinTemperatureK": 295.53,
+      "airTemperatureK": 294.4,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.86,
+      "surfacePressurePa": 101670
+    },
+    {
+      "time": "2025-06-22",
+      "skinTemperatureK": 295.59,
+      "airTemperatureK": 294.37,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.45,
+      "surfacePressurePa": 101620
+    },
+    {
+      "time": "2025-06-23",
+      "skinTemperatureK": 295.72,
+      "airTemperatureK": 294.45,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.92,
+      "surfacePressurePa": 101580
+    },
+    {
+      "time": "2025-06-24",
+      "skinTemperatureK": 295.78,
+      "airTemperatureK": 294.68,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.89,
+      "surfacePressurePa": 101380
+    },
+    {
+      "time": "2025-06-25",
+      "skinTemperatureK": 295.79,
+      "airTemperatureK": 294.77,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.04,
+      "surfacePressurePa": 101350
+    },
+    {
+      "time": "2025-06-26",
+      "skinTemperatureK": 295.59,
+      "airTemperatureK": 294.76,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.3,
+      "surfacePressurePa": 101360
+    },
+    {
+      "time": "2025-06-27",
+      "skinTemperatureK": 295.47,
+      "airTemperatureK": 294.74,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.53,
+      "surfacePressurePa": 101330
+    },
+    {
+      "time": "2025-06-28",
+      "skinTemperatureK": 295.84,
+      "airTemperatureK": 295.2,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.91,
+      "surfacePressurePa": 101260
+    },
+    {
+      "time": "2025-06-29",
+      "skinTemperatureK": 296.15,
+      "airTemperatureK": 295.57,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.03,
+      "surfacePressurePa": 101260
+    },
+    {
+      "time": "2025-06-30",
+      "skinTemperatureK": 295.8,
+      "airTemperatureK": 295.11,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.38,
+      "surfacePressurePa": 101180
+    },
+    {
+      "time": "2025-07-01",
+      "skinTemperatureK": 295.82,
+      "airTemperatureK": 295.05,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 7.68,
+      "surfacePressurePa": 101090
+    },
+    {
+      "time": "2025-07-02",
+      "skinTemperatureK": 295.96,
+      "airTemperatureK": 295.07,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 8.51,
+      "surfacePressurePa": 101190
+    },
+    {
+      "time": "2025-07-03",
+      "skinTemperatureK": 296.13,
+      "airTemperatureK": 295.28,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.83,
+      "surfacePressurePa": 101310
+    },
+    {
+      "time": "2025-07-04",
+      "skinTemperatureK": 296.04,
+      "airTemperatureK": 295.19,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.89,
+      "surfacePressurePa": 101480
+    },
+    {
+      "time": "2025-07-05",
+      "skinTemperatureK": 296.06,
+      "airTemperatureK": 295.13,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 9.85,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-07-06",
+      "skinTemperatureK": 295.9,
+      "airTemperatureK": 295.09,
+      "precipitationMmPerDay": 0.25,
+      "windSpeed10mMps": 10.13,
+      "surfacePressurePa": 101320
+    },
+    {
+      "time": "2025-07-07",
+      "skinTemperatureK": 296.08,
+      "airTemperatureK": 295.02,
+      "precipitationMmPerDay": 0.21,
+      "windSpeed10mMps": 7.96,
+      "surfacePressurePa": 101200
+    },
+    {
+      "time": "2025-07-08",
+      "skinTemperatureK": 296.39,
+      "airTemperatureK": 295.39,
+      "precipitationMmPerDay": 0.1,
+      "windSpeed10mMps": 5.18,
+      "surfacePressurePa": 101170
+    },
+    {
+      "time": "2025-07-09",
+      "skinTemperatureK": 296.09,
+      "airTemperatureK": 294.79,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 5.95,
+      "surfacePressurePa": 101400
+    },
+    {
+      "time": "2025-07-10",
+      "skinTemperatureK": 295.88,
+      "airTemperatureK": 294.93,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 7.78,
+      "surfacePressurePa": 101550
+    },
+    {
+      "time": "2025-07-11",
+      "skinTemperatureK": 295.75,
+      "airTemperatureK": 294.89,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.92,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-07-12",
+      "skinTemperatureK": 296.06,
+      "airTemperatureK": 294.95,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 8.59,
+      "surfacePressurePa": 101380
+    },
+    {
+      "time": "2025-07-13",
+      "skinTemperatureK": 296.19,
+      "airTemperatureK": 295.26,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 8.3,
+      "surfacePressurePa": 101370
+    },
+    {
+      "time": "2025-07-14",
+      "skinTemperatureK": 296.17,
+      "airTemperatureK": 295.08,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.83,
+      "surfacePressurePa": 101470
+    },
+    {
+      "time": "2025-07-15",
+      "skinTemperatureK": 296.75,
+      "airTemperatureK": 295.96,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.17,
+      "surfacePressurePa": 101370
+    },
+    {
+      "time": "2025-07-16",
+      "skinTemperatureK": 296.65,
+      "airTemperatureK": 296.4,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.04,
+      "surfacePressurePa": 101290
+    },
+    {
+      "time": "2025-07-17",
+      "skinTemperatureK": 296.4,
+      "airTemperatureK": 296.56,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.25,
+      "surfacePressurePa": 101190
+    },
+    {
+      "time": "2025-07-18",
+      "skinTemperatureK": 296.67,
+      "airTemperatureK": 296.34,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.52,
+      "surfacePressurePa": 101280
+    },
+    {
+      "time": "2025-07-19",
+      "skinTemperatureK": 296.59,
+      "airTemperatureK": 295.49,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 9.28,
+      "surfacePressurePa": 101310
+    },
+    {
+      "time": "2025-07-20",
+      "skinTemperatureK": 296.67,
+      "airTemperatureK": 295.6,
+      "precipitationMmPerDay": 0.06,
+      "windSpeed10mMps": 9.02,
+      "surfacePressurePa": 101180
+    },
+    {
+      "time": "2025-07-21",
+      "skinTemperatureK": 296.8,
+      "airTemperatureK": 295.85,
+      "precipitationMmPerDay": 0.05,
+      "windSpeed10mMps": 8.15,
+      "surfacePressurePa": 101250
+    },
+    {
+      "time": "2025-07-22",
+      "skinTemperatureK": 296.69,
+      "airTemperatureK": 295.62,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 8.55,
+      "surfacePressurePa": 101430
+    },
+    {
+      "time": "2025-07-23",
+      "skinTemperatureK": 296.56,
+      "airTemperatureK": 295.66,
+      "precipitationMmPerDay": 0.15,
+      "windSpeed10mMps": 10.42,
+      "surfacePressurePa": 101320
+    },
+    {
+      "time": "2025-07-24",
+      "skinTemperatureK": 296.53,
+      "airTemperatureK": 295.78,
+      "precipitationMmPerDay": 0.21,
+      "windSpeed10mMps": 10.05,
+      "surfacePressurePa": 100880
+    },
+    {
+      "time": "2025-07-25",
+      "skinTemperatureK": 297.06,
+      "airTemperatureK": 295.83,
+      "precipitationMmPerDay": 1.62,
+      "windSpeed10mMps": 5.61,
+      "surfacePressurePa": 100760
+    },
+    {
+      "time": "2025-07-26",
+      "skinTemperatureK": 298.06,
+      "airTemperatureK": 296.43,
+      "precipitationMmPerDay": 0.23,
+      "windSpeed10mMps": 2.23,
+      "surfacePressurePa": 101180
+    },
+    {
+      "time": "2025-07-27",
+      "skinTemperatureK": 297.15,
+      "airTemperatureK": 296.04,
+      "precipitationMmPerDay": 0.27,
+      "windSpeed10mMps": 5,
+      "surfacePressurePa": 101430
+    },
+    {
+      "time": "2025-07-28",
+      "skinTemperatureK": 297.06,
+      "airTemperatureK": 296.35,
+      "precipitationMmPerDay": 0.48,
+      "windSpeed10mMps": 6.91,
+      "surfacePressurePa": 101340
+    },
+    {
+      "time": "2025-07-29",
+      "skinTemperatureK": 297.04,
+      "airTemperatureK": 296.21,
+      "precipitationMmPerDay": 0.21,
+      "windSpeed10mMps": 7.31,
+      "surfacePressurePa": 101150
+    },
+    {
+      "time": "2025-07-30",
+      "skinTemperatureK": 297.22,
+      "airTemperatureK": 296,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.87,
+      "surfacePressurePa": 101160
+    },
+    {
+      "time": "2025-07-31",
+      "skinTemperatureK": 297.66,
+      "airTemperatureK": 296.4,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.7,
+      "surfacePressurePa": 101140
+    },
+    {
+      "time": "2025-08-01",
+      "skinTemperatureK": 297.95,
+      "airTemperatureK": 296.46,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.48,
+      "surfacePressurePa": 100990
+    },
+    {
+      "time": "2025-08-02",
+      "skinTemperatureK": 297.8,
+      "airTemperatureK": 296.68,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.2,
+      "surfacePressurePa": 101000
+    },
+    {
+      "time": "2025-08-03",
+      "skinTemperatureK": 297.47,
+      "airTemperatureK": 296.37,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.21,
+      "surfacePressurePa": 101380
+    },
+    {
+      "time": "2025-08-04",
+      "skinTemperatureK": 297.07,
+      "airTemperatureK": 295.86,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.97,
+      "surfacePressurePa": 101480
+    },
+    {
+      "time": "2025-08-05",
+      "skinTemperatureK": 297.14,
+      "airTemperatureK": 296.41,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.29,
+      "surfacePressurePa": 101370
+    },
+    {
+      "time": "2025-08-06",
+      "skinTemperatureK": 297.25,
+      "airTemperatureK": 296.64,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.94,
+      "surfacePressurePa": 101260
+    },
+    {
+      "time": "2025-08-07",
+      "skinTemperatureK": 297.16,
+      "airTemperatureK": 296.43,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.06,
+      "surfacePressurePa": 101200
+    },
+    {
+      "time": "2025-08-08",
+      "skinTemperatureK": 297.36,
+      "airTemperatureK": 296.58,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.94,
+      "surfacePressurePa": 101130
+    },
+    {
+      "time": "2025-08-09",
+      "skinTemperatureK": 297.91,
+      "airTemperatureK": 297.38,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.22,
+      "surfacePressurePa": 100900
+    },
+    {
+      "time": "2025-08-10",
+      "skinTemperatureK": 298.23,
+      "airTemperatureK": 298.45,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.71,
+      "surfacePressurePa": 100890
+    },
+    {
+      "time": "2025-08-11",
+      "skinTemperatureK": 297.81,
+      "airTemperatureK": 297.67,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.66,
+      "surfacePressurePa": 100900
+    },
+    {
+      "time": "2025-08-12",
+      "skinTemperatureK": 297.49,
+      "airTemperatureK": 297.22,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.49,
+      "surfacePressurePa": 100820
+    },
+    {
+      "time": "2025-08-13",
+      "skinTemperatureK": 297.43,
+      "airTemperatureK": 296.69,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.92,
+      "surfacePressurePa": 100970
+    },
+    {
+      "time": "2025-08-14",
+      "skinTemperatureK": 297.51,
+      "airTemperatureK": 296.51,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.89,
+      "surfacePressurePa": 101050
+    },
+    {
+      "time": "2025-08-15",
+      "skinTemperatureK": 297.22,
+      "airTemperatureK": 296.5,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.71,
+      "surfacePressurePa": 101200
+    },
+    {
+      "time": "2025-08-16",
+      "skinTemperatureK": 297.27,
+      "airTemperatureK": 296.71,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.59,
+      "surfacePressurePa": 101200
+    },
+    {
+      "time": "2025-08-17",
+      "skinTemperatureK": 297.45,
+      "airTemperatureK": 297.15,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.31,
+      "surfacePressurePa": 101100
+    },
+    {
+      "time": "2025-08-18",
+      "skinTemperatureK": 297.46,
+      "airTemperatureK": 296.94,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.82,
+      "surfacePressurePa": 101160
+    },
+    {
+      "time": "2025-08-19",
+      "skinTemperatureK": 297.32,
+      "airTemperatureK": 296.84,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.33,
+      "surfacePressurePa": 101230
+    },
+    {
+      "time": "2025-08-20",
+      "skinTemperatureK": 297.23,
+      "airTemperatureK": 296.52,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.64,
+      "surfacePressurePa": 101140
+    },
+    {
+      "time": "2025-08-21",
+      "skinTemperatureK": 296.88,
+      "airTemperatureK": 296.27,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.51,
+      "surfacePressurePa": 101000
+    },
+    {
+      "time": "2025-08-22",
+      "skinTemperatureK": 297.4,
+      "airTemperatureK": 296.5,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.52,
+      "surfacePressurePa": 101140
+    },
+    {
+      "time": "2025-08-23",
+      "skinTemperatureK": 297.47,
+      "airTemperatureK": 296.49,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.8,
+      "surfacePressurePa": 101230
+    },
+    {
+      "time": "2025-08-24",
+      "skinTemperatureK": 297.51,
+      "airTemperatureK": 295.97,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 8,
+      "surfacePressurePa": 101260
+    },
+    {
+      "time": "2025-08-25",
+      "skinTemperatureK": 297.79,
+      "airTemperatureK": 296.74,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 7.84,
+      "surfacePressurePa": 101320
+    },
+    {
+      "time": "2025-08-26",
+      "skinTemperatureK": 298.03,
+      "airTemperatureK": 297.23,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 6.8,
+      "surfacePressurePa": 101110
+    },
+    {
+      "time": "2025-08-27",
+      "skinTemperatureK": 297.96,
+      "airTemperatureK": 296.81,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 6.8,
+      "surfacePressurePa": 101230
+    },
+    {
+      "time": "2025-08-28",
+      "skinTemperatureK": 297.76,
+      "airTemperatureK": 296.64,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.75,
+      "surfacePressurePa": 101460
+    },
+    {
+      "time": "2025-08-29",
+      "skinTemperatureK": 297.54,
+      "airTemperatureK": 296.22,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.49,
+      "surfacePressurePa": 101410
+    },
+    {
+      "time": "2025-08-30",
+      "skinTemperatureK": 297.54,
+      "airTemperatureK": 296.65,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.79,
+      "surfacePressurePa": 101270
+    },
+    {
+      "time": "2025-08-31",
+      "skinTemperatureK": 297.4,
+      "airTemperatureK": 296.5,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.82,
+      "surfacePressurePa": 101340
+    },
+    {
+      "time": "2025-09-01",
+      "skinTemperatureK": 297.19,
+      "airTemperatureK": 296.37,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 10.2,
+      "surfacePressurePa": 101480
+    },
+    {
+      "time": "2025-09-02",
+      "skinTemperatureK": 297.08,
+      "airTemperatureK": 295.86,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.32,
+      "surfacePressurePa": 101400
+    },
+    {
+      "time": "2025-09-03",
+      "skinTemperatureK": 297.05,
+      "airTemperatureK": 295.93,
+      "precipitationMmPerDay": 0.72,
+      "windSpeed10mMps": 8.57,
+      "surfacePressurePa": 101320
+    },
+    {
+      "time": "2025-09-04",
+      "skinTemperatureK": 297.04,
+      "airTemperatureK": 296.26,
+      "precipitationMmPerDay": 3.67,
+      "windSpeed10mMps": 8.96,
+      "surfacePressurePa": 101190
+    },
+    {
+      "time": "2025-09-05",
+      "skinTemperatureK": 296.84,
+      "airTemperatureK": 296.07,
+      "precipitationMmPerDay": 0.1,
+      "windSpeed10mMps": 8.69,
+      "surfacePressurePa": 101030
+    },
+    {
+      "time": "2025-09-06",
+      "skinTemperatureK": 296.5,
+      "airTemperatureK": 295.71,
+      "precipitationMmPerDay": 0.25,
+      "windSpeed10mMps": 5.65,
+      "surfacePressurePa": 101030
+    },
+    {
+      "time": "2025-09-07",
+      "skinTemperatureK": 296.6,
+      "airTemperatureK": 296.38,
+      "precipitationMmPerDay": 0.17,
+      "windSpeed10mMps": 5.89,
+      "surfacePressurePa": 101120
+    },
+    {
+      "time": "2025-09-08",
+      "skinTemperatureK": 296.79,
+      "airTemperatureK": 296.44,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.78,
+      "surfacePressurePa": 101370
+    },
+    {
+      "time": "2025-09-09",
+      "skinTemperatureK": 296.82,
+      "airTemperatureK": 295.97,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.54,
+      "surfacePressurePa": 101680
+    },
+    {
+      "time": "2025-09-10",
+      "skinTemperatureK": 296.71,
+      "airTemperatureK": 295.99,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 9.7,
+      "surfacePressurePa": 101640
+    },
+    {
+      "time": "2025-09-11",
+      "skinTemperatureK": 296.63,
+      "airTemperatureK": 296.01,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.88,
+      "surfacePressurePa": 101480
+    },
+    {
+      "time": "2025-09-12",
+      "skinTemperatureK": 296.86,
+      "airTemperatureK": 296.24,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 6.89,
+      "surfacePressurePa": 101250
+    },
+    {
+      "time": "2025-09-13",
+      "skinTemperatureK": 296.88,
+      "airTemperatureK": 296.27,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.17,
+      "surfacePressurePa": 101280
+    },
+    {
+      "time": "2025-09-14",
+      "skinTemperatureK": 296.99,
+      "airTemperatureK": 296.45,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.6,
+      "surfacePressurePa": 101280
+    },
+    {
+      "time": "2025-09-15",
+      "skinTemperatureK": 296.84,
+      "airTemperatureK": 296.37,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.61,
+      "surfacePressurePa": 101240
+    },
+    {
+      "time": "2025-09-16",
+      "skinTemperatureK": 296.96,
+      "airTemperatureK": 296.48,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.69,
+      "surfacePressurePa": 101230
+    },
+    {
+      "time": "2025-09-17",
+      "skinTemperatureK": 297.13,
+      "airTemperatureK": 296.91,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.75,
+      "surfacePressurePa": 101270
+    },
+    {
+      "time": "2025-09-18",
+      "skinTemperatureK": 297.37,
+      "airTemperatureK": 297.61,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.88,
+      "surfacePressurePa": 101250
+    },
+    {
+      "time": "2025-09-19",
+      "skinTemperatureK": 297.52,
+      "airTemperatureK": 297.71,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.71,
+      "surfacePressurePa": 101300
+    },
+    {
+      "time": "2025-09-20",
+      "skinTemperatureK": 297.49,
+      "airTemperatureK": 297.53,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.57,
+      "surfacePressurePa": 101390
+    },
+    {
+      "time": "2025-09-21",
+      "skinTemperatureK": 297.68,
+      "airTemperatureK": 296.6,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.64,
+      "surfacePressurePa": 101350
+    },
+    {
+      "time": "2025-09-22",
+      "skinTemperatureK": 297.1,
+      "airTemperatureK": 295.92,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.46,
+      "surfacePressurePa": 101390
+    },
+    {
+      "time": "2025-09-23",
+      "skinTemperatureK": 296.88,
+      "airTemperatureK": 295.35,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.39,
+      "surfacePressurePa": 101460
+    },
+    {
+      "time": "2025-09-24",
+      "skinTemperatureK": 296.89,
+      "airTemperatureK": 295.91,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 6.04,
+      "surfacePressurePa": 101440
+    },
+    {
+      "time": "2025-09-25",
+      "skinTemperatureK": 296.76,
+      "airTemperatureK": 295.63,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 4.83,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-09-26",
+      "skinTemperatureK": 296.97,
+      "airTemperatureK": 295.74,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.2,
+      "surfacePressurePa": 101590
+    },
+    {
+      "time": "2025-09-27",
+      "skinTemperatureK": 296.92,
+      "airTemperatureK": 295.56,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.11,
+      "surfacePressurePa": 101760
+    },
+    {
+      "time": "2025-09-28",
+      "skinTemperatureK": 296.78,
+      "airTemperatureK": 295.91,
+      "precipitationMmPerDay": 0.09,
+      "windSpeed10mMps": 8,
+      "surfacePressurePa": 101680
+    },
+    {
+      "time": "2025-09-29",
+      "skinTemperatureK": 296.63,
+      "airTemperatureK": 295.7,
+      "precipitationMmPerDay": 0.07,
+      "windSpeed10mMps": 8.27,
+      "surfacePressurePa": 101490
+    },
+    {
+      "time": "2025-09-30",
+      "skinTemperatureK": 296.81,
+      "airTemperatureK": 295.82,
+      "precipitationMmPerDay": 0.12,
+      "windSpeed10mMps": 5.53,
+      "surfacePressurePa": 101490
+    },
+    {
+      "time": "2025-10-01",
+      "skinTemperatureK": 297.17,
+      "airTemperatureK": 296.09,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 3.57,
+      "surfacePressurePa": 101540
+    },
+    {
+      "time": "2025-10-02",
+      "skinTemperatureK": 296.59,
+      "airTemperatureK": 295.67,
+      "precipitationMmPerDay": 0.07,
+      "windSpeed10mMps": 3.64,
+      "surfacePressurePa": 101550
+    },
+    {
+      "time": "2025-10-03",
+      "skinTemperatureK": 296.98,
+      "airTemperatureK": 295.78,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.75,
+      "surfacePressurePa": 101830
+    },
+    {
+      "time": "2025-10-04",
+      "skinTemperatureK": 296.72,
+      "airTemperatureK": 295.76,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.89,
+      "surfacePressurePa": 101910
+    },
+    {
+      "time": "2025-10-05",
+      "skinTemperatureK": 296.49,
+      "airTemperatureK": 295.07,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.77,
+      "surfacePressurePa": 101650
+    },
+    {
+      "time": "2025-10-06",
+      "skinTemperatureK": 296.5,
+      "airTemperatureK": 295.6,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.71,
+      "surfacePressurePa": 101540
+    },
+    {
+      "time": "2025-10-07",
+      "skinTemperatureK": 296.28,
+      "airTemperatureK": 295.77,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.83,
+      "surfacePressurePa": 101620
+    },
+    {
+      "time": "2025-10-08",
+      "skinTemperatureK": 295.87,
+      "airTemperatureK": 295.33,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.01,
+      "surfacePressurePa": 101680
+    },
+    {
+      "time": "2025-10-09",
+      "skinTemperatureK": 295.77,
+      "airTemperatureK": 295.04,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.97,
+      "surfacePressurePa": 101630
+    },
+    {
+      "time": "2025-10-10",
+      "skinTemperatureK": 295.85,
+      "airTemperatureK": 295.07,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.62,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-10-11",
+      "skinTemperatureK": 295.95,
+      "airTemperatureK": 295.53,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.28,
+      "surfacePressurePa": 101310
+    },
+    {
+      "time": "2025-10-12",
+      "skinTemperatureK": 295.98,
+      "airTemperatureK": 295.42,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 6.16,
+      "surfacePressurePa": 101190
+    },
+    {
+      "time": "2025-10-13",
+      "skinTemperatureK": 296.17,
+      "airTemperatureK": 295.38,
+      "precipitationMmPerDay": 0.09,
+      "windSpeed10mMps": 5.26,
+      "surfacePressurePa": 101130
+    },
+    {
+      "time": "2025-10-14",
+      "skinTemperatureK": 296.38,
+      "airTemperatureK": 295.41,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 2.47,
+      "surfacePressurePa": 101170
+    },
+    {
+      "time": "2025-10-15",
+      "skinTemperatureK": 295.82,
+      "airTemperatureK": 295.14,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.83,
+      "surfacePressurePa": 101310
+    },
+    {
+      "time": "2025-10-16",
+      "skinTemperatureK": 296.41,
+      "airTemperatureK": 295.14,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 4.28,
+      "surfacePressurePa": 101130
+    },
+    {
+      "time": "2025-10-17",
+      "skinTemperatureK": 296.74,
+      "airTemperatureK": 295.37,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.24,
+      "surfacePressurePa": 100980
+    },
+    {
+      "time": "2025-10-18",
+      "skinTemperatureK": 296.87,
+      "airTemperatureK": 295.51,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.54,
+      "surfacePressurePa": 101180
+    },
+    {
+      "time": "2025-10-19",
+      "skinTemperatureK": 296.67,
+      "airTemperatureK": 295.48,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 4.18,
+      "surfacePressurePa": 101360
+    },
+    {
+      "time": "2025-10-20",
+      "skinTemperatureK": 296.54,
+      "airTemperatureK": 296.1,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 4.07,
+      "surfacePressurePa": 101310
+    },
+    {
+      "time": "2025-10-21",
+      "skinTemperatureK": 296.73,
+      "airTemperatureK": 296.16,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 5.12,
+      "surfacePressurePa": 101410
+    },
+    {
+      "time": "2025-10-22",
+      "skinTemperatureK": 296.58,
+      "airTemperatureK": 295.9,
+      "precipitationMmPerDay": 0.05,
+      "windSpeed10mMps": 6.14,
+      "surfacePressurePa": 101400
+    },
+    {
+      "time": "2025-10-23",
+      "skinTemperatureK": 296.53,
+      "airTemperatureK": 295.75,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 5.3,
+      "surfacePressurePa": 101380
+    },
+    {
+      "time": "2025-10-24",
+      "skinTemperatureK": 296.67,
+      "airTemperatureK": 295.65,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 3.21,
+      "surfacePressurePa": 101430
+    },
+    {
+      "time": "2025-10-25",
+      "skinTemperatureK": 296.81,
+      "airTemperatureK": 295.78,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.23,
+      "surfacePressurePa": 101430
+    },
+    {
+      "time": "2025-10-26",
+      "skinTemperatureK": 296.76,
+      "airTemperatureK": 295.74,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 1.5,
+      "surfacePressurePa": 101510
+    },
+    {
+      "time": "2025-10-27",
+      "skinTemperatureK": 296.6,
+      "airTemperatureK": 295.89,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.33,
+      "surfacePressurePa": 101490
+    },
+    {
+      "time": "2025-10-28",
+      "skinTemperatureK": 296.55,
+      "airTemperatureK": 296.28,
+      "precipitationMmPerDay": 0.05,
+      "windSpeed10mMps": 3.86,
+      "surfacePressurePa": 101330
+    },
+    {
+      "time": "2025-10-29",
+      "skinTemperatureK": 296.47,
+      "airTemperatureK": 296.19,
+      "precipitationMmPerDay": 0.07,
+      "windSpeed10mMps": 5.14,
+      "surfacePressurePa": 101280
+    },
+    {
+      "time": "2025-10-30",
+      "skinTemperatureK": 296.65,
+      "airTemperatureK": 295.47,
+      "precipitationMmPerDay": 0.24,
+      "windSpeed10mMps": 3.98,
+      "surfacePressurePa": 101350
+    },
+    {
+      "time": "2025-10-31",
+      "skinTemperatureK": 296.61,
+      "airTemperatureK": 295.34,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 1.6,
+      "surfacePressurePa": 101410
+    },
+    {
+      "time": "2025-11-01",
+      "skinTemperatureK": 296.51,
+      "airTemperatureK": 295.55,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.12,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-11-02",
+      "skinTemperatureK": 296.43,
+      "airTemperatureK": 295.97,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.04,
+      "surfacePressurePa": 101750
+    },
+    {
+      "time": "2025-11-03",
+      "skinTemperatureK": 296.23,
+      "airTemperatureK": 295.49,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.55,
+      "surfacePressurePa": 101570
+    },
+    {
+      "time": "2025-11-04",
+      "skinTemperatureK": 296.64,
+      "airTemperatureK": 296.67,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.6,
+      "surfacePressurePa": 101300
+    },
+    {
+      "time": "2025-11-05",
+      "skinTemperatureK": 296.67,
+      "airTemperatureK": 296.33,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.16,
+      "surfacePressurePa": 101450
+    },
+    {
+      "time": "2025-11-06",
+      "skinTemperatureK": 296.24,
+      "airTemperatureK": 295.09,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 6.39,
+      "surfacePressurePa": 101520
+    },
+    {
+      "time": "2025-11-07",
+      "skinTemperatureK": 296,
+      "airTemperatureK": 294.41,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 7.24,
+      "surfacePressurePa": 101500
+    },
+    {
+      "time": "2025-11-08",
+      "skinTemperatureK": 296.04,
+      "airTemperatureK": 295.46,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.42,
+      "surfacePressurePa": 101520
+    },
+    {
+      "time": "2025-11-09",
+      "skinTemperatureK": 295.81,
+      "airTemperatureK": 294.48,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 8.27,
+      "surfacePressurePa": 101540
+    },
+    {
+      "time": "2025-11-10",
+      "skinTemperatureK": 295.67,
+      "airTemperatureK": 294.35,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 6.03,
+      "surfacePressurePa": 101440
+    },
+    {
+      "time": "2025-11-11",
+      "skinTemperatureK": 296.19,
+      "airTemperatureK": 294.41,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 2.29,
+      "surfacePressurePa": 101110
+    },
+    {
+      "time": "2025-11-12",
+      "skinTemperatureK": 295.73,
+      "airTemperatureK": 295.3,
+      "precipitationMmPerDay": 0.05,
+      "windSpeed10mMps": 8.39,
+      "surfacePressurePa": 100750
+    },
+    {
+      "time": "2025-11-13",
+      "skinTemperatureK": 295.64,
+      "airTemperatureK": 295.45,
+      "precipitationMmPerDay": 3.01,
+      "windSpeed10mMps": 9.76,
+      "surfacePressurePa": 100610
+    },
+    {
+      "time": "2025-11-14",
+      "skinTemperatureK": 295.56,
+      "airTemperatureK": 294.65,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 4.2,
+      "surfacePressurePa": 101340
+    },
+    {
+      "time": "2025-11-15",
+      "skinTemperatureK": 295.7,
+      "airTemperatureK": 294.95,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 3.44,
+      "surfacePressurePa": 101540
+    },
+    {
+      "time": "2025-11-16",
+      "skinTemperatureK": 295.8,
+      "airTemperatureK": 294.81,
+      "precipitationMmPerDay": 0.98,
+      "windSpeed10mMps": 5.01,
+      "surfacePressurePa": 101620
+    },
+    {
+      "time": "2025-11-17",
+      "skinTemperatureK": 295.42,
+      "airTemperatureK": 293.98,
+      "precipitationMmPerDay": 0.52,
+      "windSpeed10mMps": 6.97,
+      "surfacePressurePa": 101780
+    },
+    {
+      "time": "2025-11-18",
+      "skinTemperatureK": 295.35,
+      "airTemperatureK": 294.23,
+      "precipitationMmPerDay": 0.09,
+      "windSpeed10mMps": 7.44,
+      "surfacePressurePa": 101590
+    },
+    {
+      "time": "2025-11-19",
+      "skinTemperatureK": 295.2,
+      "airTemperatureK": 293.55,
+      "precipitationMmPerDay": 0.06,
+      "windSpeed10mMps": 5.48,
+      "surfacePressurePa": 101400
+    },
+    {
+      "time": "2025-11-20",
+      "skinTemperatureK": 294.76,
+      "airTemperatureK": 293.69,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 5.1,
+      "surfacePressurePa": 101440
+    },
+    {
+      "time": "2025-11-21",
+      "skinTemperatureK": 294.88,
+      "airTemperatureK": 293.56,
+      "precipitationMmPerDay": 0.11,
+      "windSpeed10mMps": 8.31,
+      "surfacePressurePa": 101550
+    },
+    {
+      "time": "2025-11-22",
+      "skinTemperatureK": 294.77,
+      "airTemperatureK": 293.8,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 8.37,
+      "surfacePressurePa": 101660
+    },
+    {
+      "time": "2025-11-23",
+      "skinTemperatureK": 294.79,
+      "airTemperatureK": 294.81,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.98,
+      "surfacePressurePa": 101730
+    },
+    {
+      "time": "2025-11-24",
+      "skinTemperatureK": 295.09,
+      "airTemperatureK": 295.38,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 3.84,
+      "surfacePressurePa": 101770
+    },
+    {
+      "time": "2025-11-25",
+      "skinTemperatureK": 294.88,
+      "airTemperatureK": 293.79,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 5.91,
+      "surfacePressurePa": 101730
+    },
+    {
+      "time": "2025-11-26",
+      "skinTemperatureK": 294.39,
+      "airTemperatureK": 292.92,
+      "precipitationMmPerDay": 1.54,
+      "windSpeed10mMps": 6.86,
+      "surfacePressurePa": 101590
+    },
+    {
+      "time": "2025-11-27",
+      "skinTemperatureK": 294.32,
+      "airTemperatureK": 293.09,
+      "precipitationMmPerDay": 0.11,
+      "windSpeed10mMps": 7.37,
+      "surfacePressurePa": 101460
+    },
+    {
+      "time": "2025-11-28",
+      "skinTemperatureK": 294.41,
+      "airTemperatureK": 293.31,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 6.67,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-11-29",
+      "skinTemperatureK": 294.27,
+      "airTemperatureK": 293.03,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 7.33,
+      "surfacePressurePa": 101560
+    },
+    {
+      "time": "2025-11-30",
+      "skinTemperatureK": 294.33,
+      "airTemperatureK": 292.69,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 6.71,
+      "surfacePressurePa": 101620
+    },
+    {
+      "time": "2025-12-01",
+      "skinTemperatureK": 294.19,
+      "airTemperatureK": 292.6,
+      "precipitationMmPerDay": 0.13,
+      "windSpeed10mMps": 8.4,
+      "surfacePressurePa": 101610
+    },
+    {
+      "time": "2025-12-02",
+      "skinTemperatureK": 294.13,
+      "airTemperatureK": 292.53,
+      "precipitationMmPerDay": 0.01,
+      "windSpeed10mMps": 6.91,
+      "surfacePressurePa": 101820
+    },
+    {
+      "time": "2025-12-03",
+      "skinTemperatureK": 293.87,
+      "airTemperatureK": 292.41,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 8.8,
+      "surfacePressurePa": 101980
+    },
+    {
+      "time": "2025-12-04",
+      "skinTemperatureK": 293.71,
+      "airTemperatureK": 292,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 9.22,
+      "surfacePressurePa": 101940
+    },
+    {
+      "time": "2025-12-05",
+      "skinTemperatureK": 293.87,
+      "airTemperatureK": 292.26,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.59,
+      "surfacePressurePa": 101900
+    },
+    {
+      "time": "2025-12-06",
+      "skinTemperatureK": 293.95,
+      "airTemperatureK": 293.11,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 4.44,
+      "surfacePressurePa": 101850
+    },
+    {
+      "time": "2025-12-07",
+      "skinTemperatureK": 293.85,
+      "airTemperatureK": 293.78,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.65,
+      "surfacePressurePa": 101780
+    },
+    {
+      "time": "2025-12-08",
+      "skinTemperatureK": 293.77,
+      "airTemperatureK": 293.75,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 2.09,
+      "surfacePressurePa": 101720
+    },
+    {
+      "time": "2025-12-09",
+      "skinTemperatureK": 294.03,
+      "airTemperatureK": 293.94,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 1.84,
+      "surfacePressurePa": 101850
+    },
+    {
+      "time": "2025-12-10",
+      "skinTemperatureK": 293.49,
+      "airTemperatureK": 292.64,
+      "precipitationMmPerDay": 0.04,
+      "windSpeed10mMps": 5.95,
+      "surfacePressurePa": 101930
+    },
+    {
+      "time": "2025-12-11",
+      "skinTemperatureK": 293.7,
+      "airTemperatureK": 291.93,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 5.53,
+      "surfacePressurePa": 101810
+    },
+    {
+      "time": "2025-12-12",
+      "skinTemperatureK": 293.48,
+      "airTemperatureK": 292.01,
+      "precipitationMmPerDay": 5.59,
+      "windSpeed10mMps": 9.41,
+      "surfacePressurePa": 101440
+    },
+    {
+      "time": "2025-12-13",
+      "skinTemperatureK": 292.57,
+      "airTemperatureK": 290.82,
+      "precipitationMmPerDay": 15.77,
+      "windSpeed10mMps": 10.61,
+      "surfacePressurePa": 100820
+    },
+    {
+      "time": "2025-12-14",
+      "skinTemperatureK": 292.89,
+      "airTemperatureK": 291.82,
+      "precipitationMmPerDay": 4.62,
+      "windSpeed10mMps": 6.44,
+      "surfacePressurePa": 101080
+    },
+    {
+      "time": "2025-12-15",
+      "skinTemperatureK": 293.3,
+      "airTemperatureK": 292.19,
+      "precipitationMmPerDay": 0.18,
+      "windSpeed10mMps": 5.81,
+      "surfacePressurePa": 101660
+    },
+    {
+      "time": "2025-12-16",
+      "skinTemperatureK": 293.16,
+      "airTemperatureK": 292.18,
+      "precipitationMmPerDay": 0.83,
+      "windSpeed10mMps": 9.27,
+      "surfacePressurePa": 102020
+    },
+    {
+      "time": "2025-12-17",
+      "skinTemperatureK": 292.99,
+      "airTemperatureK": 291.55,
+      "precipitationMmPerDay": 1.23,
+      "windSpeed10mMps": 9.41,
+      "surfacePressurePa": 101960
+    },
+    {
+      "time": "2025-12-18",
+      "skinTemperatureK": 292.9,
+      "airTemperatureK": 291.51,
+      "precipitationMmPerDay": 0.11,
+      "windSpeed10mMps": 6.87,
+      "surfacePressurePa": 101880
+    },
+    {
+      "time": "2025-12-19",
+      "skinTemperatureK": 293.05,
+      "airTemperatureK": 291.77,
+      "precipitationMmPerDay": 1.15,
+      "windSpeed10mMps": 6.2,
+      "surfacePressurePa": 101900
+    },
+    {
+      "time": "2025-12-20",
+      "skinTemperatureK": 292.8,
+      "airTemperatureK": 291.14,
+      "precipitationMmPerDay": 0.14,
+      "windSpeed10mMps": 7.68,
+      "surfacePressurePa": 101920
+    },
+    {
+      "time": "2025-12-21",
+      "skinTemperatureK": 292.88,
+      "airTemperatureK": 291.37,
+      "precipitationMmPerDay": 0.35,
+      "windSpeed10mMps": 6.3,
+      "surfacePressurePa": 101640
+    },
+    {
+      "time": "2025-12-22",
+      "skinTemperatureK": 292.79,
+      "airTemperatureK": 291.56,
+      "precipitationMmPerDay": 0.25,
+      "windSpeed10mMps": 7.52,
+      "surfacePressurePa": 101670
+    },
+    {
+      "time": "2025-12-23",
+      "skinTemperatureK": 292.74,
+      "airTemperatureK": 291.51,
+      "precipitationMmPerDay": 0.09,
+      "windSpeed10mMps": 7.08,
+      "surfacePressurePa": 101670
+    },
+    {
+      "time": "2025-12-24",
+      "skinTemperatureK": 292.98,
+      "airTemperatureK": 292.26,
+      "precipitationMmPerDay": 2,
+      "windSpeed10mMps": 7.25,
+      "surfacePressurePa": 101150
+    },
+    {
+      "time": "2025-12-25",
+      "skinTemperatureK": 292.72,
+      "airTemperatureK": 291.46,
+      "precipitationMmPerDay": 0.97,
+      "windSpeed10mMps": 7,
+      "surfacePressurePa": 101290
+    },
+    {
+      "time": "2025-12-26",
+      "skinTemperatureK": 292.56,
+      "airTemperatureK": 290.96,
+      "precipitationMmPerDay": 0.14,
+      "windSpeed10mMps": 5.04,
+      "surfacePressurePa": 101580
+    },
+    {
+      "time": "2025-12-27",
+      "skinTemperatureK": 292.78,
+      "airTemperatureK": 292.17,
+      "precipitationMmPerDay": 0.1,
+      "windSpeed10mMps": 7.11,
+      "surfacePressurePa": 101450
+    },
+    {
+      "time": "2025-12-28",
+      "skinTemperatureK": 292.85,
+      "airTemperatureK": 291.89,
+      "precipitationMmPerDay": 0.08,
+      "windSpeed10mMps": 5.51,
+      "surfacePressurePa": 101530
+    },
+    {
+      "time": "2025-12-29",
+      "skinTemperatureK": 292.83,
+      "airTemperatureK": 291.1,
+      "precipitationMmPerDay": 0,
+      "windSpeed10mMps": 1.59,
+      "surfacePressurePa": 101690
+    },
+    {
+      "time": "2025-12-30",
+      "skinTemperatureK": 292.82,
+      "airTemperatureK": 291.38,
+      "precipitationMmPerDay": 0.02,
+      "windSpeed10mMps": 1.54,
+      "surfacePressurePa": 101770
+    },
+    {
+      "time": "2025-12-31",
+      "skinTemperatureK": 292.99,
+      "airTemperatureK": 292.14,
+      "precipitationMmPerDay": 0.03,
+      "windSpeed10mMps": 2.69,
+      "surfacePressurePa": 101490
+    }
+  ],
+  "summary": {
+    "meanSkinTemperatureK": 294.8801095890412,
+    "meanAirTemperatureK": 293.8118082191782,
+    "meanWindSpeed10mMps": 6.361397260273973,
+    "meanSurfacePressurePa": 101457.94520547945,
+    "meanPrecipitationMmPerDay": 0.19556164383561647,
+    "totalPrecipitationMm": 71.38000000000001,
+    "availablePrecipitationTotalMm": 71.38000000000001,
+    "coverage": {
+      "TS": {
+        "validCount": 365,
+        "missingCount": 0,
+        "fraction": 1
+      },
+      "T2M": {
+        "validCount": 365,
+        "missingCount": 0,
+        "fraction": 1
+      },
+      "PRECTOTCORR": {
+        "validCount": 365,
+        "missingCount": 0,
+        "fraction": 1
+      },
+      "WS10M": {
+        "validCount": 365,
+        "missingCount": 0,
+        "fraction": 1
+      },
+      "PS": {
+        "validCount": 365,
+        "missingCount": 0,
+        "fraction": 1
+      }
+    }
+  },
+  "source": {
+    "id": "nasa-power-environment",
+    "title": "NASA POWER daily meteorological context",
+    "agency": "NASA POWER / GMAO",
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "methodologyUrl": "https://power.larc.nasa.gov/docs/methodology/data/sources_meteorology/",
+    "note": "Historical daily model/reanalysis skin and air temperature, precipitation, 10 m wind and surface pressure. Not current weather or local water detection.",
+    "license": "NASA POWER openly available data; acknowledge NASA POWER and upstream model products.",
+    "requestUrl": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=TS%2CT2M%2CPRECTOTCORR%2CWS10M%2CPS&community=RE&longitude=-13.74&latitude=28.995&start=20250101&end=20251231&format=JSON&time-standard=LST",
+    "retrievedAt": "2026-11-14T12:48:41.659Z",
+    "rawResponseSHA256": "ab8cb3f2a60563646dc3cd26690f491087d01967be83f24a5041fd1da4bf85a5",
+    "retrievalMode": "bundled",
+    "modelProducts": [
+      "MERRA2",
+      "POWER"
+    ],
+    "apiVersion": "v2.10.3",
+    "spatialResolution": {
+      "latitudeDegrees": 0.5,
+      "longitudeDegrees": 0.625
+    },
+    "timeStandard": "LST",
+    "fillValue": -999,
+    "rawFile": "earth-environment-lanzarote-raw.json",
+    "verifiedCORS": null
+  },
+  "limitations": [
+    "These are historical daily model/reanalysis values, not a live instrument feed or weather forecast.",
+    "The native meteorological grid is 0.5° latitude × 0.625° longitude; local rocks, shade, coastlines and a 32 km terrain window are not resolved.",
+    "Daily mean wind is not a gust measurement or evidence of a storm; precipitation does not identify standing water, ice or flooding.",
+    "Temperature fields have different physical heights: TS is skin temperature and T2M is air temperature at 2 m.",
+    "Daily mean extrema are not instantaneous or day/night extremes. LST means Local Solar Time.",
+    "An incomplete precipitation series has only an available-day sum, not a complete-period precipitation total."
+  ],
+  "messages": []
+}

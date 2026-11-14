@@ -32,7 +32,25 @@ measurements.
   MIT license retained as `dist/vendor/THREE-LICENSE.txt`.
 - No production CDN import is needed; the files load from the same origin.
 
-## Planet imagery
+## Current original agency imagery
+
+The active globe uses `official-earth.jpg`, `official-mars.jpg` and
+`official-moon.jpg`: unchanged original NASA/USGS published renditions.
+See [GLOBE-IMAGERY.md](GLOBE-IMAGERY.md) and
+`dist/data/globe-imagery-sources.json` for original URLs, dimensions, dates,
+registration checks, credits and SHA-256 hashes. The scientific renderer does
+not add a fabricated atmosphere, terminator, star field or colour grading.
+See [GLOBE-GEOMETRY.md](GLOBE-GEOMETRY.md) for numerical geometry.
+
+NASA GIBS dated true-colour, daytime temperature and annual water-mask PNGs and
+their original legends are also bundled. `dist/data/earth-observation-layers.json`
+retains WMS requests, dates, hashes and advertised time intervals. These are
+2048×1024 browse renditions, not native-resolution quantitative rasters. The
+older water rendition is conservatively hidden outside 60°S–80°N because its
+Antarctic land rendering was not reliable; this guard is not a no-water finding
+or an official coverage boundary. Missing observations use a neutral backdrop.
+
+## Retained legacy imagery (not used by the current globe)
 
 - `dist/assets/earth-day.jpg`: Earth color texture, copied unchanged from
   <https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg>.
@@ -46,8 +64,9 @@ measurements.
   Source and license: <https://www.solarsystemscope.com/textures/> and
   <https://creativecommons.org/licenses/by/4.0/>.
   The publisher notes its global visual maps may contain fictional gap-filling.
-  Therefore this texture is used solely to illustrate a globe; terrain
-  measurements must come from the separately identified DEM products.
+  This texture is retained for collaboration history and licensing attribution;
+  the current renderer does not load it. Terrain measurements come from the
+  separately identified DEM products.
 
 ## Observational photographs
 

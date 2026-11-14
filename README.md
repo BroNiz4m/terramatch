@@ -54,6 +54,46 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
    contains source information; reports include the method, candidate origin,
    recorded survey coverage and interpretation limits.
 10. Use **Sources** to inspect exact provenance, citations and assumptions.
+11. Open **Planet data** for original global maps, coordinate frames, physical
+    dimensions and dated environmental records. **Same physical scale** retains
+    one metres-to-scene conversion for all three bodies; **Fit body to view**
+    changes the camera only. The global **Elevation** palette uses source-datum
+    heights at 1° sampling and no exaggerated relief.
+12. Under Earth in **Planet data**, show dated NASA GIBS satellite imagery,
+    daytime land-surface temperature or the historical annual water mask on the
+    globe. The default dates are bundled original NASA renditions; other verified
+    dates fetch NASA directly. Use the original legend and respect missing data.
+    Temperature colours are not decoded into quantitative measurements.
+13. Inspect NASA POWER 2025 skin/air temperatures, 10 m wind, pressure and
+    precipitation for the selected Earth candidate. EONET initially shows an
+    explicitly dated bundled storm catalogue; **Refresh from NASA** requests
+    current catalogue metadata. Catalogue points are approximate dated reports,
+    not current storm boundaries or evidence that other areas have no storms.
+
+## Scientific globe and environmental evidence
+
+The active imagery comes unchanged from NASA Blue Marble Next Generation
+(November 2004), NASA/JPL Viking Mars imagery, and the USGS/NASA LROC lunar
+mosaic. The published delivery resolutions are 5400×2700, 1440×720 and 1024×512.
+The Mars texture's exact MDIM revision/control accuracy is not stated by NASA;
+we verify global layout without claiming survey-grade texture registration.
+
+Numerical geometry uses WGS84 plus NOAA ETOPO1 topography/bathymetry, NASA MOLA
+absolute radius, and NASA LOLA radial height. The global mesh is a **1° sample**,
+not the full-resolution source. Earth MSL heights are applied to WGS84 without a
+geoid correction: a disclosed approximation. Ocean terrain is bathymetry, not a
+moving water surface. Existing finer study-window analysis remains separate.
+The renderer does not claim a current inertial orientation or sunlight model.
+
+Earth environmental records are historical model/reanalysis, not live weather.
+Mars pressure comes from actual MEDA sol 29 PDS data with original CSV/XML and
+hashes retained; the three channels are separate and numerical uncertainties
+are unavailable. Current global Mars storms, local lunar ice detection and
+local water classification are not invented. Missing data remain missing.
+
+Reproduction and source detail: [imagery](GLOBE-IMAGERY.md),
+[global geometry](GLOBE-GEOMETRY.md), [environment](ENVIRONMENT-DATA.md).
+Re-fetch GIBS references with `node scripts/fetch-earth-layer-reference.mjs`.
 
 ## Exploration tasks
 
