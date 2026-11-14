@@ -753,3 +753,120 @@ Publish via the existing Site with its owner-only audience, then synchronize the
 same source-helper commit to GitHub main. Actual deployment/version IDs are
 reported from tool results separately. No ice implementation, score calibration,
 dataset regeneration, target expansion, robot change or audience change is included.
+
+## 2026-11-15 — Longyearbreen candidate eligibility audit (research only)
+
+The owner approved verifying Longyearbreen's real dated glacier geometry,
+coordinates, full 32 km terrain window and land coverage before deciding whether
+to add a polar Earth reference. Baseline: `ad39d656a834fa9cae3a342ab177e39dfdfdeddd`;
+the working tree was clean. No AGENTS.md was found in the repository or ancestors.
+
+Result: **defer this window as a ranked reference**. A genuine historical
+outline is available, but the independent coastline check contradicts the
+runtime coarse all-land flag. This is a completed assessment, not an ice feature.
+
+- `LONGYEARBREEN-AUDIT.md`: decision, primary sources, observations, limits,
+  attribution and reproduction instructions.
+- `scripts/audit-longyearbreen.mjs`: bounded public acquisition with `--fetch`;
+  default mode verifies archived sources offline. Writes research files only.
+- `research/longyearbreen-audit-2026-11-15/`: source manifests/hashes, original
+  compressed vector responses and four PNG tiles, complete selected glacier
+  GeoJSON, terrain window, local coastline polygons, full-grid point screening
+  and machine-readable decision.
+- Acquired NPI 2020 polygon: IDENT 14204 / OBJECTID 637, 96 coordinates including
+  closure, no inner rings in this feature, reported area 2.294342 km². Actual
+  geometry is retained, not a bounding rectangle. Coordinate registration and
+  projected-area reconstruction pass; observation accuracy is not established.
+- Source imagery is summer 2020 Sentinel-2. The catalogue refers to a later
+  2026 revision, while the map layer does not expose an inventory release ID;
+  reconcile release attribution before production use. © Norwegian Polar
+  Institute, CC BY 4.0; Copernicus Sentinel-2 imagery acknowledged.
+- The GLIMS 2016 record (analysis 994985, date 2016-08-23) remains distinct. Its
+  KML export redirects to Earthdata Login. No login or credential collection was
+  attempted. No trend is inferred from the unlike 2016/2020 outline areas.
+- Explicit center: 78.17551 N, 15.47693 E (rounded old GLIMS bounds midpoint),
+  verified inside the NPI polygon. Entire glacier lies within the terrain window.
+- Runtime Natural Earth 1:110m land screen passes 25/25. Independent 1:10m
+  screening passes only 17/25; full grid has 2,975 mapped-land and 1,250 outside-
+  land points. These are sampled counts, not exact area fractions; 1:10m is a
+  cartographic scale, not 10-metre resolution. NPI base-map query/identify are
+  unsupported, so those operations were not treated as land confirmation.
+- **Known application limit:** runtime `comparisonEligible:true` remains the
+  coarse screen's result. No runtime mask fix or exclusion override was in this
+  approved research scope. Do not bundle this candidate based on that flag.
+- All 4,225 terrain samples reconstruct from the four archived zoom-8 PNGs;
+  independent slope/relief calculations agree. Negative elevation is retained
+  and is not a water classifier. No terrain score or ice percentage is produced.
+
+Offline verification passes all source hashes, ring/registration/area checks,
+window containment, independent land parity, grid reconstruction and statistics.
+All 43 production data files and imported science/search modules retain their
+fingerprints. `ICE-SOURCE-AUDIT.md` links the new findings without rewriting its
+historical source decisions. No application code or production data changed;
+no browser/GPU or field/scientific suitability validation is claimed.
+`node --check`, the offline verifier, `npm run check` (38 JSON datasets), and
+`git diff --check` passed. The unchanged app suite was not rerun for this audit.
+
+Audit files remain local for review. No commit, push or Site deployment is
+performed for this report-only step. Next: seek a verified inland polar window,
+or explicitly scope a better coverage method; do not silently shift this window
+or bypass the coverage gate. The ice module is still a separate future task.
+
+## 2026-11-15 — Detailed coastal screening for runtime searches
+
+The owner approved strengthening land coverage for all manual, automatic and
+cached Earth searches after the Longyearbreen audit. The existing owner-private
+Site source was opened at `ad39d656a834fa9cae3a342ab177e39dfdfdeddd` before edits.
+The preceding local audit files are preserved and included with this release.
+
+- Bundled unchanged Natural Earth 1:10 million land polygons as
+  `dist/data/land-mask-10m.geojson`; exact SHA-256
+  `1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416`.
+  The asset is checked by the loader and `npm run check`, loaded lazily from the
+  same Site, and kept in memory rather than duplicated in saved windows.
+- `land-geometry.js` contains the existing hole-aware/longitude-aware polygon
+  tests, now indexed by latitude edges for the denser source. No geometry is
+  simplified. `terrain-search.js` reexports its previous public geometry APIs.
+- `land-coverage.js` keeps the old 25-point coarse screen and adds all 4,225
+  terrain positions plus polygon-boundary/window intersections. Shared internal
+  land-polygon edges are ignored using mapped land on both sides. One-metre
+  computational probes are not shoreline accuracy or a safety buffer.
+- Any non-land point, intersecting coastline or unavailable/hash-invalid detailed
+  source withholds runtime ranking. Successful terrain remains inspectable.
+  Versioned `source.coverageAssessment` includes time/bounds, source hash/URL,
+  counts, bounded non-land/edge examples and explicit cartographic limitations.
+- All restored runtime records start pending. Startup reapplies current masks to
+  saved bounds without refetching elevation. Old flags cannot authorize scores;
+  assessments from another version/bounds cannot authorize them either. Original
+  coarse records remain in `previousLandScreening`. A failed recheck leaves the
+  cached record unranked. Cache validation also checks center/bounds consistency.
+- Compare explains both screens, the unchanged shared eligibility gate controls
+  all ranking/score paths, and both evidence exports include the new assessment.
+  Manual/automatic flows preserve review-only windows and cancellation semantics.
+- LANDMASK/SEARCH-DATA/README/DATA document the changes. The local static server
+  now serves GeoJSON as `application/geo+json`. No dependencies were added.
+
+Validation: **123 automated tests passed** (116 previous tests plus seven new
+coverage tests). Regressions cover real Longyearbreen (25/25 coarse but only
+2,975/4,225 detailed land points), a narrow water hole between sample points,
+shared internal land edges, longitude wrapping/polar rings, independent ray
+crossings, cached rechecking without changed heights/tile provenance, and missing
+or corrupt detailed sources. Expanded application DOM tests seed an old
+Longyearbreen cache at startup, verify it becomes unranked without elevation
+requests, then exercise manual polar selection, JSON/Markdown withholding and
+existing manual/automatic evidence workflows. Negative elevations remain valid
+when the geographic screens pass. `npm run check` passes (38 JSON datasets).
+`git diff --check` passed. The homepage, both new JavaScript modules and the new
+GeoJSON asset returned HTTP 200 from an owned temporary localhost server; the
+served mask's SHA-256 and GeoJSON MIME type were checked, then the server stopped.
+
+The terrain score formula and all existing production datasets are unchanged.
+Both land sources remain generalized cartography; no wholly dry-window, complete
+inland-water, contemporary shoreline or physical-field suitability claim is made.
+CUA inventory was checked for this release: the browser access host remains
+unavailable, so automated DOM tests do not establish WebGL/GPU visual behavior.
+
+Publish through the existing private Site and push the same helper commit to
+GitHub main. No polar reference, ice feature, mobile redesign, robot change or
+audience change is included. The next science step remains an inland polar
+candidate with independently verified coverage and dated ice geometry.

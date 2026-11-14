@@ -1,0 +1,117 @@
+{
+  "glacier-geographic": {
+    "url": "https://geodata.npolar.no/arcgis/rest/services/Temadata/I_Isbreer_Overflatetyper_og_utstrekning_Svalbard/MapServer/4/query?geometry=15.42%2C78.16%2C15.54%2C78.20&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+    "status": 200,
+    "finalHost": "geodata.npolar.no",
+    "contentType": "application/geo+json;charset=UTF-8",
+    "bytes": 9822,
+    "sha256": "04528405991ca144b9c3fa3a54f2485575b3618a26b95d82fca6dc52dbd1c5b5",
+    "retrievedAt": "2026-11-14T21:13:50.795Z",
+    "file": "sources/glacier-geographic.json.gz"
+  },
+  "glacier-projected": {
+    "url": "https://geodata.npolar.no/arcgis/rest/services/Temadata/I_Isbreer_Overflatetyper_og_utstrekning_Svalbard/MapServer/4/query?geometry=15.42%2C78.16%2C15.54%2C78.20&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=25833&f=json",
+    "status": 200,
+    "finalHost": "geodata.npolar.no",
+    "contentType": "application/json;charset=UTF-8",
+    "bytes": 11057,
+    "sha256": "50ce25c44c0e16134022788bfd1e091f2f15ade764fae33b5146668f35d8c08b",
+    "retrievedAt": "2026-11-14T21:13:51.106Z",
+    "file": "sources/glacier-projected.json.gz"
+  },
+  "natural-earth-10m": {
+    "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+    "status": 200,
+    "finalHost": "raw.githubusercontent.com",
+    "contentType": "text/plain; charset=utf-8",
+    "bytes": 10157965,
+    "sha256": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416",
+    "retrievedAt": "2026-11-14T21:13:51.973Z",
+    "file": "sources/natural-earth-10m.json.gz"
+  },
+  "inventory": {
+    "url": "https://api.npolar.no/dataset/1b8631bf-7710-449a-a56f-0da1a4fef608",
+    "status": 200,
+    "finalHost": "api.npolar.no",
+    "contentType": "application/json",
+    "bytes": 4507,
+    "sha256": "a52eccbfb9619fdf0d3a9305939057efcef7825e4c3a072b8374d5e6570e3a00",
+    "retrievedAt": "2026-11-14T21:13:53.305Z",
+    "id": "1b8631bf-7710-449a-a56f-0da1a4fef608",
+    "doi": "10.21334/npolar.2021.1b8631bf",
+    "title": "Svalbard glacier inventory based on Sentinel-2 imagery from summer 2020, v. 1",
+    "summary": "This dataset presents the first version of a complete glacier inventory of Svalbard for the year 2020 (GI_2020_v1), comprising glacier outlines digitized from a mosaic of Copernicus Sentinel-2 imagery covering all of Svalbard, acquired in July-September 2020 during an unusually warm summer with maximal snowmelt. It is an update of a previous complete GI based on satellite imagery from 2000-2010 (Nuth et al., 2013; König et al., 2013) which has been the reference dataset for Svalbard glacier outlines in GLIMS Glacier Database and the Randolph Glacier Inventory. Earlier GIs based on aerial imagery with partial coverage are also available from the same source, as well as from a study of historical 1930s imagery by Geyman et al. (2022). Divides between glacier units flowing from icefields and icecaps were updated using a digital elevation model covering the period 2008-2012 (NPI, 2014). \n\nThis version has been updated in a new version (Kohler et al 2026).\n\nReferences:\n\nKohler J., G. Moholdt , A. Lith (2026) Svalbard glacier inventory based on Sentinel-2 imagery from summer 2020 [Dataset], Norwegian Polar Institute (doi:pending)\n\nKönig, M., J. Kohler, C. Nuth (2013). Glacier Area Outlines - Svalbard 1936-2010 [Data set]. Norwegian Polar Institute (doi:10.21334/npolar.2013.89f430f8)\n\nNuth, C., J. Kohler, M. König, A. von Deschwanden, J.O. Hagen, A. Kääb, G. Moholdt, R. Pettersson (2013). Decadal changes from a multi-temporal glacier inventory of Svalbard. Cryosphere 7, 1–19 (doi:10.5194/tc-7-1603-2013)\n\nGeyman, E., W. van Pelt, A. Maloof, H.F. Aas, J. Kohler (2022). Historical record of glacier change on Svalbard predicts doubling of 21st century mass loss. Nature 601, 374–379 (doi:10.1038/s41586-021-04314-4)\n\nGeyman, E., W. van Pelt, A. Maloof, H.F. Aas, J. Kohler (2021). 1936/1938 DEM of Svalbard [Data set]. Norwegian Polar Institute (doi:10.21334/npolar.2021.f6afca5c)\n\nNorwegian Polar Institute (2014). Terrengmodell Svalbard (S0 Terrengmodell) [Data set]. Norwegian Polar Institute. https://doi.org/10.21334/npolar.2014.dce53a47\n\nNorwegian Polar Institute (2023). Satellittbildemosaikk av Svalbard (Sentinel2, 2020) [Data set]. Norwegian Polar Institute. https://doi.org/10.21334/npolar.2023.e02f479b",
+    "modified": "2026-09-15T10:42:18Z",
+    "note": "Scientific metadata retained; contact details and user-account fields omitted."
+  },
+  "glims2016": {
+    "url": "https://www.glims.org/services/glacierinfo_full?anlys_id=994985",
+    "status": 200,
+    "finalHost": "www.glims.org",
+    "contentType": "application/json",
+    "bytes": 1757,
+    "sha256": "8514cb1aa7ec63032acd12f909840591f92e3cdf9424224688f26eac3203e620",
+    "retrievedAt": "2026-11-14T21:13:55.701Z",
+    "glacier": {
+      "analysis_id": 994985,
+      "analysis_timestamp": "2020-07-13",
+      "contact_id": 793,
+      "db_calculated_area": 1.59787,
+      "glacier_id": "G015474E78170N",
+      "glacier_name": "Longyearbreen",
+      "gtng_o1region": 7,
+      "gtng_o2region": 1,
+      "primary_classification": 0,
+      "primary_classification2": 0,
+      "source_timestamp": "2016-08-23",
+      "submission_id": 796,
+      "term_type": 9,
+      "wgms_id": "14204.000000"
+    },
+    "images": [
+      {
+        "acq_timestamp": "2016-08-23",
+        "image_id": 4849,
+        "instrument_short_name": "Sentinel2",
+        "is_mosaic": false,
+        "orig_id": "S2A_OPER_MSI_L1C_TL_SGS__20160823T120958_20160823T191450_A006112_T33XWG_N02_04_01"
+      }
+    ],
+    "method": "Manual glacier digitization.; Manual digitization of imagery from Sentinel2.",
+    "note": "Scientific metadata retained; personal contact details omitted. This is NOT the 2020 geometry source."
+  },
+  "glimsExport": {
+    "requestedAnalysis": 994985,
+    "status": 200,
+    "finalHost": "urs.earthdata.nasa.gov",
+    "contentType": "text/html; charset=utf-8",
+    "requiresEarthdataLogin": true,
+    "note": "No login, credentials or redirected session parameters retained; no GLIMS polygon downloaded."
+  },
+  "tiles": [
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/8/138/35.png",
+      "file": "sources/tile-8-138-35.png",
+      "sha256": "0dfe5caad5859cff2c09abf4ca14dcd3f3b720af4aa73658de45350bafe03ba6",
+      "bytes": 97819
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/8/138/36.png",
+      "file": "sources/tile-8-138-36.png",
+      "sha256": "bd7baba7833b5e512d6d9e8e3d6b1f31b4381b1b85303414f4a844b8ca65785d",
+      "bytes": 62164
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/8/139/35.png",
+      "file": "sources/tile-8-139-35.png",
+      "sha256": "87d6c3d18eebfb78004a0b16e1528911879f27b668921a21cb89381d3ca0918d",
+      "bytes": 64438
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/8/139/36.png",
+      "file": "sources/tile-8-139-36.png",
+      "sha256": "cbef1cf1cea136e12bda830bae4f04122e6fe0be61be492c84f65cbe7595934a",
+      "bytes": 70995
+    }
+  ]
+}

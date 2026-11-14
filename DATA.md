@@ -53,7 +53,11 @@ previously unknown scientific analogs.
 The runtime uses the same 32 km extent, 65 × 65 samples and 1 km slope baseline.
 PNG channel values are decoded directly as elevation, with correct pixel-center
 interpolation across tile seams. Natural Earth 1:110 million land polygons supply
-a coarse 25-point screening rule. Negative terrain elevations are preserved;
+a coarse 25-point screening rule. Bundled 1:10 million land polygons add all
+4,225 terrain positions and coastline/window intersections; both screens must
+pass before runtime ranking. Restored searches are rechecked against current
+masks, and missing detailed coverage withholds scores. See LANDMASK.md for scale
+limits and exact source hashes. Negative terrain elevations are preserved;
 height below sea level is not itself treated as ocean. Source-pixel spacing can
 vary with latitude and zoom and is not a guarantee of native DEM accuracy.
 

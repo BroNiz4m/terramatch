@@ -156,7 +156,7 @@ licenses and the original procedural hardware model APIs.
 
 See [SEARCH-DATA.md](SEARCH-DATA.md) for runtime terrain retrieval, PNG decoding,
 manual/automatic search contracts, real network checks and coverage limits.
-[LANDMASK.md](LANDMASK.md) records the coarse land-screening asset and its hash.
+[LANDMASK.md](LANDMASK.md) records both coastline assets and their hashes.
 
 On-demand windows use RGB-encoded Mapzen / Tilezen Terrarium mixed-source DEM tiles.
 Direct PNG decoding avoids color conversion, retains negative land elevations,

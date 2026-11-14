@@ -164,3 +164,13 @@ are bounded to 1 MiB; TIFF access requires an exact range response. It retains
 scientific fields and hashes, not download tokens or contributor contact details.
 Metadata and API availability can change. The saved report records this run;
 no application dataset, score, dependency or hosting configuration is modified.
+
+## Follow-up — 15 November 2026
+
+The [Longyearbreen candidate audit](LONGYEARBREEN-AUDIT.md) acquired and verified
+a complete **NPI 2020** glacier polygon through the official public map service.
+This resolves the geometry-acquisition gap for that historical evidence source,
+not for the separate GLIMS 2016 outline whose export requires Earthdata Login.
+The candidate's chosen 32 km window is deferred from ranking: Natural Earth
+1:10m land mapping contradicts the app's coarse all-land screen. The application
+and the release gates above remain unchanged; there is no implemented ice module.

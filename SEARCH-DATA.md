@@ -6,7 +6,7 @@ TerraMatch can retrieve and compare a **new Earth location selected by the user*
 
 1. The user supplies coordinates, selects a returned place name, or launches a bounded regional scan.
 2. A 32 km × 32 km local-equirectangular window is constructed around each center.
-3. A 5 × 5 screening grid is tested against the bundled Natural Earth 1:110m land polygons.
+3. A 5 × 5 grid is checked against Natural Earth 1:110m polygons, then all 65 × 65 terrain positions and coastline/window intersections are checked against bundled 1:10m land polygons. Both checks must pass before runtime ranking.
 4. Public Mapzen / Tilezen Terrarium elevation PNG tiles are fetched directly from AWS.
 5. PNG samples are decoded without canvas, image colour correction, or screenshot interpretation.
 6. Elevations are bilinearly sampled into the existing 65 × 65 terrain schema, with 500 m sample spacing.
@@ -42,11 +42,11 @@ Each result records the actual source tile URLs, tile coordinates, PNG SHA-256 h
 
 ## Land and water screening
 
-The bundled Natural Earth mask is public domain:
+Both bundled Natural Earth land masks are public domain. Their provenance and hashes are in LANDMASK.md:
 
 https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
 
-The land screen uses **25 sample positions** across the window. A window with any sample outside the approximate land polygons remains inspectable but is excluded from terrestrial ranking. Polygon holes and antimeridian-crossing rings are handled explicitly.
+The coarse land screen retains **25 sample positions** across the window. The additional 1:10 million mask screens **4,225 terrain positions** and tests polygon boundaries touching/crossing the complete window, including between samples. Shared internal edges of adjacent land-polygon pieces are ignored when mapped land lies on both sides. Polygon holes, longitude wrapping and polar rings are respected. A non-land sample, intersecting coastline, missing mask or failed source hash leaves the window inspectable with its score withheld.
 
 Every successfully loaded manual or automatic window can be selected in Compare.
 Excluded windows show **Coverage review required**, with no terrain score or rank.
@@ -58,12 +58,10 @@ scored components. No manual override declares the window validated.
 
 New `source.landScreening.samples` records contain each point's zero-based row and
 column, latitude, normalized longitude, and `mappedLand` result. Compare lists all
-25 points, their counts and the original mask/terrain provenance. Older cached
-records retain their recorded summary; missing point coordinates are not invented.
-Analyze the location again to record those details. The bundled coastal Lanzarote
+25 points, their counts and the original mask/terrain provenance. Every restored runtime cache record starts unranked until the current masks are reapplied to its saved geographic bounds. No elevation refetch is needed. The previous coarse record is retained as `previousLandScreening`; newly calculated coordinates are explicitly new checks, not invented historical observations. If rechecking fails, the record remains available for review. The bundled coastal Lanzarote
 window is also inspectable without becoming eligible for ranking.
 
-This is coarse coastal screening. It does not resolve every small island, coastline, inland lake or other water body. Passing the screen is not proof that an entire window is dry land, accessible or suitable for field operations. Detailed land-cover/water masks would be needed to make those claims.
+Both scales remain generalized cartography; 1:10m means 1:10 million, not 10-metre resolution. These checks do not resolve every small island, coastline, inland lake or other water body. Passing the screen is not proof that an entire window is dry land, accessible or suitable for field operations. Detailed land-cover/water masks would be needed to make those claims.
 
 **Negative elevations are retained.** Below-sea-level terrestrial sites such as Death Valley are not classified as ocean merely because their heights are negative.
 
@@ -117,13 +115,16 @@ decodeTerrarium(bytesOrDecodedPNG)      // Promise<{width,height,heights}>
 parseCoordinates(text)                 // {lat,lon} | null; invalid numeric entries throw
 findPlaces(query, {signal})            // Promise<place[]>
 loadLandMask({signal,landmask})         // Promise<GeoJSON>
+loadDetailedLandMask({signal,detailedLandmask}) // Promise<GeoJSON>
+screenEarthWindow(bounds, options)     // Promise<{mask,coarse,assessment}>
+recheckSearchWindow(record, options)   // reapply current masks to saved bounds
 isLand(lon, lat, geojson)               // boolean
 landWindowCoverage(bounds, geojson)    // sampled coverage record
 generateSearchCenters(bounds, {stepDegrees,maxCandidates}, landmask)
-loadEarthWindow({lat,lon,name,country,origin,signal,onProgress,landmask})
+loadEarthWindow({lat,lon,name,country,origin,signal,onProgress,landmask,detailedLandmask})
 // Promise<{site,data,stats}>
 scanEarthRegion({bounds,stepDegrees,maxCandidates,targetTerrain,weights,
-                 signal,onProgress,onResult,landmask})
+                 signal,onProgress,onResult,landmask,detailedLandmask})
 // Promise<{results,excluded,coverage}>
 clearSearchCaches()
 SEARCH_SOURCES                        // source catalogue entries
@@ -133,9 +134,15 @@ SEARCH_SOURCES                        // source catalogue entries
 
 Longitude bounds remain continuous/unwrapped for windows that cross the antimeridian, for example 179.7°–180.1°. `bounds.crossesAntimeridian` and `projection.wrapLongitude` are set. Readouts should normalize longitude into −180°–180° while preserving continuous bounds for interpolation.
 
-Optional `landmask` injection is intended for tests or explicit alternative masks. Results using the ordinary cached bundled mask retain its actual SHA-256 and source URL; caller-supplied masks are identified separately.
+Optional `landmask` / `detailedLandmask` injection is intended for tests or explicit alternative masks. Results using the ordinary cached bundled mask retain its actual SHA-256 and source URL; caller-supplied masks are identified separately.
 
-## Verification
+## Current coastline coverage release — 15 November 2026
+
+`source.coverageAssessment` records `coastal-screen-v2`, checked bounds/time, both screens, detailed source URL/hash, 4,225-point counts, up to 25 non-land examples and up to eight intersecting-segment examples. Counts are not area fractions. The full global mask is fetched lazily from this Site and cached in memory; it is not copied into every localStorage record. Scores, sidebar, candidate lists, JSON evidence and Markdown reports use the same conservative eligibility gate. Missing, old-version or differently bounded assessments cannot authorize runtime scores.
+
+Longyearbreen now retains its coarse 25/25 result but is withheld with 2,975/4,225 detailed mapped-land points and intersecting coastline segments. Tests also cover a narrow water hole between all sample positions, shared land edges, dateline/polar geometry, negative elevations, old cache rechecking, source failure/corruption and both export formats. No planetary or reference terrain files or scoring formulas changed.
+
+## Historical verification of the original search release
 
 The dedicated suite (`node --test tests/terrain-search.test.mjs`) passed **18 tests** covering PNG reconstruction/integrity, Terrarium values, coordinate parsing, polygon holes and dateline/polar boundaries, land-window screening, distributed center selection, half-pixel bilinear seam addressing, negative land elevations, bounded concurrency, cancellation isolation, place lookup, genuine automatic new-window retrieval, preservation of mask provenance, partial scan cancellation, per-candidate failures and coastal exclusions.
 

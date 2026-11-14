@@ -48,3 +48,54 @@ remain summaries until re-analysis; missing point records are not reconstructed.
 
 The source is a mutable upstream `master` URL; this byte hash records the exact
 snapshot included in TerraMatch.
+
+## Detailed runtime coastal screen — 15 November 2026
+
+`dist/data/land-mask-10m.geojson` contains the unchanged source bytes from the
+Natural Earth maintainer repository:
+
+<https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson>
+
+SHA-256:
+`1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416`
+
+10,157,965 uncompressed bytes, 11 FeatureCollection features. This exact source
+was obtained during the Longyearbreen audit and is archived there as gzip without
+altering its bytes. The source hash is enforced at runtime and by `npm run check`.
+The asset is fetched lazily from the same Site for searches or cache rechecking.
+It is held in memory, not repeated in every saved localStorage window.
+
+This is **1:10 million cartographic scale**, not 10-metre resolution. It is more
+detailed than the existing 1:110 million asset but still generalized mapping.
+[Product documentation](https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-land/)
+describes land derived from the 10m coastline and continental polygons split into
+contiguous pieces. Credit: **Made with Natural Earth**; public domain under the
+same Natural Earth terms linked above. No high-resolution water inventory,
+current shoreline survey, access permission or physical-traversability evidence
+is supplied by either mask.
+
+The original 5 × 5 coarse screen remains. A second screen checks all 65 × 65
+terrain coordinates and tests detailed polygon edges touching/crossing the
+window. Edges shared by adjacent land pieces are ignored when probes on both
+sides remain mapped land. The one-metre computational probes identify shared
+edges; they are not a claim of one-metre shoreline precision or a safety buffer.
+Holes and narrow coastlines between sample positions can trigger review.
+Latitude edge indexing accelerates the same boundary/parity test; it does not
+simplify the source geometry.
+
+A non-land point, intersecting coast or unavailable/hash-invalid detailed mask
+withholds runtime scores while retaining the terrain for inspection. Passing
+both screens remains a shortlist rule, not proof of a wholly dry window. Counts
+of samples or segment intersections are not area fractions or counts of distinct
+physical coastlines. Small inland waters may not be represented.
+
+Every restored search starts pending and is rechecked against current local masks
+using its saved bounds. Old booleans cannot authorize scoring. Current assessment
+version, detailed-source hash and bounds are checked; no elevation reload is
+required. Original coarse evidence is retained alongside the new check. Failure
+leaves the window unranked. Bundled reference terrain datasets are unchanged.
+
+The real Longyearbreen window is the regression example: 25/25 coarse land
+points, 2,975/4,225 detailed land points, and coastline segments crossing/touching
+the window. It now requires coverage review without a terrain score. The
+historical findings in LONGYEARBREEN-AUDIT.md describe the preceding release.

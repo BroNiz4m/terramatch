@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {deflateSync} from 'node:zlib';
@@ -27,7 +28,8 @@ const target={size:65,widthMeters:32000,depthMeters:32000,heights:Array(4225).fi
 function mockTiles({height=()=>100,delay=0,failFirst=false,mask=worldLand}={}){
  let calls=0,active=0,maxActive=0,failed=false;const urls=[];
  globalThis.fetch=async(url,options={})=>{
-  const href=String(url);if(href.includes('land-mask.geojson'))return new Response(JSON.stringify(mask));
+  const href=String(url);if(href.includes('land-mask-10m.geojson'))return new Response(fs.readFileSync(new URL('../dist/data/land-mask-10m.geojson',import.meta.url)));
+  if(href.includes('land-mask.geojson'))return new Response(JSON.stringify(mask));
   const match=href.match(/terrarium\/(\d+)\/(\d+)\/(\d+)\.png$/);if(!match)throw new Error(`Unexpected mocked URL ${href}`);
   calls++;urls.push(href);active++;maxActive=Math.max(maxActive,active);
   try{
@@ -80,21 +82,21 @@ test('automatic search centers are deterministic, distributed, bounded and land-
 });
 test('runtime window uses pixel-center-correct bilinear interpolation across four tile seams',async()=>{
  const mock=mockTiles({height:({tx,ty,x,y})=>((tx*256+x)+(ty*256+y))/16});
- const result=await loadEarthWindow({lat:0,lon:0,landmask:worldLand});
+ const result=await loadEarthWindow({lat:0,lon:0,landmask:worldLand,detailedLandmask:worldLand});
  assert.equal(result.data.heights.length,4225);assert.equal(result.data.heights[32*65+32],16383.94);assert.equal(result.data.source.files.length,4);assert.equal(result.site.comparisonEligible,true);assert.equal(result.data.widthMeters,32000);assert.ok(result.data.source.files.every(file=>/^[0-9a-f]{64}$/.test(file.sha256)));assert.ok(mock.maxActive<=4);
- const again=await loadEarthWindow({lat:0,lon:0,name:'A different label',landmask:worldLand});assert.equal(again.site.id,result.site.id);assert.equal(mock.calls,4);
+ const again=await loadEarthWindow({lat:0,lon:0,name:'A different label',landmask:worldLand,detailedLandmask:worldLand});assert.equal(again.site.id,result.site.id);assert.equal(mock.calls,4);
 });
 test('negative land elevations are eligible; ocean exclusion uses land mask rather than height',async()=>{
- mockTiles({height:()=>-50});const item=await loadEarthWindow({lat:0,lon:0,landmask:worldLand});assert.equal(item.site.comparisonEligible,true);assert.ok(item.data.heights.every(height=>height===-50));
- const coastal=await loadEarthWindow({lat:0,lon:0,landmask:polygon(0,-5,5,5)});assert.equal(coastal.site.comparisonEligible,false);assert.equal(coastal.data.source.landScreening.land,15);
+ mockTiles({height:()=>-50});const item=await loadEarthWindow({lat:0,lon:0,landmask:worldLand,detailedLandmask:worldLand});assert.equal(item.site.comparisonEligible,true);assert.ok(item.data.heights.every(height=>height===-50));
+ const coastal=await loadEarthWindow({lat:0,lon:0,landmask:polygon(0,-5,5,5),detailedLandmask:worldLand});assert.equal(coastal.site.comparisonEligible,false);assert.equal(coastal.data.source.landScreening.land,15);
 });
 test('runtime window wraps the dateline and limits unsupported latitudes',async()=>{
- const mock=mockTiles();const item=await loadEarthWindow({lat:0,lon:179.99,landmask:worldLand});assert.equal(item.data.bounds.crossesAntimeridian,true);assert.ok(item.data.bounds.east>180);assert.ok(mock.urls.some(url=>/\/1023\//.test(url))&&mock.urls.some(url=>/\/0\//.test(url)));
- await assert.rejects(()=>loadEarthWindow({lat:85,lon:0,landmask:worldLand}),/84/);
+ const mock=mockTiles();const item=await loadEarthWindow({lat:0,lon:179.99,landmask:worldLand,detailedLandmask:worldLand});assert.equal(item.data.bounds.crossesAntimeridian,true);assert.ok(item.data.bounds.east>180);assert.ok(mock.urls.some(url=>/\/1023\//.test(url))&&mock.urls.some(url=>/\/0\//.test(url)));
+ await assert.rejects(()=>loadEarthWindow({lat:85,lon:0,landmask:worldLand,detailedLandmask:worldLand}),/84/);
 });
 test('aborting one request does not poison another caller or exceed four active tile fetches',async()=>{
  const mock=mockTiles({delay:20}),controller=new AbortController();
- const cancelled=loadEarthWindow({lat:0,lon:0,signal:controller.signal,landmask:worldLand});const other=loadEarthWindow({lat:0,lon:0,landmask:worldLand});
+ const cancelled=loadEarthWindow({lat:0,lon:0,signal:controller.signal,landmask:worldLand,detailedLandmask:worldLand});const other=loadEarthWindow({lat:0,lon:0,landmask:worldLand,detailedLandmask:worldLand});
  setTimeout(()=>controller.abort(),5);await assert.rejects(()=>cancelled,{name:'AbortError'});assert.equal((await other).data.heights.length,4225);assert.ok(mock.maxActive<=4);
 });
 test('place lookup includes local reference names and external geocoding results',async()=>{
@@ -107,20 +109,20 @@ test('coordinate lookup needs no geocoding request',async()=>{
 });
 test('automatic scan retrieves genuinely new windows and retains provenance on a cached mask',async()=>{
  const mock=mockTiles(),seen=[];const mask=await loadLandMask();
- const result=await scanEarthRegion({bounds:{north:1,south:-1,west:-1,east:1},stepDegrees:1,maxCandidates:4,targetTerrain:target,onResult:item=>seen.push(item.site.id)});
+ const result=await scanEarthRegion({bounds:{north:1,south:-1,west:-1,east:1},stepDegrees:1,maxCandidates:4,targetTerrain:target,detailedLandmask:worldLand,onResult:item=>seen.push(item.site.id)});
  assert.equal(result.coverage.planned,4);assert.equal(result.coverage.completed,4);assert.equal(result.results.length,4);assert.equal(seen.length,4);assert.ok(mock.calls>0);assert.ok(result.results.every(item=>item.site.id.startsWith('custom-')&&item.site.origin==='automatic'));assert.ok(result.results.every(item=>item.data.source.landMask.sha256));assert.ok(result.results.every(item=>Number.isFinite(item.comparison.score)));assert.equal(mask.type,'FeatureCollection');
 });
 test('cancelled automatic scan returns completed results with explicit partial coverage',async()=>{
  mockTiles();const controller=new AbortController();
- const result=await scanEarthRegion({bounds:{north:2,south:-2,west:-2,east:2},stepDegrees:1,maxCandidates:8,targetTerrain:target,landmask:worldLand,signal:controller.signal,onResult:()=>controller.abort()});
+ const result=await scanEarthRegion({bounds:{north:2,south:-2,west:-2,east:2},stepDegrees:1,maxCandidates:8,targetTerrain:target,landmask:worldLand,detailedLandmask:worldLand,signal:controller.signal,onResult:()=>controller.abort()});
  assert.equal(result.coverage.cancelled,true);assert.equal(result.results.length,1);assert.equal(result.coverage.completed,1);assert.equal(result.coverage.planned,8);
 });
 test('per-candidate fetch failures are counted and later automatic candidates still run',async()=>{
- mockTiles({failFirst:true});const result=await scanEarthRegion({bounds:{north:2,south:-2,west:-2,east:2},stepDegrees:1,maxCandidates:4,targetTerrain:target,landmask:worldLand});
+ mockTiles({failFirst:true});const result=await scanEarthRegion({bounds:{north:2,south:-2,west:-2,east:2},stepDegrees:1,maxCandidates:4,targetTerrain:target,landmask:worldLand,detailedLandmask:worldLand});
  assert.equal(result.coverage.failed,1);assert.equal(result.coverage.completed,3);assert.equal(result.results.length,3);assert.equal(result.coverage.failures.length,1);assert.equal(result.coverage.cancelled,false);
 });
 test('coastal automatic windows remain in excluded records rather than receiving a score',async()=>{
- mockTiles();const seen=[],controller=new AbortController();const result=await scanEarthRegion({bounds:{north:0.1,south:-0.1,west:0,east:0.2},stepDegrees:0.1,maxCandidates:4,targetTerrain:target,landmask:polygon(0,-5,5,5),signal:controller.signal,onResult:item=>{seen.push(item);controller.abort();}});
+ mockTiles();const seen=[],controller=new AbortController();const result=await scanEarthRegion({bounds:{north:0.1,south:-0.1,west:0,east:0.2},stepDegrees:0.1,maxCandidates:4,targetTerrain:target,landmask:polygon(0,-5,5,5),detailedLandmask:worldLand,signal:controller.signal,onResult:item=>{seen.push(item);controller.abort();}});
  assert.equal(result.coverage.excluded,1);assert.equal(result.results.length,0);assert.equal(result.excluded.length,1);assert.equal(result.excluded[0].data.comparisonEligible,false);
  assert.equal(result.coverage.cancelled,true);assert.equal(result.coverage.completed,1);assert.equal(result.coverage.planned,4);assert.equal(seen.length,1);assert.equal(seen[0].comparison,undefined);assert.equal(seen[0].data.source.landScreening.samples.length,25);assert.ok(!seen[0].data.source.landScreening.samples[0].mappedLand);
 });
