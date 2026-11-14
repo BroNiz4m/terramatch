@@ -6,6 +6,13 @@ saturation and the loaded-candidate scope. The original calculations and review
 below are preserved; these UI explanations do not calibrate the method or perform
 the external/spatial validation still recommended here.
 
+**Follow-up case study:** [Jezero–Amboy](JEZERO-AMBOY-CASE-STUDY.md) now verifies
+both existing height grids against their original sources, inspects Jezero MOLA
+counts and tests local extent/center sensitivity. The 32 km score reproduces,
+but the centered 16 km subset scores 55.3 rather than 86.7. This narrows the
+supported interpretation to a limited regional-terrain desktop exercise; it
+does not certify a geological match or a rover field-test site.
+
 The existing terrain calculations reproduce independently, and the first-place
 candidate is unchanged across the current terrain/navigation/fieldwork presets
 for all six targets. **This is not scientific validation of whole-site analog

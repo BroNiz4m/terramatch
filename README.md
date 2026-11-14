@@ -113,8 +113,8 @@ hashes retained; the three channels are separate and numerical uncertainties
 are unavailable. Current global Mars storms, local lunar ice detection and
 local water classification are not invented. Missing data remain missing.
 
-Reproduction and source detail: [imagery](GLOBE-IMAGERY.md),
-[global geometry](GLOBE-GEOMETRY.md), [environment](ENVIRONMENT-DATA.md).
+Reproduction and source detail: [imagery](docs/GLOBE-IMAGERY.md),
+[global geometry](docs/GLOBE-GEOMETRY.md), [environment](docs/ENVIRONMENT-DATA.md).
 Re-fetch GIBS references with `node scripts/fetch-earth-layer-reference.mjs`.
 
 ## Exploration tasks
@@ -150,13 +150,13 @@ mission results.
 - Lanzarote is deliberately excluded from the inland ranking because its window
   includes coastal bathymetry. Amboy is an established reference site, not a new discovery.
 
-See [DATA.md](DATA.md) for exact products, projections, byte ranges, source hashes,
-reproduction commands and formulas. See [ASSETS.md](ASSETS.md) for visual credits,
+See [DATA.md](docs/DATA.md) for exact products, projections, byte ranges, source hashes,
+reproduction commands and formulas. See [ASSETS.md](docs/ASSETS.md) for visual credits,
 licenses and the original procedural hardware model APIs.
 
-See [SEARCH-DATA.md](SEARCH-DATA.md) for runtime terrain retrieval, PNG decoding,
+See [SEARCH-DATA.md](docs/SEARCH-DATA.md) for runtime terrain retrieval, PNG decoding,
 manual/automatic search contracts, real network checks and coverage limits.
-[LANDMASK.md](LANDMASK.md) records both coastline assets and their hashes.
+[LANDMASK.md](docs/LANDMASK.md) records both coastline assets and their hashes.
 
 On-demand windows use RGB-encoded Mapzen / Tilezen Terrarium mixed-source DEM tiles.
 Direct PNG decoding avoids color conversion, retains negative land elevations,
@@ -167,6 +167,17 @@ to Compare, provenance, exports and 3D inspection. It is a coarse screen, not pr
 that every point is dry land, and it does not reliably classify inland lakes.
 
 ## Scope and scientific interpretation
+
+[Broader Earth analog research](docs/EARTH-ANALOG-RESEARCH.md) evaluates six new
+literature-backed regions, three same-pipeline controls and twelve generated
+Idaho windows against all six planetary targets. It separates measured terrain
+ranking from published process/material/operations evidence and records which
+claims remain unsupported. This research is not yet integrated into the live UI.
+
+[Jezero–Amboy case study](docs/JEZERO-AMBOY-CASE-STUDY.md) documents one limited
+regional-terrain exercise, source reconstruction, local extent/center sensitivity,
+proposed mission-learning uses and the limits of the claim. It is a research
+assessment rather than an implemented new layer or a certified field-test site.
 
 The resemblance index compares coarse slope distributions and relative relief.
 It is a transparent terrain heuristic, **not a probability of mission suitability**.
@@ -222,5 +233,5 @@ Earth, Moon and Mars temperature records. The 3D Temperature layer distinguishes
 spatial lunar data from coarse Earth daily-mean context. Rover point observations
 are not extended over an entire crater. Thermal evidence retains its own
 statistic and time coverage and does not change the terrain-only ranking.
-See [THERMAL.md](THERMAL.md), [THERMAL-EARTH.md](THERMAL-EARTH.md) and
-[THERMAL-PLANETARY.md](THERMAL-PLANETARY.md) for definitions and limits.
+See [THERMAL.md](docs/THERMAL.md), [THERMAL-EARTH.md](docs/THERMAL-EARTH.md) and
+[THERMAL-PLANETARY.md](docs/THERMAL-PLANETARY.md) for definitions and limits.
