@@ -36,6 +36,8 @@ test('all six bundled windows have finite geolocated sourced elevations',()=>{
 test('lunar polar geolocation centers Shackleton and treats the pole correctly',()=>{
   const data=read('shackleton'),center=terrainCoordinates(data,.5,.5);assert.ok(Math.abs(center.lat+89.67)<1e-6);assert.ok(Math.abs(center.lon-129.78)<1e-6);const p=data.projection,u=-p.xWest/(p.xEast-p.xWest),v=-p.yNorth/(p.ySouth-p.yNorth);const pole=terrainCoordinates(data,u,v);assert.equal(pole.lat,-90);
 });
+
+test('runtime windows crossing the antimeridian keep correct geographic readouts',()=>{const data={bounds:{north:1,south:0,west:179.8,east:180.2},projection:{type:'local-equirectangular',wrapLongitude:true}};assert.ok(Math.abs(terrainCoordinates(data,1,.5).lon+179.8)<1e-8);assert.equal(terrainCoordinates(data,.5,.5).lon,-180);});
 test('coastal bathymetry never enters the terrestrial ranking',()=>{
   assert.ok(!EARTH_SITES.some(s=>s.id==='lanzarote'));assert.equal(read('lanzarote').comparisonEligible,false);assert.throws(()=>compareTerrains(read('jezero'),read('lanzarote')),/excluded/i);
 });

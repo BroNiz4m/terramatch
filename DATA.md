@@ -17,6 +17,28 @@ Each window contains 65 × 65 finite elevation samples on a 32 km × 32 km proje
 
 These are curated candidate/reference sites. The application does not claim they are newly discovered analogs or that they are approved sites for fieldwork, landing or base construction.
 
+## On-demand search extension
+
+In addition to the bundled reference windows, the application now retrieves new
+Earth windows from Mapzen / Tilezen Terrarium tiles. Manual inputs can be place
+names, coordinates or globe-selected points. Automatic surveys sample new grid
+centers in an explicitly bounded region. They do not simply reorder the three
+reference candidates. Candidate origin, source tile hashes and survey coverage
+are retained; these are candidate discoveries by the application, not claims of
+previously unknown scientific analogs.
+
+The runtime uses the same 32 km extent, 65 × 65 samples and 1 km slope baseline.
+PNG channel values are decoded directly as elevation, with correct pixel-center
+interpolation across tile seams. Natural Earth 1:110 million land polygons supply
+a coarse 25-point screening rule. Negative terrain elevations are preserved;
+height below sea level is not itself treated as ocean. Source-pixel spacing can
+vary with latitude and zoom and is not a guarantee of native DEM accuracy.
+
+New searches need internet; the latest 24 valid results are cached in the browser.
+Cancelled surveys preserve completed results and label partial coverage. Failed
+or coastal/non-land windows are counted and are not assigned an invented score.
+See SEARCH-DATA.md and LANDMASK.md for methods, validation and provenance.
+
 ## NASA planetary sources
 
 ### Mars

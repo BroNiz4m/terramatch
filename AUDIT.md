@@ -64,3 +64,12 @@ formula are unchanged.
   for navigation, and the arrival sequence is not a validated flight simulation.
 
 See DATA.md and ASSETS.md for exact provenance, algorithms and visual credits.
+
+## Subsequent manual/automatic search release
+
+The earlier curated-only search boundary above records the audited first release.
+The subsequent release adds on-demand manual and automatic terrain retrieval,
+bounded survey coverage, tile decoding/hashes, land screening, cancellation and
+browser-local caching. See SEARCH-DATA.md for the new implementation and real
+network verification. Global surveys remain finite samples, not exhaustive Earth
+searches, and terrain-only scientific interpretation limits remain in effect.

@@ -68,7 +68,8 @@ export function terrainCoordinates(data, u, v) {
     const x=p.xWest+(p.xEast-p.xWest)*u,y=p.yNorth+(p.ySouth-p.yNorth)*v,rho=Math.hypot(x,y);
     return {lat:-90+2*Math.atan(rho/(2*p.radiusMeters))*180/Math.PI,lon:Math.atan2(x,y)*180/Math.PI};
   }
-  return {lat:data.bounds.north+(data.bounds.south-data.bounds.north)*v,lon:data.bounds.west+(data.bounds.east-data.bounds.west)*u};
+  const longitude=data.bounds.west+(data.bounds.east-data.bounds.west)*u;
+  return {lat:data.bounds.north+(data.bounds.south-data.bounds.north)*v,lon:data.projection?.wrapLongitude?((longitude+180)%360+360)%360-180:longitude};
 }
 
 export function analyzeTerrain(data) {

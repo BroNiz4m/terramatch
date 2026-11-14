@@ -1,0 +1,8 @@
+const KEY='terramatch-search-windows-v1';
+export function validSearchWindow(record){
+ const {site,data}=record||{};
+ const strings=value=>Array.isArray(value)&&value.every(item=>typeof item==='string');
+ return !!site&&!!data&&typeof site.id==='string'&&/^custom-[a-z0-9.-]+$/.test(site.id)&&site.body==='earth'&&typeof site.name==='string'&&site.name.length<=180&&typeof site.country==='string'&&strings(site.sourceIds)&&site.sourceIds.every(id=>['terrarium','natural-earth','open-meteo-geocoding'].includes(id))&&strings(site.useCases)&&strings(site.limitations)&&Number.isFinite(site.lat)&&Math.abs(site.lat)<=84&&Number.isFinite(site.lon)&&Math.abs(site.lon)<=180&&data.siteId===site.id&&data.size===65&&data.widthMeters===32000&&data.depthMeters===32000&&data.gridSpacingMeters===500&&data.units==='meters'&&Array.isArray(data.heights)&&data.heights.length===4225&&data.heights.every(h=>Number.isFinite(h)&&h>=-12000&&h<=12000)&&data.bounds&&['north','south','east','west'].every(key=>Number.isFinite(data.bounds[key]))&&data.source?.id==='terrarium'&&Array.isArray(data.source.files)&&data.source.files.length>0&&data.source.files.every(f=>typeof f.url==='string'&&f.url.startsWith('https://s3.amazonaws.com/elevation-tiles-prod/terrarium/'))&&['manual','automatic'].includes(site.origin);
+}
+export function restoreSearchWindows(storage){try{const records=JSON.parse(storage.getItem(KEY)||'[]');return Array.isArray(records)?records.slice(-24).filter(validSearchWindow):[];}catch{return[];}}
+export function saveSearchWindows(storage,records){const valid=records.filter(validSearchWindow).slice(-24);try{storage.setItem(KEY,JSON.stringify(valid));return true;}catch{return false;}}
