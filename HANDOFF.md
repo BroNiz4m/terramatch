@@ -545,3 +545,109 @@ target, ice module, audience change or unrelated feature is included.
 Publication uses the existing Site project and owner-only access, with the source
 helper owning commit/push/archive and the same source commit synchronized to
 GitHub. Actual commit/deployment IDs are reported from tool results separately.
+
+## 2026-11-15 — Additional planetary targets: audit only
+
+The owner said to continue after a proposed source audit/shortlist for additional
+Moon/Mars targets. Baseline was `c4cd123`, clean working tree. This step is an
+audit, not approval to add targets to the app or publish a new Site release.
+
+- Read `PLANETARY-TARGET-AUDIT.md` for the complete decision and integration gates.
+- Four research-only 32 × 32 km, 65 × 65 grids were extracted from actual PDS
+  source strips: Cabeus center (-85.33, -42.13), Nobile center (-85.28, 53.27),
+  Gale/Bradbury Landing (-4.5895, 137.4417), Eberswalde delta area (-23.8, -33.7).
+  The lunar coordinates are rounded Gazetteer crater centers, not the LCROSS
+  impact location or the historical VIPER western-rim site. Eberswalde follows
+  the HiRISE DTM page approximate center; this audit decodes MOLA, not HiRISE.
+- LOLA `LDEM_75S_240M` V2.0 and MOLA `MEGT00N090HB`/`MEGT00N270HB` V2.0 supply
+  the heights. Corresponding 8-bit unsigned MOLA MEGC products were inspected.
+  Of the unique native interpolation support cells, 3,579/5,041 at Gale and
+  3,469/5,467 at Eberswalde have count 0. Finite source-interpolated DEM heights
+  are not direct observations at every output point or rover hazard maps.
+- Exact labels, raw byte strips, source hashes, derived grids and `probes.json`
+  are under `research/planetary-target-audit-2026-11-15/` (16 files, 7,161,621 bytes).
+- `scripts/audit-planetary-targets.mjs` reproduces bounded retrieval and writes
+  only that research directory. `scripts/verify-planetary-target-audit.mjs` performs
+  offline full-grid reconstruction, label/source/grid hashes, coordinate checks,
+  statistics and observation-count verification. Both syntax checks and offline
+  verification of all 16,900 samples passed; `git diff --check` passed.
+- Mawrth Vallis is a reserve requiring an explicit center/control-network choice;
+  no Mawrth numerical grid was fetched. Four candidate windows are technically
+  feasible for coarse terrain expansion, with scientific/mission limits retained.
+- Integration must generalize the hardcoded Jezero MOLA tile selection, derive
+  actual polar-window bounds, fix the non-Jezero image-caption fallback, expose
+  interpolation limits, and keep new-site thermal evidence unavailable unless
+  separately sourced. Additional targets are not yet in `SITES`/`TARGETS`.
+
+No application code, production dataset, score, dependency or hosting file was
+changed. No application test suite rerun, browser/GPU QA, commit, push or deploy
+was performed for this audit. Files are local for review and the next instruction.
+
+## 2026-11-15 — Four additional Moon/Mars targets integrated
+
+The owner approved implementation of the four audited targets. Existing Site
+source was opened at `c4cd123` before application edits; the local audit files and
+previous handoff entry were preserved and are included in this collaboration
+release. GitHub was fetched before packaging with no upstream divergence.
+
+### Result and provenance
+
+- Explore now offers three targets per body, and Compare offers all six planetary
+  targets. Added `cabeus-center`, `nobile-center`, `gale-bradbury` and
+  `eberswalde-delta`. Globe target pins also select their mission. Names and
+  descriptions distinguish crater centers, historic landing coordinates and the
+  approximate delta-area center from whole-crater, impact or mission-site claims.
+- Ten terrain windows are bundled: six planetary targets, four Earth references.
+  The four new products were fetched from actual LOLA/MOLA archive bytes with
+  exact HTTP 206 ranges and label/range hashes. All new height arrays reproduce
+  the independently saved audit grids exactly. The original six terrain JSON
+  file hashes are unchanged; their heights, metadata and timestamps were preserved.
+- `scripts/lib/planetary-terrain.mjs` replaces hardcoded planetary source paths in
+  `scripts/fetch-terrain.mjs`. MOLA uses global pixel-center addressing to select
+  required 90°/44° tiles, including interpolation supports across the equator,
+  tile edges and 0°/360°. Unsupported ±88° supports fail explicitly. The pipeline
+  verifies labels, bounds, frame, native types and source strip lengths.
+- New Mars products retain 8-bit unsigned MEGC count summaries, full source
+  metadata and date coverage. Compare displays zero-count support-cell totals
+  with an interpolation caveat; source inspection and both exports retain them.
+  Count zero does not become an absent terrain height or an accuracy percentage.
+- Polar bounds describe each actual projected rectangle. Off-pole Cabeus/Nobile
+  windows no longer receive the broad south-pole/full-longitude envelope. Source
+  pixel registration and the DE421 frame remain intact.
+- New terrain hillshades identify MOLA or LOLA correctly. Only Jezero retains the
+  separate contextual Mastcam-Z panorama. No HiRISE height pixels are ingested.
+- New targets return an explicit unavailable thermal record, with their own site
+  ID and reason. UI/report/export state stays source-specific. No retry button
+  suggests a currently unimplemented local dataset can be fetched. Jezero MEDA
+  and Shackleton Diviner records still work when switching back; their values are
+  not transferred to the new targets. Planet data retains the historical Jezero
+  sol 29 pressure label and rover-local scope.
+
+### Verification
+
+- `npm run check`: passed, 38 JSON files.
+- Full automated suite: **111 tests passed, 0 failed**.
+- Focused expedition test passed again after adding full 15-second arrival/ramp
+  transit checks for each of the four new windows. All ten windows have grounded
+  pads/ramp without reach clamps, unchanged DEMs and missing-temperature grey
+  rendering logic. These checks use a renderer test double, not a GPU.
+- New source-pipeline tests reproduce all 16,900 audited heights from original
+  strips, verify corresponding support counts, frames and bounds, exercise
+  all task presets, and check synthetic analytical terrain across four MOLA
+  tiles at the equator/longitude seam. Polar out-of-domain windows fail explicitly.
+- DOM workflows select every new target, exercise all task presets and single
+  characteristics, validate actual index values, provenance, source modals,
+  unavailable temperature, both exports and return to original thermal targets.
+  Existing manual/automatic search and coverage-review tests still pass.
+- Eight representative static HTTP routes returned 200, including the four
+  complete new terrain JSON files. The temporary localhost server was stopped.
+- `git diff --check` passed. Numerical source verification and original-dataset
+  hash preservation are distinct from real-world accuracy or analog validation.
+- CUA inventory still reports no browser surfaces: browser access host unavailable.
+  Browser/GPU visual QA remains unverified. No alternate browser-automation bypass
+  was attempted. The preceding Windows Firefox URL-policy stop remains relevant.
+
+Publish with the existing owner-private Site audience, and synchronize the same
+source-helper commit to GitHub main. Exact deployment/version IDs are reported
+from native tool results separately. No ice module, robot redesign, stack change,
+mobile redesign, public sharing or unrelated feature was included.

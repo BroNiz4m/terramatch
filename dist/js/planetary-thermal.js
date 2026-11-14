@@ -16,7 +16,7 @@ export function validatePlanetaryThermal(record){
 }
 export async function loadPlanetaryThermal(site,{signal}={}){
   const id=typeof site==='string'?site:site?.id;
-  if(!['shackleton','jezero'].includes(id))return {available:false,siteId:id??null,reason:'No source-derived planetary thermal product is bundled for this target.'};
+  if(!['shackleton','jezero'].includes(id))return {available:false,status:'unavailable',siteId:id??null,reason:'No source-derived planetary thermal product is bundled for this target. Temperature is unavailable here; Jezero rover observations and the Shackleton raster are not reused.'};
   if(signal?.aborted)throw signal.reason??new DOMException('Cancelled','AbortError');
   if(cache.has(id))return cache.get(id);
   const url=new URL(`../data/${id}-thermal.json`,import.meta.url),response=await fetch(url,{signal});

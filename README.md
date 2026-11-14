@@ -19,7 +19,7 @@ npm start
 
 Open **http://127.0.0.1:4173** in a browser with WebGL 2 and hardware acceleration.
 The static application is in `dist/`. It can be served from any ordinary static
-web host. Planet textures, the 3D runtime, photographs, six reference DEM subsets
+web host. Planet textures, the 3D runtime, photographs, ten reference DEM subsets
 and the global land mask are served locally. There is no API key requirement.
 New manual/automatic searches require internet access to public terrain tiles;
 place-name searches additionally use Open-Meteo / GeoNames. Bundled reference
@@ -27,7 +27,9 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
 
 ## Use the application
 
-1. Select Mars / Jezero or Moon / Shackleton in **Explore**.
+1. Choose Mars or Moon in **Explore**, then select a target region. Mars includes
+   Jezero, Gale / Bradbury Landing and Eberswalde delta area; Moon includes
+   Shackleton, Cabeus crater center and Nobile crater center.
 2. In **Manual search**, submit a place name or decimal latitude, longitude.
    Alternatively choose **Pick on globe**, rotate Earth, and click a location.
    **Analyze this area** fetches a new 32 × 32 km elevation window. Its source
@@ -131,10 +133,16 @@ mission results.
 
 ## Actual datasets
 
-- NASA MGS MOLA MEGDR: Jezero Crater, Mars.
-- NASA LRO LOLA LDEM_75S_240M: Shackleton region, Moon.
+- NASA MGS MOLA MEGDR: Jezero, Gale / Bradbury Landing and Eberswalde delta area, Mars.
+- NASA LRO LOLA LDEM_75S_240M: Shackleton, Cabeus center and Nobile center, Moon.
 - Skadi mixed-source elevation tiles: Wadi Rum, Al Wahbah, Amboy and Lanzarote.
 - All study windows: 32 × 32 km; 65 × 65 samples; 500 m sampling; 1 km slope baseline.
+- Additional Mars windows retain native MOLA observation-count summaries. Zero-count
+  source bins contain archived interpolated topography; native posting is not
+  measurement accuracy. These are broad terrain windows, not rover hazard maps.
+- Cabeus/Nobile are crater-center windows, not the LCROSS impact or historical
+  VIPER western-rim site. New targets have no bundled local temperature product;
+  Jezero MEDA and Shackleton Diviner data are not transferred to them.
 - Lanzarote is deliberately excluded from the inland ranking because its window
   includes coastal bathymetry. Amboy is an established reference site, not a new discovery.
 
@@ -196,7 +204,7 @@ when browser automation is available.
   bounded grid surveys with cancellation and source hashes.
 - `dist/js/search-ui.js`, `dist/search.css`: manual and automatic discovery workflow.
 - `dist/js/search-cache.js`: validation and local caching of recent search windows.
-- `dist/data/`: six sourced terrain subsets and source summary.
+- `dist/data/`: ten sourced terrain subsets and source summary.
 - `scripts/fetch-terrain.mjs`: reproducible data retrieval and subset pipeline.
 - `.openai/hosting.json`: private Sites project and static hosting configuration.
 

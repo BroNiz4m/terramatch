@@ -1,0 +1,438 @@
+{
+  "auditDateLocal": "2026-11-15",
+  "timezone": "Asia/Taipei",
+  "applicationChanged": false,
+  "gridsAreResearchOnly": true,
+  "candidates": [
+    {
+      "id": "cabeus-center",
+      "name": "Cabeus crater-center window",
+      "body": "moon",
+      "lat": -85.33,
+      "lon": -42.13,
+      "radius": 1737400,
+      "coordinateSource": "https://planetarynames.wr.usgs.gov/Feature/953",
+      "coordinateNote": "Rounded Gazetteer crater center, not the LCROSS impact coordinate or an approved base site.",
+      "status": "complete-source-grid-extracted",
+      "gridFile": "cabeus-center-research-grid.json",
+      "gridSha256": "3fa5d173c056311b0e23368807c9ceafb4cf101a1763f2e18eef8be632de6b4a",
+      "sampleCount": 4225,
+      "bounds": {
+        "north": -84.58604750202608,
+        "south": -86.07404040172662,
+        "west": -51.26405174714846,
+        "east": -33.13847686630895
+      },
+      "projection": {
+        "type": "south-polar-stereographic",
+        "radiusMeters": 1737400,
+        "centerLat": -85.33,
+        "centerLon": -42.13,
+        "centralMeridian": 0,
+        "xWest": -111046.7718984587,
+        "xEast": -79046.7718984587,
+        "yNorth": 121079.68896161515,
+        "ySouth": 89079.68896161515
+      },
+      "source": {
+        "id": "lola",
+        "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.img",
+        "labelUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.lbl",
+        "labelSha256": "ec07239f41d8abc1a3681495b5799b770c7206b5268b76721d69180df0422e02",
+        "labelLocalFile": "ldem_75s_240m.lbl",
+        "status": 206,
+        "byteRange": [
+          10681224,
+          11710463
+        ],
+        "contentRange": "bytes 10681224-11710463/29062688",
+        "bytes": 1029240,
+        "sha256": "bb5f85fe0cc636a8982b9fbe42c4ef8f4e2056ad0da277505dada47831442cbb",
+        "retrievedAt": "2026-11-14T20:24:23.701Z",
+        "localFile": "cabeus-center-topography-range.bin",
+        "datum": "Radial height relative to 1737400 m sphere; MEAN EARTH/POLAR AXIS OF DE421",
+        "nominalPostingMeters": 240,
+        "sampling": "Bilinear source-pixel-center sampling at 500 m projected intervals; rounded to 0.01 m, not centimetre accuracy."
+      },
+      "observationSupport": {
+        "status": "not-verified",
+        "note": "Finite DEM values do not establish independent observation coverage or effective accuracy. LOLA gridding interpolates tracks; no separate lunar count/uncertainty map was acquired."
+      },
+      "statistics": {
+        "min": -4600.41,
+        "max": -2759.25,
+        "relief": 1841.1599999999999,
+        "slopeMean": 6.4347691930417215,
+        "slopeP90": 12.191629911726652
+      },
+      "checks": {
+        "finiteGrid": true,
+        "sourcePixelSupportInsideProduct": true,
+        "spatialRoundTrips": true,
+        "sourceHashRecorded": true
+      },
+      "implementationApproved": false
+    },
+    {
+      "id": "nobile-center",
+      "name": "Nobile crater-center window",
+      "body": "moon",
+      "lat": -85.28,
+      "lon": 53.27,
+      "radius": 1737400,
+      "coordinateSource": "https://planetarynames.wr.usgs.gov/Feature/4321",
+      "coordinateNote": "Rounded Gazetteer crater center, not the western-rim region in the historical 2021 VIPER announcement.",
+      "status": "complete-source-grid-extracted",
+      "gridFile": "nobile-center-research-grid.json",
+      "gridSha256": "accd296fd4c0dd8a4859c8ea82e8a30afcc3b6bbf478b478bdf224236a88cf4b",
+      "sampleCount": 4225,
+      "bounds": {
+        "north": -84.54196065371842,
+        "south": -86.01593424577013,
+        "west": 44.17983665777763,
+        "east": 61.96246974680417
+      },
+      "projection": {
+        "type": "south-polar-stereographic",
+        "radiusMeters": 1737400,
+        "centerLat": -85.28,
+        "centerLon": 53.27,
+        "centralMeridian": 0,
+        "xWest": 98775.2267097349,
+        "xEast": 130775.2267097349,
+        "yNorth": 101644.33871458433,
+        "ySouth": 69644.33871458433
+      },
+      "source": {
+        "id": "lola",
+        "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.img",
+        "labelUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.lbl",
+        "labelSha256": "ec07239f41d8abc1a3681495b5799b770c7206b5268b76721d69180df0422e02",
+        "labelLocalFile": "ldem_75s_240m.lbl",
+        "status": 206,
+        "byteRange": [
+          11291144,
+          12328007
+        ],
+        "contentRange": "bytes 11291144-12328007/29062688",
+        "bytes": 1036864,
+        "sha256": "2c0c028e314688f40f4c1a5092a58702b35fe73097d8b0fc7c6cfcb34c61625d",
+        "retrievedAt": "2026-11-14T20:24:24.721Z",
+        "localFile": "nobile-center-topography-range.bin",
+        "datum": "Radial height relative to 1737400 m sphere; MEAN EARTH/POLAR AXIS OF DE421",
+        "nominalPostingMeters": 240,
+        "sampling": "Bilinear source-pixel-center sampling at 500 m projected intervals; rounded to 0.01 m, not centimetre accuracy."
+      },
+      "observationSupport": {
+        "status": "not-verified",
+        "note": "Finite DEM values do not establish independent observation coverage or effective accuracy. LOLA gridding interpolates tracks; no separate lunar count/uncertainty map was acquired."
+      },
+      "statistics": {
+        "min": -1500.48,
+        "max": 1774.32,
+        "relief": 3274.8,
+        "slopeMean": 8.57638378578755,
+        "slopeP90": 15.814576413432519
+      },
+      "checks": {
+        "finiteGrid": true,
+        "sourcePixelSupportInsideProduct": true,
+        "spatialRoundTrips": true,
+        "sourceHashRecorded": true
+      },
+      "implementationApproved": false
+    },
+    {
+      "id": "gale-bradbury",
+      "name": "Gale / Bradbury Landing window",
+      "body": "mars",
+      "lat": -4.5895,
+      "lon": 137.4417,
+      "radius": 3396000,
+      "coordinateSource": "https://doi.org/10.1002/2014JE004622",
+      "coordinateNote": "Published historical Curiosity landing coordinate; not the current rover position or the center of the entire Gale crater.",
+      "status": "complete-source-grid-extracted",
+      "gridFile": "gale-bradbury-research-grid.json",
+      "gridSha256": "f5d579d1999158ff70ab94ac0e62143ae1fba8cd4e9c408cad571299841c843f",
+      "sampleCount": 4225,
+      "bounds": {
+        "north": -4.3195552201974925,
+        "south": -4.859444779802508,
+        "west": 137.17088687386993,
+        "east": 137.71251312613006
+      },
+      "projection": {
+        "type": "local-equirectangular",
+        "radiusMeters": 3396000,
+        "centerLat": -4.5895,
+        "centerLon": 137.4417
+      },
+      "source": {
+        "id": "mola",
+        "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n090hb.img",
+        "labelUrl": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n090hb.lbl",
+        "labelSha256": "c85891df3c11e724c5c5d980630e56ee4f13c40d234b68e22401b9a404df3d36",
+        "labelLocalFile": "megt00n090hb.lbl",
+        "status": 206,
+        "byteRange": [
+          12718080,
+          14353919
+        ],
+        "contentRange": "bytes 12718080-14353919/129761280",
+        "bytes": 1635840,
+        "sha256": "09fd20b3d9fe76283b8710967c6d8539cf5c390558b031f8edcd1396b767e104",
+        "retrievedAt": "2026-11-14T20:24:26.077Z",
+        "localFile": "gale-bradbury-topography-range.bin",
+        "datum": "Topography relative to Mars areoid; IAU2000 planetocentric, east-positive",
+        "nominalPostingMeters": 463.05766716974557,
+        "sampling": "Bilinear source-pixel-center sampling at 500 m projected intervals; rounded to 0.01 m, not centimetre accuracy."
+      },
+      "observationSupport": {
+        "status": "counts-inspected",
+        "note": "Counts refer to original latitude/longitude bins used for interpolation, not the number of direct measurements at each resampled output location. Zero-count source cells retain source-gridded topography, not invented replacements; this is not an accuracy percentage.",
+        "source": {
+          "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n090hb.img",
+          "status": 206,
+          "byteRange": [
+            6359040,
+            7176959
+          ],
+          "contentRange": "bytes 6359040-7176959/64880640",
+          "bytes": 817920,
+          "sha256": "552e0a7861ff136e87b5ffd46843a6e85c7f0d5c398fb6365f222d79f0a5351a",
+          "retrievedAt": "2026-11-14T20:24:26.881Z",
+          "localFile": "gale-bradbury-counts-range.bin",
+          "labelUrl": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n090hb.lbl",
+          "labelSha256": "7c373fcff18ee6facc2cde7ef07aa6c52daddee1235fbe373dbb2f474223adc4",
+          "labelLocalFile": "megc00n090hb.lbl"
+        },
+        "uniqueSourceCells": 5041,
+        "zeroCountCells": 3579,
+        "minCount": 0,
+        "maxCount": 6,
+        "gridSamplesWithAnyZeroCountCorner": 3864,
+        "gridSamplesWithAllZeroCountCorners": 2157
+      },
+      "statistics": {
+        "min": -4600.57,
+        "max": -73.71,
+        "relief": 4526.86,
+        "slopeMean": 5.199651524892114,
+        "slopeP90": 15.194487851148555
+      },
+      "checks": {
+        "finiteGrid": true,
+        "sourcePixelSupportInsideProduct": true,
+        "spatialRoundTrips": true,
+        "sourceHashRecorded": true
+      },
+      "implementationApproved": false
+    },
+    {
+      "id": "eberswalde-delta",
+      "name": "Eberswalde delta-area window",
+      "body": "mars",
+      "lat": -23.8,
+      "lon": -33.7,
+      "radius": 3396000,
+      "coordinateSource": "https://www.uahirise.org/dtm/dtm.php?ID=PSP_001336_1560",
+      "coordinateNote": "Project study-window center uses the HiRISE DTM page approximate center -23.8 degrees, 326.3 degrees E, normalized to -33.7 degrees. HiRISE pixels are not ingested; this audit uses MOLA.",
+      "status": "complete-source-grid-extracted",
+      "gridFile": "eberswalde-delta-research-grid.json",
+      "gridSha256": "a20a2d4e4c18f663d0defb77438b279a92035ae42605e6b98528340bf1af7d9c",
+      "sampleCount": 4225,
+      "bounds": {
+        "north": -23.530055220197493,
+        "south": -24.06994477980251,
+        "west": -33.995034622058135,
+        "east": -33.40496537794187
+      },
+      "projection": {
+        "type": "local-equirectangular",
+        "radiusMeters": 3396000,
+        "centerLat": -23.8,
+        "centerLon": -33.7
+      },
+      "source": {
+        "id": "mola",
+        "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n270hb.img",
+        "labelUrl": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n270hb.lbl",
+        "labelSha256": "a6a198c4062f40efe3dc84bf5fb7d5aa98efd73cb35e81df8cb5ce2e859ea270",
+        "labelLocalFile": "megt00n270hb.lbl",
+        "status": 206,
+        "byteRange": [
+          69373440,
+          71009279
+        ],
+        "contentRange": "bytes 69373440-71009279/129761280",
+        "bytes": 1635840,
+        "sha256": "4bb892b440e93b2b73d6b82d6bc5c80929a81c1b331bfde04df4099bc0097e12",
+        "retrievedAt": "2026-11-14T20:24:28.048Z",
+        "localFile": "eberswalde-delta-topography-range.bin",
+        "datum": "Topography relative to Mars areoid; IAU2000 planetocentric, east-positive",
+        "nominalPostingMeters": 463.05766716974557,
+        "sampling": "Bilinear source-pixel-center sampling at 500 m projected intervals; rounded to 0.01 m, not centimetre accuracy."
+      },
+      "observationSupport": {
+        "status": "counts-inspected",
+        "note": "Counts refer to original latitude/longitude bins used for interpolation, not the number of direct measurements at each resampled output location. Zero-count source cells retain source-gridded topography, not invented replacements; this is not an accuracy percentage.",
+        "source": {
+          "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n270hb.img",
+          "status": 206,
+          "byteRange": [
+            34686720,
+            35504639
+          ],
+          "contentRange": "bytes 34686720-35504639/64880640",
+          "bytes": 817920,
+          "sha256": "88ec1e47f1fa75ced516e008280b7bb1c0c5e2ebac5e190c894dce9d9fcbc2e0",
+          "retrievedAt": "2026-11-14T20:24:28.820Z",
+          "localFile": "eberswalde-delta-counts-range.bin",
+          "labelUrl": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n270hb.lbl",
+          "labelSha256": "4f146f81a436567e7b0a46c5cd9947da0a4aa4003508cf0646bebfdb5e497afb",
+          "labelLocalFile": "megc00n270hb.lbl"
+        },
+        "uniqueSourceCells": 5467,
+        "zeroCountCells": 3469,
+        "minCount": 0,
+        "maxCount": 6,
+        "gridSamplesWithAnyZeroCountCorner": 3759,
+        "gridSamplesWithAllZeroCountCorners": 1625
+      },
+      "statistics": {
+        "min": -1576.01,
+        "max": -119.41,
+        "relief": 1456.6,
+        "slopeMean": 3.7406730641524355,
+        "slopeP90": 7.563656616857669
+      },
+      "checks": {
+        "finiteGrid": true,
+        "sourcePixelSupportInsideProduct": true,
+        "spatialRoundTrips": true,
+        "sourceHashRecorded": true
+      },
+      "implementationApproved": false
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.lbl",
+      "status": 200,
+      "byteRange": null,
+      "contentRange": null,
+      "bytes": 4990,
+      "sha256": "ec07239f41d8abc1a3681495b5799b770c7206b5268b76721d69180df0422e02",
+      "retrievedAt": "2026-11-14T20:24:20.919Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.img",
+      "status": 206,
+      "byteRange": [
+        10681224,
+        11710463
+      ],
+      "contentRange": "bytes 10681224-11710463/29062688",
+      "bytes": 1029240,
+      "sha256": "bb5f85fe0cc636a8982b9fbe42c4ef8f4e2056ad0da277505dada47831442cbb",
+      "retrievedAt": "2026-11-14T20:24:23.701Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.img",
+      "status": 206,
+      "byteRange": [
+        11291144,
+        12328007
+      ],
+      "contentRange": "bytes 11291144-12328007/29062688",
+      "bytes": 1036864,
+      "sha256": "2c0c028e314688f40f4c1a5092a58702b35fe73097d8b0fc7c6cfcb34c61625d",
+      "retrievedAt": "2026-11-14T20:24:24.721Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n090hb.lbl",
+      "status": 200,
+      "byteRange": null,
+      "contentRange": null,
+      "bytes": 4820,
+      "sha256": "c85891df3c11e724c5c5d980630e56ee4f13c40d234b68e22401b9a404df3d36",
+      "retrievedAt": "2026-11-14T20:24:25.073Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n090hb.img",
+      "status": 206,
+      "byteRange": [
+        12718080,
+        14353919
+      ],
+      "contentRange": "bytes 12718080-14353919/129761280",
+      "bytes": 1635840,
+      "sha256": "09fd20b3d9fe76283b8710967c6d8539cf5c390558b031f8edcd1396b767e104",
+      "retrievedAt": "2026-11-14T20:24:26.077Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n090hb.lbl",
+      "status": 200,
+      "byteRange": null,
+      "contentRange": null,
+      "bytes": 3088,
+      "sha256": "7c373fcff18ee6facc2cde7ef07aa6c52daddee1235fbe373dbb2f474223adc4",
+      "retrievedAt": "2026-11-14T20:24:26.425Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n090hb.img",
+      "status": 206,
+      "byteRange": [
+        6359040,
+        7176959
+      ],
+      "contentRange": "bytes 6359040-7176959/64880640",
+      "bytes": 817920,
+      "sha256": "552e0a7861ff136e87b5ffd46843a6e85c7f0d5c398fb6365f222d79f0a5351a",
+      "retrievedAt": "2026-11-14T20:24:26.881Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n270hb.lbl",
+      "status": 200,
+      "byteRange": null,
+      "contentRange": null,
+      "bytes": 4822,
+      "sha256": "a6a198c4062f40efe3dc84bf5fb7d5aa98efd73cb35e81df8cb5ce2e859ea270",
+      "retrievedAt": "2026-11-14T20:24:27.224Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt00n270hb.img",
+      "status": 206,
+      "byteRange": [
+        69373440,
+        71009279
+      ],
+      "contentRange": "bytes 69373440-71009279/129761280",
+      "bytes": 1635840,
+      "sha256": "4bb892b440e93b2b73d6b82d6bc5c80929a81c1b331bfde04df4099bc0097e12",
+      "retrievedAt": "2026-11-14T20:24:28.048Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n270hb.lbl",
+      "status": 200,
+      "byteRange": null,
+      "contentRange": null,
+      "bytes": 3090,
+      "sha256": "4f146f81a436567e7b0a46c5cd9947da0a4aa4003508cf0646bebfdb5e497afb",
+      "retrievedAt": "2026-11-14T20:24:28.391Z"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc00n270hb.img",
+      "status": 206,
+      "byteRange": [
+        34686720,
+        35504639
+      ],
+      "contentRange": "bytes 34686720-35504639/64880640",
+      "bytes": 817920,
+      "sha256": "88ec1e47f1fa75ced516e008280b7bb1c0c5e2ebac5e190c894dce9d9fcbc2e0",
+      "retrievedAt": "2026-11-14T20:24:28.820Z"
+    }
+  ],
+  "completedAt": "2026-11-14T20:24:28.831Z"
+}

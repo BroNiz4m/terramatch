@@ -10,12 +10,35 @@ Each window contains 65 × 65 finite elevation samples on a 32 km × 32 km proje
 |---|---|---|---|
 | Jezero Crater, Mars | 18.38° N, 77.58° E | NASA MGS MOLA MEGDR, 128 pixels/degree | Planetary target |
 | Shackleton region, Moon | 89.67° S, 129.78° E | NASA LRO LOLA south-polar DEM, 240 m | Planetary target |
+| Cabeus crater center, Moon | 85.33° S, 42.13° W | Same LOLA product, V2.0 | Planetary target; not the LCROSS impact coordinate |
+| Nobile crater center, Moon | 85.28° S, 53.27° E | Same LOLA product, V2.0 | Planetary target; not the historic VIPER western-rim site |
+| Gale / Bradbury Landing, Mars | 4.5895° S, 137.4417° E | MOLA `MEGT00N090HB`, 128 pixels/degree | Planetary target at the historic landing coordinate |
+| Eberswalde delta area, Mars | 23.8° S, 33.7° W (326.3° E) | MOLA `MEGT00N270HB`, 128 pixels/degree | Planetary target; HiRISE page center, not HiRISE DEM pixels |
 | Wadi Rum, Jordan | 29.575° N, 35.419° E | Skadi HGT mixed-source terrain distribution | Earth candidate |
 | Al Wahbah, Saudi Arabia | 22.900° N, 41.138° E | Skadi HGT mixed-source terrain distribution | Earth candidate |
 | Amboy Crater, United States | 34.557° N, 115.780° W | Skadi HGT; US tiles can use USGS 3DEP/NED | Earth candidate |
 | Lanzarote, Spain | 28.995° N, 13.740° W | Skadi mixed land/bathymetric elevation | **Excluded**: the 32 km island window intersects the sea |
 
 These are curated candidate/reference sites. The application does not claim they are newly discovered analogs or that they are approved sites for fieldwork, landing or base construction.
+
+There are six planetary targets and four Earth windows. The four additional
+planetary grids reproduce the source-derived research grids documented in
+[PLANETARY-TARGET-AUDIT.md](PLANETARY-TARGET-AUDIT.md), with source/label hashes,
+coordinate-source references and actual local bounds. The original six terrain
+JSON files remain byte-identical to the preceding release.
+
+New Mars targets retain corresponding 8-bit unsigned MOLA observation-count
+summaries: Gale has 3,579 zero-count native cells among 5,041 unique interpolation
+support cells; Eberswalde has 3,469 among 5,467. These bins contain source-gridded
+interpolated heights, not direct measurements at every output location. Compare,
+source inspection and exports disclose this. Counts are not accuracy percentages
+and do not enter the slope/relief index. LOLA track interpolation remains explicit;
+no new lunar per-cell uncertainty/count map was acquired.
+
+Temperature remains explicitly unavailable for all four new targets. Existing
+MEDA rover-point observations and Shackleton's Diviner field are not reused for
+other windows. Optical, mineral, water/ice and biological context are not decoded
+from terrain or imagery colors.
 
 ## On-demand search extension
 
@@ -53,6 +76,15 @@ See SEARCH-DATA.md and LANDMASK.md for methods, validation and provenance.
 - Only the required contiguous source-row byte range is downloaded; the exact range and SHA-256 are retained in the JSON provenance.
 - MOLA source cells may be interpolated between altimeter tracks. The source label notes that gaps between profiles can reach 12 km. A raster posting is not a statement of effective measurement resolution everywhere.
 
+The Jezero product above remains unchanged. The reproducible pipeline now uses
+`scripts/lib/planetary-terrain.mjs` to select all required 90° × 44° tiles from
+positive-east coordinates and preserve bilinear support across tile boundaries,
+the equator and 0°/360°. Pixel supports outside the 128 ppd ±88° coverage fail
+explicitly. Labels verify dimensions, bit depth, byte order, frame and tile bounds;
+each strip requires HTTP 206 with exact Content-Range. New Mars windows also fetch
+the matching `MEGC` count products. Per-product dates, versions, hashes and ranges
+remain in `source.files`, with support summaries under `source.observationSupport`.
+
 ### Moon
 
 - Archive: https://pds-geosciences.wustl.edu/missions/lro/lola.htm
@@ -66,6 +98,12 @@ See SEARCH-DATA.md and LANDMASK.md for methods, validation and provenance.
 - Source heights are relative to the 1,737.4 km reference sphere in the DE421 mean Earth/polar-axis frame. The source grid interpolates altimeter tracks using GMT tools.
 - Crater center reference: IAU/USGS Gazetteer, https://planetarynames.wr.usgs.gov/Feature/5450.
 - This terrain subset does not calculate solar illumination, permanent shadows, cold traps, water ice, radiation or communication availability.
+
+The same product supports the additional Cabeus/Nobile center windows. Their bounds
+follow their actual projected rectangles, rather than extending to the pole.
+Polar windows containing the pole retain a full-longitude envelope. Sampling uses
+projected metres; it is not exact geodesic spacing away from the pole. The pipeline
+checks that all interpolation supports stay within the valid source domain.
 
 ## Earth source and attribution
 

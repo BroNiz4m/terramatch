@@ -29,8 +29,8 @@ test('changing weights affects the chosen measures and cannot create an empty in
 test('incomplete and nonfinite grids are rejected instead of silently filling values',()=>{
   assert.throws(()=>analyzeTerrain({...flat(0),heights:[0,1,2]}));const data=flat(0);data.heights[5]=NaN;assert.throws(()=>analyzeTerrain(data));
 });
-test('all six bundled windows have finite geolocated sourced elevations',()=>{
-  assert.equal(SITES.length,6);assert.equal(TARGETS.length,2);
+test('all ten bundled windows have finite geolocated sourced elevations',()=>{
+  assert.equal(SITES.length,10);assert.equal(TARGETS.length,6);
   for(const site of SITES){const data=read(site.id);assert.equal(data.siteId,site.id);assert.equal(data.heights.length,65*65);assert.ok(data.heights.every(Number.isFinite));assert.equal(data.widthMeters,32000);assert.equal(data.depthMeters,32000);assert.equal(data.gridSpacingMeters,500);assert.equal(data.units,'meters');assert.ok(data.source.url.startsWith('https://'));const stats=analyzeTerrain(data);assert.ok(stats.relief>0);assert.ok(Math.abs(stats.slopeHistogram.reduce((a,b)=>a+b,0)-1)<1e-10);assert.ok(stats.slopeP90>=stats.slopeMean*.5);const point=terrainCoordinates(data,.5,.5);assert.ok(Math.abs(point.lat-site.lat)<1e-5,site.id+' latitude');assert.ok(Math.abs(point.lon-site.lon)<1e-5,site.id+' longitude');}
 });
 test('lunar polar geolocation centers Shackleton and treats the pole correctly',()=>{

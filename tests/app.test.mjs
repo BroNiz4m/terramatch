@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { Window } from 'happy-dom';
-import {SITES} from '../dist/js/science.js';
+import {SITES,compareTerrains,TASK_PROFILES} from '../dist/js/science.js';
 
 // Exercise real DOM event handlers and scientific exports without pretending this
 // is a visual/WebGL browser test. 3D geometry has its own separate tests.
@@ -21,7 +21,7 @@ test('mission, comparison, source records, filters and exports work together',as
   try{
     await import('../dist/js/app.js');
     for(let i=0;i<100&&!browser.__TERRAMATCH__;i++)await new Promise(resolve=>setTimeout(resolve,5));
-    const api=browser.__TERRAMATCH__;assert.ok(api,'app initialization finished');assert.equal(api.state.terrains.size,6);assert.equal(api.state.ready,true);assert.equal(api.state.rankings.length,3);assert.equal(document.querySelectorAll('.candidate-card').length,4);
+    const api=browser.__TERRAMATCH__;assert.ok(api,'app initialization finished');assert.equal(api.state.terrains.size,10);assert.equal(api.state.ready,true);assert.equal(api.state.rankings.length,3);assert.equal(document.querySelectorAll('.candidate-card').length,4);
     assert.ok(!api.state.rankings.some(r=>r.site.id==='lanzarote'));
     document.querySelector('[data-view="compare"]').click();assert.equal(api.state.view,'compare');assert.equal(document.querySelectorAll('.chart-svg').length,2);assert.match(document.querySelector('#comparison-workspace').textContent,/Terrain resemblance index/);
     const target=document.querySelector('#comparison-target');target.value='shackleton';target.dispatchEvent(new browser.Event('change'));assert.equal(api.state.targetId,'shackleton');assert.equal(api.state.body,'moon');assert.match(document.querySelector('#comparison-workspace').textContent,/Shackleton/);
@@ -52,6 +52,27 @@ test('mission, comparison, source records, filters and exports work together',as
     await api.planetUI.selectBody('mars');assert.match(document.querySelector('#planet-source-cards').textContent,/MOLA radius/);assert.match(document.querySelector('#planet-environment').textContent,/BAROCAP1/);assert.match(document.querySelector('#planet-environment').textContent,/751.26 Pa/);assert.match(document.querySelector('#planet-environment').textContent,/11 gaps/);assert.equal(document.querySelector('#planet-earth-observations').children.length,0);
     await api.planetUI.selectBody('moon');assert.match(document.querySelector('#planet-shape').textContent,/1,737.400 km/);assert.match(document.querySelector('#planet-environment').textContent,/exosphere/);assert.ok(document.querySelector('#planet-events').classList.contains('hidden'));
     api.exportEvidence();const extended=JSON.parse(await blobs.get(downloads.at(-1).url).text());assert.equal(extended.planetData.globalDEMSamplingDegrees,1);assert.equal(extended.planetData.imagery.length,3);assert.equal(extended.planetData.earthEnvironment.series.length,365);assert.equal(extended.planetData.marsPressure.sol,29);assert.match(extended.planetData.earthEvents.source.retrievalMode,/bundled-reference/);
+    // Each new real target reaches Compare, every task preset and both scientific exports.
+    api.showView('compare');assert.equal(document.querySelectorAll('#comparison-target option').length,6);
+    for(const id of ['gale-bradbury','eberswalde-delta','cabeus-center','nobile-center']){
+      const site=SITES.find(s=>s.id===id),select=document.querySelector('#comparison-target');select.value=id;select.dispatchEvent(new browser.Event('change'));
+      assert.equal(api.state.targetId,id);assert.equal(document.querySelector('#target-select').value,id);assert.equal(document.querySelectorAll('#target-select option').length,3);
+      assert.match(document.querySelector('#destination-image-label').textContent,site.body==='mars'?/MOLA ELEVATION/:/LOLA ELEVATION/);
+      assert.ok(document.querySelector('.terrain-support'));if(site.body==='mars')assert.match(document.querySelector('.terrain-support').textContent,/zero recorded MOLA observations/);
+      await api.thermalUI.load(site);assert.match(document.querySelector('#thermal-workspace').textContent,/TEMPERATURE UNAVAILABLE/);assert.equal(api.thermalUI.snapshot().target.available,false);assert.equal(api.thermalUI.snapshot().target.siteId,id);
+      for(const taskId of Object.keys(TASK_PROFILES)){
+        const taskSelect=document.querySelector('#task-select');taskSelect.value=taskId;taskSelect.dispatchEvent(new browser.Event('change'));assert.deepEqual(api.state.weights,TASK_PROFILES[taskId].weights);
+        const expected=compareTerrains(api.state.terrains.get(id),api.state.terrains.get(api.state.earthId),api.state.weights);assert.ok(document.querySelector('#comparison-workspace').textContent.includes(expected.score.toFixed(1)+' / 100'));
+      }
+      document.querySelector('#metric-relief').checked=false;document.querySelector('#task-select').value='navigation';document.querySelector('#task-select').dispatchEvent(new browser.Event('change'));assert.deepEqual(api.state.weights,{slope:.85,relief:0});assert.equal(document.querySelector('#metric-relief').checked,false);
+      document.querySelector('#metric-relief').checked=true;document.querySelector('#task-select').value='terrain';document.querySelector('#task-select').dispatchEvent(new browser.Event('change'));
+      document.querySelector('#download-evidence').click();const record=JSON.parse(await blobs.get(downloads.at(-1).url).text());assert.equal(record.target.id,id);assert.equal(record.thermal.target.available,false);assert.ok(record.provenance.target.sha256ByteRange);assert.ok(record.provenance.target.coordinateSource);assert.ok(record.provenance.target.observationSupport);
+      document.querySelector('#compare-export').click();const targetReport=await blobs.get(downloads.at(-1).url).text();assert.ok(targetReport.includes(site.name));assert.match(targetReport,/Terrain source coverage/);assert.match(targetReport,/No source-derived planetary thermal product/);
+      document.querySelector('[data-view="sources"]').click();document.querySelector(`[data-source-site="${id}"]`).click();assert.match(document.querySelector('.modal').textContent,/observationSupport/);document.querySelector('.modal-close').click();api.showView('compare');
+    }
+    // Original targets retain their separately sourced thermal records after switching back.
+    document.querySelector('#comparison-target').value='shackleton';document.querySelector('#comparison-target').dispatchEvent(new browser.Event('change'));await api.thermalUI.load(SITES.find(s=>s.id==='shackleton'));assert.equal(api.thermalUI.snapshot().target.available,true);assert.ok(api.thermalUI.snapshot().target.raster);
+    document.querySelector('#comparison-target').value='jezero';document.querySelector('#comparison-target').dispatchEvent(new browser.Event('change'));await api.thermalUI.load(SITES.find(s=>s.id==='jezero'));assert.equal(api.thermalUI.snapshot().target.available,true);assert.equal(api.thermalUI.snapshot().target.raster,undefined);
     assert.deepEqual(errors,[],'no unexpected initialization or event-handler errors');
   }finally{console.error=oldError;await browser.happyDOM.close();}
 });
