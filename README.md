@@ -63,6 +63,10 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
    are withheld; measurements describe the full DEM window and may include water
    or bathymetry. New searches record all 25 coarse land-screen sample locations
    for inspection. Earth candidates can also be explored in 3D.
+   **What separates these candidates?** explains the gap between the first two
+   displayed scores, the selected candidate's rank/gap, equal-score shared ranks,
+   and any relief-distance cap. Only eligible loaded Earth windows are ranked;
+   this is not an exhaustive Earth search. Point gaps are not confidence levels.
 9. Export the Markdown comparison report, evidence JSON or field notebook. Each
    contains source information; reports include the method, candidate origin,
    recorded survey coverage and interpretation limits.

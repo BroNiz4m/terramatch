@@ -651,3 +651,105 @@ Publish with the existing owner-private Site audience, and synchronize the same
 source-helper commit to GitHub main. Exact deployment/version IDs are reported
 from native tool results separately. No ice module, robot redesign, stack change,
 mobile redesign, public sharing or unrelated feature was included.
+
+## 2026-11-15 — Ranking and weight-sensitivity validation (report only)
+
+The owner approved proceeding with ranking validation, weight sensitivity and
+geological/field-purpose review. Baseline was clean at `b127b40`. This review did
+not authorize or implement another app feature or score calibration.
+
+- Main report: `ANALOG-VALIDATION.md`, with primary geological references and
+  per-target supported exercise/unsupported-equivalence distinctions.
+- Reproduce with `node scripts/validate-analog-rankings.mjs`. It writes
+  `research/analog-validation-2026-11-15/results.json` and `summary.md` only.
+  Input scope is six bundled planetary targets against three eligible bundled
+  Earth references. It does not include browser-local searches, an exhaustive
+  global catalogue or the owner's earlier Kuching cache entry.
+- Independent relief/slope/statistic and distance/formula computations agree with
+  production. All presets, single characteristics, 101 complementary weight
+  choices per target, analytic intersections, rounded/unrounded tie sets and
+  dominance were checked. **6,078 numerical comparisons passed**; all ten terrain
+  file hashes were unchanged. Lanzarote remains excluded, and empty metric
+  selection is rejected. Script syntax and `git diff --check` passed.
+- Default leaders/indices: Jezero → Amboy 86.7; Shackleton → Wadi Rum 35.2;
+  Cabeus → Wadi Rum 69.4; Nobile → Wadi Rum 47.7; Gale/Bradbury → Wadi Rum 51.7;
+  Eberswalde → Wadi Rum 77.2. Leaders are unchanged in the terrain, navigation,
+  fieldwork and same-as-default thermal presets. Scores are not probabilities.
+- All three Earth relief distances saturate at 1 for Shackleton and Gale. For
+  those targets, relief cannot discriminate these candidates; positive slope
+  weight alone determines order. Relief-only is a three-way zero-index tie.
+  Gale's default first/second gap is just 1.2 displayed points, not a measured
+  statistically significant difference.
+- Analytic Wadi Rum/Amboy first-place switches occur at slope weights about
+  0.160458 (Cabeus), 0.149171 (Nobile) and 0.375381 (Eberswalde). Jezero's second
+  place switches near 0.671769 while Amboy stays first. Rounded top ties occur
+  in some scenarios; catalogue order is not evidence of a better match.
+- Geological context does not establish matching processes or materials. Amboy
+  is volcanic and its cone is smaller than the 500 m sample interval; the
+  986.94 m window relief is not the cone's height. Wadi Rum's Earth sedimentary/
+  desert landscape is not a validated lunar cold trap or Martian delta analog.
+  Suggested uses are limited operations/mapping workflows, pending actual
+  geological, access and field assessment.
+- Recommendation: preserve the disclosed heuristic and uncalibrated weights;
+  expose rounded ties/close margins and relief saturation in a future app change,
+  and perform spatial/window/source-uncertainty and expert/field validation before
+  making stronger analog claims. Those changes are not implemented by this report.
+
+No application code, production dataset, weights, score, dependencies, audience
+or live deployment changed. The full app test suite and browser/GPU QA were not
+rerun; the preceding release's 111 passing tests remain separately recorded.
+No commit, push or deploy was performed for this report. Artifacts remain local.
+
+## 2026-11-15 — Loaded-ranking explanations in Compare
+
+The owner approved implementing the validation findings in Compare: equal-score
+ties, first/second gaps, capped relief and the loaded-candidate scope. The Site
+source was opened at `b127b40` before edits. The preceding local validation report,
+script and research outputs are preserved and included in this release.
+
+- New `dist/js/ranking-context.js` reads the existing rounded results and emits
+  shared competition ranks, tie sets, gaps in index points, selected-candidate
+  context, relief-cap status and explicit eligible/loaded/review counts/IDs.
+  It does not re-score, change weights, reorder ties or mutate comparison results.
+- Compare now has **What separates these candidates?**, per-row gap text, tie
+  badges and relief-cap badges. Equal displayed indices share ranks, e.g. 1/1/3,
+  and zero-score relief-only ties explicitly have no unique leader. Explore card
+  rank numbers use the same shared ranks. Stable original row order is preserved.
+- Saturation is computed from each actual `reliefDistance === 1`, not hardcoded
+  target names. When all eligible loaded candidates reach the cap, relief cannot
+  distinguish them; with positive slope weight differences come from slope.
+  When relief is disabled, its non-contribution is explicit and cap badges say off.
+- Gaps are descriptive index points. No close-match, significance, confidence or
+  scientific-suitability threshold was added. The selected candidate's gap is
+  distinguished from the leading/second-row gap. Zero/one-candidate rankings have
+  no invented first/second gap. Coverage-review windows have null rank/score/gap.
+- The actual current eligible loaded set is described, including valid manual,
+  automatic and cached candidates; review windows are counted separately. This
+  is explicitly not an exhaustive Earth search or a global best-analog claim.
+- Evidence JSON records `rankingContext`; Markdown reports contain the same
+  explanations plus a ranking/gap/cap table. The expedition comparison sidebar
+  carries compact scope, leading-gap, tie and relief explanations. All update
+  through target, task, characteristic and selected-Earth changes.
+- README/DATA document the behavior. ANALOG-VALIDATION retains its original source
+  baseline and findings with an addendum identifying the subsequent UI change.
+
+Verification: **116 automated tests passed**, including new pure explanation
+tests and expanded DOM workflows for Gale's 1.2-point gap, selected vs leading
+rank, zero-score shared ranks, both exports, sidebar updates, disabled relief,
+dynamic search counts and excluded-window null gaps. Focused tests also cover
+rounding-induced ties with actual Cabeus data, searched-candidate ties, empty/
+single sets and partial vs complete relief saturation. `npm run check` passed
+(38 JSON datasets), and `git diff --check` passed. Four representative static
+routes, including the new module with JavaScript MIME type, returned HTTP 200;
+the temporary localhost server was stopped.
+
+The 6,078-comparison numerical validation was rerun and its full results JSON
+remained byte-identical to the preceding report. `dist/js/science.js` and every
+production dataset remain unchanged from `b127b40`. Browser QA still cannot run:
+current CUA browser inventory reports the browser access host unavailable.
+DOM/static-route checks do not establish GPU pixels or performance.
+
+Publish via the existing Site with its owner-only audience, then synchronize the
+same source-helper commit to GitHub main. Actual deployment/version IDs are
+reported from tool results separately. No ice implementation, score calibration,
+dataset regeneration, target expansion, robot change or audience change is included.

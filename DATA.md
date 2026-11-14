@@ -142,6 +142,31 @@ For example, a volcanic maar, cinder cone and impact crater can have interesting
 
 **Thermal context is assessed separately:** see [THERMAL.md](THERMAL.md). It does not enter this terrain index.
 
+### Interpreting loaded rankings
+
+`dist/js/ranking-context.js` explains the existing results without altering the
+comparison function, scores, weights or stable tie order. Equal scores at the
+displayed one-decimal precision share a competition rank (for example 1, 1, 3).
+Display order within a tie does not indicate a scientifically better match.
+
+Compare shows the first-to-second displayed-score gap and the selected candidate's
+gap from the leading displayed score, in index points. Empty/single-candidate
+rankings have no first-to-second gap; coverage-review candidates have no rank or
+gap. No threshold calls a gap significant, and none is a probability.
+
+Relief distance reaches its cap of 1 when the ratio of `(relief + 1)` between
+windows reaches fourfold. The UI identifies capped candidates and explains when
+every ranked candidate reaches it, so relief cannot distinguish them. With relief
+only, all such candidates have zero scores and share rank 1. When relief is
+switched off its inactive status is explicit, regardless of the raw distance.
+
+The scope is the actual eligible loaded candidate set, including valid manual,
+automatic and cached windows. Loaded coverage-review windows are counted separately
+and remain unranked. This context is included in evidence JSON as `rankingContext`,
+in the Markdown report and in the expedition comparison sidebar. The numerical
+weight-sensitivity review is preserved in [ANALOG-VALIDATION.md](ANALOG-VALIDATION.md);
+it does not calibrate the weights or validate whole-site analog suitability.
+
 **Not assessed:** mineralogy, water/ice, dust or wind, biology, subsurface caves, gravity effects on robot performance, radiation, accessibility, permits, environmental protection and operational safety.
 
 Profiles show elevations along the middle grid row; any normalization should be explicitly labelled. Slope overlays derive from these same coarse elevation grids. Decorative rocks or dust and robot foot-contact detail are visual additions, not resolved measurements of the actual site.
