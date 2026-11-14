@@ -4,6 +4,9 @@ import fs from 'node:fs';
 import {Window} from 'happy-dom';
 import {Expedition} from '../dist/js/expedition.js';
 import {SITES,analyzeTerrain} from '../dist/js/science.js';
+import {samplePlanetaryThermal} from '../dist/js/planetary-thermal.js';
+import {thermalColor} from '../dist/js/thermal-colors.js';
+import * as THREE from '../dist/vendor/three.module.js';
 
 test('arrival, opening hatch, walking, keyboard inspection, comparison and pause form one working sequence',async()=>{
   const window=new Window();window.document.body.innerHTML='<div id="host"></div><canvas id="map" width="240" height="180"></canvas>';
@@ -26,5 +29,14 @@ test('arrival, opening hatch, walking, keyboard inspection, comparison and pause
   expedition.setLayer('slope');assert.equal(expedition.grid.visible,true);for(const c of expedition.terrain.geometry.attributes.color.array)assert.ok(Number.isFinite(c));
   window.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(expedition.paused,true);const pausedPosition=expedition.robot.position.clone();expedition.setMove('forward',true);expedition.tick(18000);assert.deepEqual(expedition.robot.position.toArray(),pausedPosition.toArray());expedition.setPaused(false);
   assert.ok(renderCount>1000);assert.ok(expedition.camera.position.toArray().every(Number.isFinite));assert.equal(expedition.robot.userData.legs.length,6);
+  const moonData=JSON.parse(fs.readFileSync(new URL('../dist/data/shackleton-terrain.json',import.meta.url))),thermal=JSON.parse(fs.readFileSync(new URL('../dist/data/shackleton-thermal.json',import.meta.url)));
+  expedition.load(SITES.find(site=>site.id==='shackleton'),moonData,analyzeTerrain(moonData));
+  const elevations=expedition.terrain.geometry.attributes.position.array.slice();
+  expedition.setThermalField({sample:(lat,lon)=>samplePlanetaryThermal(thermal,lat,lon)?.valueK??null});expedition.setLayer('temperature');
+  assert.equal(expedition.terrain.material,expedition.thermalMaterial);assert.equal(expedition.terrain.material.toneMapped,false);assert.equal(expedition.terrain.material.map,null);assert.deepEqual(expedition.terrain.geometry.attributes.position.array,elevations,'thermal layer never changes DEM elevations');
+  const center=(32*65+32)*3,expected=new THREE.Color().setRGB(...thermalColor(thermal.raster.valuesK[32*65+32]),THREE.SRGBColorSpace);
+  const colors=expedition.terrain.geometry.attributes.color.array;assert.ok(Math.abs(colors[center]-expected.r)<1e-6);assert.ok(Math.abs(colors[center+1]-expected.g)<1e-6);
+  expedition.setThermalField(null);const missing=new THREE.Color().setRGB(...thermalColor(null),THREE.SRGBColorSpace);assert.ok(Math.abs(colors[center]-missing.r)<1e-6,'missing thermal fields use grey instead of inferred values');
+  expedition.setLayer('surface');assert.equal(expedition.terrain.material,expedition.terrainMaterial);
   await window.happyDOM.close();
 });

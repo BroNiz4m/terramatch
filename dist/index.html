@@ -9,6 +9,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="search.css">
+  <link rel="stylesheet" href="thermal.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 </head>
 <body>
@@ -31,7 +32,8 @@
           <div class="panel-title"><h2>Your mission</h2><span class="step-number">01 / 03</span></div>
           <label class="field-label">Destination</label><div class="segmented destination-toggle"><button data-body="moon"><span class="planet-dot moon-dot"></span>Moon</button><button data-body="mars" class="active"><span class="planet-dot mars-dot"></span>Mars</button></div>
           <label class="field-label" for="target-select">Target region</label><select id="target-select"></select>
-          <label class="field-label" for="task-select">Exploration task</label><select id="task-select"><option value="terrain">Terrain exploration</option><option value="navigation">Navigation training</option><option value="fieldwork">Field operations</option></select>
+          <label class="field-label" for="task-select">Exploration task</label><select id="task-select"><option value="terrain">Terrain exploration</option><option value="navigation">Navigation training</option><option value="fieldwork">Field operations</option><option value="thermal">Thermal environment study</option></select>
+          <div class="thermal-prompt" id="thermal-mission-prompt"></div>
           <div class="field-label label-row">Compare characteristics<button class="icon-button" id="method-tip" aria-label="How comparisons work">?</button></div>
           <label class="check-row"><input type="checkbox" id="metric-slope" checked><span>Terrain &amp; slope</span><span class="mini-tag">DEM</span></label>
           <label class="check-row"><input type="checkbox" id="metric-relief" checked><span>Relative relief</span><span class="mini-tag">DEM</span></label>
@@ -68,7 +70,7 @@
     <section id="expedition-view" class="view expedition-view hidden" aria-label="3D terrain expedition">
       <div id="expedition-canvas" class="canvas-host"></div>
       <div class="expedition-vignette"></div>
-      <div class="expedition-top-left"><div class="expedition-location"><span class="eyebrow" id="expedition-body">MARS EXPEDITION</span><div><h1 id="expedition-title">Jezero Crater</h1><span class="status-pill orange" id="expedition-stage">Approach</span></div></div><div class="terrain-layer-control segmented"><button data-layer="surface" class="active">Surface</button><button data-layer="slope">Slope</button><button data-layer="elevation">Elevation</button></div><div class="terrain-legend hidden" id="terrain-legend"><span>Gentle</span><i></i><span>Steep</span></div><div class="deployment-progress" id="deployment-progress"></div></div>
+      <div class="expedition-top-left"><div class="expedition-location"><span class="eyebrow" id="expedition-body">MARS EXPEDITION</span><div><h1 id="expedition-title">Jezero Crater</h1><span class="status-pill orange" id="expedition-stage">Approach</span></div></div><div class="terrain-layer-control segmented"><button data-layer="surface" class="active">Surface</button><button data-layer="slope">Slope</button><button data-layer="elevation">Elevation</button><button data-layer="temperature">Temperature</button></div><div class="terrain-legend hidden" id="terrain-legend"><span>Gentle</span><i></i><span>Steep</span></div><div class="thermal-scene hidden" id="thermal-scene" aria-live="polite"></div><div class="deployment-progress" id="deployment-progress"></div></div>
       <div class="expedition-top-right"><div class="minimap"><div class="minimap-heading">Local terrain<button class="icon-button" id="expand-map" aria-label="Change map size">↗</button></div><canvas id="minimap" width="240" height="180" aria-label="Local terrain minimap"></canvas></div><button class="button button-glass button-small" id="toggle-expedition-evidence"></button></div>
       <aside class="expedition-evidence panel hidden" id="expedition-evidence"></aside>
       <div class="arrival-banner" id="arrival-banner"><div class="arrival-steps"><span data-phase="landing">01 <b>Land</b></span><i></i><span data-phase="deploy">02 <b>Deploy</b></span><i></i><span data-phase="explore">03 <b>Explore</b></span></div><button class="button button-primary" id="take-control">Skip arrival</button></div>

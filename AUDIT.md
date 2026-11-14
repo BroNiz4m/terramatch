@@ -51,8 +51,9 @@ formula are unchanged.
 - Candidate ranking evaluates three curated inland Earth regions. It does not
   run a new global search. Six terrain windows are bundled; coastal Lanzarote is
   excluded from ranking.
-- Numerical analysis uses terrain slopes and relative relief only. Temperature,
-  mineralogy, ice, biology, dust and subsurface conditions are unassessed.
+- The terrain index uses slopes and relative relief only. Surface thermal context
+  is now documented separately in THERMAL.md. Mineralogy, ice, biology, dust
+  and subsurface conditions remain unassessed.
 - The resemblance index is a project-defined, uncalibrated terrain heuristic. It
   is not a NASA-approved score, probability or proof of analog suitability.
 - Window size, sampling and weights affect rankings. No multi-scale sensitivity

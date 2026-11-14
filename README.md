@@ -126,3 +126,14 @@ when browser automation is available.
 - `.openai/hosting.json`: private Sites project and static hosting configuration.
 
 Use of public space-agency data does not imply agency endorsement.
+
+
+## Surface thermal context
+
+Choose **Thermal environment study**, then open Compare for source-derived
+Earth, Moon and Mars temperature records. The 3D Temperature layer distinguishes
+spatial lunar data from coarse Earth daily-mean context. Rover point observations
+are not extended over an entire crater. Thermal evidence retains its own
+statistic and time coverage and does not change the terrain-only ranking.
+See [THERMAL.md](THERMAL.md), [THERMAL-EARTH.md](THERMAL-EARTH.md) and
+[THERMAL-PLANETARY.md](THERMAL-PLANETARY.md) for definitions and limits.

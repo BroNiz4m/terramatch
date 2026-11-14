@@ -102,7 +102,9 @@ The index is a transparent, adjustable **terrain-only heuristic**. It is not a p
 
 For example, a volcanic maar, cinder cone and impact crater can have interesting terrain similarities while having different origins. Wadi Rum's sandstone does not become Martian delta sediment or lunar regolith because a terrain score is high.
 
-**Not assessed:** temperature, mineralogy, water/ice, dust or wind, biology, subsurface caves, gravity effects on robot performance, radiation, accessibility, permits, environmental protection and operational safety.
+**Thermal context is assessed separately:** see [THERMAL.md](THERMAL.md). It does not enter this terrain index.
+
+**Not assessed:** mineralogy, water/ice, dust or wind, biology, subsurface caves, gravity effects on robot performance, radiation, accessibility, permits, environmental protection and operational safety.
 
 Profiles show elevations along the middle grid row; any normalization should be explicitly labelled. Slope overlays derive from these same coarse elevation grids. Decorative rocks or dust and robot foot-contact detail are visual additions, not resolved measurements of the actual site.
 
