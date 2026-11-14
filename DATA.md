@@ -125,6 +125,12 @@ mission or expert data were used to calibrate them, and no sensitivity study sup
 preset over another. The active normalized weights are recorded in every comparison and
 export, together with `calibrated: false`.
 
+At least one terrain characteristic must be selected before applying a task preset.
+If both checkboxes are off, a task change is rejected with an explanation; the
+task selector, active weights and existing ranking keep their previous values.
+Selecting one characteristic applies only that measure, without re-enabling the
+other checkbox.
+
 `taskMeasures(stats)` adds no new measurement. It sums existing slope-histogram bins:
 under 5° = bins 0–2° and 2–5°; under 10° = those plus 5–10°; at least 20° = bins 20–35°
 and 35–90°. Shares are fractions of interior samples over the 1 km gradient baseline.

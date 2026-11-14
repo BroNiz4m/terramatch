@@ -179,6 +179,7 @@ All three were re-checked in the browser after the fix.
 
 Unchanged: all work is local and uncommitted. Nothing was committed, pushed or deployed.
 
+
 ## 2026-11-14 — Claude Code: exploration-task presets and leftovers
 
 ### 1. Task and scope
@@ -221,3 +222,51 @@ statistics, score sensitivity, denser automatic search) are **not started**.
 ### 5. Commit / push / deploy status
 
 Unchanged: all work is local and uncommitted. Nothing was committed, pushed or deployed.
+
+## 2026-11-14 — Codex: GitHub integration and task-selection guard
+
+### Scope and integration
+
+- The owner asked Codex to integrate the reviewed Claude update, fix the empty
+  characteristic selection, run checks and update the existing live Site.
+- GitHub commit `9ffd46d0dfb0930b0812c943713cde1c36f16bd7` was integrated by
+  fast-forward from the previous release `788c50e`. Claude's changes and earlier
+  handoff entries were preserved. Earlier statements that work was uncommitted
+  describe the state when those entries were written, before the GitHub push.
+- The three changed source-derived JSON records were compared with the previous
+  release during review: numeric values and structure were unchanged; 55 strings
+  changed across those records.
+
+### Additional fix
+
+- `dist/js/app.js`: `applyTaskWeights()` rejects an empty terrain selection
+  instead of silently restoring both preset weights. Changing tasks with both
+  checkboxes off restores the previous task selection, leaves active weights and
+  rankings intact, and asks the user to select at least one characteristic.
+- A single selected characteristic still applies its task weight without
+  re-enabling the other checkbox. Re-enabling both applies the normal preset.
+- `tests/app.test.mjs`: added DOM regression assertions for rejection, unchanged
+  rankings, visible selector restoration, slope-only, relief-only and both-on
+  task changes.
+- `DATA.md`: documented the empty-selection rule.
+
+### Validation and remaining work
+
+- `npm run check`: passed; 17 JSON datasets checked.
+- `npm test`: **63 tests passed, 0 failed**, including the additional regression
+  assertions in the existing application test.
+- `git diff --check`: passed.
+- Codex did not repeat real-browser/GPU QA for this integration. Claude's earlier
+  Chromium observations remain separately attributed above; Firefox, Safari,
+  physical-phone and frame-rate verification remain outstanding.
+- No data regeneration, numerical science changes or ice implementation were
+  performed. Ice, more lunar-relevant Earth candidates, comparable thermal
+  statistics, sensitivity analysis and denser discovery remain future work.
+
+### Publication
+
+- This entry accompanies the integration release intended for GitHub `main` and
+  the existing Site, with the existing owner-only Site audience preserved.
+- Live URL: https://terramatch-expedition.nizamkasema.chatgpt.site
+- Source files do not themselves certify a deployment. The GitHub commit history
+  and Sites deployment result identify the final published revision and status.
