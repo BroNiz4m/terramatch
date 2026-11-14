@@ -415,3 +415,33 @@ only global map layout is verified. Moon is a historical grayscale image mosaic.
   before packaging. Preserve all collaboration files and existing Site audience.
   Site helper commits/synchronizes this source, then the same commit is pushed
   to GitHub and privately deployed to the existing TerraMatch URL.
+
+
+## 2026-11-14 — Roomier desktop globe and original/brightened Earth view
+
+User screenshot showed new globe controls crowding the scene: the global
+select width:100% forced the camera selector onto a full row, colliding with
+an absolutely positioned EONET badge. Fixed with a flow-based globe header,
+dedicated map stage, evidence region, source footer and candidate tray. Final
+stylesheet globe-layout.css overrides old overlay positioning. The selector
+has width:auto and valid font declarations. At desktop widths up to1500px
+the destination summary sits below the workspace, preserving globe width.
+Expand map hides side panels reversibly; Restore layout preserves mission
+and candidate state. Body sizes/camera distance are unchanged. The stage
+resizes through the existing ResizeObserver. No mobile layout redesign.
+
+Inspected the original NASA BMNG November2004 JPEG: oceans and forests are
+dark in that source. Original brightness stays the default; Brighten Earth
+optionally applies gamma1.45 to Earth base imagery only, labelled in caption
+and evidence metadata. Source files, geometry, terrain analytics and
+scientific layer colours stay unchanged. Other bodies and observation/
+elevation views use gamma1.
+
+Validation: six focused app/geometry integration tests passed (expand/restore
+preserves state; brightness leaves the texture object and scientific layer
+colours unchanged). CSS cascade checked with happy-dom: control/evidence
+containers static, scale width auto, canvas separated from header. This is
+not pixel/GPU browser QA. Previous Firefox URL-policy limitation remains.
+The preceding scientific-data release passed97tests; no data sources changed.
+Site source opened atbf43a02 before edits. Publish to the existing private
+Site and push the same source commit to GitHub.

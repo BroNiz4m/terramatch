@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="search.css">
   <link rel="stylesheet" href="thermal.css">
   <link rel="stylesheet" href="planet.css">
+  <link rel="stylesheet" href="globe-layout.css">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 </head>
 <body>
@@ -47,15 +48,14 @@
           <button class="text-link" id="method-link">How the matching works <span>↗</span></button>
         </aside>
         <section class="globe-panel" aria-label="Interactive planetary globe">
-          <div id="globe-canvas" class="canvas-host"></div>
-          <div class="globe-top"><div class="segmented globe-toggle"><button data-globe="earth" class="active">Earth</button><button data-globe="target">Mars</button></div><span class="globe-instruction">DRAG TO ROTATE · SCROLL TO ZOOM</span></div>
-          <div class="globe-data-controls"><button data-globe-layer="surface" class="active">Agency imagery</button><button data-globe-layer="elevation">Elevation</button><select id="globe-scale" aria-label="Globe camera scale"><option value="shared">Same physical scale</option><option value="fit">Fit body to view</option></select><button id="open-planet-data">Data &amp; Earth layers ↗</button></div>
-          <div class="globe-observation-key hidden" id="globe-observation-key"></div><span id="globe-event-key" class="globe-event-key hidden"></span>
-          <div class="globe-toolbar"><button class="map-tool" id="globe-reset" aria-label="Reset globe view">N<span>↑</span></button><button class="map-tool" id="globe-zoom-in" aria-label="Zoom in">+</button><button class="map-tool" id="globe-zoom-out" aria-label="Zoom out">−</button></div>
-          <div class="globe-place-label" id="globe-place-label"></div>
-          <div class="globe-bottom"><div class="globe-caption"><span class="eyebrow">A WORLD OF POSSIBILITIES</span><p>Different worlds.<br>Shared terrain.</p></div><span class="globe-source">Loading original agency sources…</span></div>
+          <header class="globe-header">
+            <div class="globe-top"><div class="segmented globe-toggle"><button data-globe="earth" class="active">Earth</button><button data-globe="target">Mars</button></div><div class="globe-header-actions"><button id="open-planet-data">Data &amp; Earth layers ↗</button><button id="globe-expand" aria-expanded="false" aria-controls="globe-stage">Expand map ⤢</button></div></div>
+            <div class="globe-data-controls"><div class="globe-layer-buttons" role="group" aria-label="Globe display layer"><button data-globe-layer="surface" class="active">Agency imagery</button><button data-globe-layer="elevation">Elevation</button></div><label class="globe-scale-label"><span>Camera</span><select id="globe-scale" aria-label="Globe camera scale"><option value="shared">Same physical scale</option><option value="fit">Fit body to view</option></select></label><button id="globe-brightness" aria-pressed="false" title="Optional display adjustment for the Earth base image only. Source files and scientific layers stay unchanged.">Brighten Earth</button><span class="globe-instruction">DRAG TO ROTATE · SCROLL TO ZOOM</span></div>
+          </header>
+          <div class="globe-stage" id="globe-stage"><div id="globe-canvas" class="canvas-host"></div><div class="globe-toolbar"><button class="map-tool" id="globe-reset" aria-label="Reset globe view">N<span>↑</span></button><button class="map-tool" id="globe-zoom-in" aria-label="Zoom in">+</button><button class="map-tool" id="globe-zoom-out" aria-label="Zoom out">−</button></div><div class="globe-place-label" id="globe-place-label"></div><div class="canvas-loading" id="globe-loading"><span class="loader"></span><p>Bringing Earth into view…</p></div></div>
+          <div class="globe-evidence"><span id="globe-event-key" class="globe-event-key hidden"></span><div class="globe-observation-key hidden" id="globe-observation-key"></div></div>
+          <div class="globe-bottom"><div class="globe-caption"><span class="eyebrow">A WORLD OF POSSIBILITIES</span><p>Different worlds. Shared terrain.</p></div><span class="globe-source">Loading original agency sources…</span></div>
           <div class="candidate-tray"><div class="tray-heading"><h2>Earth analog candidates</h2><span id="candidate-count">Loading terrain…</span></div><div class="candidate-cards" id="candidate-cards"></div></div>
-          <div class="canvas-loading" id="globe-loading"><span class="loader"></span><p>Bringing Earth into view…</p></div>
         </section>
         <aside class="panel destination-panel" aria-label="Selected mission destination">
           <div class="panel-title"><h2>Your destination</h2><span class="status-pill">TARGET</span></div>

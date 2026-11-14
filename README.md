@@ -59,6 +59,11 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
     one metres-to-scene conversion for all three bodies; **Fit body to view**
     changes the camera only. The global **Elevation** palette uses source-datum
     heights at 1° sampling and no exaggerated relief.
+    **Expand map** gives the globe the full workspace width; **Restore layout**
+    brings the mission panels back. Controls and evidence sit outside the 3D
+    stage. Earth shows original NASA image brightness by default; **Brighten
+    Earth** is an optional, labelled display adjustment that never affects
+    elevation, temperature, water-map colours or the original image files.
 12. Under Earth in **Planet data**, show dated NASA GIBS satellite imagery,
     daytime land-surface temperature or the historical annual water mask on the
     globe. The default dates are bundled original NASA renditions; other verified

@@ -39,7 +39,10 @@ The active globe uses `official-earth.jpg`, `official-mars.jpg` and
 See [GLOBE-IMAGERY.md](GLOBE-IMAGERY.md) and
 `dist/data/globe-imagery-sources.json` for original URLs, dimensions, dates,
 registration checks, credits and SHA-256 hashes. The scientific renderer does
-not add a fabricated atmosphere, terminator, star field or colour grading.
+not add a fabricated atmosphere, terminator or star field. It shows original
+image brightness by default. The optional **Brighten Earth** control applies a
+labelled display gamma adjustment to Earth base imagery only, leaving original
+files and scientific overlay colours unchanged.
 See [GLOBE-GEOMETRY.md](GLOBE-GEOMETRY.md) for numerical geometry.
 
 NASA GIBS dated true-colour, daytime temperature and annual water-mask PNGs and
