@@ -1,0 +1,30 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {Window} from 'happy-dom';
+import {Expedition} from '../dist/js/expedition.js';
+import {SITES,analyzeTerrain} from '../dist/js/science.js';
+
+test('arrival, opening hatch, walking, keyboard inspection, comparison and pause form one working sequence',async()=>{
+  const window=new Window();window.document.body.innerHTML='<div id="host"></div><canvas id="map" width="240" height="180"></canvas>';
+  Object.assign(globalThis,{window,document:window.document,devicePixelRatio:1,ResizeObserver:class{observe(){}}});
+  const context={createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)}),putImageData(){},fillRect(){},drawImage(){},setLineDash(){},beginPath(){},moveTo(){},lineTo(){},stroke(){},arc(){},fill(){},strokeRect(){},save(){},translate(){},rotate(){},closePath(){},restore(){},fillText(){}};
+  window.HTMLCanvasElement.prototype.getContext=()=>context;
+  let renderCount=0;const stages=[],inspections=[];let compared=0;
+  const renderer={domElement:document.createElement('canvas'),shadowMap:{},setPixelRatio(){},setSize(){},setAnimationLoop(fn){this.animationLoop=fn;},render(scene,camera){scene.updateMatrixWorld(true);camera.updateMatrixWorld(true);renderCount++;}};
+  const host=document.querySelector('#host');host.getBoundingClientRect=()=>({width:1000,height:650});
+  let expedition;expedition=new Expedition({container:host,minimap:document.querySelector('#map'),rendererFactory:()=>renderer,onStage:s=>stages.push(s),onInspect:info=>inspections.push(info),onCompare:()=>compared++,onPause:value=>expedition.setPaused(value)});
+  const data=JSON.parse(fs.readFileSync(new URL('../dist/data/jezero-terrain.json',import.meta.url),'utf8')),site=SITES.find(s=>s.id==='jezero');
+  expedition.load(site,data,analyzeTerrain(data));expedition.last=0;
+  for(let frame=1;frame<=900;frame++)expedition.tick(frame*1000/60);
+  assert.equal(expedition.phase,'explore');assert.ok(expedition.robot.visible);assert.ok(stages.includes('landing'));assert.ok(stages.includes('deploy'));assert.ok(stages.includes('explore'));assert.equal(stages.filter(s=>s==='explore').length,1);assert.equal(expedition.rocket.position.y,expedition.spawn.y);assert.ok(expedition.rocket.userData.doorPivot.rotation.x>1);
+  renderer.domElement.focus();const before=expedition.robot.position.clone();window.dispatchEvent(new window.KeyboardEvent('keydown',{key:'w'}));
+  for(let frame=901;frame<=1020;frame++)expedition.tick(frame*1000/60);
+  window.dispatchEvent(new window.KeyboardEvent('keyup',{key:'w'}));assert.ok(expedition.robot.position.distanceTo(before)>2,'W moves the explorer over the source terrain');assert.ok(expedition.totalDistance>2);
+  window.dispatchEvent(new window.KeyboardEvent('keydown',{key:'e'}));assert.equal(inspections.length,1);assert.equal(inspections[0].siteId,'jezero');assert.ok(Number.isFinite(inspections[0].height));assert.equal(inspections[0].baselineMeters,1000);
+  window.dispatchEvent(new window.KeyboardEvent('keydown',{key:'c'}));assert.equal(compared,1);
+  expedition.setLayer('slope');assert.equal(expedition.grid.visible,true);for(const c of expedition.terrain.geometry.attributes.color.array)assert.ok(Number.isFinite(c));
+  window.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(expedition.paused,true);const pausedPosition=expedition.robot.position.clone();expedition.setMove('forward',true);expedition.tick(18000);assert.deepEqual(expedition.robot.position.toArray(),pausedPosition.toArray());expedition.setPaused(false);
+  assert.ok(renderCount>1000);assert.ok(expedition.camera.position.toArray().every(Number.isFinite));assert.equal(expedition.robot.userData.legs.length,6);
+  await window.happyDOM.close();
+});

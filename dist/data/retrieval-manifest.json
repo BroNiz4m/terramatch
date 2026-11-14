@@ -1,0 +1,173 @@
+{
+  "generatedAt": "2026-11-14T01:11:20.500Z",
+  "datasets": [
+    {
+      "file": "al-wahbah-terrain.json",
+      "siteId": "al-wahbah",
+      "retrievedAt": "2026-11-14T01:07:41.956Z",
+      "center": {
+        "lat": 22.9,
+        "lon": 41.138
+      },
+      "source": {
+        "id": "srtm",
+        "title": "Skadi terrain tile (SRTM and other elevation sources)",
+        "url": "https://registry.opendata.aws/terrain-tiles/",
+        "files": [
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N22/N22E040.hgt.gz",
+            "sha256": "dfa2241e4dc8d448ba34dc34732e0a0e49871daa3008dca76ade7fc8be1e4e56",
+            "nativeSpacingArcSeconds": 1
+          },
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N23/N23E040.hgt.gz",
+            "sha256": "70e12962ec475f7cc1d22897d30307a46bfb5e0146e720f3d752dbfebce74742",
+            "nativeSpacingArcSeconds": 1
+          },
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N23/N23E041.hgt.gz",
+            "sha256": "2db5357f7348567839bb1bf50834c1b47143afaa44421fe2a98804e2dfcb4f23",
+            "nativeSpacingArcSeconds": 1
+          },
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N22/N22E041.hgt.gz",
+            "sha256": "5b52c14fce2c04be1111e15d80f045ac53fc81a831ce944b3f31e6005f51a794",
+            "nativeSpacingArcSeconds": 1
+          }
+        ],
+        "nativeResolutionMetersApprox": 30,
+        "datum": "Earth elevation in metres from the Skadi HGT derivative; consult underlying source documentation",
+        "sampling": "Bilinear sample of native HGT grid at 500 m projected spacing; no invented height detail.",
+        "caveat": "Distribution tiles can combine underlying sources; the source is identified as Skadi, not an unmodified Earthdata product."
+      }
+    },
+    {
+      "file": "amboy-terrain.json",
+      "siteId": "amboy",
+      "retrievedAt": "2026-11-14T01:07:41.956Z",
+      "center": {
+        "lat": 34.557,
+        "lon": -115.78
+      },
+      "source": {
+        "id": "srtm",
+        "title": "Skadi terrain tile (SRTM and other elevation sources)",
+        "url": "https://registry.opendata.aws/terrain-tiles/",
+        "files": [
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N34/N34W116.hgt.gz",
+            "sha256": "5c37445e7ae5555c56ca9e7e462adc57fff2a386f54f3b0bd9068f88da1580b4",
+            "nativeSpacingArcSeconds": 1
+          }
+        ],
+        "nativeResolutionMetersApprox": 30,
+        "datum": "Earth elevation in metres from the Skadi HGT derivative; consult underlying source documentation",
+        "sampling": "Bilinear sample of native HGT grid at 500 m projected spacing; no invented height detail.",
+        "caveat": "US Skadi tiles can use USGS 3DEP/NED rather than SRTM; this is not labelled as pure NASA data."
+      }
+    },
+    {
+      "file": "jezero-terrain.json",
+      "siteId": "jezero",
+      "retrievedAt": "2026-11-14T01:07:41.956Z",
+      "center": {
+        "lat": 18.38,
+        "lon": 77.58
+      },
+      "source": {
+        "id": "mola",
+        "title": "MGS MOLA MEGDR MEGT44N000HB, 128 pixels per degree",
+        "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.img",
+        "labelUrl": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.lbl",
+        "sha256ByteRange": "43291ee099926416f6d3b12a91ec95d7f5bc1ef53ca75c2b15adfe0d0a2b3a38",
+        "byteRange": [
+          74741760,
+          76377599
+        ],
+        "nativeResolutionMetersApprox": 463,
+        "datum": "Topography relative to Mars areoid (GMM3 model), IAU2000 planetocentric coordinates",
+        "sampling": "Bilinear sample of 1/128 degree MOLA grid at 500 m local spacing.",
+        "caveat": "Cells without altimeter returns are interpolated in the source. Some source-track gaps can reach 12 km. This grid is not a rover-scale hazard map."
+      }
+    },
+    {
+      "file": "lanzarote-terrain.json",
+      "siteId": "lanzarote",
+      "retrievedAt": "2026-11-14T01:07:41.956Z",
+      "center": {
+        "lat": 28.995,
+        "lon": -13.74
+      },
+      "source": {
+        "id": "srtm",
+        "title": "Skadi terrain tile (SRTM and other elevation sources)",
+        "url": "https://registry.opendata.aws/terrain-tiles/",
+        "files": [
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N29/N29W014.hgt.gz",
+            "sha256": "1a29fddd8e6dadcc145354d84b6f4a2e81812ca2352b5516a6468324f222726a",
+            "nativeSpacingArcSeconds": 1
+          },
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N28/N28W014.hgt.gz",
+            "sha256": "f1f342c16d7dfe1ddb2ca326c74285697021ead7484c75bee0387be05fb1f4b7",
+            "nativeSpacingArcSeconds": 1
+          }
+        ],
+        "nativeResolutionMetersApprox": 30,
+        "datum": "Earth elevation in metres from the Skadi HGT derivative; consult underlying source documentation",
+        "sampling": "Bilinear sample of native HGT grid at 500 m projected spacing; no invented height detail.",
+        "caveat": "This island window intersects coastal/ocean terrain; the terrain score is sensitive to the window and is not an inland-only assessment."
+      }
+    },
+    {
+      "file": "shackleton-terrain.json",
+      "siteId": "shackleton",
+      "retrievedAt": "2026-11-14T01:10:52.931Z",
+      "center": {
+        "lat": -89.67,
+        "lon": 129.78
+      },
+      "source": {
+        "id": "lola",
+        "title": "LRO LOLA LDEM_75S_240M, V2.0",
+        "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.img",
+        "labelUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_75s_240m.lbl",
+        "sha256ByteRange": "36bb278095d3ff51a318effe743b5ec3cfedce9f9ec2425ec95193a615e96d90",
+        "byteRange": [
+          14218760,
+          15247999
+        ],
+        "nativeResolutionMetersApprox": 240,
+        "datum": "Height relative to 1,737,400 m lunar sphere; DE421 mean Earth/polar axis frame",
+        "sampling": "Bilinear sample in lunar south-polar stereographic coordinates at 500 m spacing; label specifies little-endian signed16 DN × 0.5 metres.",
+        "caveat": "Source ground tracks are interpolated using GMT surface. Grid axes are projected X/Y, not global north/east. Illumination, shadows and ice have not been calculated."
+      }
+    },
+    {
+      "file": "wadi-rum-terrain.json",
+      "siteId": "wadi-rum",
+      "retrievedAt": "2026-11-14T01:07:41.956Z",
+      "center": {
+        "lat": 29.575,
+        "lon": 35.419
+      },
+      "source": {
+        "id": "srtm",
+        "title": "Skadi terrain tile (SRTM and other elevation sources)",
+        "url": "https://registry.opendata.aws/terrain-tiles/",
+        "files": [
+          {
+            "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N29/N29E035.hgt.gz",
+            "sha256": "ec889296c001ed16dfd5a8d7a612c3f7f4358397528ef8226c1c45e0f33d2e5e",
+            "nativeSpacingArcSeconds": 1
+          }
+        ],
+        "nativeResolutionMetersApprox": 30,
+        "datum": "Earth elevation in metres from the Skadi HGT derivative; consult underlying source documentation",
+        "sampling": "Bilinear sample of native HGT grid at 500 m projected spacing; no invented height detail.",
+        "caveat": "Distribution tiles can combine underlying sources; the source is identified as Skadi, not an unmodified Earthdata product."
+      }
+    }
+  ]
+}
