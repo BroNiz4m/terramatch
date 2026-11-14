@@ -106,7 +106,7 @@ Rebuild source-derived records with Node 22:
 node scripts/fetch-planetary-thermal.mjs
 ```
 
-An optional site ID limits the retrieval: `shackleton` or `jezero`. If ingestion cannot complete, the script writes an explicit unavailable record with the actual failure reason rather than fabricated numbers. Both committed records are currently available and passed source/schema validation.
+An optional site ID limits the retrieval: `shackleton` or `jezero`. If ingestion cannot complete and no available record exists yet, the script writes an explicit unavailable record with the actual failure reason rather than fabricated numbers. An existing available record is never overwritten by a failed run; the script keeps it unchanged and exits with a non-zero status. Both committed records are currently available and passed source/schema validation.
 
 ## Verification
 

@@ -55,6 +55,24 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
    recorded survey coverage and interpretation limits.
 10. Use **Sources** to inspect exact provenance, citations and assumptions.
 
+## Exploration tasks
+
+The **Exploration task** selector changes the comparison, not just the wording:
+
+| Task | Slope weight | Relief weight | Measures shown in Compare |
+| --- | ---: | ---: | --- |
+| Terrain exploration (default) | 0.65 | 0.35 | Relative relief, mean slope, 90th percentile slope |
+| Navigation training | 0.85 | 0.15 | Ground under 10°, ground at 20° or steeper, 90th percentile slope |
+| Field operations | 0.50 | 0.50 | Ground under 5°, relative relief, mean slope |
+| Thermal environment study | 0.65 | 0.35 | Relative relief, mean slope; temperature stays separate evidence |
+
+Selecting a task re-ranks the loaded candidates, shows the reason for the preset under
+the selector, and adds a task panel to Compare with task-relevant measures, how the
+analog can help and what it cannot tell you. An unchecked characteristic stays off.
+Exports record the task and its preset. The presets are disclosed, project-defined
+weights for the same terrain-only index; they are **not calibrated** against field or
+mission results.
+
 ## Actual datasets
 
 - NASA MGS MOLA MEGDR: Jezero Crater, Mars.

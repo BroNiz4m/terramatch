@@ -1,11 +1,8 @@
-import {findPlaces,parseCoordinates,loadEarthWindow,scanEarthRegion} from './terrain-search.js';
+import {findPlaces,parseCoordinates,loadEarthWindow,scanEarthRegion,SEARCH_SOURCES} from './terrain-search.js';
 import {icon,escapeHTML as esc} from './icons.js';
 
-export const SEARCH_SOURCES=[
- {id:'terrarium',title:'Mapzen Terrain Tiles — Terrarium elevation',agency:'Mapzen / Tilezen / AWS; underlying source agencies',url:'https://registry.opendata.aws/terrain-tiles/',license:'Retain Mapzen / Tilezen and underlying provider credits.',note:'On-demand Earth terrain fetched from public mixed-source Terrarium PNG tiles. RGB channels encode elevations, not colors to infer from a map. Original source accuracy varies by region; 500 m sampling does not imply new native detail.'},
- {id:'natural-earth',title:'Natural Earth global land polygons',agency:'Natural Earth',url:'https://www.naturalearthdata.com/about/terms-of-use/',license:'Public domain. Made with Natural Earth.',note:'Coarse 1:110 million land polygons screen sampled study-window points for land coverage. This is not a high-resolution coastline or inland-water classification.'},
- {id:'open-meteo-geocoding',title:'Place search — Open-Meteo / GeoNames',agency:'Open-Meteo / GeoNames',url:'https://open-meteo.com/en/docs/geocoding-api',license:'CC BY 4.0; Open-Meteo free API for non-commercial use.',note:'Names are resolved only after a user submits a search. Coordinates and globe selection work without geocoding. Search names are sent to the provider; elevation analysis uses the separate terrain tile service.'}
-];
+// Single source catalogue for on-demand search; defined in terrain-search.js.
+export {SEARCH_SOURCES};
 const PRESETS={global:{name:'Global sample · 80°S–80°N',bounds:{west:-180,east:180,south:-80,north:80},step:20},africa:{name:'North Africa',bounds:{west:-18,east:40,south:10,north:35},step:4},middleeast:{name:'Middle East',bounds:{west:32,east:60,south:12,north:40},step:3},americas:{name:'Western North America',bounds:{west:-125,east:-100,south:22,north:48},step:3},australia:{name:'Australia',bounds:{west:112,east:154,south:-44,north:-10},step:4},southamerica:{name:'South America',bounds:{west:-80,east:-45,south:-55,north:10},step:5}};
 export function earthBounds(lat,lon){const d=16000/6371008.8*180/Math.PI;return{north:lat+d,south:lat-d,west:lon-d/Math.cos(lat*Math.PI/180),east:lon+d/Math.cos(lat*Math.PI/180)};}
 const coordinateLabel=p=>`${Math.abs(p.lat).toFixed(4)}°${p.lat<0?'S':'N'}, ${Math.abs(p.lon).toFixed(4)}°${p.lon<0?'W':'E'}`;

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { SITES, TARGETS, EARTH_SITES, analyzeTerrain, compareTerrains, sampleTerrain, terrainCoordinates } from '../dist/js/science.js';
+import { SITES, TARGETS, EARTH_SITES, TASK_PROFILES, taskProfile, taskMeasures, analyzeTerrain, compareTerrains, sampleTerrain, terrainCoordinates } from '../dist/js/science.js';
 
 const read=id=>JSON.parse(fs.readFileSync(new URL(`../dist/data/${id}-terrain.json`,import.meta.url),'utf8'));
 const flat=height=>({size:5,widthMeters:2000,depthMeters:2000,heights:new Array(25).fill(height),bounds:{north:1,south:0,west:0,east:1}});
@@ -44,3 +44,12 @@ test('coastal bathymetry never enters the terrestrial ranking',()=>{
 test('terrain index is bounded, symmetric and identifies its scientific limits',()=>{
   for(const target of TARGETS)for(const earth of EARTH_SITES){const a=read(target.id),b=read(earth.id),ab=compareTerrains(a,b),ba=compareTerrains(b,a);assert.ok(ab.score>=0&&ab.score<=100);assert.equal(ab.score,ba.score);assert.equal(ab.scope,'Terrain only');assert.ok(ab.unassessed.includes('Landing or base safety'));assert.equal(compareTerrains(a,a).score,100);}
 });
+test('exploration-task presets are disclosed weights for the same terrain-only index',()=>{
+  assert.deepEqual(Object.keys(TASK_PROFILES),['terrain','navigation','fieldwork','thermal']);
+  for(const [id,p] of Object.entries(TASK_PROFILES)){assert.ok(Math.abs(p.weights.slope+p.weights.relief-1)<1e-12,id);assert.ok(p.weights.slope>0&&p.weights.relief>0,id);assert.ok(p.helps.length&&p.limits.length&&p.measures.length,id);}
+  assert.deepEqual(TASK_PROFILES.terrain.weights,{slope:.65,relief:.35});assert.deepEqual(TASK_PROFILES.thermal.weights,TASK_PROFILES.terrain.weights,'a thermal study never changes the terrain ranking');assert.equal(taskProfile('unknown'),TASK_PROFILES.terrain);
+  const a=read('jezero'),b=read('wadi-rum'),stats=analyzeTerrain(a),m=taskMeasures(stats),h=stats.slopeHistogram;
+  assert.ok(Math.abs(m.under10-(h[0]+h[1]+h[2]))<1e-12);assert.ok(Math.abs(m.under5-(h[0]+h[1]))<1e-12);assert.ok(Math.abs(m.atLeast20-(h[4]+h[5]))<1e-12);assert.ok(m.under5<=m.under10&&m.under10+m.atLeast20<=1+1e-12);
+  assert.notEqual(compareTerrains(a,b,TASK_PROFILES.navigation.weights).score,compareTerrains(a,b,TASK_PROFILES.fieldwork.weights).score,'a different task preset changes the index');
+});
+test('reference sites do not point to image files that are not shipped',()=>{for(const site of SITES)assert.equal('image' in site,false,site.id);});

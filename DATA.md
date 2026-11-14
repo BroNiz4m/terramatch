@@ -108,6 +108,27 @@ For example, a volcanic maar, cinder cone and impact crater can have interesting
 
 Profiles show elevations along the middle grid row; any normalization should be explicitly labelled. Slope overlays derive from these same coarse elevation grids. Decorative rocks or dust and robot foot-contact detail are visual additions, not resolved measurements of the actual site.
 
+## Exploration-task presets
+
+`TASK_PROFILES` in `dist/js/science.js` defines four presets for the same index. They only
+change the two weights in step 8 above:
+
+| Task | Slope | Relief | Reason given to the user |
+| --- | ---: | ---: | --- |
+| `terrain` | 0.65 | 0.35 | Balanced default. |
+| `navigation` | 0.85 | 0.15 | Route planning at this scale depends mostly on the slope mix. |
+| `fieldwork` | 0.50 | 0.50 | Local steepness and the elevation range both affect logistics. |
+| `thermal` | 0.65 | 0.35 | Temperature is separate evidence and never enters the index. |
+
+These numbers are project-defined judgements, chosen to be simple and visible. No field,
+mission or expert data were used to calibrate them, and no sensitivity study supports one
+preset over another. The active normalized weights are recorded in every comparison and
+export, together with `calibrated: false`.
+
+`taskMeasures(stats)` adds no new measurement. It sums existing slope-histogram bins:
+under 5° = bins 0–2° and 2–5°; under 10° = those plus 5–10°; at least 20° = bins 20–35°
+and 35–90°. Shares are fractions of interior samples over the 1 km gradient baseline.
+
 ## Geological and mission context
 
 - Jezero mission context: https://science.nasa.gov/mars/mars-2020/jezero-crater/

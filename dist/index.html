@@ -33,6 +33,7 @@
           <label class="field-label">Destination</label><div class="segmented destination-toggle"><button data-body="moon"><span class="planet-dot moon-dot"></span>Moon</button><button data-body="mars" class="active"><span class="planet-dot mars-dot"></span>Mars</button></div>
           <label class="field-label" for="target-select">Target region</label><select id="target-select"></select>
           <label class="field-label" for="task-select">Exploration task</label><select id="task-select"><option value="terrain">Terrain exploration</option><option value="navigation">Navigation training</option><option value="fieldwork">Field operations</option><option value="thermal">Thermal environment study</option></select>
+          <p class="micro-copy" id="task-brief" aria-live="polite"></p>
           <div class="thermal-prompt" id="thermal-mission-prompt"></div>
           <div class="field-label label-row">Compare characteristics<button class="icon-button" id="method-tip" aria-label="How comparisons work">?</button></div>
           <label class="check-row"><input type="checkbox" id="metric-slope" checked><span>Terrain &amp; slope</span><span class="mini-tag">DEM</span></label>

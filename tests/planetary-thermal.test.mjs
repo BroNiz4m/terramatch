@@ -12,12 +12,12 @@ const terrain=JSON.parse(await readFile(new URL('../dist/data/shackleton-terrain
 test('both bundled planetary records are available, sourced surface thermal context',()=>{
  for(const record of [moon,mars]){assert.equal(record.available,true);assert.equal(validatePlanetaryThermal(record),record);assert.equal(record.quantity,'surface-temperature');assert.equal(record.unit,'K');assert.equal(record.comparability.scoreEligible,false);assert.match(record.source.url,/pds-geosciences|nmsu/);}
 });
-test('Diviner parser reads surface temp_max rather than the2cm temp_avg field',()=>{
+test('Diviner parser reads surface temp_max rather than the 2 cm temp_avg field',()=>{
  const row=Array(210).fill(' ');const put=(start,text)=>{for(let i=0;i<text.length;i++)row[start+i]=text[i];};put(126,'129.559707642');put(143,'-89.667678833');put(160,'-2.770453930');put(177,'  50.218');put(187,'  85.199');
  const result=parseDivinerRow(row.join(''));assert.equal(result.valueK,85.199);assert.notEqual(result.valueK,50.218);assert.equal(result.lat,-89.667678833);assert.throws(()=>parseDivinerRow('short'),/Short/);
 });
 test('lunar thermal raster iscomplete65×65andmatches actual terrain projection',()=>{
- assert.equal(moon.raster.size,65);assert.equal(moon.raster.valuesK.length,4225);assert.deepEqual(moon.raster.projection,terrain.projection);assert.ok(moon.raster.valuesK.every(value=>Number.isFinite(value)&&value>0));assert.ok(moon.raster.sourceDistancesMeters.every(value=>value<=450));assert.equal(moon.quality.sourceField,'temp_max');assert.match(moon.quality.ignoredField,/2cm/);
+ assert.equal(moon.raster.size,65);assert.equal(moon.raster.valuesK.length,4225);assert.deepEqual(moon.raster.projection,terrain.projection);assert.ok(moon.raster.valuesK.every(value=>Number.isFinite(value)&&value>0));assert.ok(moon.raster.sourceDistancesMeters.every(value=>value<=450));assert.equal(moon.quality.sourceField,'temp_max');assert.match(moon.quality.ignoredField,/2 cm/);
 });
 test('lunar source-ranges carry exact lengths andSHA256whilemodelstatisticsremainexplicit',()=>{
  assert.equal(moon.source.slices.length,71);for(const slice of moon.source.slices){assert.equal(slice.bytes,slice.byteRange[1]-slice.byteRange[0]+1);assert.match(slice.sha256,/^[a-f0-9]{64}$/);}

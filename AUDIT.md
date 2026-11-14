@@ -74,3 +74,16 @@ bounded survey coverage, tile decoding/hashes, land screening, cancellation and
 browser-local caching. See SEARCH-DATA.md for the new implementation and real
 network verification. Global surveys remain finite samples, not exhaustive Earth
 searches, and terrain-only scientific interpretation limits remain in effect.
+
+## Addendum — later state on 14 November 2026
+
+The sections above describe the first audited release and are kept as a record. Since
+then:
+
+- The automated suite has grown from 14 to **63 tests** (`npm test`), all passing.
+- Thermal context (THERMAL.md), on-demand search (SEARCH-DATA.md) and exploration-task
+  presets (DATA.md, "Exploration-task presets") were added.
+- A real-browser pass with WebGL 2 was completed on a desktop-size and a phone-size
+  viewport; see HANDOFF.md for what was exercised, what was fixed and what remains
+  unverified (other browsers, a physical phone, the published Site).
+- Task presets are project-defined weights and remain uncalibrated, like the index itself.
