@@ -1,4 +1,5 @@
 const paths = {
+  temperature:'<path d="M9 14.8V5a3 3 0 0 1 6 0v9.8a5 5 0 1 1-6 0Z"/><path d="M12 8v10"/><circle cx="12" cy="19" r="1.5"/>',
   search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
   arrow:'<path d="M4 12h15m-6-6 6 6-6 6"/>',
   play:'<path d="m8 5 11 7-11 7Z"/>',

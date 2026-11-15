@@ -75,8 +75,8 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
 9. Export the Markdown comparison report, evidence JSON or field notebook. Each
    contains source information; reports include the method, candidate origin,
    recorded survey coverage and interpretation limits.
-10. Use **Sources** to inspect exact provenance, citations and assumptions.
-11. Open **Planet data** for original global maps, coordinate frames, physical
+10. Use **Sources** for selected-pair source cards, then expand the exact provenance, citations and assumptions.
+11. Open **Planet overview** for original global maps, coordinate frames, physical
     dimensions and dated environmental records. **Same physical scale** retains
     one metres-to-scene conversion for all three bodies; **Fit body to view**
     changes the camera only. The global **Elevation** palette uses source-datum
@@ -86,7 +86,7 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
     stage. Earth shows original NASA image brightness by default; **Brighten
     Earth** is an optional, labelled display adjustment that never affects
     elevation, temperature, water-map colours or the original image files.
-12. Under Earth in **Planet data**, show dated NASA GIBS satellite imagery,
+12. Under Earth in **Planet overview**, show dated NASA GIBS satellite imagery,
     daytime land-surface temperature or the historical annual water mask on the
     globe. The default dates are bundled original NASA renditions; other verified
     dates fetch NASA directly. Use the original legend and respect missing data.
@@ -263,3 +263,6 @@ See [THERMAL.md](docs/THERMAL.md), [THERMAL-EARTH.md](docs/THERMAL-EARTH.md) and
 
 Automatic pair-search method, original products, reproducibility and demo flow:
 [docs/AUTOMATIC-PAIR-SEARCH.md](docs/AUTOMATIC-PAIR-SEARCH.md).
+
+Compare, Planet overview and Sources now show summaries first while preserving
+full records and analysis in disclosures. See [docs/EVIDENCE-LAYOUT.md](docs/EVIDENCE-LAYOUT.md).

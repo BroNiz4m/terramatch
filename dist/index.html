@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="search.css">
   <link rel="stylesheet" href="thermal.css">
   <link rel="stylesheet" href="planet.css">
+  <link rel="stylesheet" href="evidence-layout.css?v=20261115-evidence-1">
   <link rel="stylesheet" href="globe-layout.css">
   <link rel="stylesheet" href="pair-dashboard.css?v=20261115-pair-link-1">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
@@ -23,7 +24,7 @@
       <button data-view="explore" class="nav-item active">Explore</button>
       <button data-view="compare" class="nav-item">Compare</button>
       <button data-view="expedition" class="nav-item">Expedition<span class="nav-dot"></span></button>
-      <button data-view="planet" class="nav-item">Planet data</button>
+      <button data-view="planet" class="nav-item">Planet overview</button>
       <button data-view="sources" class="nav-item">Sources</button>
     </nav>
     <div class="topbar-actions"><span class="project-tag"><span></span> SPACE APPS 2026</span><button class="button button-outline button-small" id="export-report"></button></div>
@@ -86,12 +87,12 @@
       <div class="expedition-loading hidden" id="expedition-loading"><span class="loader"></span><h2>Preparing your expedition</h2><p>Reading terrain. Preparing the explorer.</p></div>
       <div class="pause-overlay hidden" id="pause-overlay"><div class="panel"><p class="eyebrow">TAKE A BREATH</p><h2>Expedition paused</h2><p>Your explorer is right where you left it.</p><button class="button button-primary" id="resume-expedition">Continue exploring</button><button class="button button-outline" id="leave-expedition">Return to globe</button></div></div>
     </section>
-    <section id="compare-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SIMILARITIES WITH THE EVIDENCE ATTACHED</p><h1>Different worlds. Shared terrain<span>.</span></h1><p class="page-subtitle">Compare all candidate areas with your planetary target, then inspect the evidence for any location.</p></div><button class="button button-primary button-small" id="compare-export">Export comparison</button></div><div id="comparison-workspace"></div></section>
+    <section id="compare-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SIMILARITIES WITH THE EVIDENCE ATTACHED</p><h1>Why do these places match<span>?</span></h1><p class="page-subtitle">Understand the selected pair before exploring the full analysis.</p></div><button class="button button-primary button-small" id="compare-export">Export comparison</button></div><div id="comparison-workspace"></div></section>
     <section id="planet-view" class="view content-view hidden"><div id="planet-content"></div></section>
-    <section id="sources-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SCIENCE YOU CAN TRACE</p><h1>Every comparison has a source<span>.</span></h1><p class="page-subtitle">What we measured, how we compared it, and what we cannot conclude.</p></div></div><div id="sources-content"></div></section>
+    <section id="sources-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SCIENCE YOU CAN TRACE</p><h1>Where does this comparison come from<span>?</span></h1><p class="page-subtitle">Follow the data used for your selected Earth–planet pair.</p></div></div><div id="sources-content"></div></section>
   </main>
   <div id="modal-root"></div><div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
   <noscript><div class="noscript">TerraMatch needs JavaScript to render interactive 3D terrain. Enable JavaScript to start exploring.</div></noscript>
-  <script type="module" src="js/app.js?v=20261115-pair-link-1"></script>
+  <script type="module" src="js/app.js?v=20261115-evidence-1"></script>
 </body>
 </html>
