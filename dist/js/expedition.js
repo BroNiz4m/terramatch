@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js';
+import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js?v=20261115-cargo-2';
 import { sampleTerrain, terrainCoordinates } from './science.js';
 import { thermalColor } from './thermal-colors.js';
 import {installSurfaceMaterial,surfaceSeed} from './surface-material.js';
@@ -38,7 +38,7 @@ export class Expedition {
     this.releaseSurface?.();this.surfaceTexture=null;this.landingEffects?.dispose();this.landingEffects=null;this.groundTexture?.dispose();this.thermalMaterial?.dispose();this.terrainMaterial?.dispose();this.thermalField=null;disposeGroup(this.root);this.root.clear();this.obstacles=[];
     const moon=site.body==='moon',earth=site.body==='earth';const sky=moon?'#060a0e':earth?'#93adb5':'#b18c75';this.scene.background=new THREE.Color(sky);this.scene.fog=moon?null:new THREE.FogExp2(sky,.0022);this.hemisphere.color.set(moon?'#bfc8db':earth?'#c7e1ec':'#f2d7ba');this.hemisphere.groundColor.set(moon?'#292932':'#795238');this.hemisphere.intensity=moon?1.2:2.2;this.sun.color.set(moon?'#fff9e9':'#ffedcc');
     this.makeTerrain();this.spawn=this.findSpawn();this.spawn.y=this.height(this.spawn.x,this.spawn.z);
-    initializeCargoArrival(this);this.makeRocks();this.makeRoute();this.makeMap();prepareCargoCamera(this);this.active=true;this.resize();this.onStage?.('landing',0,{step:'approach',credit:'powered by Wh0Knows'});this.drawMap();return this;
+    initializeCargoArrival(this);this.makeRocks();this.makeRoute();this.makeMap();prepareCargoCamera(this);this.active=true;this.resize();this.onStage?.('landing',0,{step:'approach',credit:'Wh0Knows'});this.drawMap();return this;
   }
   height(x,z){return(sampleTerrain(this.data,x/this.width+.5,z/this.depth+.5)-this.base)*this.scale;}
   walkSurfaceHeight(x,z){return cargoSurfaceHeight(this,x,z);}

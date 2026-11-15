@@ -224,90 +224,63 @@ export function createHexapod() {
  * Original low, box-shaped cargo lander. Visual metres; front and exit face -Z.
  * The model owns hardware/nozzle glow. Plumes and dust belong to landing-effects.
  */
-function landerLabelTexture(text, background = '#d9d9cd', foreground = '#15212b') {
-  const stackedCredit = text === 'powered by Wh0Knows';
-  const canvasHeight = stackedCredit ? 400 : 192;
-  let canvas, ctx;
-  try {
-    canvas = globalThis.document?.createElement?.('canvas');
-    if (canvas) { canvas.width = 1024; canvas.height = canvasHeight; ctx = canvas.getContext?.('2d'); }
-  } catch { /* DOM-free tests use the genuine pixel-font fallback below. */ }
-  let texture;
-  if (ctx && typeof ctx.fillText === 'function') {
-    ctx.fillStyle = background; ctx.fillRect(0, 0, 1024, canvasHeight);
-    ctx.fillStyle = foreground; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    if (stackedCredit) {
-      ctx.font = '600 78px Arial, sans-serif'; ctx.fillText('powered by', 512, 104, 930);
-      ctx.font = '700 150px Arial, sans-serif'; ctx.fillText('Wh0Knows', 512, 253, 930);
-    } else {
-      ctx.font = '700 100px Arial, sans-serif'; ctx.fillText(text, 512, 94, 940);
-    }
-    ctx.fillStyle = '#d86e2b'; ctx.fillRect(55, canvasHeight - 28, 914, 5);
-    texture = new THREE.CanvasTexture(canvas);
-    texture.userData.renderMethod = 'local-canvas-text';
+function chamferPanel(width,height,depth,cut=.18) {
+  const x=width/2,y=height/2,c=Math.min(cut,x*.4,y*.4),shape=new THREE.Shape();
+  shape.moveTo(-x+c,-y);shape.lineTo(x-c,-y);shape.lineTo(x,-y+c);shape.lineTo(x,y-c);
+  shape.lineTo(x-c,y);shape.lineTo(-x+c,y);shape.lineTo(-x,y-c);shape.lineTo(-x,-y+c);shape.closePath();
+  const geometry=new THREE.ExtrudeGeometry(shape,{depth:Math.max(.001,depth-.03),bevelEnabled:true,bevelSize:.015,bevelThickness:.015,bevelSegments:2,steps:1});
+  geometry.center();return geometry;
+}
+
+/** Transparent ink, with no backing plate or opaque paper-colored pixels. */
+function landerLabelTexture(text) {
+  let canvas,ctx,texture;
+  try {canvas=globalThis.document?.createElement?.('canvas');if(canvas){canvas.width=1024;canvas.height=256;ctx=canvas.getContext?.('2d');}} catch {}
+  if(ctx&&typeof ctx.fillText==='function'){
+    ctx.clearRect?.(0,0,1024,256);ctx.fillStyle='#172029';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font='700 176px Inter, Arial, sans-serif';ctx.fillText(text,512,128,960);
+    texture=new THREE.CanvasTexture(canvas);texture.userData.renderMethod='local-canvas-text';
   } else {
-    // Local bitmap glyphs render the actual spelling even when there is no DOM.
-    const font = {
-      ' ': '00000/00000/00000/00000/00000/00000/00000',
-      p: '00000/11110/10001/10001/11110/10000/10000',
-      o: '00000/00000/01110/10001/10001/10001/01110',
-      w: '00000/00000/10001/10001/10101/10101/01010',
-      e: '00000/00000/01110/10001/11111/10000/01110',
-      r: '00000/00000/10110/11001/10000/10000/10000',
-      d: '00001/00001/01101/10011/10001/10001/01111',
-      b: '10000/10000/10110/11001/10001/10001/11110',
-      y: '00000/00000/10001/10001/01111/00001/01110',
-      W: '10001/10001/10001/10101/10101/10101/01010',
-      h: '10000/10000/10110/11001/10001/10001/10001',
-      '0': '01110/10001/10011/10101/11001/10001/01110',
-      K: '10001/10010/10100/11000/10100/10010/10001',
-      n: '00000/00000/11110/10001/10001/10001/10001',
-      s: '00000/00000/01111/10000/01110/00001/11110',
-      T: '11111/00100/00100/00100/00100/00100/00100',
-      a: '00000/00000/01110/00001/01111/10001/01111',
-      M: '10001/11011/10101/10101/10001/10001/10001',
-      t: '00100/00100/11111/00100/00100/00101/00010',
-      c: '00000/00000/01111/10000/10000/10000/01111',
+    const glyphs={
+      W:'10001/10001/10001/10101/10101/10101/01010',h:'10000/10000/10110/11001/10001/10001/10001',
+      '0':'01110/10001/10011/10101/11001/10001/01110',K:'10001/10010/10100/11000/10100/10010/10001',
+      n:'00000/00000/11110/10001/10001/10001/10001',o:'00000/00000/01110/10001/10001/10001/01110',
+      w:'00000/00000/10001/10001/10101/10101/01010',s:'00000/00000/01111/10000/01110/00001/11110',
+      T:'11111/00100/00100/00100/00100/00100/00100',e:'00000/00000/01110/10001/11111/10000/01110',
+      r:'00000/00000/10110/11001/10000/10000/10000',a:'00000/00000/01110/00001/01111/10001/01111',
+      M:'10001/11011/10101/10101/10001/10001/10001',t:'00100/00100/11111/00100/00100/00101/00010',
+      c:'00000/00000/01111/10000/10000/10000/01111',
     };
-    const width = stackedCredit ? 768 : Math.max(256, (text.length * 6 + 8) * 5), height = stackedCredit ? 320 : 64;
-    const pixels = new Uint8Array(width * height * 4);
-    // Parse the literal sRGB colors without applying a second display conversion.
-    const rgb = value => [parseInt(value.slice(1, 3), 16), parseInt(value.slice(3, 5), 16), parseInt(value.slice(5, 7), 16)];
-    const bgRGB = rgb(background), fgRGB = rgb(foreground);
-    for (let p = 0; p < pixels.length; p += 4) { pixels[p] = bgRGB[0]; pixels[p + 1] = bgRGB[1]; pixels[p + 2] = bgRGB[2]; pixels[p + 3] = 255; }
-    const lines = stackedCredit ? [{ text: 'powered by', scale: 7, y: 35 }, { text: 'Wh0Knows', scale: 12, y: 135 }] : [{ text, scale: 5, y: 13 }];
-    for (const line of lines) {
-      const { scale } = line, x0 = Math.floor((width - line.text.length * 6 * scale) / 2), y0 = line.y;
-      for (let char = 0; char < line.text.length; char++) {
-      const rows = (font[line.text[char]] || font[' ']).split('/');
-      for (let y = 0; y < 7; y++) for (let x = 0; x < 5; x++) if (rows[y][x] === '1') {
-        for (let sy = 0; sy < scale; sy++) for (let sx = 0; sx < scale; sx++) {
-          const offset = ((y0 + y * scale + sy) * width + x0 + (char * 6 + x) * scale + sx) * 4;
-          pixels[offset] = fgRGB[0]; pixels[offset + 1] = fgRGB[1]; pixels[offset + 2] = fgRGB[2];
-        }
+    const scale=8,width=(text.length*6+4)*scale,height=96,pixels=new Uint8Array(width*height*4);
+    const left=Math.floor((width-(text.length*6-1)*scale)/2),top=20;
+    [...text].forEach((letter,index)=>{const rows=(glyphs[letter]||'00000/00000/00000/00000/00000/00000/00000').split('/');
+      for(let row=0;row<7;row++)for(let col=0;col<5;col++)if(rows[row][col]==='1')for(let y=0;y<scale;y++)for(let x=0;x<scale;x++){
+        const offset=((top+row*scale+y)*width+left+index*6*scale+col*scale+x)*4;
+        pixels[offset]=23;pixels[offset+1]=32;pixels[offset+2]=41;pixels[offset+3]=255;
       }
-      }
-    }
-    texture = new THREE.DataTexture(pixels, width, height, THREE.RGBAFormat);
-    texture.flipY = true;
-    texture.magFilter = THREE.LinearFilter; texture.minFilter = THREE.LinearFilter;
-    texture.userData.renderMethod = 'local-pixel-font';
+    });
+    texture=new THREE.DataTexture(pixels,width,height,THREE.RGBAFormat);texture.flipY=true;
+    texture.magFilter=THREE.LinearFilter;texture.minFilter=THREE.LinearFilter;texture.userData.renderMethod='local-pixel-font';
   }
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.userData.text = text;
-  texture.userData.originalProceduralAsset = true;
-  texture.needsUpdate = true;
-  return texture;
+  texture.colorSpace=THREE.SRGBColorSpace;texture.userData.text=text;texture.userData.transparentInk=true;
+  texture.userData.originalProceduralAsset=true;texture.needsUpdate=true;return texture;
+}
+
+function hullLettering(text) {
+  return new THREE.MeshStandardMaterial({map:landerLabelTexture(text),transparent:true,alphaTest:.12,depthWrite:false,
+    roughness:.72,metalness:0,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-2,side:THREE.FrontSide});
 }
 
 export function createCargoLander() {
   const root = new THREE.Group();
   root.name = 'TerraMatch Cargo Lander';
-  const ivory = material(0xd9d9cd, 0.55, 0.38);
-  const orange = material(0xdb702d, 0.44, 0.42);
+  const ivory = material(0xe2dfd3, 0.68, 0.16);
+  const orange = material(0xef812c, 0.55, 0.22);
   const dark = material(0x18212a, 0.62, 0.66);
   const silver = material(0x9ba9ad, 0.3, 0.85);
-  const interior = material(0x38403e, 0.83, 0.28);
+  const interior = material(0x777369, 0.84, 0.18);
+  const innerDoor = material(0xbcb8a9, 0.74, 0.18);
+  const deckMetal = material(0x858881, 0.8, 0.32);
   const rubber = material(0x24282b, 0.93, 0.08);
   const lamp = material(0xffddaa, 0.34, 0.12, { emissive: 0xffb85a, emissiveIntensity: 2.2 });
   const hull = new THREE.Group();
@@ -320,39 +293,46 @@ export function createCargoLander() {
   let groundSampler = null, thrust = 0;
 
   // Separate walls leave a real 4.5 m-wide open payload bay through the front.
-  mesh(bevelBox(hullWidth, 0.28, hullDepth, 0.075), dark, hull, 0, 0.71, 0);
-  mesh(bevelBox(6.26, 0.1, 5.08, 0.025), silver, hull, 0, 0.80, 0);
-  mesh(bevelBox(0.24, 2.98, 5.12, 0.065), ivory, hull, -3.08, 2.25, 0);
-  mesh(bevelBox(0.24, 2.98, 5.12, 0.065), ivory, hull, 3.08, 2.25, 0);
-  mesh(bevelBox(6.16, 2.98, 0.24, 0.065), ivory, hull, 0, 2.25, 2.48);
-  mesh(bevelBox(6.52, 0.3, 5.32, 0.085), ivory, hull, 0, 3.69, 0);
-  mesh(bevelBox(6.4, 0.08, 5.2, 0.025), dark, hull, 0, 3.54, 0);
+  mesh(bevelBox(hullWidth, 0.28, hullDepth, 0.075), dark, hull, 0, 0.685, 0);
+  mesh(bevelBox(6.26, 0.08, 5.08, 0.025), silver, hull, 0, 0.80, 0);
+  for(const side of [-1,1]){
+    const wall=mesh(chamferPanel(5.12,2.98,.24,.26),ivory,hull,side*3.08,2.25,0);
+    wall.rotation.y=side*Math.PI/2;wall.name='Chamfered side hull panel';
+  }
+  mesh(chamferPanel(6.16,2.98,.24,.27),ivory,hull,0,2.25,2.48).name='Fixed rear bulkhead';
+  const roof=mesh(chamferPanel(6.52,5.32,.30,.38),ivory,hull,0,3.69,0);roof.rotation.x=-Math.PI/2;roof.name='Chamfered cargo roof';
+  const underside=mesh(chamferPanel(6.4,5.2,.08,.34),dark,hull,0,3.54,0);underside.rotation.x=-Math.PI/2;
   for (const side of [-1, 1]) {
-    mesh(bevelBox(0.88, bayHeight, 0.26, 0.05), ivory, hull, side * 2.76, deckHeight + bayHeight / 2, -2.48);
-    for (const z of [-2.47, 2.47]) mesh(bevelBox(0.25, 3.03, 0.26, 0.045), orange, hull, side * 3.10, 2.24, z);
+    mesh(chamferPanel(0.88, bayHeight, 0.26, 0.14), ivory, hull, side * 2.76, deckHeight + bayHeight / 2, -2.48);
+    for (const z of [-2.47, 2.47]) for(const y of [1.08,3.42]) mesh(bevelBox(0.25, 0.62, 0.26, 0.045), orange, hull, side * 3.10, y, z);
     mesh(bevelBox(0.11, 0.15, 4.9, 0.025), orange, hull, side * 3.21, 3.80, 0);
     mesh(new THREE.BoxGeometry(0.08, 0.13, 4.98), silver, hull, side * 2.97, 0.98, 0);
-    // Thin surface seams, corner fasteners and lower service vents.
-    for (const z of [-1.8, -0.8, 0.6, 1.8]) {
-      mesh(new THREE.BoxGeometry(0.015, 2.13, 0.018), silver, hull, side * 3.208, 2.25, z);
-      for (const y of [1.21, 3.27]) {
-        const fastener = mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.025, 6), dark, hull, side * 3.225, y, z);
-        fastener.rotation.z = Math.PI / 2;
+    // Perimeter seams leave the wide branding field uninterrupted.
+    for(const y of [1.03,3.46])mesh(new THREE.BoxGeometry(.018,.018,4.25),silver,hull,side*3.207,y,0);
+    for(const z of [-2.15,2.15]){
+      mesh(new THREE.BoxGeometry(.018,2.10,.018),silver,hull,side*3.207,2.25,z);
+      for(const y of [1.22,2.25,3.28]){
+        const fastener=mesh(new THREE.CylinderGeometry(.026,.026,.025,6),dark,hull,side*3.225,y,z);fastener.rotation.z=Math.PI/2;
       }
     }
-    for (let z = -1.6; z < 1.8; z += 0.18) mesh(new THREE.BoxGeometry(0.025, 0.16, 0.07), dark, hull, side * 3.225, 1.10, z);
+    for(const z of [-1.5,-.5,.5,1.5]){
+      const fastener=mesh(new THREE.CylinderGeometry(.022,.022,.022,6),silver,hull,side*3.224,3.29,z);fastener.rotation.z=Math.PI/2;
+    }
+    for(const z of [-1.8,1.8])for(let y=1.08;y<1.38;y+=.07)mesh(new THREE.BoxGeometry(.025,.027,.35),dark,hull,side*3.225,y,z);
     mesh(bevelBox(0.33, 0.78, 0.3, 0.03), dark, hull, side * 2.67, 1.60, 1.94);
   }
   // Chunky corner armor gives the small lander its orange structural identity.
   // Everything stays outside the 4.5 m cargo corridor.
   for (const side of [-1, 1]) for (const fore of [-1, 1]) {
-    const roofCap = mesh(bevelBox(0.72, 0.27, 0.72, 0.085), orange, hull, side * 3.02, 3.83, fore * 2.39);
+    const roofCap = mesh(chamferPanel(0.72, 0.72, 0.27, 0.14), orange, hull, side * 3.02, 3.83, fore * 2.39);
+    roofCap.rotation.x=-Math.PI/2;
     roofCap.name = 'Orange roof corner armor';
     mesh(bevelBox(0.43, 0.018, 0.43, 0.035), dark, hull, side * 3.02, 3.973, fore * 2.39);
     for (const dx of [-0.25, 0.25]) for (const dz of [-0.24, 0.24]) {
       mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.02, 6), silver, hull, side * 3.02 + dx, 3.975, fore * 2.39 + dz);
     }
-    const shoulder = mesh(bevelBox(0.72, 0.67, 0.70, 0.09), orange, hull, side * 3.15, 1.64, fore * 2.26);
+    const shoulder = mesh(chamferPanel(0.70, 0.67, 0.72, 0.11), orange, hull, side * 3.15, 1.64, fore * 2.26);
+    shoulder.rotation.y=side*Math.PI/2;
     shoulder.name = 'Orange articulated landing-leg shoulder';
     mesh(bevelBox(0.055, 0.43, 0.46, 0.035), silver, hull, side * 3.525, 1.64, fore * 2.26);
     const shoulderHub = mesh(new THREE.CylinderGeometry(0.15, 0.19, 0.12, 16), dark, hull, side * 3.58, 1.64, fore * 2.26);
@@ -362,47 +342,66 @@ export function createCargoLander() {
       bolt.rotation.z = Math.PI / 2;
     }
   }
-  mesh(bevelBox(6.32, 0.30, 0.30, 0.045), ivory, hull, 0, 3.65, -2.48);
+  mesh(chamferPanel(5.64,.50,.24,.12),ivory,hull,0,3.68,-2.64).name='Front structural branding lintel';
+  for(const side of [-1,1]){
+    mesh(bevelBox(.70,.065,.025,.012),orange,hull,side*2.03,3.68,-2.778);
+    for(const y of [3.54,3.82])bolt(hull,silver,side*2.59,y,-2.786);
+    mesh(bevelBox(.16,2.24,.16,.035),orange,hull,side*2.64,2.12,-2.62);
+  }
   mesh(new THREE.BoxGeometry(4.63, 0.06, 0.31), orange, hull, 0, 0.82, -2.50);
 
   // Warm lamps, ceiling ribs and a dark ribbed floor make the actual bay readable.
-  mesh(new THREE.BoxGeometry(4.58, 0.035, 4.65), interior, hull, 0, 0.831, -0.12);
-  for (let z = -2.42; z < 2.1; z += 0.23) mesh(new THREE.BoxGeometry(4.5, 0.018, 0.027), silver, hull, 0, 0.858, z);
+  mesh(new THREE.BoxGeometry(4.58, 0.02, 4.65), interior, hull, 0, 0.84, -0.12);
+  for (let z = -2.42; z < 2.1; z += 0.30) mesh(new THREE.BoxGeometry(4.5, 0.012, 0.035), silver, hull, 0, 0.855, z);
   for (const side of [-1, 1]) {
     mesh(new THREE.BoxGeometry(0.06, 0.055, 3.9), lamp, hull, side * 2.17, 3.45, -0.1);
     mesh(new THREE.BoxGeometry(0.035, 0.035, 4.3), lamp, hull, side * 2.20, 0.93, -0.08);
     for (const z of [-1.5, 0, 1.5]) mesh(new THREE.BoxGeometry(0.07, 2.2, 0.07), silver, hull, side * 2.37, 2.02, z);
   }
-  mesh(new THREE.BoxGeometry(3.92, 0.06, 0.13), lamp, hull, 0, 3.45, -2.40);
+  for(const side of [-1,1]){
+    mesh(bevelBox(1.18,.075,.25,.025),dark,hull,side*1.10,3.47,-2.36);
+    mesh(bevelBox(1.03,.025,.18,.012),lamp,hull,side*1.10,3.423,-2.36);
+  }
+  for(const x of [-1.5,0,1.5]){
+    mesh(chamferPanel(1.42,1.84,.045,.10),innerDoor,hull,x,2.23,2.332);
+    for(const dx of [-.60,.60])for(const y of [1.45,3.02])bolt(hull,dark,x+dx,y,2.300);
+    mesh(bevelBox(1.28,.12,.07,.015),orange,hull,x,1.20,2.27);
+  }
+  for(const side of [-1,1])for(const z of [-1.2,.3,1.65]){
+    const panel=mesh(chamferPanel(1.22,1.72,.04,.10),innerDoor,hull,side*2.925,2.15,z);panel.rotation.y=side*Math.PI/2;
+  }
   const bayLight = new THREE.PointLight(0xffc078, 2.4, 7, 2);
   bayLight.position.set(0, 2.8, -0.35); hull.add(bayLight);
   mesh(new THREE.BoxGeometry(4.42, 0.1, 0.1), silver, hull, 0, 1.13, 2.15);
 
-  // Low roof fittings and a compact antenna maintain the requested box silhouette.
-  mesh(bevelBox(3.3, 0.10, 2.3, 0.04), silver, hull, 0.3, 3.88, 0.15);
-  for (let i = 0; i < 6; i++) mesh(new THREE.BoxGeometry(2.75, 0.032, 0.045), dark, hull, 0.3, 3.951, -0.75 + i * 0.33);
-  mesh(new THREE.CylinderGeometry(0.29, 0.35, 0.16, 20), dark, hull, -1.9, 3.95, 1.45);
-  mesh(new THREE.CylinderGeometry(0.035, 0.055, 0.68, 10), silver, hull, -1.9, 4.31, 1.45);
-  mesh(new THREE.SphereGeometry(0.075, 12, 8), dark, hull, -1.9, 4.68, 1.45);
-  const dish = mesh(new THREE.CylinderGeometry(0.33, 0.18, 0.1, 24, 1, true), ivory, hull, 1.98, 3.99, 1.51);
-  dish.rotation.x = -0.28;
+  // Segmented ivory roof, compact antenna and fixed rear service fittings.
+  const roofPanels=[];
+  for(const side of [-1,1])for(const z of [-1.63,0,1.63]){
+    const panel=mesh(chamferPanel(2.84,1.48,.035,.14),ivory,hull,side*1.49,3.862,z);panel.rotation.x=-Math.PI/2;panel.name='Segmented roof armor';roofPanels.push(panel);
+    for(const dx of [-1.15,1.15])for(const dz of [-.53,.53])mesh(new THREE.CylinderGeometry(.022,.022,.012,6),silver,hull,side*1.49+dx,3.89,z+dz);
+  }
+  mesh(bevelBox(1.10,.06,.19,.025),orange,hull,0,3.90,1.97);
+  mesh(new THREE.CylinderGeometry(.18,.22,.16,20),dark,hull,0,3.96,.65);
+  mesh(new THREE.CylinderGeometry(.13,.13,.10,16),orange,hull,0,4.08,.65);
+  mesh(new THREE.CylinderGeometry(.025,.044,.55,10),silver,hull,0,4.38,.65);
+  mesh(new THREE.SphereGeometry(.044,12,8),dark,hull,0,4.68,.65);
+  mesh(chamferPanel(1.12,.82,.035,.10),innerDoor,hull,0,2.28,2.625).name='Rear maintenance hatch';
+  for(const side of [-1,1]){
+    mesh(bevelBox(.46,.94,.035,.025),dark,hull,side*1.55,2.28,2.625);
+    for(let y=1.90;y<2.69;y+=.09)mesh(new THREE.BoxGeometry(.36,.025,.025),silver,hull,side*1.55,y,2.66);
+    for(const y of [1.96,2.60])bolt(hull,dark,side*.43,y,2.66);
+  }
 
-  const brandingText = 'powered by Wh0Knows';
-  const brandingTexture = landerLabelTexture(brandingText);
-  const brandMaterial = new THREE.MeshBasicMaterial({ map: brandingTexture, toneMapped: false, side: THREE.FrontSide });
-  const brandingLabels = [-1, 1].map(side => {
-    const label = mesh(new THREE.PlaneGeometry(3.85, 1.35), brandMaterial, hull, side * 3.225, 2.39, -0.02);
-    label.name = side < 0 ? 'Wh0Knows left-side branding' : 'Wh0Knows right-side branding';
-    label.rotation.y = side * Math.PI / 2;
-    label.castShadow = false; label.receiveShadow = false;
-    label.userData.text = brandingText;
-    return label;
+  const brandingText='Wh0Knows',brandMaterial=hullLettering(brandingText);
+  const brandingLabels=[-1,1].map(side=>{
+    const label=mesh(new THREE.PlaneGeometry(3.65,.82),brandMaterial,hull,side*3.223,2.43,0);
+    label.name=side<0?'Wh0Knows left-side branding':'Wh0Knows right-side branding';label.rotation.y=side*Math.PI/2;
+    label.castShadow=false;label.receiveShadow=true;label.renderOrder=2;label.userData.text=brandingText;label.userData.application='transparent hull ink';return label;
   });
-  const frontBrand = mesh(new THREE.PlaneGeometry(2.5, 0.29), new THREE.MeshBasicMaterial({ map: landerLabelTexture('TerraMatch'), toneMapped: false }), hull, 0, 3.65, -2.638);
-  frontBrand.rotation.y = Math.PI;
-  frontBrand.name = 'TerraMatch front lintel';
-  frontBrand.userData.text = 'TerraMatch';
-  frontBrand.castShadow = false; frontBrand.receiveShadow = false;
+  // The old name sat behind the roof edge. This ink plane is outside the frontmost beam.
+  const frontBrand=mesh(new THREE.PlaneGeometry(2.85,.42),hullLettering('TerraMatch'),hull,0,3.68,-2.785);
+  frontBrand.rotation.y=Math.PI;frontBrand.name='TerraMatch front lintel';frontBrand.userData.text='TerraMatch';
+  frontBrand.userData.application='transparent hull ink';frontBrand.castShadow=false;frontBrand.receiveShadow=true;frontBrand.renderOrder=2;
 
   // Two genuinely independent side hinges. Opening sends both leaves outside the bay.
   const doorPivots = [];
@@ -412,11 +411,15 @@ export function createCargoLander() {
     pivot.position.set(side * 2.50, deckHeight, -2.67);
     hull.add(pivot);
     const inward = -side, centerX = inward * 1.25;
-    mesh(bevelBox(2.50, 2.54, 0.16, 0.035), ivory, pivot, centerX, 1.31, 0);
-    mesh(new THREE.BoxGeometry(2.34, 2.38, 0.045), interior, pivot, centerX, 1.31, 0.11);
-    for (const y of [0.17, 0.75, 1.33, 1.91, 2.49]) mesh(new THREE.BoxGeometry(2.25, 0.045, 0.095), silver, pivot, centerX, y, 0.15);
-    mesh(new THREE.BoxGeometry(0.09, 2.52, 0.19), orange, pivot, inward * 2.44, 1.31, -0.02);
-    mesh(new THREE.BoxGeometry(0.08, 2.52, 0.18), orange, pivot, inward * 0.05, 1.31, -0.02);
+    mesh(chamferPanel(2.50,2.54,.16,.18),ivory,pivot,centerX,1.31,0).name='Cargo door exterior shell';
+    mesh(chamferPanel(2.28,2.30,.012,.17),dark,pivot,centerX,1.31,-.095);
+    mesh(chamferPanel(2.22,2.24,.025,.16),ivory,pivot,centerX,1.31,-.122);
+    mesh(chamferPanel(2.27,2.29,.045,.16),innerDoor,pivot,centerX,1.31,.11);
+    for(const y of [.22,2.40])mesh(bevelBox(2.08,.045,.04,.012),silver,pivot,centerX,y,.153);
+    for(const x of [inward*.17,inward*2.33])mesh(bevelBox(.045,1.96,.04,.012),silver,pivot,x,1.31,.153);
+    for(const x of [centerX-.96,centerX+.96])for(const y of [.39,2.23])bolt(pivot,dark,x,y,.16);
+    for(const y of [.15,2.47])mesh(bevelBox(.22,.18,.19,.025),orange,pivot,inward*2.35,y,-.02);
+    mesh(bevelBox(.10,.30,.045,.02),dark,pivot,inward*2.12,1.32,-.153);
     for (const y of [0.22, 1.30, 2.38]) {
       mesh(new THREE.CylinderGeometry(0.085, 0.085, 0.24, 12), dark, pivot, 0, y, 0);
     }
@@ -433,9 +436,9 @@ export function createCargoLander() {
   rampTipPivot.position.z = -segmentLength;
   rampPivot.add(rampTipPivot);
   function rampSegment(parent, endSegment) {
-    mesh(new THREE.BoxGeometry(4.64, 0.09, segmentLength), silver, parent, 0, -0.045, -segmentLength / 2);
-    mesh(new THREE.BoxGeometry(4.43, 0.026, segmentLength - 0.04), dark, parent, 0, -0.013, -segmentLength / 2);
-    for (let z = 0.07; z < segmentLength; z += 0.16) mesh(new THREE.BoxGeometry(4.37, 0.018, 0.039), silver, parent, 0, 0.003, -z);
+    mesh(new THREE.BoxGeometry(4.64, 0.09, segmentLength), silver, parent, 0, -0.065, -segmentLength / 2);
+    mesh(new THREE.BoxGeometry(4.43, 0.026, segmentLength - 0.04), deckMetal, parent, 0, -0.013, -segmentLength / 2);
+    for (let z = 0.12; z < segmentLength; z += 0.30) mesh(new THREE.BoxGeometry(4.37, 0.022, 0.070), silver, parent, 0, 0.003, -z);
     for (const side of [-1, 1]) {
       mesh(new THREE.BoxGeometry(0.10, 0.15, segmentLength), ivory, parent, side * 2.34, 0.08, -segmentLength / 2);
       mesh(new THREE.BoxGeometry(0.035, 0.035, segmentLength - 0.06), orange, parent, side * 2.295, 0.165, -segmentLength / 2);
@@ -457,6 +460,7 @@ export function createCargoLander() {
     const pad = mesh(new THREE.CylinderGeometry(0.55, 0.65, 0.11, 24), rubber, group);
     const padPlate = mesh(new THREE.CylinderGeometry(0.43, 0.53, 0.075, 24), silver, group);
     const padHub = mesh(new THREE.CylinderGeometry(0.16, 0.24, 0.20, 12), dark, group);
+    for(let i=0;i<8;i++){const angle=i*Math.PI/4;mesh(new THREE.CylinderGeometry(.023,.023,.022,6),dark,padPlate,Math.sin(angle)*.37,.048,Math.cos(angle)*.37);}
     const anchor = new THREE.Vector3(side * 4.10, 0, fore * 3.32);
     footAnchors.push(anchor);
     legParts.push({ side, fore, group, upper, lower, brace, kneeMesh, pad, padPlate, padHub, anchor });
@@ -508,6 +512,8 @@ export function createCargoLander() {
   }
   function updateRamp() {
     const rampP = ease((deployment - 0.5) / 0.5);
+    // Retract the folded stack behind the closed door skins before descent.
+    rampPivot.position.z=frontZ+.30*(1-rampP);
     const height = deckHeight - compression * 0.1;
     const rawSine = (rampGroundY - height) / rampLength;
     const appliedSine = clamp(rawSine, -0.65, 0.65);
@@ -560,8 +566,8 @@ export function createCargoLander() {
     hull, doorPivots, rampPivot, rampTipPivot, rampLength, rampWidth: bayWidth, bayWidth, bayDepth, bayHeight,
     doorFrontZ: frontZ, bayBackZ: frontZ + bayDepth, hullWidth, hullDepth, deckHeight,
     footAnchors, landingLegs: legParts, nozzleAnchors, nozzleGlows, flames,
-    brandingText, brandingLabels, frontBrand, forward: '-Z', landingGear: 1,
-    modelCredit: 'Original procedural TerraMatch Cargo Lander, powered by Wh0Knows',
+    brandingText, brandingLabels, frontBrand, roofPanels, designRevision:'cargo-reference-v2', forward: '-Z', landingGear: 1,
+    modelCredit: 'Original procedural TerraMatch Cargo Lander · Wh0Knows',
   });
   setCompression(0); setDeployment(0); root.userData.setThrust(0);
   return root;
