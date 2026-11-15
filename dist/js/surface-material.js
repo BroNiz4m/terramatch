@@ -1,7 +1,8 @@
 import * as THREE from '../vendor/three.module.js';
+import {installLunarSurface} from './lunar-surface.js?v=20261116-lunar-1';
 
 // Artistic albedo only: these images never supply heights, geology or scores.
-export const SURFACE_ASSETS={moon:['moon-mare','moon-highlands'],mars:['mars-dunes','mars-layered']};
+export const SURFACE_ASSETS={mars:['mars-dunes','mars-layered']};
 export function surfaceSeed(site,data){
   const center=data.center||site;let hash=2166136261;
   for(const ch of `${site.body}:${center.lat}:${center.lon}`)hash=Math.imul(hash^ch.charCodeAt(0),16777619);
@@ -9,7 +10,8 @@ export function surfaceSeed(site,data){
 }
 export function surfaceBlend(slopes){return Float32Array.from(slopes,slope=>THREE.MathUtils.smoothstep(Number.isFinite(slope)?slope:0,.5,8));}
 
-export function installSurfaceMaterial(expedition,{loader=new THREE.TextureLoader()}={}){
+export function installSurfaceMaterial(expedition,{loader=new THREE.TextureLoader(),...options}={}){
+  if(expedition.site.body==='moon')return installLunarSurface(expedition,{loader,...options});
   const names=SURFACE_ASSETS[expedition.site.body];if(!names)return ()=>{};
   const material=expedition.terrainMaterial,terrain=expedition.terrain;
   const textures=[];let cancelled=false,loaded=0;

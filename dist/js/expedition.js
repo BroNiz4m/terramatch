@@ -2,22 +2,23 @@ import * as THREE from '../vendor/three.module.js';
 import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js?v=20261116-compact-expedition-1';
 import { sampleTerrain, terrainCoordinates } from './science.js';
 import { thermalColor } from './thermal-colors.js';
-import {installSurfaceMaterial,surfaceSeed} from './surface-material.js';
+import {installSurfaceMaterial,surfaceSeed} from './surface-material.js?v=20261116-lunar-1';
+import {lunarLighting,makeLunarRocks} from './lunar-surface.js?v=20261116-lunar-1';
 
 const clamp=THREE.MathUtils.clamp, smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 const surfaceColors={mars:['#79543d','#b98359','#cba27b'],moon:['#42464c','#84878b','#b3b0a7'],earth:['#605642','#9e8a63','#c2aa7c']};
 function disposeGroup(group){const geos=new Set(),mats=new Set(),textures=new Set();group.traverse(item=>{if(item.geometry)geos.add(item.geometry);if(item.material){for(const m of Array.isArray(item.material)?item.material:[item.material])mats.add(m);}});geos.forEach(g=>g.dispose());mats.forEach(m=>{for(const value of Object.values(m))if(value?.isTexture)textures.add(value);m.dispose();});textures.forEach(t=>t.dispose());}
 
 export class Expedition {
-  constructor({container,minimap,onTelemetry,onStage,onInspect,onCompare,onPause,onError,rendererFactory}){
-    Object.assign(this,{container,minimap,onTelemetry,onStage,onInspect,onCompare,onPause,onError});this.active=false;this.paused=false;this.keys=new Set();this.layer='surface';this.phase='landing';this.clock=0;this.orbitYaw=1.25;this.orbitPitch=.42;this.cameraDistance=28;this.follow=true;this.evidenceOpen=false;
+  constructor({container,minimap,onTelemetry,onStage,onInspect,onCompare,onPause,onError,onSurface,rendererFactory}){
+    Object.assign(this,{container,minimap,onTelemetry,onStage,onInspect,onCompare,onPause,onError,onSurface});this.active=false;this.paused=false;this.keys=new Set();this.layer='surface';this.phase='landing';this.clock=0;this.orbitYaw=1.25;this.orbitPitch=.42;this.cameraDistance=28;this.follow=true;this.evidenceOpen=false;
     try{this.renderer=rendererFactory?rendererFactory():new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});}catch(error){onError?.(error);return;}
     this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.3;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;
     container.append(this.renderer.domElement);this.renderer.domElement.tabIndex=0;this.renderer.domElement.setAttribute('aria-label','3D expedition. W and S move, A and D turn, Shift moves faster. Drag to look. E inspects terrain, C compares, Escape pauses.');
     this.scene=new THREE.Scene();this.camera=new THREE.PerspectiveCamera(49,1,.1,1800);this.root=new THREE.Group();this.scene.add(this.root);
     this.hemisphere=new THREE.HemisphereLight('#e9ddce','#6c4330',2.2);this.scene.add(this.hemisphere);
     this.sun=new THREE.DirectionalLight('#fff0d4',3.4);this.sun.position.set(-35,60,-20);this.sun.castShadow=true;this.sun.shadow.mapSize.set(2048,2048);this.sun.shadow.camera.left=-35;this.sun.shadow.camera.right=35;this.sun.shadow.camera.top=35;this.sun.shadow.camera.bottom=-35;this.sun.shadow.camera.near=.5;this.sun.shadow.camera.far=170;this.sun.shadow.bias=-.0002;this.sun.shadow.normalBias=.02;this.scene.add(this.sun);this.scene.add(this.sun.target);
-    const rim=new THREE.DirectionalLight('#b9d2e0',.45);rim.position.set(30,12,30);this.scene.add(rim);
+    this.rim=new THREE.DirectionalLight('#b9d2e0',.45);this.rim.position.set(30,12,30);this.scene.add(this.rim);
     this.pointerDrag=null;const canvas=this.renderer.domElement;
     canvas.addEventListener('pointerdown',e=>{if(!this.active)return;canvas.focus({preventScroll:true});this.pointerDrag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});
     canvas.addEventListener('pointermove',e=>{if(!this.pointerDrag||!this.active)return;this.orbitYaw-=(e.clientX-this.pointerDrag.x)*.006;this.orbitPitch=clamp(this.orbitPitch+(e.clientY-this.pointerDrag.y)*.004,.08,1.05);this.pointerDrag={x:e.clientX,y:e.clientY};});
@@ -35,8 +36,8 @@ export class Expedition {
   load(site,data,stats){
     if(!this.renderer)throw new Error('WebGL is not available on this device.');
     this.keys.clear();this.paused=false;this.site=site;this.data=data;this.stats=stats;this.width=500;this.depth=data.depthMeters/data.widthMeters*500;this.scale=this.width/data.widthMeters;this.base=stats.min;this.clock=0;this.totalDistance=0;this.layer='surface';this.phase='landing';this.orbitYaw=1.25;this.orbitPitch=.42;this.cameraDistance=28;this.follow=true;this.edgeReached=false;
-    this.releaseSurface?.();this.surfaceTexture=null;this.landingEffects?.dispose();this.landingEffects=null;this.groundTexture?.dispose();this.thermalMaterial?.dispose();this.terrainMaterial?.dispose();this.thermalField=null;disposeGroup(this.root);this.root.clear();this.obstacles=[];
-    const moon=site.body==='moon',earth=site.body==='earth';const sky=moon?'#060a0e':earth?'#93adb5':'#b18c75';this.scene.background=new THREE.Color(sky);this.scene.fog=moon?null:new THREE.FogExp2(sky,.0022);this.hemisphere.color.set(moon?'#bfc8db':earth?'#c7e1ec':'#f2d7ba');this.hemisphere.groundColor.set(moon?'#292932':'#795238');this.hemisphere.intensity=moon?1.2:2.2;this.sun.color.set(moon?'#fff9e9':'#ffedcc');
+    this.releaseSurface?.();this.surfaceRecord=null;this.surfaceTexture=null;this.landingEffects?.dispose();this.landingEffects=null;this.groundTexture?.dispose();this.thermalMaterial?.dispose();this.terrainMaterial?.dispose();this.thermalField=null;disposeGroup(this.root);this.root.clear();this.obstacles=[];
+    const moon=site.body==='moon',earth=site.body==='earth';const sky=moon?'#060a0e':earth?'#93adb5':'#b18c75';this.scene.background=new THREE.Color(sky);this.scene.fog=moon?null:new THREE.FogExp2(sky,.0022);this.hemisphere.color.set(moon?'#bfc8db':earth?'#c7e1ec':'#f2d7ba');this.hemisphere.groundColor.set(moon?'#292932':'#795238');this.hemisphere.intensity=moon?1.2:2.2;this.sun.color.set(moon?'#fff9f2':'#ffedcc');this.sunOffset=moon?lunarLighting(site).offset:new THREE.Vector3(-35,60,-20);this.sun.intensity=moon?3.1:3.4;this.hemisphere.intensity=moon?.24:2.2;this.hemisphere.groundColor.set(moon?'#0b0b0c':'#795238');this.rim.intensity=moon?.08:.45;this.renderer.toneMappingExposure=moon?1.15:1.3;this.renderer.shadowMap.type=moon?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;this.sun.shadow.camera.far=220;this.sun.shadow.camera.updateProjectionMatrix();
     this.makeTerrain();this.spawn=this.findSpawn();this.spawn.y=this.height(this.spawn.x,this.spawn.z);
     initializeCargoArrival(this);this.makeRocks();this.makeRoute();this.makeMap();prepareCargoCamera(this);this.active=true;this.resize();this.onStage?.('landing',0,{step:'approach',credit:'Wh0Knows'});this.drawMap();return this;
   }
@@ -64,9 +65,10 @@ export class Expedition {
       array.setXYZ(i,color.r,color.g,color.b);
     }array.needsUpdate=true;const map=this.layer==='surface'?(this.surfaceTexture||this.groundTexture):null;if(this.terrainMaterial.map!==map){this.terrainMaterial.map=map;this.terrainMaterial.needsUpdate=true;}this.terrain.material=this.layer==='temperature'?this.thermalMaterial:this.terrainMaterial;
   }
-  setLayer(layer){this.layer=layer;this.recolor();if(this.grid)this.grid.visible=layer!=='surface';}
+  setLayer(layer){this.layer=layer;this.updateSurfaceLayer?.();this.recolor();if(this.grid)this.grid.visible=layer!=='surface';}
   setThermalField(field){this.thermalField=field;if(this.layer==='temperature')this.recolor();}
   makeRocks(){
+    if(this.site.body==='moon'){makeLunarRocks(this);return;}
     const geometry=new THREE.DodecahedronGeometry(1,0),material=new THREE.MeshStandardMaterial({color:this.site.body==='moon'?'#6b6c71':this.site.body==='earth'?'#8f8065':'#8e664b',roughness:1});this.rocks=new THREE.InstancedMesh(geometry,material,180);this.rocks.castShadow=true;this.rocks.receiveShadow=true;const dummy=new THREE.Object3D();let seed=surfaceSeed(this.site,this.data);const rand=()=>{seed=seed*16807%2147483647;return seed/2147483647;};
     for(let i=0;i<180;i++){let x=this.spawn.x+(rand()-.5)*180,z=this.spawn.z+(rand()-.5)*180;const r=.12+rand()*.8;if(Math.abs(x-this.spawn.x)<8&&Math.abs(z-this.spawn.z)<14)x+=16;const y=this.height(x,z);dummy.position.set(x,y+r*.35,z);dummy.rotation.set(rand(),rand()*6,rand());dummy.scale.set(r*(.8+rand()),r*.65,r*(.7+rand()));dummy.updateMatrix();this.rocks.setMatrixAt(i,dummy.matrix);if(r>.48)this.obstacles.push({x,z,r:r+1.4});}for(const foot of this.lander.userData.footAnchors)this.obstacles.push({x:this.spawn.x+foot.x,z:this.spawn.z+foot.z,r:1.25});this.root.add(this.rocks);
   }
@@ -99,7 +101,7 @@ export class Expedition {
       moving=forward?1:turn?.45:0;
       const angle=this.robot.rotation.y+this.orbitYaw,dist=this.cameraDistance,desired=new THREE.Vector3(x+Math.sin(angle)*dist,this.robot.position.y+Math.sin(this.orbitPitch)*dist+2,z+Math.cos(angle)*dist);desired.y=Math.max(desired.y,this.height(desired.x,desired.z)+2.5);this.camera.position.lerp(desired,1-Math.exp(-dt*3.5));this.lookTarget.lerp(new THREE.Vector3(x-Math.sin(this.robot.rotation.y)*3,this.robot.position.y+1,z-Math.cos(this.robot.rotation.y)*3),1-Math.exp(-dt*5));
     }
-    orientCargoRobot(this,dt);this.robot.updateMatrixWorld(true);this.robot.userData.update?.(dt,this.clock,moving,(x,z)=>this.walkSurfaceHeight(x,z));this.camera.lookAt(this.lookTarget);const sx=this.robot.position.x,sz=this.robot.position.z;this.sun.position.set(sx-35,this.robot.position.y+60,sz-20);this.sun.target.position.set(sx,this.robot.position.y,sz);this.sun.target.updateMatrixWorld();
+    orientCargoRobot(this,dt);this.robot.updateMatrixWorld(true);this.robot.userData.update?.(dt,this.clock,moving,(x,z)=>this.walkSurfaceHeight(x,z));this.camera.lookAt(this.lookTarget);const sx=this.robot.position.x,sz=this.robot.position.z;this.sun.position.set(sx+this.sunOffset.x,this.robot.position.y+this.sunOffset.y,sz+this.sunOffset.z);this.sun.target.position.set(sx,this.robot.position.y,sz);this.sun.target.updateMatrixWorld();
     if(time-(this.lastTelemetry||0)>180){this.lastTelemetry=time;this.onTelemetry?.(this.telemetry());this.drawMap();}this.renderer.render(this.scene,this.camera);
   }
 }

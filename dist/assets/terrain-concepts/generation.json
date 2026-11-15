@@ -1,7 +1,7 @@
 {
   "generatedOn": "2026-11-15",
   "method": "built-in image_gen",
-  "status": "Integrated as illustrative albedo in Expedition. DEM geometry, measurements and ranking remain source-derived.",
+  "status": "Mars assets remain illustrative albedo in Expedition. Legacy Moon concept assets are retained but no longer used: Moon now uses coordinate-specific LRO imagery where available, with display-only procedural regolith detail.",
   "scientificUse": "Not georeferenced imagery, elevation, measured geology, observed rock positions, or NASA data. Do not select a material as evidence based on coordinates.",
   "assets": [
     {
@@ -29,5 +29,5 @@
       "height": 1254
     }
   ],
-  "rendering": "Two materials per body blended by source DEM slope (0.5–8 degrees). This is an artistic convention, not a geological classification. Coordinate seed changes decorative pattern placement; no observed rock positions are claimed."
+  "rendering": "Mars illustrative materials blend by DEM slope. Moon observed images use fixed DEM-aligned UVs; only unmeasured fine-grain detail repeats. No source-derived heights, terrain scores or rock abundance are inferred from these concept assets."
 }

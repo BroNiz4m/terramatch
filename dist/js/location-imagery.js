@@ -27,6 +27,8 @@ export function imageryRequestPlan(site,data,{size=512}={}){
   }return plan;
  }
  let zoom=0;while(zoom<source.maxZoom&&Math.max(east-west,north-south)/360*(2**(zoom+1)*source.tileSize)<size)zoom++;
+ const tileCount=z=>{const world=2**(z+1)*source.tileSize,tile=source.tileSize;return (Math.ceil((east+180)/360*world/tile)-Math.floor((west+180)/360*world/tile))*(Math.ceil((90-south)/360*world/tile)-Math.floor((90-north)/360*world/tile));};
+ while(zoom>0&&tileCount(zoom)>16)zoom--;
  const columns=2**(zoom+1),rows=2**zoom,tile=source.tileSize,world=columns*tile;
  const x0=(west+180)/360*world,x1=(east+180)/360*world,y0=(90-north)/360*world,y1=(90-south)/360*world;
  for(let y=Math.floor(y0/tile);y<=Math.ceil(y1/tile)-1;y++)for(let x=Math.floor(x0/tile);x<=Math.ceil(x1/tile)-1;x++){
@@ -45,7 +47,7 @@ async function decode(blob){
  const url=URL.createObjectURL(blob);try{return await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=()=>reject(Error('The imagery response could not be decoded.'));image.src=url;});}finally{URL.revokeObjectURL(url);}
 }
 export async function loadLocationImagery(site,data,options={}){
- const plan=imageryRequestPlan(site,data);
+ const plan=imageryRequestPlan(site,data,{size:options.size??512});
  if(site.body==='earth')return loadRecentEarthImagery(plan,{decodeImage:decode,createCanvas:()=>document.createElement('canvas'),...options,loadArchive:()=>loadPlannedImagery(plan,options)});
  return loadPlannedImagery(plan,options);
 }
@@ -78,6 +80,6 @@ async function loadPlannedImagery(plan,{signal,fetchImpl=globalThis.fetch,decode
   for(let i=0;i<pixels.length;i+=4){if(pixels[i+3]>=250)opaque++;min=Math.min(min,pixels[i],pixels[i+1],pixels[i+2]);max=Math.max(max,pixels[i],pixels[i+1],pixels[i+2]);}
   const coverage=opaque/(pixels.length/4);if(coverage<.98||max-min<2)throw Error('Full usable imagery coverage is unavailable for this footprint. Elevation remains available.');
   const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(Error('Could not prepare the imagery preview.')),'image/png'));
-  return {blob,metadata:{siteId:site.id,body:site.body,center:plan.center,bounds:plan.bounds,extentMeters:{width:plan.widthMeters,depth:plan.depthMeters},sourceId:plan.source.id,product:plan.source.title,sourceURL:plan.source.url,imageryStatus:'historical-mosaic',resolution:plan.source.body==='earth'?plan.source.resolution:plan.source.body==='moon'?'WAC mosaic: about 83 m/px at equator; varies with latitude':'CTX source: about 5–6 m/px; delivered preview resampled',previewSamplingMeters:plan.widthMeters/plan.size,period:plan.source.period,credit:plan.source.credit,license:plan.source.license,caveat:plan.source.note,retrievedAt:new Date().toISOString(),opaqueCoverage:coverage,processing:'Provider imagery cropped and resampled to the geographic study bounds; north up. No generated surface detail. Independent of DEM measurements and ranking.',requests:records}};
+  return {blob,metadata:{siteId:site.id,body:site.body,center:plan.center,bounds:plan.bounds,extentMeters:{width:plan.widthMeters,depth:plan.depthMeters},sourceId:plan.source.id,product:plan.source.title,sourceURL:plan.source.url,imageryStatus:'historical-mosaic',resolution:plan.source.body==='earth'?plan.source.resolution:plan.source.body==='moon'?'WAC mosaic: about 100 m nominal source; preview resampled':'CTX source: about 5–6 m/px; delivered preview resampled',previewSamplingMeters:plan.widthMeters/plan.size,period:plan.source.period,credit:plan.source.credit,license:plan.source.license,caveat:plan.source.note,retrievedAt:new Date().toISOString(),opaqueCoverage:coverage,processing:'Provider imagery cropped and resampled to the geographic study bounds; north up. No generated surface detail. Independent of DEM measurements and ranking.',requests:records}};
  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
 }
