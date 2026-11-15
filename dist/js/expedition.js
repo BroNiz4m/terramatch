@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js?v=20261115-rover-1';
+import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js?v=20261116-compact-expedition-1';
 import { sampleTerrain, terrainCoordinates } from './science.js';
 import { thermalColor } from './thermal-colors.js';
 import {installSurfaceMaterial,surfaceSeed} from './surface-material.js';
@@ -10,7 +10,7 @@ function disposeGroup(group){const geos=new Set(),mats=new Set(),textures=new Se
 
 export class Expedition {
   constructor({container,minimap,onTelemetry,onStage,onInspect,onCompare,onPause,onError,rendererFactory}){
-    Object.assign(this,{container,minimap,onTelemetry,onStage,onInspect,onCompare,onPause,onError});this.active=false;this.paused=false;this.keys=new Set();this.layer='surface';this.phase='landing';this.clock=0;this.orbitYaw=.72;this.orbitPitch=.32;this.cameraDistance=15;this.follow=true;this.evidenceOpen=false;
+    Object.assign(this,{container,minimap,onTelemetry,onStage,onInspect,onCompare,onPause,onError});this.active=false;this.paused=false;this.keys=new Set();this.layer='surface';this.phase='landing';this.clock=0;this.orbitYaw=1.25;this.orbitPitch=.42;this.cameraDistance=28;this.follow=true;this.evidenceOpen=false;
     try{this.renderer=rendererFactory?rendererFactory():new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});}catch(error){onError?.(error);return;}
     this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.3;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;
     container.append(this.renderer.domElement);this.renderer.domElement.tabIndex=0;this.renderer.domElement.setAttribute('aria-label','3D expedition. W and S move, A and D turn, Shift moves faster. Drag to look. E inspects terrain, C compares, Escape pauses.');
@@ -34,7 +34,7 @@ export class Expedition {
   }
   load(site,data,stats){
     if(!this.renderer)throw new Error('WebGL is not available on this device.');
-    this.keys.clear();this.paused=false;this.site=site;this.data=data;this.stats=stats;this.width=500;this.depth=data.depthMeters/data.widthMeters*500;this.scale=this.width/data.widthMeters;this.base=stats.min;this.clock=0;this.totalDistance=0;this.layer='surface';this.phase='landing';this.orbitYaw=.72;this.orbitPitch=.32;this.cameraDistance=15;this.follow=true;this.edgeReached=false;
+    this.keys.clear();this.paused=false;this.site=site;this.data=data;this.stats=stats;this.width=500;this.depth=data.depthMeters/data.widthMeters*500;this.scale=this.width/data.widthMeters;this.base=stats.min;this.clock=0;this.totalDistance=0;this.layer='surface';this.phase='landing';this.orbitYaw=1.25;this.orbitPitch=.42;this.cameraDistance=28;this.follow=true;this.edgeReached=false;
     this.releaseSurface?.();this.surfaceTexture=null;this.landingEffects?.dispose();this.landingEffects=null;this.groundTexture?.dispose();this.thermalMaterial?.dispose();this.terrainMaterial?.dispose();this.thermalField=null;disposeGroup(this.root);this.root.clear();this.obstacles=[];
     const moon=site.body==='moon',earth=site.body==='earth';const sky=moon?'#060a0e':earth?'#93adb5':'#b18c75';this.scene.background=new THREE.Color(sky);this.scene.fog=moon?null:new THREE.FogExp2(sky,.0022);this.hemisphere.color.set(moon?'#bfc8db':earth?'#c7e1ec':'#f2d7ba');this.hemisphere.groundColor.set(moon?'#292932':'#795238');this.hemisphere.intensity=moon?1.2:2.2;this.sun.color.set(moon?'#fff9e9':'#ffedcc');
     this.makeTerrain();this.spawn=this.findSpawn();this.spawn.y=this.height(this.spawn.x,this.spawn.z);
@@ -85,7 +85,7 @@ export class Expedition {
   setMove(direction,pressed){const key={forward:'w',backward:'s',left:'a',right:'d'}[direction];if(pressed)this.keys.add(key);else this.keys.delete(key);}
   resize(){if(!this.renderer)return;const r=this.container.getBoundingClientRect();if(!r.width||!r.height)return;this.renderer.setSize(r.width,r.height,false);this.camera.aspect=r.width/r.height;this.camera.updateProjectionMatrix();this.landingEffects?.setViewport(r.height,Math.min(devicePixelRatio,1.6),this.camera.fov);}
   skipArrival(){finishCargoArrival(this);}
-  changeCamera(){this.follow=!this.follow;if(!this.follow){this.orbitPitch=.8;this.cameraDistance=28;}else{this.orbitPitch=.32;this.cameraDistance=15;}return this.follow?'Follow camera':'Survey camera';}
+  changeCamera(){this.follow=!this.follow;if(!this.follow){this.orbitPitch=.8;this.cameraDistance=28;}else{this.orbitPitch=.42;this.cameraDistance=28;}return this.follow?'Follow camera':'Survey camera';}
   telemetry(){if(!this.robot)return null;const x=this.robot.position.x,z=this.robot.position.z,u=x/this.width+.5,v=z/this.depth+.5;return{siteId:this.site.id,siteName:this.site.name,body:this.site.body,lat:terrainCoordinates(this.data,u,v).lat,lon:terrainCoordinates(this.data,u,v).lon,height:sampleTerrain(this.data,u,v),slope:this.pointSlope(x,z),distanceMeters:this.totalDistance/this.scale,gridSpacingMeters:this.data.widthMeters/(this.data.size-1),baselineMeters:this.stats.gradientBaselineMeters.x,avatarScaleEnlarged:true,decorativeRocks:true,position:{x,z},u,v};}
   tick(time){const dt=Math.min((time-this.last)/1000,.045);this.last=time;if(!this.active||!this.data||this.paused||!this.renderer)return;this.clock+=dt;let moving=0;
     if(this.phase!=='explore'){
