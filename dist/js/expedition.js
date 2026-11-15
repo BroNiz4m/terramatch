@@ -2,6 +2,7 @@ import * as THREE from '../vendor/three.module.js';
 import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js';
 import { sampleTerrain, terrainCoordinates } from './science.js';
 import { thermalColor } from './thermal-colors.js';
+import {installSurfaceMaterial,surfaceSeed} from './surface-material.js';
 
 const clamp=THREE.MathUtils.clamp, smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
 const surfaceColors={mars:['#79543d','#b98359','#cba27b'],moon:['#42464c','#84878b','#b3b0a7'],earth:['#605642','#9e8a63','#c2aa7c']};
@@ -34,7 +35,7 @@ export class Expedition {
   load(site,data,stats){
     if(!this.renderer)throw new Error('WebGL is not available on this device.');
     this.keys.clear();this.paused=false;this.site=site;this.data=data;this.stats=stats;this.width=500;this.depth=data.depthMeters/data.widthMeters*500;this.scale=this.width/data.widthMeters;this.base=stats.min;this.clock=0;this.totalDistance=0;this.layer='surface';this.phase='landing';this.orbitYaw=.72;this.orbitPitch=.32;this.cameraDistance=15;this.follow=true;this.edgeReached=false;
-    this.landingEffects?.dispose();this.landingEffects=null;this.groundTexture?.dispose();this.thermalMaterial?.dispose();this.terrainMaterial?.dispose();this.thermalField=null;disposeGroup(this.root);this.root.clear();this.obstacles=[];
+    this.releaseSurface?.();this.surfaceTexture=null;this.landingEffects?.dispose();this.landingEffects=null;this.groundTexture?.dispose();this.thermalMaterial?.dispose();this.terrainMaterial?.dispose();this.thermalField=null;disposeGroup(this.root);this.root.clear();this.obstacles=[];
     const moon=site.body==='moon',earth=site.body==='earth';const sky=moon?'#060a0e':earth?'#93adb5':'#b18c75';this.scene.background=new THREE.Color(sky);this.scene.fog=moon?null:new THREE.FogExp2(sky,.0022);this.hemisphere.color.set(moon?'#bfc8db':earth?'#c7e1ec':'#f2d7ba');this.hemisphere.groundColor.set(moon?'#292932':'#795238');this.hemisphere.intensity=moon?1.2:2.2;this.sun.color.set(moon?'#fff9e9':'#ffedcc');
     this.makeTerrain();this.spawn=this.findSpawn();this.spawn.y=this.height(this.spawn.x,this.spawn.z);
     initializeCargoArrival(this);this.makeRocks();this.makeRoute();this.makeMap();prepareCargoCamera(this);this.active=true;this.resize();this.onStage?.('landing',0,{step:'approach',credit:'powered by Wh0Knows'});this.drawMap();return this;
@@ -42,7 +43,7 @@ export class Expedition {
   height(x,z){return(sampleTerrain(this.data,x/this.width+.5,z/this.depth+.5)-this.base)*this.scale;}
   walkSurfaceHeight(x,z){return cargoSurfaceHeight(this,x,z);}
   pointSlope(x,z){const n=this.data.size,u=clamp(x/this.width+.5,0,1),v=clamp(z/this.depth+.5,0,1),ix=Math.round(u*(n-1)),iz=Math.round(v*(n-1));return this.stats.slopeGrid[iz*n+ix];}
-  findSpawn(){const n=this.data.size;let best={cost:Infinity,x:0,z:0};for(let j=25;j<40;j++)for(let i=25;i<40;i++){const slope=this.stats.slopeGrid[j*n+i];const cost=slope+Math.hypot(i-32,j-32)*.15;if(cost<best.cost)best={cost,x:(i/(n-1)-.5)*this.width,z:(j/(n-1)-.5)*this.depth};}return new THREE.Vector3(best.x,0,best.z);}
+  findSpawn(){const n=this.data.size,center=(n-1)/2,start=Math.ceil((n-1)*.38),end=Math.floor((n-1)*.62);let best={cost:Infinity,x:0,z:0};for(let j=start;j<=end;j++)for(let i=start;i<=end;i++){const slope=this.stats.slopeGrid[j*n+i];const cost=slope+Math.hypot(i-center,j-center)*.15;if(cost<best.cost)best={cost,x:(i/(n-1)-.5)*this.width,z:(j/(n-1)-.5)*this.depth};}return new THREE.Vector3(best.x,0,best.z);}
   makeTerrain(){
     const n=this.data.size,geometry=new THREE.PlaneGeometry(this.width,this.depth,n-1,n-1);geometry.rotateX(-Math.PI/2);const positions=geometry.attributes.position,colors=new Float32Array(n*n*3);
     for(let i=0;i<n*n;i++)positions.setY(i,(this.data.heights[i]-this.base)*this.scale);
@@ -50,7 +51,7 @@ export class Expedition {
     const ground=new THREE.Mesh(new THREE.PlaneGeometry(3500,3500),new THREE.MeshStandardMaterial({color:surfaceColors[this.site.body][0],roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.5;ground.receiveShadow=true;this.root.add(ground);
     this.grid=new THREE.LineSegments(new THREE.WireframeGeometry(geometry),new THREE.LineBasicMaterial({color:'#b1e9e1',transparent:true,opacity:.10,depthWrite:false}));this.grid.position.y=.022;this.grid.visible=false;this.root.add(this.grid);
     // Fine ground texture is a visual treatment only. Elevations stay unchanged.
-    const canvas=document.createElement('canvas');canvas.width=canvas.height=128;const ctx=canvas.getContext('2d'),img=ctx.createImageData(128,128);let seed=41;for(let i=0;i<img.data.length;i+=4){seed=seed*16807%2147483647;const value=150+seed%75;img.data[i]=img.data[i+1]=img.data[i+2]=value;img.data[i+3]=255;}ctx.putImageData(img,0,0);const texture=new THREE.CanvasTexture(canvas);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(75,75);texture.colorSpace=THREE.SRGBColorSpace;this.terrainMaterial.map=texture;this.terrainMaterial.needsUpdate=true;this.groundTexture=texture;
+    const canvas=document.createElement('canvas');canvas.width=canvas.height=128;const ctx=canvas.getContext('2d'),img=ctx.createImageData(128,128);let seed=surfaceSeed(this.site,this.data);for(let i=0;i<img.data.length;i+=4){seed=seed*16807%2147483647;const value=150+seed%75;img.data[i]=img.data[i+1]=img.data[i+2]=value;img.data[i+3]=255;}ctx.putImageData(img,0,0);const texture=new THREE.CanvasTexture(canvas);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(75,75);texture.colorSpace=THREE.SRGBColorSpace;this.terrainMaterial.map=texture;this.terrainMaterial.needsUpdate=true;this.groundTexture=texture;this.releaseSurface=installSurfaceMaterial(this);
   }
   recolor(){if(!this.terrain)return;const palette=surfaceColors[this.site.body],low=new THREE.Color(palette[0]),mid=new THREE.Color(palette[1]),high=new THREE.Color(palette[2]),teal=new THREE.Color('#318f99'),yellow=new THREE.Color('#d5c46a'),red=new THREE.Color('#cb6437'),color=new THREE.Color(),array=this.terrain.geometry.attributes.color;
     for(let i=0;i<this.data.heights.length;i++){
@@ -58,14 +59,15 @@ export class Expedition {
       if(this.layer==='temperature'){const n=this.data.size,{lat,lon}=terrainCoordinates(this.data,(i%n)/(n-1),Math.floor(i/n)/(n-1)),value=this.thermalField?.sample(lat,lon);color.setRGB(...thermalColor(value),THREE.SRGBColorSpace);}
       else if(this.layer==='slope'){color.copy(s<.5?teal:yellow).lerp(s<.5?yellow:red,s<.5?s*2:(s-.5)*2);color.multiplyScalar(.85);}
       else if(this.layer==='elevation'){color.copy(new THREE.Color('#225e74')).lerp(new THREE.Color('#d5c58c'),h);}
+      else if(this.surfaceTexture){color.setRGB(1,1,1);}
       else{color.copy(h<.5?low:mid).lerp(h<.5?mid:high,h<.5?h*2:(h-.5)*2);const variation=Math.sin(i*12.96)*.025;color.offsetHSL(0,0,variation);}
       array.setXYZ(i,color.r,color.g,color.b);
-    }array.needsUpdate=true;this.terrain.material=this.layer==='temperature'?this.thermalMaterial:this.terrainMaterial;
+    }array.needsUpdate=true;const map=this.layer==='surface'?(this.surfaceTexture||this.groundTexture):null;if(this.terrainMaterial.map!==map){this.terrainMaterial.map=map;this.terrainMaterial.needsUpdate=true;}this.terrain.material=this.layer==='temperature'?this.thermalMaterial:this.terrainMaterial;
   }
   setLayer(layer){this.layer=layer;this.recolor();if(this.grid)this.grid.visible=layer!=='surface';}
   setThermalField(field){this.thermalField=field;if(this.layer==='temperature')this.recolor();}
   makeRocks(){
-    const geometry=new THREE.DodecahedronGeometry(1,0),material=new THREE.MeshStandardMaterial({color:this.site.body==='moon'?'#6b6c71':this.site.body==='earth'?'#8f8065':'#8e664b',roughness:1});this.rocks=new THREE.InstancedMesh(geometry,material,180);this.rocks.castShadow=true;this.rocks.receiveShadow=true;const dummy=new THREE.Object3D();let seed=6553;const rand=()=>{seed=seed*16807%2147483647;return seed/2147483647;};
+    const geometry=new THREE.DodecahedronGeometry(1,0),material=new THREE.MeshStandardMaterial({color:this.site.body==='moon'?'#6b6c71':this.site.body==='earth'?'#8f8065':'#8e664b',roughness:1});this.rocks=new THREE.InstancedMesh(geometry,material,180);this.rocks.castShadow=true;this.rocks.receiveShadow=true;const dummy=new THREE.Object3D();let seed=surfaceSeed(this.site,this.data);const rand=()=>{seed=seed*16807%2147483647;return seed/2147483647;};
     for(let i=0;i<180;i++){let x=this.spawn.x+(rand()-.5)*180,z=this.spawn.z+(rand()-.5)*180;const r=.12+rand()*.8;if(Math.abs(x-this.spawn.x)<8&&Math.abs(z-this.spawn.z)<14)x+=16;const y=this.height(x,z);dummy.position.set(x,y+r*.35,z);dummy.rotation.set(rand(),rand()*6,rand());dummy.scale.set(r*(.8+rand()),r*.65,r*(.7+rand()));dummy.updateMatrix();this.rocks.setMatrixAt(i,dummy.matrix);if(r>.48)this.obstacles.push({x,z,r:r+1.4});}for(const foot of this.lander.userData.footAnchors)this.obstacles.push({x:this.spawn.x+foot.x,z:this.spawn.z+foot.z,r:1.25});this.root.add(this.rocks);
   }
   makeRoute(){

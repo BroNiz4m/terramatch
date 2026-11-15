@@ -1,0 +1,33 @@
+{
+  "generatedOn": "2026-11-15",
+  "method": "built-in image_gen",
+  "status": "Integrated as illustrative albedo in Expedition. DEM geometry, measurements and ranking remain source-derived.",
+  "scientificUse": "Not georeferenced imagery, elevation, measured geology, observed rock positions, or NASA data. Do not select a material as evidence based on coordinates.",
+  "assets": [
+    {
+      "file": "moon-highlands.png",
+      "prompt": "Use case: stylized-concept. Asset type: a single square seamless tileable ground BASE COLOR texture, 2048 by 2048 target resolution, for a TerraMatch 3D terrain material. Primary request: Neutral grey lunar highland regolith: irregular compacted fine dust, overlapping small worn impact depressions, restrained sparse embedded angular mineral fragments. Pronounced variation in pitted roughness; no dramatic giant crater.\nComposition: perfectly top-down orthographic flat surface scan filling the complete image edge to edge. Maintain consistent scale across the image. Opposite edges should tile seamlessly with no border and no seams. Realistic physically plausible mineral surface with restrained high-frequency grain. Flat diffuse illumination, minimal baked shading, no directional cast shadows, no perspective, no horizon, no sky, no vehicles, no robot, no footprints, no UI, no labels, no text or logos, no black frame. This is a hypothetical AI-created illustrative material, not a satellite observation, not geolocated and not an elevation map. Do not add invented scientific annotations. Make the surface useful as a repeatable albedo texture rather than a scenic picture.",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "moon-mare.png",
+      "prompt": "Use case: stylized-concept. Asset type: a single square seamless tileable ground BASE COLOR texture, 2048 by 2048 target resolution, for a TerraMatch 3D terrain material. Primary request: Dark charcoal-grey lunar mare basalt regolith: relatively smooth fine powder, subtle low basalt ridges and very sparse shallow worn impact pits. Much smoother and darker than highland regolith.\nComposition: perfectly top-down orthographic flat surface scan filling the complete image edge to edge. Maintain consistent scale across the image. Opposite edges should tile seamlessly with no border and no seams. Realistic physically plausible mineral surface with restrained high-frequency grain. Flat diffuse illumination, minimal baked shading, no directional cast shadows, no perspective, no horizon, no sky, no vehicles, no robot, no footprints, no UI, no labels, no text or logos, no black frame. This is a hypothetical AI-created illustrative material, not a satellite observation, not geolocated and not an elevation map. Do not add invented scientific annotations. Make the surface useful as a repeatable albedo texture rather than a scenic picture.",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "mars-layered.png",
+      "prompt": "Use case: stylized-concept. Asset type: a single square seamless tileable ground BASE COLOR texture, 2048 by 2048 target resolution, for a TerraMatch 3D terrain material. Primary request: Muted rusty ochre Martian exposed sedimentary bedrock: pale tan thin bedding bands crossing diagonally, eroded fractured plates and angular slabs, reddish dust collected in fine joints. Distinct stratified rock rather than loose dunes.\nComposition: perfectly top-down orthographic flat surface scan filling the complete image edge to edge. Maintain consistent scale across the image. Opposite edges should tile seamlessly with no border and no seams. Realistic physically plausible mineral surface with restrained high-frequency grain. Flat diffuse illumination, minimal baked shading, no directional cast shadows, no perspective, no horizon, no sky, no vehicles, no robot, no footprints, no UI, no labels, no text or logos, no black frame. This is a hypothetical AI-created illustrative material, not a satellite observation, not geolocated and not an elevation map. Do not add invented scientific annotations. Make the surface useful as a repeatable albedo texture rather than a scenic picture.",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "mars-dunes.png",
+      "prompt": "Use case: stylized-concept. Asset type: a single square seamless tileable ground BASE COLOR texture, 2048 by 2048 target resolution, for a TerraMatch 3D terrain material. Primary request: Martian dune sand: dark burnt sienna fine-grain sand, flowing interlocking curved ripple crests in alternating rusty amber and muted dark brown tones, sparse tiny pebbles. Dunes shown from directly above, no horizon.\nComposition: perfectly top-down orthographic flat surface scan filling the complete image edge to edge. Maintain consistent scale across the image. Opposite edges should tile seamlessly with no border and no seams. Realistic physically plausible mineral surface with restrained high-frequency grain. Flat diffuse illumination, minimal baked shading, no directional cast shadows, no perspective, no horizon, no sky, no vehicles, no robot, no footprints, no UI, no labels, no text or logos, no black frame. This is a hypothetical AI-created illustrative material, not a satellite observation, not geolocated and not an elevation map. Do not add invented scientific annotations. Make the surface useful as a repeatable albedo texture rather than a scenic picture.",
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "rendering": "Two materials per body blended by source DEM slope (0.5–8 degrees). This is an artistic convention, not a geological classification. Coordinate seed changes decorative pattern placement; no observed rock positions are claimed."
+}
