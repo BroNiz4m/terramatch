@@ -9,6 +9,7 @@ required.push('dist/js/pair-connector.js','dist/js/evidence-views.js','dist/js/p
 required.push('dist/readability.css','dist/js/display-format.js','dist/assets/fonts/InterVariable.woff2','dist/assets/fonts/Inter-LICENSE.txt');
 const inter=fs.readFileSync('dist/assets/fonts/InterVariable.woff2');
 if(inter.toString('ascii',0,4)!=='wOF2'||inter.length<100000)throw Error('Invalid bundled Inter font.');
+required.push('dist/js/terrain-preview.js');
 for (const file of required) if (!fs.existsSync(file)) throw Error(`Missing ${file}`);
 for (const file of fs.readdirSync('dist/js').filter(f => f.endsWith('.js'))) {
   const result = spawnSync(process.execPath, ['--check', path.join('dist/js', file)], { encoding: 'utf8' });

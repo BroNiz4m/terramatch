@@ -212,3 +212,17 @@ p,li,dd{overflow-wrap:break-word}
  .arrival-banner .button{margin-left:0;width:100%}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{animation:none}}
+
+/* Preserve the complete DEM footprint; captions do not cover the terrain. */
+.evidence-area figure img{width:100%;height:clamp(240px,25vw,360px);object-fit:contain;background:#071722;display:block}
+.evidence-area figcaption{position:static;display:grid;gap:4px;background:#0b202b;padding:12px 14px;font-size:14px;line-height:1.6}
+.evidence-area figcaption strong{font-weight:500}
+.evidence-area figcaption span{font-size:13px;color:var(--muted)}
+.terrain-preview-note{font-size:14px;line-height:1.7;color:var(--muted);margin:12px 0 18px}
+.pair-images img{height:auto;aspect-ratio:1;object-fit:contain;background:#071722}
+.pair-row>img,.candidate-thumb{object-fit:contain;background:#071722}
+.destination-image.dem-preview{background-size:contain;background-repeat:no-repeat;background-color:#071722;background-position:center}
+.evidence-photo{height:auto}
+.evidence-photo>img{height:180px;object-fit:contain;background:#071722;display:block}
+.evidence-photo>div{position:static;padding:12px;background:#0b202b}
+@media(max-width:700px){.evidence-area figure img{height:260px}}
