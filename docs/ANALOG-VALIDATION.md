@@ -43,8 +43,8 @@ same results as the default; it adds no thermal comparison.
 | Eberswalde delta area | Wadi Rum | 77.2 | Amboy | 4.1 | Wadi Rum / 80.5 | Wadi Rum / 74.7 |
 
 All candidate scores and component distances, including Al Wahbah, are retained
-in [the generated summary](research/analog-validation-2026-11-15/summary.md).
-The [full results JSON](research/analog-validation-2026-11-15/results.json) contains
+in [the generated summary](../research/analog-validation-2026-11-15/summary.md).
+The [full results JSON](../research/analog-validation-2026-11-15/results.json) contains
 input SHA-256 values, source provenance, independently recomputed statistics,
 all six preset/single-measure cases, a 101-scenario sweep, analytic intersections,
 unrounded margins and rounded-score tie sets.

@@ -1,0 +1,1705 @@
+{
+  "version": "planetary-search-atlas-v1",
+  "createdAt": "2026-11-15T03:38:08.032Z",
+  "method": {
+    "extentMeters": 32000,
+    "gridSpacingMeters": 2000,
+    "gradientBaselineMeters": 4000,
+    "indexStepDegrees": 3,
+    "latitudeLimit": 75
+  },
+  "bodies": {
+    "mars": {
+      "body": "mars",
+      "id": "mola",
+      "product": "megt90n000fb",
+      "pixelsPerDegree": 32,
+      "width": 11520,
+      "height": 5760,
+      "tileSize": 640,
+      "tileColumns": 18,
+      "tileRows": 9,
+      "scale": 1,
+      "radiusMeters": 3396000,
+      "datum": "Topography relative to the Mars areoid; IAU2000 planetocentric, east-positive longitude.",
+      "infoUrl": "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
+      "source": {
+        "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg032/megt90n000fb.img",
+        "sha256": "09ae1c0956afcdc869bd82c55993849f67c16ef0efe73f38cb1ea204c186ad8b",
+        "bytes": 132710400,
+        "labelUrl": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg032/megt90n000fb.lbl",
+        "labelSha256": "7ed187c0e6ce09cbf43e931e5efb0178312fb931003199daaa873c61c76b2e2f",
+        "productVersion": "2.0",
+        "observationStart": "1997-09-15T19:10:00.000",
+        "observationStop": "2001-06-30T11:10:40.000",
+        "retrievedAt": "2026-11-15T03:38:31.092Z"
+      },
+      "encoding": "gzip signed little-endian int16 horizontal row deltas, modulo 65536; first value in each row is absolute DN",
+      "tiles": {
+        "0-0": {
+          "file": "mars/0-0.bin.gz",
+          "sha256": "8a1f1c978d16f5a2478bea8ceef548e1248506c630977ecd31a814b3fb1c09d1",
+          "bytes": 284639
+        },
+        "0-1": {
+          "file": "mars/0-1.bin.gz",
+          "sha256": "c0212de53e3407b8212e65c7983f79ce5a61889829806438987b21071906f771",
+          "bytes": 268265
+        },
+        "0-2": {
+          "file": "mars/0-2.bin.gz",
+          "sha256": "39f8e0ff6d54692b0afe5d558ac079085fb5dc0b23ee0890c12d47fe789e7011",
+          "bytes": 277224
+        },
+        "0-3": {
+          "file": "mars/0-3.bin.gz",
+          "sha256": "e813d838fe836a6837baf46180968dd65818541e1695c26613c7b11afb4ead7d",
+          "bytes": 284878
+        },
+        "0-4": {
+          "file": "mars/0-4.bin.gz",
+          "sha256": "8f03c256b54b84bb5307d7c8b9e113600cd47fc4babd7faaa17a940bc8448ec9",
+          "bytes": 284821
+        },
+        "0-5": {
+          "file": "mars/0-5.bin.gz",
+          "sha256": "50f86bee23d6292a77fcc2860414a01c2ed023100521aa7b3e997ce2bf464d58",
+          "bytes": 285216
+        },
+        "0-6": {
+          "file": "mars/0-6.bin.gz",
+          "sha256": "10547552cdc8641c428043e16eb7160ceb50434feedcd4de09201eb89917a2c3",
+          "bytes": 286581
+        },
+        "0-7": {
+          "file": "mars/0-7.bin.gz",
+          "sha256": "a6e505bf425a37ec71811409c656b49077dc0ab19ce455a964fa6f609c0c42fb",
+          "bytes": 293581
+        },
+        "0-8": {
+          "file": "mars/0-8.bin.gz",
+          "sha256": "b2e5a12ed6c6d4bf0e0c9ffa67b568abd2dd63dced163709bf40f90b2bdaa4f0",
+          "bytes": 313091
+        },
+        "0-9": {
+          "file": "mars/0-9.bin.gz",
+          "sha256": "81b7599057ce272a3b0d67b4f1efbfe6d010e10a022a855784b7d5362edb9a1b",
+          "bytes": 309582
+        },
+        "0-10": {
+          "file": "mars/0-10.bin.gz",
+          "sha256": "aba9b90980ad7575c64bfe1fab6fa35936819a75ed8b4e83a602f9ce42036ce8",
+          "bytes": 313585
+        },
+        "0-11": {
+          "file": "mars/0-11.bin.gz",
+          "sha256": "04a66884d8c9065fb4a5e741e55756e7fd041edf43b8d9e339d50704735d119d",
+          "bytes": 319705
+        },
+        "0-12": {
+          "file": "mars/0-12.bin.gz",
+          "sha256": "487a8a6413a63d1dae907d0100636abe2deb85513263a8aa22533919477eb388",
+          "bytes": 299041
+        },
+        "0-13": {
+          "file": "mars/0-13.bin.gz",
+          "sha256": "7cf4652c10b176ef0e10a2daa1773a3aa922275832ab794c2b51007f3d66e7dc",
+          "bytes": 280587
+        },
+        "0-14": {
+          "file": "mars/0-14.bin.gz",
+          "sha256": "cc7ffb5ef0d3e3435fc526a441c1ee44eabc6138627e18c06d9ed4f7ed55eb1e",
+          "bytes": 283421
+        },
+        "0-15": {
+          "file": "mars/0-15.bin.gz",
+          "sha256": "e3dd881b63f84fe484a4f3a874332c90ad098cbbea2b45662145d7ba2b92f2ae",
+          "bytes": 285833
+        },
+        "0-16": {
+          "file": "mars/0-16.bin.gz",
+          "sha256": "fe1331ee8b12808822991aacbd80fcce90440116e0bddd4a4051cf16c34dd6ef",
+          "bytes": 294960
+        },
+        "0-17": {
+          "file": "mars/0-17.bin.gz",
+          "sha256": "9695055edfb0bd3c12f979c7cb394ca7341d88d2486c1ab2c7244d2a00e2447a",
+          "bytes": 293106
+        },
+        "1-0": {
+          "file": "mars/1-0.bin.gz",
+          "sha256": "8580ba42b886f39229c0fd0774652e601f3e3d8829ffd240c13518c1086622b8",
+          "bytes": 347304
+        },
+        "1-1": {
+          "file": "mars/1-1.bin.gz",
+          "sha256": "4742dc6c635bfc0e77c83a7aa9bebbe6192f418f77c4bc0129919c3205d69275",
+          "bytes": 369754
+        },
+        "1-2": {
+          "file": "mars/1-2.bin.gz",
+          "sha256": "b1c45757a1f26dba5b53a452259ca4d9bca0048531fd3f790730d90c992ca4b7",
+          "bytes": 351916
+        },
+        "1-3": {
+          "file": "mars/1-3.bin.gz",
+          "sha256": "50a86af8b231f38d4f5708b4451d4b6f1fcebc7401011e8a7a89af598ea249c3",
+          "bytes": 344794
+        },
+        "1-4": {
+          "file": "mars/1-4.bin.gz",
+          "sha256": "6db79fb5cb5e83b30ad771b2dec2689b661bef0fb11097c78276256e1291a44d",
+          "bytes": 338959
+        },
+        "1-5": {
+          "file": "mars/1-5.bin.gz",
+          "sha256": "b79c35a61bbb54dd14492235fc6d9bfbbbd07e787bf90b8716784c8c8a6ac7af",
+          "bytes": 328588
+        },
+        "1-6": {
+          "file": "mars/1-6.bin.gz",
+          "sha256": "05cee5d7888dcdbb02c45bb5d4109f0d1589bc422f13a99c3b6fddb1d9f78df0",
+          "bytes": 332061
+        },
+        "1-7": {
+          "file": "mars/1-7.bin.gz",
+          "sha256": "b3a519a36822a1fd33c90ff0d615e22cf7dfe6e201be079fefa641807b843599",
+          "bytes": 341801
+        },
+        "1-8": {
+          "file": "mars/1-8.bin.gz",
+          "sha256": "df022f9f73f21a29b6c00be344d77f5ff42b3eaef5a9b94a3ad364723badffd4",
+          "bytes": 359576
+        },
+        "1-9": {
+          "file": "mars/1-9.bin.gz",
+          "sha256": "1e10f99e77e10e2b0566b93da188704cec13eb5202566443d4e5db35640d73f9",
+          "bytes": 353208
+        },
+        "1-10": {
+          "file": "mars/1-10.bin.gz",
+          "sha256": "c718832fb780cb08831dca95fb8b16aed1931886e7ae35cf7ce24aa22776ebb7",
+          "bytes": 377188
+        },
+        "1-11": {
+          "file": "mars/1-11.bin.gz",
+          "sha256": "dfe82d6d777449391324ebd7f0e957fcfc6a579120f6c64ae69d40c8dae713ba",
+          "bytes": 328641
+        },
+        "1-12": {
+          "file": "mars/1-12.bin.gz",
+          "sha256": "92f2edfdb3c670d2c6b76b88c71a15decaf507cfa700c67b7c38a4724595396a",
+          "bytes": 324393
+        },
+        "1-13": {
+          "file": "mars/1-13.bin.gz",
+          "sha256": "118de009c1a36f9e629d37db7ee437631e6bb5c440d0f26eb7c315b64e50dbb8",
+          "bytes": 351522
+        },
+        "1-14": {
+          "file": "mars/1-14.bin.gz",
+          "sha256": "dac8ec73bf52d293a548c32ef0742a195c51f4b4c723fa5d80bf04dc2fa9adc1",
+          "bytes": 350008
+        },
+        "1-15": {
+          "file": "mars/1-15.bin.gz",
+          "sha256": "32386eebb731508edffe93162763256f17e7e869a90fc3f41dcfb76be1c5b59b",
+          "bytes": 337129
+        },
+        "1-16": {
+          "file": "mars/1-16.bin.gz",
+          "sha256": "672c60ec493cc9bba6d8a12d2b3967300ee62efc4b833e0bdc59d03d7303aa9c",
+          "bytes": 334866
+        },
+        "1-17": {
+          "file": "mars/1-17.bin.gz",
+          "sha256": "b666b9ccfcbcddd338bf41d3099de77bf3987828ab4f55328d74dca1a94db7f4",
+          "bytes": 363307
+        },
+        "2-0": {
+          "file": "mars/2-0.bin.gz",
+          "sha256": "c4b41b96508f18dcb99d03299d0b0de754d244b59eb4b53e223a0469161447fd",
+          "bytes": 456798
+        },
+        "2-1": {
+          "file": "mars/2-1.bin.gz",
+          "sha256": "43d31f01f33a18b10d1c92f4382f8d875d6219ea6f6f2cc12abdf6def6df5ef3",
+          "bytes": 492402
+        },
+        "2-2": {
+          "file": "mars/2-2.bin.gz",
+          "sha256": "b00ded93cb39aa1344dd30a4b25be6c755aa3e886ca8624f598dd82f125ab4e3",
+          "bytes": 496649
+        },
+        "2-3": {
+          "file": "mars/2-3.bin.gz",
+          "sha256": "2118ad122566d900dd856f5b99811c789405bac6b722a06e9758314d1073cc60",
+          "bytes": 455805
+        },
+        "2-4": {
+          "file": "mars/2-4.bin.gz",
+          "sha256": "b94535ddcf35a89d0f087bfb85b25b14d787fbe611fb4a604572d0488b4989f1",
+          "bytes": 377482
+        },
+        "2-5": {
+          "file": "mars/2-5.bin.gz",
+          "sha256": "5ae00dfa6e748c632d1608c599a3d1dbf069ce162beb6f743f5de2e838d847ff",
+          "bytes": 357840
+        },
+        "2-6": {
+          "file": "mars/2-6.bin.gz",
+          "sha256": "44d7e425f48258189babf0ac06d7cd75db53faec9d38f4ccd670a8d4473b3ac1",
+          "bytes": 376926
+        },
+        "2-7": {
+          "file": "mars/2-7.bin.gz",
+          "sha256": "e2255946cdea243a503bc667cba23a20b96c4041c6d3aad10b502b7a29bf893f",
+          "bytes": 406137
+        },
+        "2-8": {
+          "file": "mars/2-8.bin.gz",
+          "sha256": "586c43b22028123a040d0fded92a2b3a1c20e2ddd6c8ffec5af77c13ca5ef65a",
+          "bytes": 414051
+        },
+        "2-9": {
+          "file": "mars/2-9.bin.gz",
+          "sha256": "d696284a079e85c455aed25dbed8af3a204ac9e41893632ef06092990f7fc23c",
+          "bytes": 312992
+        },
+        "2-10": {
+          "file": "mars/2-10.bin.gz",
+          "sha256": "10b97054840cc40dc4b80e26d4755811892395cce66f273fafea2f3b8ec265ce",
+          "bytes": 351648
+        },
+        "2-11": {
+          "file": "mars/2-11.bin.gz",
+          "sha256": "938d48cbf437cc8cd5fd3e0751f8832c2ee444486f0ea3898f6899237424305d",
+          "bytes": 411164
+        },
+        "2-12": {
+          "file": "mars/2-12.bin.gz",
+          "sha256": "93486c4ee782b546bd247cb78d2dbdff7dc4967faefe3c7145f49e72007bd40e",
+          "bytes": 451412
+        },
+        "2-13": {
+          "file": "mars/2-13.bin.gz",
+          "sha256": "eaa4a8a74e48725f4e909c035436770aae92eb3742ff024247c7ea703dd2ee0a",
+          "bytes": 448286
+        },
+        "2-14": {
+          "file": "mars/2-14.bin.gz",
+          "sha256": "44aa65cef321abb1328eba49d3ed594e070bbadf5a594fb3f899d99926e031ba",
+          "bytes": 475501
+        },
+        "2-15": {
+          "file": "mars/2-15.bin.gz",
+          "sha256": "3066960a2b473dad5a36818d56a2b7175af3749339efa8774e314a5e0ec772a1",
+          "bytes": 401803
+        },
+        "2-16": {
+          "file": "mars/2-16.bin.gz",
+          "sha256": "d2841d9f173359897ed94cd857adf67cfb723f153dcd7d06876277e3f2f22240",
+          "bytes": 389249
+        },
+        "2-17": {
+          "file": "mars/2-17.bin.gz",
+          "sha256": "98a6bafffb5385390a082848da446ad0484a50610b8ab5af80f2dd7c4135d5d3",
+          "bytes": 431262
+        },
+        "3-0": {
+          "file": "mars/3-0.bin.gz",
+          "sha256": "ed4a963c5133d73517c9440bc2ad2e557a3965d1e8a91e0972cf3bcb7969b196",
+          "bytes": 491982
+        },
+        "3-1": {
+          "file": "mars/3-1.bin.gz",
+          "sha256": "32b4117b1f5ce7931e75b62d967feb0deb5a0b1b0bb2d3afd9aff02ef6d56c6d",
+          "bytes": 503478
+        },
+        "3-2": {
+          "file": "mars/3-2.bin.gz",
+          "sha256": "ec6c6c93ddf68c3118f7bf21acb239a191530a0fc633565573781e09957bb40e",
+          "bytes": 500506
+        },
+        "3-3": {
+          "file": "mars/3-3.bin.gz",
+          "sha256": "4eb12b7df624bdb831418abe1dc3e071b44b9cd9452793056d93f14619c1cad1",
+          "bytes": 495315
+        },
+        "3-4": {
+          "file": "mars/3-4.bin.gz",
+          "sha256": "3bc79632869519f34f0ea31626f56d409312f0f616eb6dfbd8cd58522d192d94",
+          "bytes": 413084
+        },
+        "3-5": {
+          "file": "mars/3-5.bin.gz",
+          "sha256": "84bd5b3da595b8fc3b01ea4a2a00e6cbf779a2fd993e9ff3f3deaaa205c2d2ce",
+          "bytes": 412032
+        },
+        "3-6": {
+          "file": "mars/3-6.bin.gz",
+          "sha256": "e1ff69c5719d89d9e8351b1d56c79706152cd6cef23342f0f9412c5d2dd2d35d",
+          "bytes": 399218
+        },
+        "3-7": {
+          "file": "mars/3-7.bin.gz",
+          "sha256": "391d1e98be9d354b2f4c4a865107afa31d49b8bfb9114dd7616c96a9db535c8f",
+          "bytes": 416783
+        },
+        "3-8": {
+          "file": "mars/3-8.bin.gz",
+          "sha256": "d6be8714710daa032cb046305ef9e3680c3fdf0a68e3613f7c3c00c6b00855fe",
+          "bytes": 443292
+        },
+        "3-9": {
+          "file": "mars/3-9.bin.gz",
+          "sha256": "60d795d1a8af5a406bac5a49ec2fa558bd1836e4f95d442078e6645e16fb86be",
+          "bytes": 364920
+        },
+        "3-10": {
+          "file": "mars/3-10.bin.gz",
+          "sha256": "a03e331a1289747a3260ff89b2a9027a9d7d9f4748c24a8db7490c213134c2d2",
+          "bytes": 402004
+        },
+        "3-11": {
+          "file": "mars/3-11.bin.gz",
+          "sha256": "3ae84bc7502f7c5df36414972480b097483236624b2c3bd60be6c5634c25eff9",
+          "bytes": 477628
+        },
+        "3-12": {
+          "file": "mars/3-12.bin.gz",
+          "sha256": "a690a0e62c32e1c31f6cf8e7d85e7495ae1914789663647cde52f2ef4f6a8c31",
+          "bytes": 421461
+        },
+        "3-13": {
+          "file": "mars/3-13.bin.gz",
+          "sha256": "7f27e3ab3e950112a1e78a777c9982a99620cc9ec300c100e68f36aa3f566773",
+          "bytes": 370670
+        },
+        "3-14": {
+          "file": "mars/3-14.bin.gz",
+          "sha256": "4f198ae65070e935d52fa601561e28539b4dbc902425c52fa2e3943101a7591b",
+          "bytes": 435794
+        },
+        "3-15": {
+          "file": "mars/3-15.bin.gz",
+          "sha256": "0a462ecbfae10ea9ca98b8d2380a47dfdd540a26eeafebd6b196390651de89b1",
+          "bytes": 445094
+        },
+        "3-16": {
+          "file": "mars/3-16.bin.gz",
+          "sha256": "2083c6cdb53493d723fcb510ae9f47948d25d1f43662dd6fbe5e1629a28a9e22",
+          "bytes": 458358
+        },
+        "3-17": {
+          "file": "mars/3-17.bin.gz",
+          "sha256": "31e7a4e666611ed8eea20727453265f3e640b5cb65b91dc26a454af62df5b6cb",
+          "bytes": 509513
+        },
+        "4-0": {
+          "file": "mars/4-0.bin.gz",
+          "sha256": "8e32742c542f9e1b4166da9a2a2367208a942b6c9123de4182a340b3823ecd4d",
+          "bytes": 486948
+        },
+        "4-1": {
+          "file": "mars/4-1.bin.gz",
+          "sha256": "c3cd1a0e2d8c30d9cb38b5cf7bbc6e58480d6d67b03483f4d00026e05cebf633",
+          "bytes": 503133
+        },
+        "4-2": {
+          "file": "mars/4-2.bin.gz",
+          "sha256": "d54a029e570a0908e8131be326f6a49a03b6c1067e9c9df50441931c779bccb2",
+          "bytes": 496372
+        },
+        "4-3": {
+          "file": "mars/4-3.bin.gz",
+          "sha256": "2831352e9a9dd7f1f5b1cfac419407961399d19d2d24e7d96ab9cdb0b552f8a8",
+          "bytes": 470548
+        },
+        "4-4": {
+          "file": "mars/4-4.bin.gz",
+          "sha256": "4e876671b4b7cbf4ca0175370d73af24bf7a17be35c2851b8e6ad9b5c3ea0898",
+          "bytes": 513878
+        },
+        "4-5": {
+          "file": "mars/4-5.bin.gz",
+          "sha256": "b50f8e3e9c623c0b310c5e0587a01c005cfbec29bcc01d52717bc76eef4075a7",
+          "bytes": 511486
+        },
+        "4-6": {
+          "file": "mars/4-6.bin.gz",
+          "sha256": "bbeed2231186a47f4d3734846e715cea5444d55579e4e7a77af9262edd292d16",
+          "bytes": 506901
+        },
+        "4-7": {
+          "file": "mars/4-7.bin.gz",
+          "sha256": "6d4009c80e1f99e3eb66b600934b3fd6f3b75e0a96690f2235badf90eec9a21c",
+          "bytes": 432515
+        },
+        "4-8": {
+          "file": "mars/4-8.bin.gz",
+          "sha256": "dcac24fb38258125fe838c3d25c3b1fc334616cb812026c43fe734efda7b909b",
+          "bytes": 357320
+        },
+        "4-9": {
+          "file": "mars/4-9.bin.gz",
+          "sha256": "d6717328598b6f57a2cd29ff4176d5ef68989f248f65a09708f35e1097ea171f",
+          "bytes": 475357
+        },
+        "4-10": {
+          "file": "mars/4-10.bin.gz",
+          "sha256": "f9c1b8b7939498ae74fe70f7dd5a0cf07e06938490e20d3e090f73d01fc4ac8e",
+          "bytes": 461243
+        },
+        "4-11": {
+          "file": "mars/4-11.bin.gz",
+          "sha256": "4a86f876dfc08eeac952dec2f359774dcfea96cc1a3249465dc81cd1ff562a9d",
+          "bytes": 444998
+        },
+        "4-12": {
+          "file": "mars/4-12.bin.gz",
+          "sha256": "e42a059fa0b5921c6f56764b28983badfca1d71fe0dad9967eff29361ab79755",
+          "bytes": 446934
+        },
+        "4-13": {
+          "file": "mars/4-13.bin.gz",
+          "sha256": "abaab56b33dc630dcc724336096b4693e6f5bff4c0e5b23791afa19e2dda0e80",
+          "bytes": 443724
+        },
+        "4-14": {
+          "file": "mars/4-14.bin.gz",
+          "sha256": "0e4e2ebbb3a8430367f3f529e4ca5417612c87cf7d2c729ea4f40023a6f76b22",
+          "bytes": 491605
+        },
+        "4-15": {
+          "file": "mars/4-15.bin.gz",
+          "sha256": "0ff45fe95b64441537a45219e41de0d18325b0d428f03243b98be01215640354",
+          "bytes": 507933
+        },
+        "4-16": {
+          "file": "mars/4-16.bin.gz",
+          "sha256": "9863df347f4835b5fa1a943f21a7181a6148c92f224160644d0eb550052aea08",
+          "bytes": 548707
+        },
+        "4-17": {
+          "file": "mars/4-17.bin.gz",
+          "sha256": "be1d5acaab0f5c16082053e22ed2e614ed66dccc4be464fd4d663bbc35ff7b6a",
+          "bytes": 505009
+        },
+        "5-0": {
+          "file": "mars/5-0.bin.gz",
+          "sha256": "ec51ec93283d031dbbe6dceea3dc8145d5314eb9a5d1f9407916bf05520ea302",
+          "bytes": 489775
+        },
+        "5-1": {
+          "file": "mars/5-1.bin.gz",
+          "sha256": "f314760d84d6beeb062905dd517501fed890a1c9cddd1256451b562a2c9a67f7",
+          "bytes": 488627
+        },
+        "5-2": {
+          "file": "mars/5-2.bin.gz",
+          "sha256": "0a24f591ef118d219a202c5a85a45822e5e9f73c23468a99d2cb638d18ca465c",
+          "bytes": 495450
+        },
+        "5-3": {
+          "file": "mars/5-3.bin.gz",
+          "sha256": "19376320da85034bc93d57d84f68aff3af6eb34a68ca56e049e781e2a965f39e",
+          "bytes": 512183
+        },
+        "5-4": {
+          "file": "mars/5-4.bin.gz",
+          "sha256": "9ca31ec7173c9faa1ee92c54ab34ad3497417f4e68350bd1f8963800e954b1d5",
+          "bytes": 505693
+        },
+        "5-5": {
+          "file": "mars/5-5.bin.gz",
+          "sha256": "109388e18a6e8ebdf63e71f80f0b825476243d3d05f2a7624ccafe087c538e33",
+          "bytes": 446815
+        },
+        "5-6": {
+          "file": "mars/5-6.bin.gz",
+          "sha256": "3252862bd08b170f206aee05e78a106bcb9dc7b834668a1a418c913835a2cadd",
+          "bytes": 500455
+        },
+        "5-7": {
+          "file": "mars/5-7.bin.gz",
+          "sha256": "9b799808d65958d9d21b1f0c26401315587a6bc6227910a57f4dc6b21d5d739a",
+          "bytes": 502466
+        },
+        "5-8": {
+          "file": "mars/5-8.bin.gz",
+          "sha256": "e31626bbc04dc255e82da114320bc6637fad376023f10477a438bdeff8e76eeb",
+          "bytes": 515877
+        },
+        "5-9": {
+          "file": "mars/5-9.bin.gz",
+          "sha256": "fd5630c93bb614a0636bd99038af32c74947a7c46f89eb469f9810b2635ffd16",
+          "bytes": 512241
+        },
+        "5-10": {
+          "file": "mars/5-10.bin.gz",
+          "sha256": "6f06ade7ed48db8a3b349cd7749a8cca852489967d8b5873e3aa035d2fd29289",
+          "bytes": 479124
+        },
+        "5-11": {
+          "file": "mars/5-11.bin.gz",
+          "sha256": "7642939ba816994f893f014d0ffa077872e8a4c5f93479c2ea10fe8fd0b05d6e",
+          "bytes": 369508
+        },
+        "5-12": {
+          "file": "mars/5-12.bin.gz",
+          "sha256": "34ced830fc232bf74ffe2aae04254b0db294f08166a545d9d1af302de803cdd5",
+          "bytes": 441697
+        },
+        "5-13": {
+          "file": "mars/5-13.bin.gz",
+          "sha256": "96953fde6c0966ae42fb5da9796940f5328011a42500c78f8e55355b65793236",
+          "bytes": 385699
+        },
+        "5-14": {
+          "file": "mars/5-14.bin.gz",
+          "sha256": "8ef236c541eaabcf870922216c9e6176328c659f17b9a5d641dc925432a76ddc",
+          "bytes": 470011
+        },
+        "5-15": {
+          "file": "mars/5-15.bin.gz",
+          "sha256": "3bbad4d699cfdb51f00456f08c74bdaeb851d501f754445e98b730fd17c011e9",
+          "bytes": 501491
+        },
+        "5-16": {
+          "file": "mars/5-16.bin.gz",
+          "sha256": "1540fe110117905dff8e28a43752dcb151e7f60a0ea2dc1c09f7fd26978c74b7",
+          "bytes": 509551
+        },
+        "5-17": {
+          "file": "mars/5-17.bin.gz",
+          "sha256": "e12977536b873d09e8bc13aa5bf985c21e5cf6b1d31686331fd89d6058fb1408",
+          "bytes": 491636
+        },
+        "6-0": {
+          "file": "mars/6-0.bin.gz",
+          "sha256": "bed9364306635337b2347e7ab9f03e2a8a3cac4ca651de8baf330d8c0338360a",
+          "bytes": 469371
+        },
+        "6-1": {
+          "file": "mars/6-1.bin.gz",
+          "sha256": "19c141208d777a0434c4751799c79313ff5202a8363d24b8d15af1f6787c110a",
+          "bytes": 473527
+        },
+        "6-2": {
+          "file": "mars/6-2.bin.gz",
+          "sha256": "2d8b8eed17f0b8f99102a015e1bd8eeb4862642fdc97891aa49c7a6805bd9a4b",
+          "bytes": 501044
+        },
+        "6-3": {
+          "file": "mars/6-3.bin.gz",
+          "sha256": "0a216b3ec077a3695f2cf30e19ce9b002db5c41408909d91d1c96fee6d8af864",
+          "bytes": 476833
+        },
+        "6-4": {
+          "file": "mars/6-4.bin.gz",
+          "sha256": "0f6c485fbb31964743679f879f7dc79c7d8c90e1abbec7ec5bdc83b9cbf34915",
+          "bytes": 479489
+        },
+        "6-5": {
+          "file": "mars/6-5.bin.gz",
+          "sha256": "de2972e695f6af99aac2fa92c67d6a2438defc0f1987fed77a953e7db9454b46",
+          "bytes": 482321
+        },
+        "6-6": {
+          "file": "mars/6-6.bin.gz",
+          "sha256": "49ba4be9cdd4683cfe1a0f094f068502b298da9641bbce7d07270c5312ec62c1",
+          "bytes": 474395
+        },
+        "6-7": {
+          "file": "mars/6-7.bin.gz",
+          "sha256": "b14dcd6c9c8804b77922a19745f0b49bdd24c55592f52cee216a998b9cb433f9",
+          "bytes": 482070
+        },
+        "6-8": {
+          "file": "mars/6-8.bin.gz",
+          "sha256": "74a64dd76f187083105c68c6b7936a52edeeaf2f76629da6d5110997ced073c7",
+          "bytes": 473779
+        },
+        "6-9": {
+          "file": "mars/6-9.bin.gz",
+          "sha256": "cc919d1a2e990a3963763acd9d3eebbaef8e2aa55dcb33fbc5b22573c658fa84",
+          "bytes": 491310
+        },
+        "6-10": {
+          "file": "mars/6-10.bin.gz",
+          "sha256": "1b16ecb7c8103dd9fc0f61f54ac3049a2f867fbbfe141f08decb6fdc3030f2c6",
+          "bytes": 478425
+        },
+        "6-11": {
+          "file": "mars/6-11.bin.gz",
+          "sha256": "e94370358059e0da2625f11a506eb485ecca4db54df4030fc8ea80e03238ab72",
+          "bytes": 446682
+        },
+        "6-12": {
+          "file": "mars/6-12.bin.gz",
+          "sha256": "bd537ec77608509b2b2e69e230705ec8a44276ce3885c94bac94ae0eddc38f09",
+          "bytes": 463149
+        },
+        "6-13": {
+          "file": "mars/6-13.bin.gz",
+          "sha256": "49606f3025dc5716da329c5935d4a14535993c1371287198163553f15f3fab6c",
+          "bytes": 477168
+        },
+        "6-14": {
+          "file": "mars/6-14.bin.gz",
+          "sha256": "6fe309502d8a77ad681011837c4cd912cf4e8fe15c3df12808092cd83d1618ca",
+          "bytes": 459422
+        },
+        "6-15": {
+          "file": "mars/6-15.bin.gz",
+          "sha256": "c2d6f44d81a0ec61ad382b2d87dc16fc9652a83212d0a1a16b9ca816e6215708",
+          "bytes": 506422
+        },
+        "6-16": {
+          "file": "mars/6-16.bin.gz",
+          "sha256": "36fd8ce6b878bd18eb83a1c51d061cfee565645d5671a8ceab39b2df658fc06b",
+          "bytes": 493828
+        },
+        "6-17": {
+          "file": "mars/6-17.bin.gz",
+          "sha256": "18eb1a504cc1a8284a5824acb9b91aa49f553b2139d991e995675542c165b602",
+          "bytes": 467039
+        },
+        "7-0": {
+          "file": "mars/7-0.bin.gz",
+          "sha256": "44ba5aaab955fb1570d924812aa27183a3f6aa48e5ec6bee4413d67fb39bec1d",
+          "bytes": 437085
+        },
+        "7-1": {
+          "file": "mars/7-1.bin.gz",
+          "sha256": "1d001dac464c48244b6e5117edfe2625e211a9d6c91fbbd5e01090f4e1299d41",
+          "bytes": 433176
+        },
+        "7-2": {
+          "file": "mars/7-2.bin.gz",
+          "sha256": "6c8d131b1b2b358b733ee1eea67feb2749d75fe382ed9722620776e202dbb060",
+          "bytes": 426793
+        },
+        "7-3": {
+          "file": "mars/7-3.bin.gz",
+          "sha256": "2816dba85fd6597e579227e39bb870cab3bfdb3cca515acf15b50d11d916de98",
+          "bytes": 429776
+        },
+        "7-4": {
+          "file": "mars/7-4.bin.gz",
+          "sha256": "e28fbb858f7597aee2e519aad277e63b36d5a1ac1f2b6352cb172ccb225d8ed7",
+          "bytes": 474624
+        },
+        "7-5": {
+          "file": "mars/7-5.bin.gz",
+          "sha256": "dcf6a0d517aa4b22bf98c925a96255f7cb78e6a912fe3de99379d8547d8f0e28",
+          "bytes": 457390
+        },
+        "7-6": {
+          "file": "mars/7-6.bin.gz",
+          "sha256": "70ffe8b824152c2ebcb086af0d4c747d9bae11d89a50d7b084d80815a0e495fe",
+          "bytes": 451976
+        },
+        "7-7": {
+          "file": "mars/7-7.bin.gz",
+          "sha256": "089af7b0851ee6b99009d53d9b5a5fb72ed10fa826c5e59e8b0eef469cbecfea",
+          "bytes": 435164
+        },
+        "7-8": {
+          "file": "mars/7-8.bin.gz",
+          "sha256": "a7791e842d55763019a5900e813be84a2e0ba9029955e42c31b5133031271f4d",
+          "bytes": 441047
+        },
+        "7-9": {
+          "file": "mars/7-9.bin.gz",
+          "sha256": "0f784150210dc1691a720ec2462bb2d9f4f425942bed80ed82ef15dab9913e9b",
+          "bytes": 451955
+        },
+        "7-10": {
+          "file": "mars/7-10.bin.gz",
+          "sha256": "0d5b626c52fe7a6b0853faf7192121a9ce2a3c4c7c659fdc94c088782f8942ff",
+          "bytes": 439887
+        },
+        "7-11": {
+          "file": "mars/7-11.bin.gz",
+          "sha256": "86b123dc416a34b3831f020adb609fb99080dc8c9d57c90e43671cfcabb7554f",
+          "bytes": 433493
+        },
+        "7-12": {
+          "file": "mars/7-12.bin.gz",
+          "sha256": "2039181820a4e7ac44ceaa128255b2dce2301ec6582d6f1cedc6354165b11be3",
+          "bytes": 423692
+        },
+        "7-13": {
+          "file": "mars/7-13.bin.gz",
+          "sha256": "1f7d8e54322eb671807460550c7a978e5daf6a4d77e764ba92ebd7584407f8de",
+          "bytes": 422067
+        },
+        "7-14": {
+          "file": "mars/7-14.bin.gz",
+          "sha256": "3c16fc1422dd9b552ad365cd2d23526dcbe5a9d52c979cc452a1667bdf13fcf9",
+          "bytes": 439146
+        },
+        "7-15": {
+          "file": "mars/7-15.bin.gz",
+          "sha256": "06d52e000e7701014ad24b5d06a0db3b2813388ca5578471db6bb88e0f3f6d8a",
+          "bytes": 479920
+        },
+        "7-16": {
+          "file": "mars/7-16.bin.gz",
+          "sha256": "5b5f4f3f2f861d5fc09446ea2edca254f7b8a5a353747518bff1b69171544083",
+          "bytes": 473714
+        },
+        "7-17": {
+          "file": "mars/7-17.bin.gz",
+          "sha256": "dd54dee5e0d1931cf4781fabb175500d7576066396878a246be48476f1f949df",
+          "bytes": 442982
+        },
+        "8-0": {
+          "file": "mars/8-0.bin.gz",
+          "sha256": "11ce4977772bdb3a8c5d304ff285c2c3d270dffd84027d3341f561ba03f47e91",
+          "bytes": 351626
+        },
+        "8-1": {
+          "file": "mars/8-1.bin.gz",
+          "sha256": "2b8417f16bdb2e30e680d7d3e260970a7935869bb946d57988f664ff326cd54a",
+          "bytes": 348389
+        },
+        "8-2": {
+          "file": "mars/8-2.bin.gz",
+          "sha256": "db581e2547a7f9a79501395a1977423c588be27cae03d8cc426d984de6276c2d",
+          "bytes": 345437
+        },
+        "8-3": {
+          "file": "mars/8-3.bin.gz",
+          "sha256": "6a3a715de46bba8528b9b7b39882e7693b20328c5abfc40f3dab264a5a377400",
+          "bytes": 344306
+        },
+        "8-4": {
+          "file": "mars/8-4.bin.gz",
+          "sha256": "09b3ff9bcbb7510abbd9e1efce87ad68366e8f4268851ff0aa3b90a82483cc72",
+          "bytes": 364037
+        },
+        "8-5": {
+          "file": "mars/8-5.bin.gz",
+          "sha256": "ba2edebcb3af3c95ab0191274d73d29b058577db1a919400b1a73268c66b4005",
+          "bytes": 342830
+        },
+        "8-6": {
+          "file": "mars/8-6.bin.gz",
+          "sha256": "9ad2e98e1a6dbd3e0fd6340416aab766059c2a48d61eb509b0bef773735c9425",
+          "bytes": 334544
+        },
+        "8-7": {
+          "file": "mars/8-7.bin.gz",
+          "sha256": "882a2972968e596269a362ffff31ccfdf33035de26cdc3a09b7188a1f90d6249",
+          "bytes": 331211
+        },
+        "8-8": {
+          "file": "mars/8-8.bin.gz",
+          "sha256": "b8ab86c5d686b5685fe1920c87f0688dfee7f0093f6f7e6c08f52fb432e443bc",
+          "bytes": 304457
+        },
+        "8-9": {
+          "file": "mars/8-9.bin.gz",
+          "sha256": "a2ec0da536c991bdd3989c8f6795a8aa12817ff3156be6b29236323aef5a3fce",
+          "bytes": 295219
+        },
+        "8-10": {
+          "file": "mars/8-10.bin.gz",
+          "sha256": "34350c1d0d4c788c2ab031a492d92c4eea856027e9627a5b621ffcece4edb83f",
+          "bytes": 308282
+        },
+        "8-11": {
+          "file": "mars/8-11.bin.gz",
+          "sha256": "e1ede6f283cfb549abfee8e0847aafbdd7289188df4cb0de32bfe18e9f64f6ae",
+          "bytes": 321403
+        },
+        "8-12": {
+          "file": "mars/8-12.bin.gz",
+          "sha256": "32997bdf683cf9437de1a3d4d8d25d41012d43e76a49064ed4d34981912fafb6",
+          "bytes": 312147
+        },
+        "8-13": {
+          "file": "mars/8-13.bin.gz",
+          "sha256": "659ffef5ab6da0709a52b269b851ea7481ee30dcbbf880fa2cc02cd01aadc91d",
+          "bytes": 343902
+        },
+        "8-14": {
+          "file": "mars/8-14.bin.gz",
+          "sha256": "961081ca5a96d5b8523b4b9fe4ed53e9390db6f251f01ad4ba495ebc4217a604",
+          "bytes": 380168
+        },
+        "8-15": {
+          "file": "mars/8-15.bin.gz",
+          "sha256": "907350f875036289301f678e762f0c7709ae7b6bcf567decf3cec5d425e4d956",
+          "bytes": 339099
+        },
+        "8-16": {
+          "file": "mars/8-16.bin.gz",
+          "sha256": "ea882ce363fcdc8c146c36287bbfd383b1d3d522bfba4c5e75d9cfe317ad9efb",
+          "bytes": 340534
+        },
+        "8-17": {
+          "file": "mars/8-17.bin.gz",
+          "sha256": "23cb6c68a5d21f287aa9a9ae4b7bd0455d5633e40b3af0a7a4ac652b191d7bea",
+          "bytes": 341650
+        }
+      },
+      "index": {
+        "file": "mars-index.json.gz",
+        "sha256": "1740a847dcb1ce94fb0b545d69e7565a9547a8077d6732967855928cde0475b2",
+        "count": 6000,
+        "stepDegrees": 3
+      },
+      "caveat": "Source gridding interpolates between instrument tracks. No per-cell observation counts or uncertainty layer acquired. Pixel spacing is not measurement accuracy. Search is regional terrain comparison, not rover-scale hazard or landing assessment."
+    },
+    "moon": {
+      "body": "moon",
+      "id": "lola",
+      "product": "ldem_16",
+      "pixelsPerDegree": 16,
+      "width": 5760,
+      "height": 2880,
+      "tileSize": 320,
+      "tileColumns": 18,
+      "tileRows": 9,
+      "scale": 0.5,
+      "radiusMeters": 1737400,
+      "datum": "Height relative to a 1,737,400 m sphere; Mean Earth/polar axis of DE421, east-positive longitude.",
+      "infoUrl": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+      "source": {
+        "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+        "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+        "bytes": 33177600,
+        "labelUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.lbl",
+        "labelSha256": "9aef29463ccc6ed3a3fbe0df3ecd830a99c69e16b564f455507dee2697096579",
+        "productVersion": "V3.1",
+        "observationStart": "2009-07-13T17:33:17",
+        "observationStop": "2016-11-29T05:48:19",
+        "retrievedAt": "2026-11-15T03:38:55.241Z"
+      },
+      "encoding": "gzip signed little-endian int16 horizontal row deltas, modulo 65536; first value in each row is absolute DN",
+      "tiles": {
+        "0-0": {
+          "file": "moon/0-0.bin.gz",
+          "sha256": "228f39b02a19ad8c8062cfc83fc53c5352771f9e154d9054e6fbeb4fa73846d4",
+          "bytes": 122655
+        },
+        "0-1": {
+          "file": "moon/0-1.bin.gz",
+          "sha256": "2704a5bfb34ed365834f915df93c9117660e5770b104830dedda64c0e4abcdf7",
+          "bytes": 124460
+        },
+        "0-2": {
+          "file": "moon/0-2.bin.gz",
+          "sha256": "8f546f0df84572676baa2039285311dcb760edf9081f7264fa3c9df3485d9713",
+          "bytes": 129897
+        },
+        "0-3": {
+          "file": "moon/0-3.bin.gz",
+          "sha256": "dc36d34ddaf04050ce7765ae4812908261d6cf94c0f3abb85f37e7b97a9f4758",
+          "bytes": 132236
+        },
+        "0-4": {
+          "file": "moon/0-4.bin.gz",
+          "sha256": "47529499388f6bb20cb207e5455c341281637c734e2487f1ccc2a8faf71de31d",
+          "bytes": 131981
+        },
+        "0-5": {
+          "file": "moon/0-5.bin.gz",
+          "sha256": "2431c3ba6d0e582aa1425ff634cddaf2713c0719597742f4348831fbac7ef616",
+          "bytes": 131594
+        },
+        "0-6": {
+          "file": "moon/0-6.bin.gz",
+          "sha256": "a5712ce4671d2505b9cafdcaede343b34b49205e87c5b6587ec8e5888ac0d364",
+          "bytes": 130183
+        },
+        "0-7": {
+          "file": "moon/0-7.bin.gz",
+          "sha256": "e26650516de0dc3eae6edacb76781692d7da91c2e3e67484a601c26c2ebe9d50",
+          "bytes": 130682
+        },
+        "0-8": {
+          "file": "moon/0-8.bin.gz",
+          "sha256": "2cf95217e67b715024fa0994d62c1d131b163f83619e3182d3d93a83ffe1e961",
+          "bytes": 132704
+        },
+        "0-9": {
+          "file": "moon/0-9.bin.gz",
+          "sha256": "1a369b11b14050fb6173279b51d0216c3b488576b8b68e688f7744eb6c68f322",
+          "bytes": 130783
+        },
+        "0-10": {
+          "file": "moon/0-10.bin.gz",
+          "sha256": "ef5260517e787c8f0bff7f5e5c2d4c6065fda7b7abe99a6eaf579134b7c1332a",
+          "bytes": 128702
+        },
+        "0-11": {
+          "file": "moon/0-11.bin.gz",
+          "sha256": "4d76b00b2b8a9c35350acf7eacf72fbf032cf420a0d9df7dc165b37001cc5922",
+          "bytes": 131608
+        },
+        "0-12": {
+          "file": "moon/0-12.bin.gz",
+          "sha256": "4e5e4177d9f03eb454c4c21480df3da9cd983e52fc0f00bb64eaf407186758bc",
+          "bytes": 131915
+        },
+        "0-13": {
+          "file": "moon/0-13.bin.gz",
+          "sha256": "a1022feae14360fbd92f60d913121f8f6cf564a42462bb2ff83ec39b244f62bf",
+          "bytes": 129812
+        },
+        "0-14": {
+          "file": "moon/0-14.bin.gz",
+          "sha256": "a9a3254e5f44795da48c4e56e9d2705d1dcfc72140bb006dfd420e8b928aef70",
+          "bytes": 130242
+        },
+        "0-15": {
+          "file": "moon/0-15.bin.gz",
+          "sha256": "d68813344c154c028fdc1719c8c002f71c51f25c6ef413bda0a2006e75382ae3",
+          "bytes": 126134
+        },
+        "0-16": {
+          "file": "moon/0-16.bin.gz",
+          "sha256": "f56bc63f9af28c6b8181be2c70a31a360d925258cc25431c316c391c4d911083",
+          "bytes": 125059
+        },
+        "0-17": {
+          "file": "moon/0-17.bin.gz",
+          "sha256": "c87f7cbecf5bb0d83e5a056d6429e35f79bc549df3c2ea66af422524eb774a81",
+          "bytes": 122338
+        },
+        "1-0": {
+          "file": "moon/1-0.bin.gz",
+          "sha256": "98fc8f743c751d4c464792ffae3af8abd81a6034123ff43cb569bb927d565bd0",
+          "bytes": 131218
+        },
+        "1-1": {
+          "file": "moon/1-1.bin.gz",
+          "sha256": "418bea96d765557fca0f8ec0995d1f487b85375c88e7d021205480c9f780d992",
+          "bytes": 123095
+        },
+        "1-2": {
+          "file": "moon/1-2.bin.gz",
+          "sha256": "c3f7cd722297d354fba911ece5c7b202ffb39059d26af49946cf3b91e1c0e5bc",
+          "bytes": 140114
+        },
+        "1-3": {
+          "file": "moon/1-3.bin.gz",
+          "sha256": "6bdb31be346bd9531ff30e5f8e958e10d5c1718b1b5739eed185a8a3e8de1164",
+          "bytes": 145129
+        },
+        "1-4": {
+          "file": "moon/1-4.bin.gz",
+          "sha256": "a44939e189888880279f85ced99630db47b1a1cf5d06ea7b0fae932055096431",
+          "bytes": 146942
+        },
+        "1-5": {
+          "file": "moon/1-5.bin.gz",
+          "sha256": "ffd86e3759348f52a23bbb90bb68dc930961887833c53911935ff9ea09e5d48a",
+          "bytes": 148527
+        },
+        "1-6": {
+          "file": "moon/1-6.bin.gz",
+          "sha256": "e2ad930c9af0fe6c7854b3e0b0d08d768a25e8ae5a9bbc1803fc371f6966b784",
+          "bytes": 151213
+        },
+        "1-7": {
+          "file": "moon/1-7.bin.gz",
+          "sha256": "48df1dffd99efdc4197b82977fb211346f9a0be453c860cad2d9d8ebd154f644",
+          "bytes": 151205
+        },
+        "1-8": {
+          "file": "moon/1-8.bin.gz",
+          "sha256": "24527efb885f9e95e009a696b0d6aa072a292ef45c18480a6eed07bd6b0b8188",
+          "bytes": 150439
+        },
+        "1-9": {
+          "file": "moon/1-9.bin.gz",
+          "sha256": "4cced9b881560f82ecaeeaf1c6641155579cec30367e3aecea52807657c0fd92",
+          "bytes": 149694
+        },
+        "1-10": {
+          "file": "moon/1-10.bin.gz",
+          "sha256": "525ed0fa7988acf0a5ef539e34f4ec1aa5ed9f756758a87c1a1febca965451ec",
+          "bytes": 149923
+        },
+        "1-11": {
+          "file": "moon/1-11.bin.gz",
+          "sha256": "9c7db77268181963e79f126095b0fd3434eeb275ec26791176245f94e3bb8b33",
+          "bytes": 148522
+        },
+        "1-12": {
+          "file": "moon/1-12.bin.gz",
+          "sha256": "70c55acca230cbb7c76abacdb16a068bcd766b86a4571d2633713683650f980c",
+          "bytes": 146744
+        },
+        "1-13": {
+          "file": "moon/1-13.bin.gz",
+          "sha256": "c4b7d457a83626d5cb933111411b499477b50aade6b6a4d5bb45a4fa459ae628",
+          "bytes": 148347
+        },
+        "1-14": {
+          "file": "moon/1-14.bin.gz",
+          "sha256": "6554054dbdec2621dd2c0de8cc1467f85f83d994d83e4df2d4d60904e3880771",
+          "bytes": 138357
+        },
+        "1-15": {
+          "file": "moon/1-15.bin.gz",
+          "sha256": "1f33a166ec2a9c172db383a8f6df912e11f6cbe065f7e538f9061091cd9608da",
+          "bytes": 132384
+        },
+        "1-16": {
+          "file": "moon/1-16.bin.gz",
+          "sha256": "a276055768df3500453dcce7ef3c5cac5b9d878d762e3858d05552e04ceb2486",
+          "bytes": 129684
+        },
+        "1-17": {
+          "file": "moon/1-17.bin.gz",
+          "sha256": "b73ed3beed93913e3d77bd98957297dbe316cf9694dd55ee36e6f854ce208284",
+          "bytes": 127587
+        },
+        "2-0": {
+          "file": "moon/2-0.bin.gz",
+          "sha256": "661dab0531e4ce53ca3560f9adc9bf175f043747ad9dc73e017c1662fc99f101",
+          "bytes": 138288
+        },
+        "2-1": {
+          "file": "moon/2-1.bin.gz",
+          "sha256": "44e70a4fc1bce7880bd1c056a8e66ec2070fb1f73d475fbc2cdc60c4370fe288",
+          "bytes": 133977
+        },
+        "2-2": {
+          "file": "moon/2-2.bin.gz",
+          "sha256": "59d3a92a876b8ec6f803d3c5f397fe75c14b692780e3f1b5ca54a9d582fd604c",
+          "bytes": 145303
+        },
+        "2-3": {
+          "file": "moon/2-3.bin.gz",
+          "sha256": "067ad1a52f1482d11764c7fd408763e52bfdbfaf42526fb82bc6a4a039984f8d",
+          "bytes": 150836
+        },
+        "2-4": {
+          "file": "moon/2-4.bin.gz",
+          "sha256": "67be34e71993165180f42393c15647a2cf84749ac3df38f62c083c56dd93c7a7",
+          "bytes": 155229
+        },
+        "2-5": {
+          "file": "moon/2-5.bin.gz",
+          "sha256": "400da078299f246da699771d086f7e87efc4799471a1407686190433a16d0dbb",
+          "bytes": 156654
+        },
+        "2-6": {
+          "file": "moon/2-6.bin.gz",
+          "sha256": "ee251afbeb64b8eb627e98359513608d71d8f29ecfb6935728e09caf800dcdfe",
+          "bytes": 156805
+        },
+        "2-7": {
+          "file": "moon/2-7.bin.gz",
+          "sha256": "4df5e79bea346e3c9cf17e12fa5c4f95c7757d6b0c355562999d44b6608ae480",
+          "bytes": 156830
+        },
+        "2-8": {
+          "file": "moon/2-8.bin.gz",
+          "sha256": "f6c911fd8bf021845297c85cf3606bea5d4e21457d300dfcfa1247c901f0e0af",
+          "bytes": 157595
+        },
+        "2-9": {
+          "file": "moon/2-9.bin.gz",
+          "sha256": "4206e887f4b97d87ffcc25d6174767322268befa07a9edfd9dc316b0b5c5197b",
+          "bytes": 158345
+        },
+        "2-10": {
+          "file": "moon/2-10.bin.gz",
+          "sha256": "600e27f1404a035cd9df069bc03fa163241e1bf42320fc9b713bf82c30536f15",
+          "bytes": 156956
+        },
+        "2-11": {
+          "file": "moon/2-11.bin.gz",
+          "sha256": "d2d36e7ad8bd12b7f3cec1d9b56ee1cb4fc9ee6e041d667a0ebd5487eece6633",
+          "bytes": 155538
+        },
+        "2-12": {
+          "file": "moon/2-12.bin.gz",
+          "sha256": "9506be15699325558e71b2a9023ed78cf4d3e0457998467727494d4650d9142f",
+          "bytes": 154367
+        },
+        "2-13": {
+          "file": "moon/2-13.bin.gz",
+          "sha256": "1f20926cdd4f89186c006e8a549ccaceda2a028ab834dd7947bfab1871fe145c",
+          "bytes": 152051
+        },
+        "2-14": {
+          "file": "moon/2-14.bin.gz",
+          "sha256": "3999f3eb82eb2448487cdb29258321791be840f7309607abb4a5ec3a485f3d1a",
+          "bytes": 111469
+        },
+        "2-15": {
+          "file": "moon/2-15.bin.gz",
+          "sha256": "f328548b88ab06498a3001d4e7ec750763f2f0069b47ed6c80f6bdf2591ea387",
+          "bytes": 119025
+        },
+        "2-16": {
+          "file": "moon/2-16.bin.gz",
+          "sha256": "f4e32aea42aa9656d4d8263a7c4b294471e818edc3b50f2176ab2ef574e2a36b",
+          "bytes": 115129
+        },
+        "2-17": {
+          "file": "moon/2-17.bin.gz",
+          "sha256": "01963c87f8226c4fd5bdc46e7834382de364c052c432bbbacbf4837899921c83",
+          "bytes": 107201
+        },
+        "3-0": {
+          "file": "moon/3-0.bin.gz",
+          "sha256": "fac83e0c273502eb4af58507fd09d60d1e7a7edfb2f5c7012d32e677c79100b5",
+          "bytes": 129808
+        },
+        "3-1": {
+          "file": "moon/3-1.bin.gz",
+          "sha256": "78d490705f88c8d71c9b35c34dcbe436d881ee32bd7cf3a7bd81c9dfb739741a",
+          "bytes": 130846
+        },
+        "3-2": {
+          "file": "moon/3-2.bin.gz",
+          "sha256": "17705e87c205ab54dadc183746375f2e32bc93256d33438e772d52b832049b22",
+          "bytes": 146401
+        },
+        "3-3": {
+          "file": "moon/3-3.bin.gz",
+          "sha256": "3e236b9139338b27bb488905a59a0e71b203a5259ee0bd668efff793b2cc6e5a",
+          "bytes": 150374
+        },
+        "3-4": {
+          "file": "moon/3-4.bin.gz",
+          "sha256": "47ebfb5a05ab262276b7e134c7abaf8c73e405804b30036a2e5cfbd56bc59fdf",
+          "bytes": 150392
+        },
+        "3-5": {
+          "file": "moon/3-5.bin.gz",
+          "sha256": "2cebfcc8026cd7d1bb6e196b6a1d4f392cfd1f5057459e37742cf1f4f51f2ac4",
+          "bytes": 153847
+        },
+        "3-6": {
+          "file": "moon/3-6.bin.gz",
+          "sha256": "8d582ad46ef1df70fe2644c6a21d1c04b52a81a754ae44cbdb473bbea2ef4248",
+          "bytes": 159946
+        },
+        "3-7": {
+          "file": "moon/3-7.bin.gz",
+          "sha256": "2dcc7bb707adb48111a9574a9790fb7d675198bc9aab942647b801cfad6b664a",
+          "bytes": 158307
+        },
+        "3-8": {
+          "file": "moon/3-8.bin.gz",
+          "sha256": "abcd9116008d65c16a5beff9747203c8967b7138712a7c549c440c62cc0bb22a",
+          "bytes": 159489
+        },
+        "3-9": {
+          "file": "moon/3-9.bin.gz",
+          "sha256": "a1e29eca5b4f04fcb574c2a1ca08b0780b0871f429120ee3dfe4253637e4ba5b",
+          "bytes": 159795
+        },
+        "3-10": {
+          "file": "moon/3-10.bin.gz",
+          "sha256": "c24f4765b82e72e0db0699f1a53bf944d82d2fc02892c215c23f9b267c11dc31",
+          "bytes": 159940
+        },
+        "3-11": {
+          "file": "moon/3-11.bin.gz",
+          "sha256": "56e4871ae249d6764b2a33ab2774bf441c72c081186bcb8b25ea3b2da840c441",
+          "bytes": 160663
+        },
+        "3-12": {
+          "file": "moon/3-12.bin.gz",
+          "sha256": "900af62feaebc63feab50714274d8c851250b3cb2e8c2773c516d5aa4c4645d6",
+          "bytes": 159950
+        },
+        "3-13": {
+          "file": "moon/3-13.bin.gz",
+          "sha256": "949285b938cb5462411a230c6e1792100f80ec7ee688f2e8af95cb061afb85db",
+          "bytes": 156096
+        },
+        "3-14": {
+          "file": "moon/3-14.bin.gz",
+          "sha256": "adb5630c2683fed88fa92030e3f48bf9b7060cadcdb484293ac9e7ebfeb5c915",
+          "bytes": 121882
+        },
+        "3-15": {
+          "file": "moon/3-15.bin.gz",
+          "sha256": "3b48c974511e41e1ca0395703383e7e374091575a19afc5682c3cf32be2fd58d",
+          "bytes": 116762
+        },
+        "3-16": {
+          "file": "moon/3-16.bin.gz",
+          "sha256": "aa8ee0cc3804a23c25fb999529e9d60d4ca42ef71d30fa91e79cda73e4c355c6",
+          "bytes": 117508
+        },
+        "3-17": {
+          "file": "moon/3-17.bin.gz",
+          "sha256": "6db28b44ecc4902f94275c9bdc42c9e80bd6821583eabc1accceaa5ede00bb17",
+          "bytes": 130421
+        },
+        "4-0": {
+          "file": "moon/4-0.bin.gz",
+          "sha256": "8e4da4ad064554643b47163935328a25742e14d5e6e90e5f60c7106c8da67f2b",
+          "bytes": 148863
+        },
+        "4-1": {
+          "file": "moon/4-1.bin.gz",
+          "sha256": "1a38ba31774dfc1448c7d0bc1d101077488ae4e8c4a374db2b346481f6d8ccbd",
+          "bytes": 136445
+        },
+        "4-2": {
+          "file": "moon/4-2.bin.gz",
+          "sha256": "e3ba605593183ccedca639fccd749014233b953298f247d590a2581acc23f799",
+          "bytes": 137248
+        },
+        "4-3": {
+          "file": "moon/4-3.bin.gz",
+          "sha256": "d8a591a2c10f6c4019bcf6bbff57ccb61e925390ecfc45aa26f26471d5008b3e",
+          "bytes": 155229
+        },
+        "4-4": {
+          "file": "moon/4-4.bin.gz",
+          "sha256": "2796576ec9c9a0e190528d0c4aca8cf1398907e2f5869fba3066a40bb92b1443",
+          "bytes": 152205
+        },
+        "4-5": {
+          "file": "moon/4-5.bin.gz",
+          "sha256": "f8bbbef40236aab0e2dd544d1ce1d15b93154c5ef5ca7db84f9abc257b80a8fd",
+          "bytes": 159394
+        },
+        "4-6": {
+          "file": "moon/4-6.bin.gz",
+          "sha256": "683fafedf17237566bf787d1d9110913a35edc6b98808dc4f905465110d4e10d",
+          "bytes": 161097
+        },
+        "4-7": {
+          "file": "moon/4-7.bin.gz",
+          "sha256": "a8f989833b42d638411211362401c3346eefd3a7ba60b95060195066c86595ba",
+          "bytes": 160289
+        },
+        "4-8": {
+          "file": "moon/4-8.bin.gz",
+          "sha256": "c6450e4cbf93288472b15d27500b258e0803d13bf854f324367b9f87c7f45006",
+          "bytes": 160497
+        },
+        "4-9": {
+          "file": "moon/4-9.bin.gz",
+          "sha256": "fc2087281c52bb086f6e7f0244b1d37ffb78a21f00263dee8c85269179c92aaf",
+          "bytes": 160484
+        },
+        "4-10": {
+          "file": "moon/4-10.bin.gz",
+          "sha256": "7bf3ee3447f42c4b0d6191e9536b729950d3f3ccf773460bb7c21e67c72ad7fd",
+          "bytes": 158340
+        },
+        "4-11": {
+          "file": "moon/4-11.bin.gz",
+          "sha256": "f4fd8bb8882317a123a725c33574bb9942ee2d19d989a870a7b9d8bc844fc6e0",
+          "bytes": 158958
+        },
+        "4-12": {
+          "file": "moon/4-12.bin.gz",
+          "sha256": "0777a15d393dba3bd1eac6dd92b2aa0a8b88fb6f556a97071eaa0d5ce82b0136",
+          "bytes": 160496
+        },
+        "4-13": {
+          "file": "moon/4-13.bin.gz",
+          "sha256": "017a36eaa194368085808ae27753fb5795d8c7c602e77f7c6bffab0b27c220dc",
+          "bytes": 158469
+        },
+        "4-14": {
+          "file": "moon/4-14.bin.gz",
+          "sha256": "ed2623ddc9839882c181b6b839c7d677cf24a0e87cbaa27a0a27fb12f2b9c7bc",
+          "bytes": 149012
+        },
+        "4-15": {
+          "file": "moon/4-15.bin.gz",
+          "sha256": "7f1053004f43e154d8e06310870f385296d4041564e71b87470f7aeb3cb556e9",
+          "bytes": 112521
+        },
+        "4-16": {
+          "file": "moon/4-16.bin.gz",
+          "sha256": "e0dc2b10d0e92e37eb8d9a2ba5aa845610c13c4d7bca141bd6e6b7838b90b039",
+          "bytes": 122352
+        },
+        "4-17": {
+          "file": "moon/4-17.bin.gz",
+          "sha256": "80cb104155590b4d4990a3f6f32235fde488d6eedbfe4cfca641bcde56c5bbea",
+          "bytes": 136613
+        },
+        "5-0": {
+          "file": "moon/5-0.bin.gz",
+          "sha256": "e4ee328b9dfa336b1b0d730f4b86526b2cb8456603777d9c96ae6c96ad07522e",
+          "bytes": 154902
+        },
+        "5-1": {
+          "file": "moon/5-1.bin.gz",
+          "sha256": "160a76e78a2268bacb49da3c56d8a6a02db1949e02bca945d653d7149c8a924f",
+          "bytes": 149941
+        },
+        "5-2": {
+          "file": "moon/5-2.bin.gz",
+          "sha256": "eb6d9453a25a00314f1734064cd1c1da74510579dfaa05c726886e5907138eba",
+          "bytes": 148275
+        },
+        "5-3": {
+          "file": "moon/5-3.bin.gz",
+          "sha256": "098e4f43acb442ec8e66c2a56c7580c81ceddadc089713953a6d289b4efaed7c",
+          "bytes": 152931
+        },
+        "5-4": {
+          "file": "moon/5-4.bin.gz",
+          "sha256": "6b4b5647d9cf42004d51180269a4620bfdb32e239e0de66b5ab8cae986c98437",
+          "bytes": 158022
+        },
+        "5-5": {
+          "file": "moon/5-5.bin.gz",
+          "sha256": "06be857696580a4c3dda7416a2669c42882482f47429b53ffc83d04591856df8",
+          "bytes": 157762
+        },
+        "5-6": {
+          "file": "moon/5-6.bin.gz",
+          "sha256": "c4db6483bb77ebbae5a5213f7609ceff5a700606e2ec5ed9cd7596c9339da4bd",
+          "bytes": 159319
+        },
+        "5-7": {
+          "file": "moon/5-7.bin.gz",
+          "sha256": "8134bc1b89bdfedc2ba40801a904d3a96807962850a5d96ba45e55d245f92987",
+          "bytes": 161135
+        },
+        "5-8": {
+          "file": "moon/5-8.bin.gz",
+          "sha256": "ef3147af79dac4ad86391756ba7a9b983f45a69800a753b97a078c2dffc8e102",
+          "bytes": 158995
+        },
+        "5-9": {
+          "file": "moon/5-9.bin.gz",
+          "sha256": "bfb3e9a5a146251683ff44beaffdb70ec92e3e7f086162b90b83e552d0c32454",
+          "bytes": 160695
+        },
+        "5-10": {
+          "file": "moon/5-10.bin.gz",
+          "sha256": "660c32b57f0b153863b2fee160f77135e115d37a6c317c6d8df0e814bacea5e2",
+          "bytes": 161473
+        },
+        "5-11": {
+          "file": "moon/5-11.bin.gz",
+          "sha256": "ec651d1889aca57328f7981064cb50a6747226992908df182deb5f196bf38ed6",
+          "bytes": 160514
+        },
+        "5-12": {
+          "file": "moon/5-12.bin.gz",
+          "sha256": "c538c2bfb6d4a1be534b12afe7925d300733ed08e5fc20e7fcdb2d1d687eb671",
+          "bytes": 157756
+        },
+        "5-13": {
+          "file": "moon/5-13.bin.gz",
+          "sha256": "faff50b83f758c0dca9e17f3465ecb30226bfea364a92b8789438dadd54f30da",
+          "bytes": 152016
+        },
+        "5-14": {
+          "file": "moon/5-14.bin.gz",
+          "sha256": "9d0682b43062c9ce6fdd73830750315300a29105fd3e95eb8dba12b1a86129ac",
+          "bytes": 154715
+        },
+        "5-15": {
+          "file": "moon/5-15.bin.gz",
+          "sha256": "d07229579bc7bbc862e28ac2f56d97c03eebaa0b660f0fda3d53ad25ac08ef16",
+          "bytes": 146071
+        },
+        "5-16": {
+          "file": "moon/5-16.bin.gz",
+          "sha256": "78370330678479c891e7a0b80c78f87083ddca43740e144ae55677fd5bf46415",
+          "bytes": 130097
+        },
+        "5-17": {
+          "file": "moon/5-17.bin.gz",
+          "sha256": "95fcafeedd4ce3aac4f06f8a07d2d5c069adc70da967edbbf13bfc669be6a844",
+          "bytes": 134491
+        },
+        "6-0": {
+          "file": "moon/6-0.bin.gz",
+          "sha256": "95a6f6cc0975536236818b39f3e41b81233cce60218257788ba5bb2331285627",
+          "bytes": 154775
+        },
+        "6-1": {
+          "file": "moon/6-1.bin.gz",
+          "sha256": "8ac2d5517c0244bd9ff0db77e95fc00964c68948fe189bf52ff5827d49d909b1",
+          "bytes": 153347
+        },
+        "6-2": {
+          "file": "moon/6-2.bin.gz",
+          "sha256": "1061ed1ba3075cef8bd72f983611b15f19b9e8dd5f8826cb7c99344fe1335375",
+          "bytes": 155206
+        },
+        "6-3": {
+          "file": "moon/6-3.bin.gz",
+          "sha256": "572b203745234159b3b8698e7ea8307da8b702f4626beb06b8424437db1e5167",
+          "bytes": 153885
+        },
+        "6-4": {
+          "file": "moon/6-4.bin.gz",
+          "sha256": "5028a2697906dccee72f68413f3b8285373cd91f3e56f3d4029137c18ee72906",
+          "bytes": 147161
+        },
+        "6-5": {
+          "file": "moon/6-5.bin.gz",
+          "sha256": "31d1e90922d8d44d64d93cf5cfd44fd792056e282cc1b67cb9d7f43e53f7dbfd",
+          "bytes": 154153
+        },
+        "6-6": {
+          "file": "moon/6-6.bin.gz",
+          "sha256": "a573130edad9ff476713867f3d6585110fe18924b1a98a396ac478344787ea52",
+          "bytes": 156967
+        },
+        "6-7": {
+          "file": "moon/6-7.bin.gz",
+          "sha256": "e74a4dedf1d33baf55d1e1a8069e5f1b6795ad87806aa58679f4be02a2746c0c",
+          "bytes": 156502
+        },
+        "6-8": {
+          "file": "moon/6-8.bin.gz",
+          "sha256": "aef24d8a935c9b3ac83e4e473be114890a96f0a8ceb1ac75e8a47008392f31f2",
+          "bytes": 148798
+        },
+        "6-9": {
+          "file": "moon/6-9.bin.gz",
+          "sha256": "0859a0cbf054fe2d0388f3e4dfa471a93f2e8071c7835ec8b0f3b0a56ae2b729",
+          "bytes": 150303
+        },
+        "6-10": {
+          "file": "moon/6-10.bin.gz",
+          "sha256": "c38a4b6bed67a047be48350a6ae881cf71fc25915e0b96fb86b129c7e7db70f4",
+          "bytes": 151225
+        },
+        "6-11": {
+          "file": "moon/6-11.bin.gz",
+          "sha256": "96a96b303201778a65fbd1dd9ed38d4be9dbaa1309c7d9a950efc119b13489ec",
+          "bytes": 158614
+        },
+        "6-12": {
+          "file": "moon/6-12.bin.gz",
+          "sha256": "2e40ca0b38369e863706c8410fc10e038ecc55e9c9045da6084738608351b0e6",
+          "bytes": 155923
+        },
+        "6-13": {
+          "file": "moon/6-13.bin.gz",
+          "sha256": "dd79074d12c3b1920eade1ae93461e0e6b1ea7ff18b3727f50ab9a9f1860e3c6",
+          "bytes": 156529
+        },
+        "6-14": {
+          "file": "moon/6-14.bin.gz",
+          "sha256": "46f352a570126f059305d49c1649323ef5e6b33a8fb0ebd7d6838cdc375c32b4",
+          "bytes": 151553
+        },
+        "6-15": {
+          "file": "moon/6-15.bin.gz",
+          "sha256": "238bbcf191ed36b265d0d4d72eb59937f3bd771a48b4c36e475bbd2948d9526b",
+          "bytes": 145380
+        },
+        "6-16": {
+          "file": "moon/6-16.bin.gz",
+          "sha256": "53abddbe5ef3f3671b9abebf6988f1edaa63bbca745d7797456262fdd5524749",
+          "bytes": 150049
+        },
+        "6-17": {
+          "file": "moon/6-17.bin.gz",
+          "sha256": "92abd3cc14b9024ca54fc5529ed865ce956e12b9322fbcbf8d87d4b2bd12b25b",
+          "bytes": 153839
+        },
+        "7-0": {
+          "file": "moon/7-0.bin.gz",
+          "sha256": "fa3f3d91bb187f281ff374b1b45e272461d42a1de1dcb53c1e6dddc01203ee34",
+          "bytes": 148143
+        },
+        "7-1": {
+          "file": "moon/7-1.bin.gz",
+          "sha256": "6deb09fea2679abadcbe02a6ab449148fb2e330e23b580eebbd29dee9108aeac",
+          "bytes": 145002
+        },
+        "7-2": {
+          "file": "moon/7-2.bin.gz",
+          "sha256": "d483fe5b92c478af43696d6b9027da0fd4c0e84558603be729e4d18f41240527",
+          "bytes": 147387
+        },
+        "7-3": {
+          "file": "moon/7-3.bin.gz",
+          "sha256": "377fdba78d650f989bd8c3ebd0c561b8c525db2d81b38be4781a487c967e271e",
+          "bytes": 145561
+        },
+        "7-4": {
+          "file": "moon/7-4.bin.gz",
+          "sha256": "fb1c4cb983032b6ec4a3d7de6b2aa82f8c501d8bc26230d18491ac7a10680219",
+          "bytes": 144107
+        },
+        "7-5": {
+          "file": "moon/7-5.bin.gz",
+          "sha256": "6b324e037865ba7e3c6034c304943a093058231d2c89df23f2352cbaacdf3de5",
+          "bytes": 146434
+        },
+        "7-6": {
+          "file": "moon/7-6.bin.gz",
+          "sha256": "0475e07e2e4acf9240b053f14d779ab70493fbf27b4abf4020eb41f5daddb49a",
+          "bytes": 146779
+        },
+        "7-7": {
+          "file": "moon/7-7.bin.gz",
+          "sha256": "e53ff67107f81917a155afc0b14a45e020b9db07c786da2e1c0a76aae9e7c8e4",
+          "bytes": 146426
+        },
+        "7-8": {
+          "file": "moon/7-8.bin.gz",
+          "sha256": "5923a4b70fe6706e4b673437e4c845f486111aa9a286309c52459d467a95ee33",
+          "bytes": 144300
+        },
+        "7-9": {
+          "file": "moon/7-9.bin.gz",
+          "sha256": "29caa42d3ba78dac546c1987a3a4b12aef23e7038d727330010cc472b1fcb730",
+          "bytes": 143945
+        },
+        "7-10": {
+          "file": "moon/7-10.bin.gz",
+          "sha256": "6c72f380d195ea9daf7482387060d1e249ba10dd8d25e2f291a0fd43158de618",
+          "bytes": 146181
+        },
+        "7-11": {
+          "file": "moon/7-11.bin.gz",
+          "sha256": "f54e2bad459ad334f13e7c73e5d2d6c0c2914f2adc3179c3f7f20d57deb07b79",
+          "bytes": 149117
+        },
+        "7-12": {
+          "file": "moon/7-12.bin.gz",
+          "sha256": "dd240e765a3eb7c186590eef5ecf298f15572a717ac47923a60c7c099d7c27fc",
+          "bytes": 150864
+        },
+        "7-13": {
+          "file": "moon/7-13.bin.gz",
+          "sha256": "8f1b1a09a994c5a4d3c005f7a1c2a7accbbec1c98f744ddd0aaab50c0d43e332",
+          "bytes": 148442
+        },
+        "7-14": {
+          "file": "moon/7-14.bin.gz",
+          "sha256": "a7f8269eeb6f725f373b8b20702bd326d3dd75f99cda431701f59984cb8b4131",
+          "bytes": 146374
+        },
+        "7-15": {
+          "file": "moon/7-15.bin.gz",
+          "sha256": "df3d94221deeb74275628ce18b0fa0e40375b24a4f99879254af5f383a8d2adf",
+          "bytes": 143724
+        },
+        "7-16": {
+          "file": "moon/7-16.bin.gz",
+          "sha256": "dd4ff3804f90a04aa82dbab1e46993f7b55047eb127e98614e3ba1cb6ffab4ef",
+          "bytes": 144833
+        },
+        "7-17": {
+          "file": "moon/7-17.bin.gz",
+          "sha256": "e34fb34be7ab0bc34b2483a01aa5451e664e11c68e543a0c82a4aec6562e7a5f",
+          "bytes": 146443
+        },
+        "8-0": {
+          "file": "moon/8-0.bin.gz",
+          "sha256": "a355ffb3974daad318328e4dc7593e482737b2493af5cc2f83ebef65595185f3",
+          "bytes": 130125
+        },
+        "8-1": {
+          "file": "moon/8-1.bin.gz",
+          "sha256": "7b0254bd4e394cf3c0a33dc00eebb0fd3558a7f695dae7c64f1e8568d8c31a16",
+          "bytes": 128751
+        },
+        "8-2": {
+          "file": "moon/8-2.bin.gz",
+          "sha256": "edb81df641bd53faf68b01cfbd7e578d849a9e1118dc85baeaeabf65b2955741",
+          "bytes": 128712
+        },
+        "8-3": {
+          "file": "moon/8-3.bin.gz",
+          "sha256": "9770bdcf0eb08015154b6d9360b1e85027a299622607e6123ffe0069f355b869",
+          "bytes": 130131
+        },
+        "8-4": {
+          "file": "moon/8-4.bin.gz",
+          "sha256": "015f47dee02c4760ec4df34979ae38182aa0f8ce07f79465e6489cac61940cdc",
+          "bytes": 127602
+        },
+        "8-5": {
+          "file": "moon/8-5.bin.gz",
+          "sha256": "8775ac9d167e1e329c4a553977936b9a01c434d2a090f90c45c86ed1a7307d27",
+          "bytes": 125323
+        },
+        "8-6": {
+          "file": "moon/8-6.bin.gz",
+          "sha256": "b5da3f0c920415d87301861e472b2b0e978e8aaa91256de7b4c26cf688331fe4",
+          "bytes": 120746
+        },
+        "8-7": {
+          "file": "moon/8-7.bin.gz",
+          "sha256": "89aba684ec702e9a5cea78bd2bc17bc048a4800f5ab32c47b7346ee57b368235",
+          "bytes": 124800
+        },
+        "8-8": {
+          "file": "moon/8-8.bin.gz",
+          "sha256": "e40abfd46802d531ed14b5d03c02266298545924f789c74b1d8c175c99a5ce7f",
+          "bytes": 125485
+        },
+        "8-9": {
+          "file": "moon/8-9.bin.gz",
+          "sha256": "cb88898287233ef3bafa35f7f74ec511a4733c0b3cf414be8c288eb2d86af36b",
+          "bytes": 126787
+        },
+        "8-10": {
+          "file": "moon/8-10.bin.gz",
+          "sha256": "f1d3f2ff4d02088044e072b54469487a70955f28b78e534df6eac953e7b31b2c",
+          "bytes": 126331
+        },
+        "8-11": {
+          "file": "moon/8-11.bin.gz",
+          "sha256": "f9e5ec6458c4e80883d87a47ade1a9e99799a23e96a010eb905e47fdda72073b",
+          "bytes": 125749
+        },
+        "8-12": {
+          "file": "moon/8-12.bin.gz",
+          "sha256": "ce7ce83efba14a41c32fe03ab82e64c79c97b1958a3e0323371c87311886e9d5",
+          "bytes": 128128
+        },
+        "8-13": {
+          "file": "moon/8-13.bin.gz",
+          "sha256": "212f319b2cded0cfdba2e836bad16e37d740b52f4f8f3e1b529e91862a753506",
+          "bytes": 127921
+        },
+        "8-14": {
+          "file": "moon/8-14.bin.gz",
+          "sha256": "62e381e54c1dbe60f79cbf7149779c9df6fd9160057ebc2b33abeea3aeca75d3",
+          "bytes": 129296
+        },
+        "8-15": {
+          "file": "moon/8-15.bin.gz",
+          "sha256": "a88ea66d2be2a4b763a44b25c48fd4065f17f9105c670b504f40502d48d849be",
+          "bytes": 129139
+        },
+        "8-16": {
+          "file": "moon/8-16.bin.gz",
+          "sha256": "e8ae53a1d2db5141681a89363976916a85fb4a9736eae5734ffb7e62ecbd1dc6",
+          "bytes": 127859
+        },
+        "8-17": {
+          "file": "moon/8-17.bin.gz",
+          "sha256": "9e6dccf57506ee91755c2d471d32a1212e47f51c3fc712f901eec1ae11666daa",
+          "bytes": 128591
+        }
+      },
+      "index": {
+        "file": "moon-index.json.gz",
+        "sha256": "45c1043d4b65ecbfea7d9ebb8ff1fb5bf3fd78fa081dd3b6d941a312b5f4f158",
+        "count": 6000,
+        "stepDegrees": 3
+      },
+      "caveat": "Source gridding interpolates between instrument tracks. No per-cell observation counts or uncertainty layer acquired. Pixel spacing is not measurement accuracy. Search is regional terrain comparison, not rover-scale hazard or landing assessment."
+    }
+  }
+}

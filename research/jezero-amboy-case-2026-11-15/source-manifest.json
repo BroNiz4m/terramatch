@@ -1,0 +1,53 @@
+{
+  "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.lbl": {
+    "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.lbl",
+    "file": "sources/megt44n000hb.lbl",
+    "status": 200,
+    "bytes": 4820,
+    "sha256": "bc624a238ba6d71a770a09f959ead96f1c144970fae435b8ca5e26208b42eec5",
+    "byteRange": null,
+    "retrievedAt": "2026-11-14T21:48:33.743Z"
+  },
+  "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.img": {
+    "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megt44n000hb.img",
+    "file": "sources/megt44n000hb.img.strip.bin",
+    "status": 206,
+    "bytes": 1635840,
+    "sha256": "43291ee099926416f6d3b12a91ec95d7f5bc1ef53ca75c2b15adfe0d0a2b3a38",
+    "byteRange": [
+      74741760,
+      76377599
+    ],
+    "retrievedAt": "2026-11-14T21:48:37.201Z"
+  },
+  "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc44n000hb.lbl": {
+    "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc44n000hb.lbl",
+    "file": "sources/megc44n000hb.lbl",
+    "status": 200,
+    "bytes": 3088,
+    "sha256": "e7bde6960c05e9fc48ff6417ee3e2b12ed271af16ea85294a775a6948d890a1e",
+    "byteRange": null,
+    "retrievedAt": "2026-11-14T21:48:37.559Z"
+  },
+  "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc44n000hb.img": {
+    "url": "https://pds-geosciences.wustl.edu/mgs/urn-nasa-pds-mgs_mola_topography_derived/meg128/megc44n000hb.img",
+    "file": "sources/megc44n000hb.img.strip.bin",
+    "status": 206,
+    "bytes": 817920,
+    "sha256": "f9b40352ebd46c7762fc32f387aaa7a30406bbc597e44dbd151d19f7d539bb05",
+    "byteRange": [
+      37370880,
+      38188799
+    ],
+    "retrievedAt": "2026-11-14T21:48:38.310Z"
+  },
+  "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N34/N34W116.hgt.gz": {
+    "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N34/N34W116.hgt.gz",
+    "file": "sources/N34W116.hgt.gz",
+    "status": 200,
+    "bytes": 8077841,
+    "sha256": "5c37445e7ae5555c56ca9e7e462adc57fff2a386f54f3b0bd9068f88da1580b4",
+    "byteRange": null,
+    "retrievedAt": "2026-11-14T21:48:44.425Z"
+  }
+}

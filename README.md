@@ -20,28 +20,33 @@ npm start
 Open **http://127.0.0.1:4173** in a browser with WebGL 2 and hardware acceleration.
 The static application is in `dist/`. It can be served from any ordinary static
 web host. Planet textures, the 3D runtime, photographs, ten reference DEM subsets
-and the global land mask are served locally. There is no API key requirement.
+and the global land mask are served locally. The global planetary search atlas
+(about 91 MB in compressed, demand-loaded numeric tiles) is also served locally. There is no API key requirement.
 New manual/automatic searches require internet access to public terrain tiles;
 place-name searches additionally use Open-Meteo / GeoNames. Bundled reference
 comparisons work without those services. Use HTTPS or localhost for source hashes.
 
 ## Use the application
 
-1. Choose Mars or Moon in **Explore**, then select a target region. Mars includes
-   Jezero, Gale / Bradbury Landing and Eberswalde delta area; Moon includes
-   Shackleton, Cabeus crater center and Nobile crater center.
-2. In **Manual search**, submit a place name or decimal latitude, longitude.
-   Alternatively choose **Pick on globe**, rotate Earth, and click a location.
-   **Analyze this area** fetches a new 32 × 32 km elevation window. Its source
-   tile hashes, land screening, charts and provenance remain available.
-3. In **Automatic search**, select a regional or global sample, or draw a region
-   by clicking two opposite globe corners. Choose a budget of 12, 24 or 48 windows
-   and start the survey. Actual new coordinate windows are fetched, analyzed and
-   compared with the target. Progress, failure/exclusion counts and cancellation
-   with partial results are supported. A global sample is not exhaustive.
-4. Select slope and/or relief and run **Rank loaded candidates**. Results include
-   bundled references and eligible on-demand windows. New candidates show their
-   manual/automatic origin. The latest 24 valid search windows are cached locally.
+1. **Automatic search** is the default. Choose Moon, Mars or Both and a terrain
+   condition, then **Find matching locations**. The system samples new Earth
+   coordinates and searches 6,000 indexed coordinate areas on each selected
+   planetary body. These are source-derived terrain descriptors, not a curated
+   list of matching pairs or the six reference targets.
+2. Open **Advanced options** to choose the Earth search region, draw a region,
+   or set a 6/12/24-area Earth sample. Cancellation keeps completed pairs. The
+   search record lists indexed areas, actual Earth centers, failures and exclusions.
+   Sampling is bounded and is not an exhaustive search of three surfaces.
+3. Select a result under the globe to see both locations, actual terrain
+   measurements, source provenance and the index. **Compare this pair** opens
+   all discovered pairs and detailed evidence for the selected pair. Pair search
+   uses equal 32 km extents, a common 2 km grid and 4 km slope baselines; original
+   instrument resolution and interpolation limits remain disclosed.
+4. **Manual search** retains the mission controls and optional reference targets.
+   Enter a place, decimal coordinates or pick on Earth. Manual terrain is sampled
+   at 500 m. Comparing with a 2 km planetary search window resamples both to the
+   common coarser grid. Loaded Earth areas remain available for inspection; the
+   last 24 valid Earth search windows are cached locally.
 5. Choose **Explore in 3D**. Watch the lander arrive, its door open, the ramp
    unfold, and the hexapod deploy. **Skip arrival** starts exploration immediately.
    The low **TerraMatch Cargo Lander**, **powered by Wh0Knows**, has four
@@ -194,6 +199,14 @@ not a landing-site, permanent-base or field-safety certification.
 
 ## Verification
 
+[Discovery validation](docs/DISCOVERY-VALIDATION.md) reviews three generated Idaho
+areas alongside Craters of the Moon and same-pipeline Amboy references. Compare
+and exports now show measured slope shares, relief differences, component
+penalties, footprint sensitivity, literature-review status and a proposed
+regional observation-planning exercise. Context is attached only to the exact
+reviewed footprints. Documented Magic Reservoir and Salda locations trigger
+coverage review even where both coastline screens pass.
+
 Compare starts with a table of all ranked candidate areas against the selected
 planetary target, showing coordinates, search/reference origin, average slope,
 elevation range and the existing terrain index. Use **Review evidence** to jump
@@ -247,3 +260,6 @@ are not extended over an entire crater. Thermal evidence retains its own
 statistic and time coverage and does not change the terrain-only ranking.
 See [THERMAL.md](docs/THERMAL.md), [THERMAL-EARTH.md](docs/THERMAL-EARTH.md) and
 [THERMAL-PLANETARY.md](docs/THERMAL-PLANETARY.md) for definitions and limits.
+
+Automatic pair-search method, original products, reproducibility and demo flow:
+[docs/AUTOMATIC-PAIR-SEARCH.md](docs/AUTOMATIC-PAIR-SEARCH.md).

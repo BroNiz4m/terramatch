@@ -1,8 +1,8 @@
 import {comparisonStatus} from './comparison-status.js';
 /** TerraMatch's reproducible terrain comparison. All terrain heights are sourced, not generated. */
 export const SOURCES = [
-  { id: 'mola', title: 'MGS MOLA MEGDR, 128 pixels per degree', agency: 'NASA / PDS Geosciences', url: 'https://pds-geosciences.wustl.edu/missions/mgs/megdr.html', license: 'NASA planetary archive; cite MOLA science team and dataset.', note: 'Altimeter-derived gridded topography relative to the Mars areoid. Cells without observations can be interpolated. Native north–south spacing is approximately 463 m.' },
-  { id: 'lola', title: 'LRO LOLA South Polar Digital Elevation Model', agency: 'NASA / PDS Geosciences', url: 'https://pds-geosciences.wustl.edu/missions/lro/lola.htm', license: 'NASA planetary archive; cite LOLA science team and dataset.', note: 'Lunar laser-altimeter terrain. Elevations relative to the 1,737.4 km lunar reference sphere. A polar projection is used for the south-pole subset.' },
+  { id: 'mola', title: 'MGS MOLA MEGDR elevation products', agency: 'NASA / PDS Geosciences', url: 'https://pds-geosciences.wustl.edu/missions/mgs/megdr.html', license: 'NASA planetary archive; cite MOLA science team and dataset.', note: 'Altimeter-derived gridded topography relative to the Mars areoid. Cells without observations can be interpolated. References use 128 ppd (approximately 463 m north–south); automatic pair search uses the global 32 ppd product (approximately 1,853 m north–south). These are postings, not effective accuracy.' },
+  { id: 'lola', title: 'LRO LOLA global and south-polar elevation models', agency: 'NASA / PDS Geosciences', url: 'https://pds-geosciences.wustl.edu/missions/lro/lola.htm', license: 'NASA planetary archive; cite LOLA science team and dataset.', note: 'Lunar laser-altimeter terrain. Elevations relative to the 1,737.4 km lunar reference sphere. References use the 240 m south-polar subset; automatic pair search uses the global LDEM_16 grid (approximately 1,895 m north–south). Source cells may interpolate ground tracks.' },
   { id: 'srtm', title: 'Skadi elevation tiles — mixed-source terrain', agency: 'NASA / NGA / USGS / NOAA and other providers; Mapzen / AWS distribution', url: 'https://registry.opendata.aws/terrain-tiles/', license: 'Underlying providers have different conditions; retain Mapzen / Tilezen attribution and source credits.', note: 'Terrain data: USGS SRTM / GMTED2010 / 3DEP; NOAA ETOPO1; Copernicus EU-DEM. Distributed by Mapzen. Regional inputs can differ; these are not unmodified NASA Earthdata files.' },
   { id: 'srtm-nasa', title: 'NASA SRTM Global 1 arc second V003', agency: 'NASA / LP DAAC', url: 'https://doi.org/10.5067/MEaSUREs/SRTM/SRTMGL1.003', license: 'NASA open Earth science data.', note: 'Reference documentation for SRTM elevation. Near-global coverage is 60° N to 56° S. The app uses the openly distributed Skadi derivative and identifies that distinction.' },
   { id: 'jezero', title: 'Jezero Crater landing site', agency: 'NASA Science', url: 'https://science.nasa.gov/mars/mars-2020/jezero-crater/', license: 'NASA site image/data policies apply.', note: 'Mission context for a crater basin containing evidence of an ancient lake and delta. The app terrain score does not test mineralogy or past habitability.' },
@@ -71,6 +71,17 @@ export function sampleTerrain(data, u, v) {
   return (h[y0*n+x0]*(1-tx)+h[y0*n+x1]*tx)*(1-ty)+(h[y1*n+x0]*(1-tx)+h[y1*n+x1]*tx)*ty;
 }
 
+const resampledGrids=new WeakMap();
+/** Compare at the coarser available spacing; never imply new native detail. */
+export function resampleTerrain(data,spacingMeters){
+  const original=data.widthMeters/(data.size-1);
+  if(spacingMeters===original)return data;
+  if(!Number.isFinite(spacingMeters)||spacingMeters<original||data.widthMeters!==data.depthMeters||data.widthMeters%spacingMeters!==0)throw Error('A matched coarser square grid is required.');
+  if(!resampledGrids.has(data))resampledGrids.set(data,new Map());const cache=resampledGrids.get(data);if(cache.has(spacingMeters))return cache.get(spacingMeters);
+  const size=data.widthMeters/spacingMeters+1,heights=[];for(let row=0;row<size;row++)for(let col=0;col<size;col++)heights.push(sampleTerrain(data,col/(size-1),row/(size-1)));
+  const result={...data,size,heights,gridSpacingMeters:spacingMeters,analysisResampling:{inputSpacingMeters:original,outputSpacingMeters:spacingMeters,method:'Bilinear sampling of the existing numeric grid at the common coarser spacing. No new source detail.'}};cache.set(spacingMeters,result);return result;
+}
+
 /** Geolocate an avatar/inspection point without treating polar projected axes as geographic degrees. */
 export function terrainCoordinates(data, u, v) {
   u=Math.max(0,Math.min(1,u));v=Math.max(0,Math.min(1,v));
@@ -99,19 +110,21 @@ export function analyzeTerrain(data) {
   for(let y=0;y<n;y++){slopeGrid[y*n]=slopeGrid[y*n+1];slopeGrid[y*n+n-1]=slopeGrid[y*n+n-2];}
   slopes.sort((a,b)=>a-b);
   const profile=heights.slice(Math.floor(n/2)*n, (Math.floor(n/2)+1)*n);
-  return {min,max,relief:max-min,slopeMean:slopes.reduce((a,b)=>a+b,0)/slopes.length,slopeP90:slopes[Math.floor((slopes.length-1)*0.9)],slopeHistogram:histogram.map(count=>count/slopes.length),slopeBinEdges:SLOPE_BINS.slice(),slopeGrid,profile,profileRelative:profile.map(h=>h-min),validCount:heights.length,slopeSampleCount:slopes.length,gridSpacingMeters:{x:dx,z:dz},gradientBaselineMeters:{x:2*dx,z:2*dz},extentMeters:{x:widthMeters,z:depthMeters},source:data.source};
+  return {min,max,relief:max-min,slopeMean:slopes.reduce((a,b)=>a+b,0)/slopes.length,slopeP90:slopes[Math.floor((slopes.length-1)*0.9)],slopeHistogram:histogram.map(count=>count/slopes.length),slopeBinEdges:SLOPE_BINS.slice(),slopeGrid,profile,profileRelative:profile.map(h=>h-min),validCount:heights.length,slopeSampleCount:slopes.length,gridSpacingMeters:{x:dx,z:dz},gradientBaselineMeters:{x:2*dx,z:2*dz},extentMeters:{x:widthMeters,z:depthMeters},comparisonEligible:comparisonStatus(null,data).scoreEligible,source:data.source};
 }
 
 export function compareTerrains(target, earth, weights = {}) {
   if(!comparisonStatus(null,target).scoreEligible||!comparisonStatus(null,earth).scoreEligible)throw new Error('This terrain window is excluded from ranking because its land coverage needs review (coastal bathymetry or coarse land-screen exclusion).');
-  const a=target.heights?analyzeTerrain(target):target,b=earth.heights?analyzeTerrain(earth):earth;
+  const spacing=Math.max(target.heights?target.widthMeters/(target.size-1):target.gridSpacingMeters?.x||500,earth.heights?earth.widthMeters/(earth.size-1):earth.gridSpacingMeters?.x||500);
+  const a=target.heights?analyzeTerrain(resampleTerrain(target,spacing)):target,b=earth.heights?analyzeTerrain(resampleTerrain(earth,spacing)):earth;
+  if(a.gridSpacingMeters?.x!==b.gridSpacingMeters?.x||a.gridSpacingMeters?.z!==b.gridSpacingMeters?.z||a.extentMeters?.x!==b.extentMeters?.x||a.extentMeters?.z!==b.extentMeters?.z)throw Error('Terrain comparisons require equal physical extents and grid spacing.');
   if(a.slopeHistogram?.length!==b.slopeHistogram?.length)throw new Error('Matched slope histogram bins are required.');
   const distance=0.5*a.slopeHistogram.reduce((sum,p,index)=>sum+Math.abs(p-b.slopeHistogram[index]),0);
   const reliefDistance=Math.min(1,Math.abs(Math.log((a.relief+1)/(b.relief+1)))/Math.log(4));
   const sw=Number.isFinite(weights.slope)?Math.max(0,weights.slope):0.65,rw=Number.isFinite(weights.relief)?Math.max(0,weights.relief):0.35,total=sw+rw;
   if(total===0)throw new Error('At least one terrain comparison weight must be positive.');
   const score=100*(1-(sw*distance+rw*reliefDistance)/total);
-  const activeMethod=`Index = 100 × [1 − (${(sw/total).toFixed(6)} × slope-distribution total-variation distance + ${(rw/total).toFixed(6)} × normalized log relief difference)]. All windows use 500 m sampling and 1,000 m gradient baselines.`;
+  const activeMethod=`Index = 100 × [1 − (${(sw/total).toFixed(6)} × slope-distribution total-variation distance + ${(rw/total).toFixed(6)} × normalized log relief difference)]. All windows use ${spacing.toLocaleString('en-US')} m sampling and ${(spacing*2).toLocaleString('en-US')} m gradient baselines.`;
   return {score:Math.round(score*10)/10,similarity:Math.round(score*10)/10,slopeDistance:distance,reliefDistance,components:[{id:'slope',name:'Slope distribution',score:100*(1-distance),weight:sw/total,target:a.slopeMean,earth:b.slopeMean,unit:'degrees'},{id:'relief',name:'Relative relief',score:100*(1-reliefDistance),weight:rw/total,target:a.relief,earth:b.relief,unit:'m'}],method:activeMethod,scope:'Terrain only',limitations:METHOD.limitations,unassessed:['Surface materials','Thermal equivalence (separate context records available)','Water or ice','Biology','Accessibility','Landing or base safety'],targetStats:a,earthStats:b};
 }
 

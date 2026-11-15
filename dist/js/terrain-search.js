@@ -1,6 +1,7 @@
 import {assessLandCoverage,DETAILED_MASK_SHA256} from './land-coverage.js';
 import {isLand,landWindowCoverage} from './land-geometry.js';
 import {nameSearchWindow,PLACE_NAME_SOURCE,clearPlaceNameCache} from './place-names.js';
+import {knownWaterReviews} from './reviewed-areas.js';
 export {isLand,landWindowCoverage} from './land-geometry.js';
 /** Runtime Earth terrain search. Fetches public elevation data; never substitutes generated heights. */
 import { SITES, analyzeTerrain, compareTerrains } from './science.js';
@@ -140,10 +141,12 @@ export async function screenEarthWindow(bounds,{signal,landmask,detailedLandmask
   return {mask,coarse,assessment:assessLandCoverage(bounds,coarse,detailed,source,error)};
 }
 export async function recheckSearchWindow(record,options={}){
-  const copy=structuredClone(record),{coarse,assessment}=await screenEarthWindow(copy.data.bounds,options),eligible=assessment.status==='screened-land';
+  const copy=structuredClone(record),{coarse,assessment}=await screenEarthWindow(copy.data.bounds,options);
+  const waterReviews=knownWaterReviews(copy.data),eligible=assessment.status==='screened-land'&&!waterReviews.length;
   const prior=copy.data.source.landScreening;
   if(!copy.data.source.previousLandScreening&&prior)copy.data.source.previousLandScreening=prior;
   copy.data.source.landScreening=coarse;copy.data.source.coverageAssessment=assessment;copy.data.comparisonEligible=eligible;copy.site.comparisonEligible=eligible;copy.data.coverageRecheckRequired=false;
+  copy.data.source.knownWaterReviews=waterReviews;
   return nameSearchWindow(copy,options);
 }
 
@@ -207,7 +210,8 @@ export async function loadEarthWindow({lat,lon,name,country='',origin='manual',s
   // Stable, metre-level coordinate identity independent of user-supplied place names.
   lat=Number(lat.toFixed(5));lon=wrapLon(Number(lon.toFixed(5)));const id=customId(lat,lon),bounds=windowBounds(lat,lon);
   emit(onProgress,{phase:'landmask',stage:'landmask',loaded:0,total:1,message:'Checking the 32 km window against coarse and detailed coastline polygons.'});
-  const {mask,coarse:coverage,assessment}=await screenEarthWindow(bounds,{signal,landmask,detailedLandmask}),eligible=assessment.status==='screened-land';
+  const {mask,coarse:coverage,assessment}=await screenEarthWindow(bounds,{signal,landmask,detailedLandmask});
+  const waterReviews=knownWaterReviews({body:'earth',bounds}),eligible=assessment.status==='screened-land'&&!waterReviews.length;
   const zoom=Math.max(0,Math.min(14,Math.ceil(Math.log2(2*Math.PI*WEB_MERCATOR_RADIUS*Math.cos(lat*DEG)/(256*200)))));
   const pixels=[],keys=new Set();
   for(let row=0;row<SIZE;row++)for(let col=0;col<SIZE;col++){
@@ -224,10 +228,11 @@ export async function loadEarthWindow({lat,lon,name,country='',origin='manual',s
   const retrievedAt=new Date().toISOString(),label=(String(name??'').trim()||`Earth ${lat.toFixed(3)}°, ${lon.toFixed(3)}°`).replace(/\s+/g,' ').slice(0,100);
   const nativePixelSpacing=2*Math.PI*WEB_MERCATOR_RADIUS*Math.cos(lat*DEG)/(256*2**zoom);
   const limitation='Coarse elevation cannot resolve individual rocks or robot-scale hazards; terrain resemblance does not establish material, thermal, biological or operational equivalence.';
-  const coastal=assessment.reason||'Coverage review required before terrain ranking.';
+  const coastal=waterReviews.map(review=>review.reason).join(' ')||assessment.reason||'Coverage review required before terrain ranking.';
   const site={id,name:label,country:String(country).slice(0,100)||'Earth',body:'earth',lat,lon,category:origin==='automatic'?'Automatically sampled study area':'Manually selected study area',description:`A newly retrieved 32 km Earth elevation window centered at ${lat.toFixed(5)}°, ${lon.toFixed(5)}°. ${eligible?'Passed the coarse and detailed coastline screens; small water bodies and current field conditions remain unverified.':coastal}`,origin,comparisonEligible:eligible,sourceIds:['terrarium','natural-earth'],useCases:['Terrain reconnaissance','Slope and relief comparison','Field-training candidate assessment'],limitations:[limitation,...(!eligible?[coastal]:[]),'Land access, permits, environmental protection and field safety have not been assessed.'],terrainFile:null,dataFile:`runtime:${id}`,color:'#dfba85',image:null};
   const source={id:'terrarium',title:'Mapzen / Tilezen Terrarium mixed-source elevation tiles',url:'https://registry.opendata.aws/terrain-tiles/',formatUrl:'https://github.com/tilezen/joerd/blob/master/docs/formats.md',attributionUrl:'https://github.com/tilezen/joerd/blob/master/docs/attribution.md',files:[...tiles.values()].map(tile=>({url:tile.url,sha256:tile.sha256,bytes:tile.bytes,retrievedAt:tile.retrievedAt,z:tile.z,x:tile.x,y:tile.y})),zoom,nativePixelSpacingMetersAtCenter:nativePixelSpacing,nativeResolutionMetersApprox:nativePixelSpacing,datum:'Source-dependent mixed DEM heights in metres; Web Mercator tile positioning (EPSG:3857). Consult original datasets for vertical datum and accuracy.',sampling:'Direct RGB Terrarium decode without colour conversion; pixel-center-correct bilinear samples across tile seams into a 500 m grid.',landScreening:coverage,coverageAssessment:assessment,landMask:mask===cachedMask?maskProvenance:{provided:true,note:'Caller-provided GeoJSON land mask.'},caveat:'Mixed elevation sources may include SRTM, USGS 3DEP/GMTED2010, Copernicus EU-DEM and NOAA bathymetry. Tile pixel spacing is not guaranteed source accuracy or effective resolution. Negative elevations are retained and are not used as an ocean classifier.'};
   const data={schemaVersion:1,siteId:id,name:label,body:'earth',center:{lat,lon},comparisonEligible:site.comparisonEligible,size:SIZE,widthMeters:EXTENT,depthMeters:EXTENT,gridSpacingMeters:SPACING,orientation:'Rows decrease latitude; columns increase continuous/unwrapped longitude.',units:'meters',origin,retrievedAt,bounds,projection:{type:'local-equirectangular',radiusMeters:R,centerLat:lat,centerLon:lon,wrapLongitude:true},heights,source};
+  source.knownWaterReviews=waterReviews;
   const stats=analyzeTerrain(data);data.summary={min:stats.min,max:stats.max,relief:stats.relief,slopeMean:stats.slopeMean,slopeP90:stats.slopeP90,slopeHistogram:stats.slopeHistogram,validCount:stats.validCount};
   emit(onProgress,{phase:'names',stage:'names',message:'Identifying the study-area region…'});
   const result=await nameSearchWindow({site,data,stats},{signal});
@@ -248,7 +253,7 @@ export async function scanEarthRegion({bounds,stepDegrees=2,maxCandidates=24,tar
       try{
         const item=await loadEarthWindow({...center,origin:'automatic',signal,landmask:mask,detailedLandmask:detailed,onProgress:tileProgress=>emit(onProgress,{phase:'scan',stage:'scan',...coverage,current:center,tileProgress,message:tileProgress.message})});
         coverage.completed++;
-        if(!item.site.comparisonEligible){coverage.excluded++;const review={...item,reason:item.data.source.coverageAssessment.reason};excluded.push(review);emit(onResult,review);}
+        if(!item.site.comparisonEligible){coverage.excluded++;const review={...item,reason:item.data.source.knownWaterReviews.map(review=>review.reason).join(' ')||item.data.source.coverageAssessment.reason};excluded.push(review);emit(onResult,review);}
         else{const result={...item,comparison:compareTerrains(targetTerrain,item.data,weights)};results.push(result);emit(onResult,result);}
       }catch(error){if(isAbort(error,signal))throw error;coverage.failed++;coverage.failures.push({...center,message:error.message});}
     }

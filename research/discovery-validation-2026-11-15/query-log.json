@@ -1,0 +1,22 @@
+{
+  "localDate": "2026-11-15",
+  "scope": "Bounded public-web discovery of primary geological and planetary-literature sources for three previously generated Idaho footprints. This is not an exhaustive bibliographic review.",
+  "queries": [
+    {"query": "\"43.25\" \"-114.24\"", "purpose": "Identify the generated sample 04 area."},
+    {"query": "site.usgs.gov Magic Reservoir latitude longitude Shoshone lava field Idaho", "primaryMatches": ["https://www.usgs.gov/volcanoes/black-butte-crater-lava-field", "https://www.blm.gov/visit/magic-reservoir"]},
+    {"query": "site.waterdata.usgs.gov \"MAGIC RES\" \"Latitude\"", "primaryMatches": ["https://waterdata.usgs.gov/monitoring-location/USGS-13142000/"]},
+    {"query": "\"Black Butte\" Idaho \"analog\" Mars", "purpose": "Review aliases of the volcanic field inside sample 04."},
+    {"query": "\"Black Butte Crater\" \"Mars\" analog", "primaryMatches": ["https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2143.pdf", "https://www.hou.usra.edu/meetings/lpsc2022/pdf/2944.pdf"]},
+    {"query": "\"Rock Corral Butte\" \"Mars\" analog", "primaryMatches": ["https://gsa.confex.com/gsa/2022NE/webprogram/Paper374961.html", "https://www.hou.usra.edu/meetings/lpsc2023/pdf/2644.pdf"]},
+    {"query": "site.usgs.gov \"Big Southern Butte\" \"Middle Butte\"", "primaryMatches": ["https://www.usgs.gov/observatories/yvo/news/big-buttes-eastern-snake-river-plain"], "limit": "Nearby large buttes are not assigned to a sampled footprint without coordinate containment."},
+    {"query": "site.pubs.usgs.gov \"West of Atomic City Vent\" \"43.449\"", "primaryMatches": ["https://pubs.usgs.gov/publication/sir20255020/full", "https://pubs.usgs.gov/sir/2025/5020/sir20255020.pdf"]},
+    {"query": "\"West of Atomic City\" \"Mars analog\"", "limit": "Prior use of the exact sample 09 footprint as a Jezero terrain analog was not established."},
+    {"query": "\"Arco rift zone\" \"analog\" Mars", "limit": "Regional planetary-research context does not establish an experimental footprint for sample 09."},
+    {"query": "\"Arco\" \"regional terrain\" \"Jezero\" analog", "limit": "No conclusion of scientific novelty follows from an unsuccessful narrow search."}
+  ],
+  "decisions": {
+    "idaho-sample-04": "Retain the archived numerical result as historical evidence. Withhold current ranking because the area contains the BLM Magic Reservoir reference point. Black Butte also has prior planetary research.",
+    "idaho-sample-06": "Prior planetary analogy is documented at the Rock Corral Butte landform. The regional Jezero index evaluates a different, coarse terrain comparison.",
+    "idaho-sample-09": "Geological context is supported by published USGS vent coordinates. Prior use of the exact footprint and scientific novelty remain unverified. Retain only a regional-terrain desktop hypothesis."
+  }
+}

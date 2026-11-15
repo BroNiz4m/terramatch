@@ -1,5 +1,8 @@
 # TerraMatch terrain data and comparison method
 
+> Update 15 November 2026: the default Automatic Search now finds Earth–Moon and Earth–Mars coordinate pairs using the global numeric search atlas. See [AUTOMATIC-PAIR-SEARCH.md](AUTOMATIC-PAIR-SEARCH.md) for the current 2 km pair method, bounded coverage and source products. The 500 m reference/manual pipeline below remains available.
+
+
 The application ships **real geolocated elevation subsets**, not procedural scientific terrain. The rocket, hexapod, terrain colours, atmosphere, surface decoration and deployment sequence are an interactive presentation layer. They do not constitute a reconstruction of a particular flight or a validated robot mobility model.
 
 ## Included windows
@@ -23,7 +26,7 @@ These are curated candidate/reference sites. The application does not claim they
 
 There are six planetary targets and four Earth windows. The four additional
 planetary grids reproduce the source-derived research grids documented in
-[PLANETARY-TARGET-AUDIT.md](PLANETARY-TARGET-AUDIT.md), with source/label hashes,
+[the planetary target audit record](../research/planetary-target-audit-2026-11-15/probes.json), with source/label hashes,
 coordinate-source references and actual local bounds. The original six terrain
 JSON files remain byte-identical to the preceding release.
 

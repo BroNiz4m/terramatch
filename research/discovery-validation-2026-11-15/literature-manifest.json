@@ -1,0 +1,98 @@
+[
+  {
+    "id": "black-butte",
+    "url": "https://www.usgs.gov/volcanoes/black-butte-crater-lava-field",
+    "finalUrl": "https://www.usgs.gov/volcanoes/black-butte-crater-lava-field",
+    "status": 403,
+    "file": "sources/black-butte.txt",
+    "bytes": 919,
+    "sha256": "9bd0a94e09de06bf7ccf5fcbe448b1435fb669b3aa03b90e895f234da7f8122c",
+    "retrievedAt": "2026-11-15T02:08:49.548Z"
+  },
+  {
+    "id": "magic-reservoir",
+    "url": "https://www.blm.gov/visit/magic-reservoir",
+    "finalUrl": "https://www.blm.gov/visit/magic-reservoir",
+    "status": 200,
+    "file": "sources/magic-reservoir.txt",
+    "bytes": 210159,
+    "sha256": "7451c4eaa239b4c035f77204cbc7ab67166c33fc07dcc2f7230d70b734ec49f9",
+    "retrievedAt": "2026-11-15T02:08:50.689Z"
+  },
+  {
+    "id": "magic-usgs",
+    "url": "https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=13142000&siteOutput=expanded",
+    "finalUrl": "https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=13142000&siteOutput=expanded",
+    "status": 200,
+    "file": "sources/magic-usgs.txt",
+    "bytes": 3172,
+    "sha256": "a26137c4d9c3695d5427add5d1ad1c1b1c411f3c6f6b17fbb8322e7509541261",
+    "retrievedAt": "2026-11-15T02:08:52.589Z"
+  },
+  {
+    "id": "inl-geology",
+    "url": "https://pubs.usgs.gov/sir/2025/5020/sir20255020.html",
+    "finalUrl": "https://pubs.usgs.gov/sir/2025/5020/sir20255020.html",
+    "status": 404,
+    "file": "sources/inl-geology.txt",
+    "bytes": 6744,
+    "sha256": "aacd74a88f80af0c79249db3f141b40c8d00df0da0b47ec5f95354d81a24c6c3",
+    "retrievedAt": "2026-11-15T02:08:54.038Z"
+  },
+  {
+    "id": "esrp-geology",
+    "url": "https://www.usgs.gov/observatories/yvo/news/big-buttes-eastern-snake-river-plain",
+    "finalUrl": "https://www.usgs.gov/observatories/yvo/news/big-buttes-eastern-snake-river-plain",
+    "status": 403,
+    "file": "sources/esrp-geology.txt",
+    "bytes": 919,
+    "sha256": "d07fe04706f1c22732eb3499e985b1d14971e5a48734200394116e63332d6689",
+    "retrievedAt": "2026-11-15T02:08:54.207Z"
+  },
+  {
+    "id": "basalt",
+    "url": "https://www.nasa.gov/missions/analog-field-testing/what-is-basalt/",
+    "finalUrl": "https://www.nasa.gov/missions/analog-field-testing/what-is-basalt/",
+    "status": 200,
+    "file": "sources/basalt.txt",
+    "bytes": 288470,
+    "sha256": "99aa52034a52d11921fe51b4166b10ef19a6bd88551111560a2dd9a979898634",
+    "retrievedAt": "2026-11-15T02:08:55.456Z"
+  },
+  {
+    "id": "lpsc-black-butte",
+    "url": "https://www.hou.usra.edu/meetings/lpsc2022/pdf/2944.pdf",
+    "status": 200,
+    "file": "sources/lpsc-black-butte.pdf",
+    "bytes": 791001,
+    "sha256": "b06ea57ae597a0bfcba1c7d1270f0f95539cf546ff1b3c6788ccc931acb90cd6",
+    "retrievedAt": "2026-11-15T02:15:58.888Z"
+  },
+  {
+    "id": "lpsc-low-shields",
+    "url": "https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2143.pdf",
+    "status": 200,
+    "file": "sources/lpsc-low-shields.pdf",
+    "bytes": 19300,
+    "sha256": "07412467460eabe76178fd2bef30578b6d680fbcf9d23f7be49868f4592cc5f8",
+    "retrievedAt": "2026-11-15T02:16:00.204Z"
+  },
+  {
+    "id": "lpsc-rock-corral",
+    "url": "https://www.hou.usra.edu/meetings/lpsc2023/pdf/2644.pdf",
+    "status": 200,
+    "file": "sources/lpsc-rock-corral.pdf",
+    "bytes": 2536374,
+    "sha256": "02e41a359855cb0c45ececc5fc803d86efcabb7b283673279d3c4d511feb5cda",
+    "retrievedAt": "2026-11-15T02:16:01.439Z"
+  },
+  {
+    "id": "inl-report",
+    "url": "https://pubs.usgs.gov/sir/2025/5020/sir20255020.pdf",
+    "status": 200,
+    "file": "sources/inl-report.pdf",
+    "bytes": 2234315,
+    "sha256": "ea3f9d2c918e0d99679205358bad8935fb39db69d5ce27bfcb3c48bb56363703",
+    "retrievedAt": "2026-11-15T02:16:03.617Z"
+  }
+]

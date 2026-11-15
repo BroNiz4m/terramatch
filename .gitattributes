@@ -1,0 +1,5 @@
+# Original archived source bytes must retain their recorded SHA-256 across OSes.
+dist/data/** -text
+dist/data/search-atlas/*.lbl -text -diff
+research/**/*.lbl -text -diff
+research/**/sources/** -text -diff

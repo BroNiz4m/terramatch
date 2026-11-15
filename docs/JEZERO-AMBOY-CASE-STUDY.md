@@ -191,7 +191,7 @@ node scripts/validate-jezero-amboy.mjs --fetch-sources
 ```
 
 Skrip hanya menulis
-[folder bukti kajian](research/jezero-amboy-case-2026-11-15/): `results.json`,
+[folder bukti kajian](../research/jezero-amboy-case-2026-11-15/): `results.json`,
 `source-manifest.json`, label MOLA, dua strip binari sumber dan fail Skadi asal.
 JSON menyimpan semua ukuran, 1,250 pasangan subset, kedudukan subset, hash input
 dan metadata sumber. Fingerprint fail produksi disemak sebelum/selepas analisis.

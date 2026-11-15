@@ -1,5 +1,14 @@
 # Research analog Bumi berdasarkan bukti
 
+**Semakan susulan 15 November 2026.** [Pengesahan hasil penemuan](DISCOVERY-VALIDATION.md)
+mendapati sampel Idaho 04 mengandungi rujukan Magic Reservoir. Indeks semasanya
+ditahan walaupun kedua-dua mask pantai lulus. Sampel 06 mempunyai sejarah kajian
+planetari Rock Corral Butte. Sampel 09 kekal sebagai calon terrain serantau dengan
+status kebaharuan belum dipastikan. Ranking research semasa mempunyai 17 kawasan
+layak. Jadual dan bilangan dalam kajian asal di bawah merekodkan keadaan sebelum
+semakan tambahan ini. Compare dan eksport kini mempunyai pencirian terrain
+dinamik serta konteks literatur bagi footprint yang disemak.
+
 15 November 2026 · baseline aplikasi `1209a9e49db69a6d2b9a590e0469065f605ec527`
 
 **Keputusan utama:** pilihan analog perlu mengikuti keadaan atau eksperimen yang
@@ -117,7 +126,7 @@ Setiap window baharu: 32 × 32 km nominal, 65 × 65 sampel, posting 500 m,
 baseline gradient 1 km. Data diperoleh daripada PNG elevasi Terrarium sebenar,
 bukan warna imej atau terrain generatif. Ia derivatif sumber campuran; bukan
 semua fail NASA Earthdata asli. Koordinat dan sumbernya direkodkan dalam
-[candidates.json](research/earth-analog-survey-2026-11-15/candidates.json).
+[candidates.json](../research/earth-analog-survey-2026-11-15/candidates.json).
 
 | Window baharu | Pusat latitude, longitude | Relief | Cerun purata | Keputusan ranking research |
 | --- | --- | ---: | ---: | --- |
@@ -219,7 +228,7 @@ menguji semua anjakan pusat, ralat sumber atau medan bahaya sebenar. Nilai 95.5
 tidak dipilih untuk mendakwa lokasi itu lebih sah. Kaedah yang disyorkan ialah
 menyatakan footprint terlebih dahulu, kemudian melaporkan sensitiviti.
 
-[Jadual penuh](research/earth-analog-survey-2026-11-15/summary.md) menyimpan
+[Jadual penuh](../research/earth-analog-survey-2026-11-15/summary.md) menyimpan
 semua calon layak, tiga preset serta subset 16/24 km bagi keenam-enam target.
 
 ## Implikasi untuk TerraMatch

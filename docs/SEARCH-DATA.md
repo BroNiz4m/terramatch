@@ -1,5 +1,8 @@
 # Runtime Earth terrain search
 
+> Update 15 November 2026: the default Automatic Search now finds Earth–Moon and Earth–Mars coordinate pairs using the global numeric search atlas. See [AUTOMATIC-PAIR-SEARCH.md](AUTOMATIC-PAIR-SEARCH.md) for the current 2 km pair method, bounded coverage and source products. The 500 m reference/manual pipeline below remains available.
+
+
 TerraMatch can retrieve and compare a **new Earth location selected by the user**, or sample new locations within a selected search region. The search module does not substitute the three bundled Earth reference candidates for a runtime search.
 
 ## Data path
@@ -223,3 +226,25 @@ with the served name-asset hash verified. Browser/GPU visual QA remains unverifi
 the browser host was unavailable and native Firefox did not provide a valid
 target-window observation. Local tests remain excluded from the public repository
 under its existing configuration.
+
+## Subsequent scientific characterization and inland-water review
+
+The preceding Idaho 87.5 verification records the release before this review.
+Current searches containing the published BLM Magic Reservoir marker, or the
+Lake Salda reference coordinate, receive coverage-review status with scores
+withheld. These are bounded, source-linked checks for documented water locations.
+They do not supply reservoir polygons, current water levels or a complete water
+inventory. The same checks apply to fresh searches, automatic results, restored
+cache records and precomputed statistics. Coastline findings remain separately
+inspectable. Reviewable completed windows count as exclusions rather than failed
+terrain retrievals.
+
+Compare and exports now characterize each selected pair using actual slope-bin
+shares, relief, component penalties and footprint sensitivity. The sensitivity
+exercise uses centered 16/24 km subsets plus 625 independent center combinations
+per extent from existing samples. Those ranges are deterministic, overlapping
+footprint experiments. They do not quantify confidence or DEM errors. Scores are
+withheld when the parent area needs coverage review. Exact 32 km reviewed
+footprints receive bounded literature context. Other searched areas explicitly
+retain unreviewed prior-use status. See [DISCOVERY-VALIDATION.md](DISCOVERY-VALIDATION.md)
+for the five-area assessment, adverse findings, sources and reproduction.

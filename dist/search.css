@@ -31,6 +31,10 @@
 .selected-area-help { margin-bottom: 20px; font-size: 12px; line-height: 1.7; color: var(--muted); }
 .ranking-method-details { margin: 20px 0; }
 .ranking-method-details > summary { cursor: pointer; padding: 12px 0; color: var(--teal); font-size: 12px; }
+#terrain-characterization { margin: 24px 0; }
+#terrain-characterization ol { padding-left: 21px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+#terrain-characterization h3 { margin-top: 20px; }
+#terrain-characterization a { color: var(--teal); }
 .scan-summary .button { margin-left: auto; }
 @media (max-width: 720px) {
   .candidate-overview { padding: 16px; }
