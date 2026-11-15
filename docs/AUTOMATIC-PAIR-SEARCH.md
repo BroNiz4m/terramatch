@@ -79,6 +79,12 @@ updates both locations and the right evidence panel. Planet previews switch the
 actual agency-mosaic globe. Regional thumbnails are explicitly labelled DEM
 shaded relief, not site photographs or mineral/imagery reconstructions.
 
+Selecting a pair focuses its Earth marker and draws a connector to the matching
+Moon or Mars preview. Its Earth endpoint follows the actual projected globe
+coordinate during rotation, zoom and resizing. The line is hidden when that
+point is behind the globe, outside the viewport, or another body/manual mode is
+shown. This is a comparison relationship, not a travel path or physical distance.
+
 Compare opens a table of every discovered pair and the selected pair's detailed
 charts. The existing all-Earth ranking against a single target remains available
 as additional evidence. All charts, characterization and source records use

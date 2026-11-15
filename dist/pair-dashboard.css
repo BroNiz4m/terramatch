@@ -31,6 +31,14 @@
 .planet-peeks button{background:transparent;border:0;color:var(--muted);font-size:10px;display:grid;justify-items:center;gap:5px;cursor:pointer}
 .planet-peeks img{width:70px;height:70px;border-radius:50%;object-fit:cover;box-shadow:inset -18px -5px 20px #000b,0 0 0 1px #547783}
 .planet-peeks button:hover img{outline:2px solid var(--teal)}
+.planet-peeks button.selected img{outline:2px solid var(--orange);outline-offset:3px}
+.planet-peeks button.selected>span{color:var(--orange)}
+.pair-connector{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:hidden}
+.pair-connector path{fill:none;vector-effect:non-scaling-stroke}
+.pair-connector-outline{stroke:#fff0d5;stroke-width:4;opacity:.9}
+.pair-connector-line{stroke:var(--orange);stroke-width:2}
+.pair-connector circle{fill:var(--orange);stroke:#fff0d5;stroke-width:2;vector-effect:non-scaling-stroke}
+.pair-connector-label{font-size:10px;font-family:inherit;text-anchor:middle;fill:#f6ead9;paint-order:stroke;stroke:#07151e;stroke-width:4;stroke-linejoin:round}
 .pair-results{padding:18px 20px;border-top:1px solid var(--line);background:#0b1c29}
 .pair-results .tray-heading{margin-bottom:8px}
 .pair-results .tray-heading h2{font-size:16px}
