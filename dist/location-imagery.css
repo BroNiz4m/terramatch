@@ -4,6 +4,11 @@
 .location-visual-toolbar button[aria-pressed=true]{color:var(--teal);background:#103b43;box-shadow:inset 0 0 0 1px #45837f}
 .evidence-area figure.location-visual img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;display:block;background:#071722}
 .evidence-area figure.location-visual figcaption{position:static;display:grid;gap:6px;padding:12px 14px;min-height:115px;background:#0b202b}
-.location-visual figcaption [data-imagery-credit]{font-size:12px;line-height:1.6;color:#c7d9df}.location-visual figcaption a,.location-visual figcaption button{font-size:13px;text-align:left;line-height:1.6;color:var(--teal)}
-.location-visual [data-imagery-status]{font-size:13px;line-height:1.7;color:var(--muted)}.location-visual [data-imagery-status]:empty{display:none}
+.location-visual figcaption [data-imagery-credit]{font-size:14px;line-height:1.6;color:#c7d9df}.location-visual figcaption a,.location-visual figcaption button{font-size:14px;text-align:left;line-height:1.6;color:var(--teal)}
+.location-visual [data-imagery-status]{font-size:14px;line-height:1.7;color:var(--muted)}.location-visual [data-imagery-status]:empty{display:none}
+.location-visual .imagery-status-badge{width:fit-content;border:1px solid #407b7c;border-radius:5px;padding:3px 8px;color:#9be4db;font-size:14px}
+.location-visual [data-imagery-resolution]{font-size:14px;line-height:1.6;color:var(--muted)}
+.imagery-record{font-size:14px;line-height:1.6;border-top:1px solid var(--line);padding-top:8px}.imagery-record summary,.imagery-source-summary summary{cursor:pointer;color:var(--teal);padding:4px 0}.imagery-record p{margin:8px 0;overflow-wrap:anywhere}
+.imagery-source-summary{padding:24px;margin:20px 0}.imagery-source-summary>p{color:var(--muted)}.imagery-source-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.imagery-source-pair article{min-width:0}.imagery-source-pair p{font-size:14px;line-height:1.7;overflow-wrap:anywhere}.imagery-source-pair strong{color:var(--teal)}
+@media(max-width:700px){.imagery-source-pair{grid-template-columns:1fr}}
 @media(max-width:520px){.location-visual-toolbar{flex-wrap:wrap}.location-visual-toolbar>span{font-size:12px}}

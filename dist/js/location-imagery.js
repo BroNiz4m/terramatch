@@ -1,12 +1,13 @@
+import {EARTH_IMAGERY_SOURCES,loadRecentEarthImagery} from './recent-earth-imagery.js?v=20261116-observations-1';
 /** Coordinate-derived, observed imagery. This module never supplies terrain measurements. */
 export const IMAGERY_SOURCES=[
- {id:'sentinel2-eox-2016',body:'earth',title:'EOxCloudless 2016 · Copernicus Sentinel-2 mosaic',agency:'ESA Copernicus / EOX IT Services GmbH',url:'https://cloudless.eox.at/documentation/faq',license:'CC BY 4.0; retain EOX and Copernicus attribution. Public service fair use; no availability guarantee.',note:'Historical 2016 cloudless satellite mosaic, requested for each selected geographic extent. Cropped/resampled display imagery; not current conditions or ranking input.',period:'2016 mosaic · not live imagery',credit:'EOxCloudless https://cloudless.eox.at by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2016)',endpoint:'https://tiles.maps.eox.at/wms'},
+ ...EARTH_IMAGERY_SOURCES,
  {id:'lroc-wac-trek',body:'moon',title:'LRO LROC WAC global mosaic v2',agency:'NASA/GSFC/ASU/LROC Team · NASA/JPL Moon Trek',url:'https://trek.nasa.gov/tiles/Moon/EQ/LRO_WAC_Mosaic_Global_303ppd_v02/1.0.0/WMTSCapabilities.xml',license:'Public mission imagery; retain NASA/GSFC/ASU/LROC and Trek credit.',note:'Historical WAC orbital mosaic. Geographic WMTS origin −180°,90°; 256 px tiles, two columns at level 0, levels 0–8. Dark areas and mosaic seams are retained.',period:'2009–2011 observations · historical mosaic',credit:'NASA/GSFC/Arizona State University · LROC Team · NASA/JPL Moon Trek',tileSize:256,maxZoom:8,template:'https://trek.nasa.gov/tiles/Moon/EQ/LRO_WAC_Mosaic_Global_303ppd_v02/1.0.0/default/default028mm/{z}/{y}/{x}.jpg'},
  {id:'ctx-murray-beta01',body:'mars',title:'MRO CTX · Murray Lab beta01 mosaic',agency:'NASA/JPL/MSSS/Caltech Murray Lab · Esri',url:'https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX/MapServer',license:'Murray Lab grants free use of beta01 for all purposes; credit NASA/JPL/MSSS/The Murray Lab and service host.',note:'Observed CTX orbital imagery in a preliminary uncontrolled mosaic. Acquisition dates vary between source frames; seams, gaps and positional offsets can occur. Not survey-grade positioning or an elevation product.',period:'Historical mosaic · acquisition dates vary by frame',credit:'NASA/JPL/MSSS/The Murray Lab · hosted by Esri',tileSize:512,maxZoom:11,template:'https://astro.arcgis.com/arcgis/rest/services/OnMars/CTX/MapServer/tile/{z}/{y}/{x}'}
 ];
 const RAD=Math.PI/180,radii={earth:6371008.8,moon:1737400,mars:3396190};
 export function imageryRequestPlan(site,data,{size=512}={}){
- const source=IMAGERY_SOURCES.find(s=>s.body===site?.body);
+ const source=site?.body==='earth'?EARTH_IMAGERY_SOURCES[1]:IMAGERY_SOURCES.find(s=>s.body===site?.body);
  if(!source||!Number.isFinite(site.lat)||Math.abs(site.lat)>90||!Number.isFinite(site.lon)||Math.abs(site.lon)>180)throw Error('Invalid imagery coordinates.');
  if(!Number.isInteger(size)||size<64||size>1024)throw Error('Unsupported imagery display size.');
  const width=data?.widthMeters??32000,depth=data?.depthMeters??32000,radius=data?.projection?.radiusMeters||radii[site.body];
@@ -22,7 +23,7 @@ export function imageryRequestPlan(site,data,{size=512}={}){
  if(source.body==='earth'){
   // Split at the antimeridian; WMS 1.1.1 uses longitude,latitude axis order.
   let left=west;while(left<east-1e-10){const wrap=Math.floor((left+180)/360),right=Math.min(east,180+360*wrap),x0=Math.round((left-west)/(east-west)*size),x1=Math.round((right-west)/(east-west)*size);
-   if(x1>x0){const url=new URL(source.endpoint);url.search=new URLSearchParams({SERVICE:'WMS',VERSION:'1.1.1',REQUEST:'GetMap',LAYERS:'s2cloudless',STYLES:'',SRS:'EPSG:4326',BBOX:[left-wrap*360,south,right-wrap*360,north].join(','),WIDTH:String(x1-x0),HEIGHT:String(height),FORMAT:'image/jpeg'});requests.push({url:url.href,destination:[x0,0,x1-x0,height]});}left=right;
+   if(x1>x0){const url=new URL(source.endpoint);url.search=new URLSearchParams({SERVICE:'WMS',VERSION:'1.1.1',REQUEST:'GetMap',LAYERS:source.layer,STYLES:'',SRS:'EPSG:4326',BBOX:[left-wrap*360,south,right-wrap*360,north].join(','),WIDTH:String(x1-x0),HEIGHT:String(height),FORMAT:'image/jpeg'});requests.push({url:url.href,destination:[x0,0,x1-x0,height]});}left=right;
   }return plan;
  }
  let zoom=0;while(zoom<source.maxZoom&&Math.max(east-west,north-south)/360*(2**(zoom+1)*source.tileSize)<size)zoom++;
@@ -43,8 +44,13 @@ async function decode(blob){
  if(globalThis.createImageBitmap)return createImageBitmap(blob);
  const url=URL.createObjectURL(blob);try{return await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=()=>reject(Error('The imagery response could not be decoded.'));image.src=url;});}finally{URL.revokeObjectURL(url);}
 }
-export async function loadLocationImagery(site,data,{signal,fetchImpl=globalThis.fetch,decodeImage=decode,createCanvas=()=>document.createElement('canvas'),timeoutMs=20000}={}){
- const plan=imageryRequestPlan(site,data),controller=new AbortController(),abort=()=>controller.abort();
+export async function loadLocationImagery(site,data,options={}){
+ const plan=imageryRequestPlan(site,data);
+ if(site.body==='earth')return loadRecentEarthImagery(plan,{decodeImage:decode,createCanvas:()=>document.createElement('canvas'),...options,loadArchive:()=>loadPlannedImagery(plan,options)});
+ return loadPlannedImagery(plan,options);
+}
+async function loadPlannedImagery(plan,{signal,fetchImpl=globalThis.fetch,decodeImage=decode,createCanvas=()=>document.createElement('canvas'),timeoutMs=16000}={}){
+ const site={id:plan.siteId,body:plan.body},controller=new AbortController(),abort=()=>controller.abort();
  if(signal?.aborted)throw new DOMException('Cancelled','AbortError');signal?.addEventListener('abort',abort,{once:true});const timer=setTimeout(abort,timeoutMs);
  const canvas=createCanvas();canvas.width=plan.size;canvas.height=plan.height;const context=canvas.getContext('2d',{willReadFrequently:true});if(!context){clearTimeout(timer);signal?.removeEventListener('abort',abort);throw Error('Image composition is unavailable.');}
  const records=[];
@@ -72,6 +78,6 @@ export async function loadLocationImagery(site,data,{signal,fetchImpl=globalThis
   for(let i=0;i<pixels.length;i+=4){if(pixels[i+3]>=250)opaque++;min=Math.min(min,pixels[i],pixels[i+1],pixels[i+2]);max=Math.max(max,pixels[i],pixels[i+1],pixels[i+2]);}
   const coverage=opaque/(pixels.length/4);if(coverage<.98||max-min<2)throw Error('Full usable imagery coverage is unavailable for this footprint. Elevation remains available.');
   const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(Error('Could not prepare the imagery preview.')),'image/png'));
-  return {blob,metadata:{siteId:site.id,body:site.body,center:plan.center,bounds:plan.bounds,extentMeters:{width:plan.widthMeters,depth:plan.depthMeters},sourceId:plan.source.id,product:plan.source.title,sourceURL:plan.source.url,period:plan.source.period,credit:plan.source.credit,license:plan.source.license,caveat:plan.source.note,retrievedAt:new Date().toISOString(),opaqueCoverage:coverage,processing:'Provider imagery cropped and resampled to the geographic study bounds; north up. No generated surface detail. Independent of DEM measurements and ranking.',requests:records}};
+  return {blob,metadata:{siteId:site.id,body:site.body,center:plan.center,bounds:plan.bounds,extentMeters:{width:plan.widthMeters,depth:plan.depthMeters},sourceId:plan.source.id,product:plan.source.title,sourceURL:plan.source.url,imageryStatus:'historical-mosaic',resolution:plan.source.body==='earth'?plan.source.resolution:plan.source.body==='moon'?'WAC mosaic: about 83 m/px at equator; varies with latitude':'CTX source: about 5–6 m/px; delivered preview resampled',previewSamplingMeters:plan.widthMeters/plan.size,period:plan.source.period,credit:plan.source.credit,license:plan.source.license,caveat:plan.source.note,retrievedAt:new Date().toISOString(),opaqueCoverage:coverage,processing:'Provider imagery cropped and resampled to the geographic study bounds; north up. No generated surface detail. Independent of DEM measurements and ranking.',requests:records}};
  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
 }
