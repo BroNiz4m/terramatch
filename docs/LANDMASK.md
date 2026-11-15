@@ -98,4 +98,4 @@ leaves the window unranked. Bundled reference terrain datasets are unchanged.
 The real Longyearbreen window is the regression example: 25/25 coarse land
 points, 2,975/4,225 detailed land points, and coastline segments crossing/touching
 the window. It now requires coverage review without a terrain score. The
-historical findings in LONGYEARBREEN-AUDIT.md describe the preceding release.
+historical findings describe the preceding release.
