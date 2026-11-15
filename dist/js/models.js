@@ -271,6 +271,140 @@ function hullLettering(text) {
     roughness:.72,metalness:0,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-2,side:THREE.FrontSide});
 }
 
+/** Original six-wheel visual rover. Suspension follows sampled terrain; this is not a mobility simulation. */
+export function createSurfaceRover() {
+  const root = new THREE.Group();
+  root.name = 'TerraMatch Surface Rover';
+  const ivory = material(0xe2dfd3, .63, .18), orange = material(0xef812c, .46, .4);
+  const dark = material(0x242b31, .62, .65), silver = material(0xa4aaac, .36, .82);
+  const tread = material(0x686d70, .72, .65), glass = material(0x111e2e, .13, .6);
+  const body = new THREE.Group(); root.add(body);
+  mesh(bevelBox(1.7, .28, 2.35), dark, body, 0, .92, .05);
+  mesh(bevelBox(1.63, .56, 1.42, .06), ivory, body, 0, 1.29, .12);
+  mesh(bevelBox(1.8, .12, 1.5), silver, body, 0, 1.01, .08);
+  for (const side of [-1, 1]) {
+    mesh(new THREE.BoxGeometry(.035, .05, 1.1), orange, body, side * .829, 1.075, .16);
+    for (const z of [-.43, .67]) {
+      const b = mesh(new THREE.CylinderGeometry(.027, .027, .025, 6), silver, body, side * .833, 1.48, z); b.rotation.z = Math.PI / 2;
+    }
+    const label = mesh(new THREE.PlaneGeometry(1.17, .29), hullLettering('Wh0Knows'), body, side * .837, 1.31, .12);
+    label.rotation.y = side * Math.PI / 2; label.name = 'Wh0Knows direct side lettering';
+    for (const z of [-.33, .44]) {
+      strut(body, new THREE.Vector3(side * .45, 1.58, z - .12), new THREE.Vector3(side * .45, 1.64, z - .12), .022, dark);
+      strut(body, new THREE.Vector3(side * .45, 1.64, z - .12), new THREE.Vector3(side * .45, 1.64, z + .12), .022, dark);
+      strut(body, new THREE.Vector3(side * .45, 1.64, z + .12), new THREE.Vector3(side * .45, 1.58, z + .12), .022, dark);
+    }
+    // Orange cable loops on the deck, not freestanding labels or backing cards.
+    const loop = mesh(new THREE.TorusGeometry(.075, .018, 6, 12), orange, body, side * .72, 1.17, -.79); loop.rotation.y = Math.PI / 2;
+  }
+  const front = mesh(bevelBox(1.79, .32, .32), ivory, body, 0, 1.04, -1.12); front.name = 'Front chassis';
+  const frontBrand = mesh(new THREE.PlaneGeometry(.89, .23), hullLettering('TerraMatch'), body, 0, 1.06, -1.291);
+  frontBrand.rotation.y = Math.PI; frontBrand.name = 'TerraMatch direct front lettering';
+  mesh(new THREE.BoxGeometry(.65, .025, .018), orange, body, 0, .929, -1.29);
+  function cameraLens(parent, x, y, z, radius) {
+    mesh(bevelBox(radius * 2.65, radius * 2.65, .07, .025), dark, parent, x, y, z);
+    cylinderAlongZ(parent, radius, .035, silver, x, y, z - .051);
+    cylinderAlongZ(parent, radius * .77, .04, glass, x, y, z - .07);
+  }
+  for (const side of [-1, 1]) cameraLens(body, side * .69, 1.05, -1.305, .105);
+  const mast = new THREE.Group(); mast.name = 'Binocular camera mast'; body.add(mast); mast.position.set(-.23, 1.2, -.65);
+  mesh(bevelBox(.13, .91, .12, .017), silver, mast, 0, .43, 0);
+  for (const y of [.12, .66]) cylinderAlongZ(mast, .095, .14, dark, 0, y, -.005);
+  mesh(bevelBox(.79, .25, .27, .035), ivory, mast, 0, .93, 0);
+  mesh(new THREE.BoxGeometry(.55, .025, .19), orange, mast, 0, 1.069, 0);
+  for (const side of [-1, 1]) cameraLens(mast, side * .255, .93, -.15, .086);
+  mesh(new THREE.CylinderGeometry(.13, .13, .18, 20), silver, body, .4, 1.67, .36);
+  mesh(new THREE.CylinderGeometry(.065, .065, .12, 16), dark, body, .4, 1.52, .36);
+  // Rear solar deck with discrete cells and visible silver grid, made from original geometry.
+  const solar = new THREE.Group(); solar.name = 'Rear solar array'; body.add(solar); solar.position.set(0, 1.4, 1.14); solar.rotation.x = -.10;
+  mesh(bevelBox(1.86, .075, .95, .02), silver, solar);
+  const blue = material(0x173c73, .34, .4);
+  const cellGeometry = new THREE.BoxGeometry(.211, .012, .198);
+  for (let x = 0; x < 8; x++) for (let z = 0; z < 4; z++) mesh(cellGeometry, blue, solar, (x - 3.5) * .222, .045, (z - 1.5) * .212);
+  for (const x of [-.68, .68]) strut(body, new THREE.Vector3(x, .96, .75), new THREE.Vector3(x, 1.36, 1.48), .035, dark);
+  mesh(bevelBox(1.3, .16, .23), dark, body, 0, 1.12, 1.54);
+  for (let i = 0; i < 9; i++) mesh(new THREE.BoxGeometry(.022, .13, .19), silver, body, (i - 4) * .13, 1.16, 1.55);
+  // Folded sample arm: two links, rotary joints and a cylindrical end tool.
+  const arm = new THREE.Group(); arm.name = 'Stowed instrument arm'; body.add(arm);
+  const armPoints = [new THREE.Vector3(.58, 1.24, -.64), new THREE.Vector3(-.55, 1.31, -.97), new THREE.Vector3(.48, 1.31, -1.36)];
+  for (let i = 0; i < 2; i++) {
+    strut(arm, armPoints[i], armPoints[i + 1], .065, silver);
+    strut(arm, armPoints[i].clone().add(new THREE.Vector3(0, .06, 0)), armPoints[i + 1].clone().add(new THREE.Vector3(0, .06, 0)), .025, dark);
+  }
+  for (const p of armPoints) cylinderAlongZ(arm, .11, .13, dark, p.x, p.y, p.z);
+  mesh(new THREE.CylinderGeometry(.09, .08, .19, 16), silver, arm, .48, 1.19, -1.36);
+  const wheels = [], suspensions = [], radius = .42, halfTrack = 1.3;
+  const drumGeometry = new THREE.CylinderGeometry(radius - .026, radius - .026, .31, 24);
+  const hubGeometry = new THREE.CylinderGeometry(.23, .23, .335, 20);
+  const cleatGeometry = new THREE.BoxGeometry(.342, .052, .054);
+  for (const side of [-1, 1]) {
+    const sideWheels = [];
+    for (let index = 0; index < 3; index++) {
+      const carrier = new THREE.Group(); carrier.name = `${side < 0 ? 'Left' : 'Right'} wheel ${index + 1}`; root.add(carrier);
+      const spin = new THREE.Group(); carrier.add(spin);
+      const drum = mesh(drumGeometry, tread, spin); drum.rotation.z = Math.PI / 2;
+      const hub = mesh(hubGeometry, silver, spin); hub.rotation.z = Math.PI / 2;
+      for (let k = 0; k < 20; k++) {
+        const a = k / 20 * TAU, cleat = mesh(cleatGeometry, silver, spin, 0, Math.cos(a) * (radius - .026), Math.sin(a) * (radius - .026)); cleat.rotation.x = a;
+      }
+      for (let k = 0; k < 8; k++) {
+        const a = k / 8 * TAU, b = mesh(new THREE.CylinderGeometry(.021, .021, .024, 6), dark, spin, side * .178, Math.cos(a) * .178, Math.sin(a) * .178); b.rotation.z = Math.PI / 2;
+      }
+      const neutral = new THREE.Vector3(side * halfTrack, radius, (index - 1) * 1.18);
+      carrier.position.copy(neutral);
+      const wheel = { side, index, carrier, spin, neutral, radius, contactWorld: new THREE.Vector3(), roll: 0 };
+      wheels.push(wheel); sideWheels.push(wheel);
+    }
+    const links = Array.from({ length: 5 }, () => mesh(new THREE.CylinderGeometry(.065, .065, 1, 8), silver, root));
+    const joints = Array.from({ length: 6 }, () => { const joint = mesh(new THREE.CylinderGeometry(.115, .115, .12, 16), dark, root); joint.rotation.z = Math.PI / 2; return joint; });
+    suspensions.push({ side, wheels: sideWheels, links, joints, rockerAngle: 0, bogieAngle: 0 });
+  }
+  const previous = new THREE.Vector3(), current = new THREE.Vector3(), forward = new THREE.Vector3(), axle = new THREE.Vector3();
+  let initialized = false, previousYaw = 0;
+  function update(dt = .016, elapsed = 0, moving = false, heightSampler) {
+    root.updateWorldMatrix(true, false); root.getWorldPosition(current);
+    forward.set(0, 0, -1).transformDirection(root.matrixWorld); forward.y = 0; forward.normalize();
+    const yaw = Math.atan2(-forward.x, -forward.z);
+    const travel = initialized && dt > 0 ? current.clone().sub(previous).dot(forward) : 0;
+    const yawDelta = initialized && dt > 0 ? Math.atan2(Math.sin(yaw - previousYaw), Math.cos(yaw - previousYaw)) : 0;
+    for (const wheel of wheels) {
+      const { carrier, spin, neutral, side, index } = wheel;
+      carrier.position.copy(neutral);
+      // Corner steering indicates a turn. Wheel travel, including reverse and pivot turns, drives roll.
+      carrier.rotation.y = index === 1 ? 0 : clamp(yawDelta * 12, -.4, .4) * (index === 0 ? 1 : -1);
+      axle.set(1, 0, 0).applyAxisAngle(UP, carrier.rotation.y).transformDirection(root.matrixWorld);
+      const support = radius * Math.sqrt(Math.max(0, 1 - axle.y * axle.y)) + .171 * Math.abs(axle.y);
+      const center = neutral.clone().applyMatrix4(root.matrixWorld);
+      const ground = heightSampler?.(center.x, center.z);
+      if (Number.isFinite(ground)) {
+        center.y = ground + support; carrier.position.copy(root.worldToLocal(center.clone()));
+        wheel.contactWorld.set(center.x, ground, center.z);
+      } else wheel.contactWorld.copy(center).add(new THREE.Vector3(0, -support, 0));
+      wheel.roll -= (travel + side * yawDelta * halfTrack) / radius;
+      spin.rotation.x = wheel.roll;
+    }
+    for (const suspension of suspensions) {
+      const [a, b, c] = suspension.wheels.map(w => w.carrier.position.clone());
+      const hip = new THREE.Vector3(suspension.side * .91, 1.01, -.25);
+      const bogie = b.clone().lerp(c, .5); bogie.x = suspension.side * 1.08; bogie.y += .25;
+      const fork = a.clone().lerp(bogie, .53); fork.x = suspension.side * 1.05; fork.y += .29;
+      const points = [[hip, fork], [fork, a], [fork, bogie], [bogie, b], [bogie, c]];
+      // Rear bogie beam follows middle/rear hubs; its central pivot connects to the rocker.
+      points.forEach(([start, end], i) => positionLink(suspension.links[i], start, end));
+      [hip, fork, a, b, c, bogie].forEach((p, i) => suspension.joints[i].position.copy(p));
+      suspension.rockerAngle = Math.atan2(bogie.y - a.y, bogie.z - a.z);
+      suspension.bogieAngle = Math.atan2(c.y - b.y, c.z - b.z);
+    }
+    previous.copy(current); previousYaw = yaw; initialized = true;
+  }
+  Object.assign(root.userData, {
+    update, resetMotion() { initialized = false; }, wheels, suspensions, body, mast, solar, arm, frontBrand,
+    wheelCount: 6, halfWidth: 1.64, halfLength: 1.67, wheelRadius: radius, forward: '-Z',
+    designRevision: 'surface-rover-reference-v1', modelCredit: 'Original procedural TerraMatch surface rover',
+  });
+  update(0); return root;
+}
+
 export function createCargoLander() {
   const root = new THREE.Group();
   root.name = 'TerraMatch Cargo Lander';

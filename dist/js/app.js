@@ -5,8 +5,8 @@ import {createPairDashboard} from './pair-dashboard.js?v=20261115-readability-1'
 import {PAIR_SOURCES} from './planetary-search.js';
 import {resampleTerrain} from './science.js';
 import {recheckSearchWindow,loadDetailedLandMask} from './terrain-search.js';
-import { GlobeView, createRobotPreview } from './globe.js?v=20261115-pair-link-1';
-import { Expedition } from './expedition.js?v=20261115-cargo-2';
+import { GlobeView, createRobotPreview } from './globe.js?v=20261115-rover-1';
+import { Expedition } from './expedition.js?v=20261115-rover-1';
 import { SITES, TARGETS, EARTH_SITES, SOURCES, METHOD, TASK_PROFILES, taskProfile, taskMeasures, loadTerrain, analyzeTerrain, compareTerrains, sampleTerrain } from './science.js';
 import { icon, escapeHTML as esc } from './icons.js?v=20261115-readability-1';
 import {initSearchUI,SEARCH_SOURCES} from './search-ui.js?v=20261115-readability-1';

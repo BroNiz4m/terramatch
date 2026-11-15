@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {createHexapod} from './models.js';
+import {createSurfaceRover} from './models.js?v=20261115-rover-1';
 import {BODY_SHAPES,loadGlobeDEM} from './globe-science.js';
 import {buildGlobeGeometry,bodyRadiusScene,surfacePoint,pointCoordinates} from './globe-geometry.js';
 
@@ -68,10 +68,10 @@ export class GlobeView {
 export function createRobotPreview(container){
   let renderer;try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});}catch{return{setActive(){}};}
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;container.append(renderer.domElement);
-  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(33,1,.1,30);camera.position.set(5,3.2,-5);camera.lookAt(0,.8,0);
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(33,1,.1,30);camera.position.set(5.6,3.5,-5.6);camera.lookAt(0,1,0);
   scene.add(new THREE.HemisphereLight('#d7edff','#5c3a23',2.5));const light=new THREE.DirectionalLight('#fff0cf',3);light.position.set(-2,7,-3);light.castShadow=true;light.shadow.mapSize.set(512,512);scene.add(light);
   const plane=new THREE.Mesh(new THREE.CircleGeometry(8,48),new THREE.MeshStandardMaterial({color:'#34414a',roughness:.95}));plane.rotation.x=-Math.PI/2;plane.receiveShadow=true;scene.add(plane);
-  const robot=createHexapod();robot.rotation.y=.25;scene.add(robot);let active=true;
+  const robot=createSurfaceRover();robot.rotation.y=.25;scene.add(robot);let active=true;
   const resize=()=>{const r=container.getBoundingClientRect();if(!r.width||!r.height)return;renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();};new ResizeObserver(resize).observe(container);resize();
   renderer.setAnimationLoop(time=>{if(!active)return;robot.rotation.y=.25+Math.sin(time*.00015)*.18;robot.userData.update?.(.016,time*.001,false,()=>0);renderer.render(scene,camera);});
   return{setActive(value){active=value;if(value)resize();}};

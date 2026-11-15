@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js?v=20261115-cargo-2';
+import {initializeCargoArrival,prepareCargoCamera,cargoSurfaceHeight,insideCargoWall,orientCargoRobot,finishCargoArrival,updateCargoArrival} from './cargo-arrival.js?v=20261115-rover-1';
 import { sampleTerrain, terrainCoordinates } from './science.js';
 import { thermalColor } from './thermal-colors.js';
 import {installSurfaceMaterial,surfaceSeed} from './surface-material.js';
@@ -99,7 +99,7 @@ export class Expedition {
       moving=forward?1:turn?.45:0;
       const angle=this.robot.rotation.y+this.orbitYaw,dist=this.cameraDistance,desired=new THREE.Vector3(x+Math.sin(angle)*dist,this.robot.position.y+Math.sin(this.orbitPitch)*dist+2,z+Math.cos(angle)*dist);desired.y=Math.max(desired.y,this.height(desired.x,desired.z)+2.5);this.camera.position.lerp(desired,1-Math.exp(-dt*3.5));this.lookTarget.lerp(new THREE.Vector3(x-Math.sin(this.robot.rotation.y)*3,this.robot.position.y+1,z-Math.cos(this.robot.rotation.y)*3),1-Math.exp(-dt*5));
     }
-    orientCargoRobot(this,dt);this.robot.userData.setStance?.(1);this.robot.updateMatrixWorld(true);this.robot.userData.update?.(dt,this.clock,moving,(x,z)=>this.walkSurfaceHeight(x,z));this.camera.lookAt(this.lookTarget);const sx=this.robot.position.x,sz=this.robot.position.z;this.sun.position.set(sx-35,this.robot.position.y+60,sz-20);this.sun.target.position.set(sx,this.robot.position.y,sz);this.sun.target.updateMatrixWorld();
+    orientCargoRobot(this,dt);this.robot.updateMatrixWorld(true);this.robot.userData.update?.(dt,this.clock,moving,(x,z)=>this.walkSurfaceHeight(x,z));this.camera.lookAt(this.lookTarget);const sx=this.robot.position.x,sz=this.robot.position.z;this.sun.position.set(sx-35,this.robot.position.y+60,sz-20);this.sun.target.position.set(sx,this.robot.position.y,sz);this.sun.target.updateMatrixWorld();
     if(time-(this.lastTelemetry||0)>180){this.lastTelemetry=time;this.onTelemetry?.(this.telemetry());this.drawMap();}this.renderer.render(this.scene,this.camera);
   }
 }
