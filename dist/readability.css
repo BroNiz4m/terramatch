@@ -1,0 +1,214 @@
+/* Shared reading scale and space for labels at desktop and mobile widths. */
+:root{--muted:#b0c3cf;--reading-line:1.65}
+html{font-synthesis:none;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{font-size:16px;line-height:var(--reading-line)}
+button,input,select,textarea{font-family:Inter,'Segoe UI',Arial,sans-serif}
+button,select,input{line-height:1.5}
+p,li,dd{overflow-wrap:break-word}
+.button,.segmented button,.text-link,.globe-header-actions button,.globe-data-controls button,.globe-data-controls select{font-size:14px;line-height:1.5}
+.button,.segmented button,select,input{min-height:42px}
+.button{white-space:normal}
+.main-nav{min-width:0;overflow-x:auto;scrollbar-width:thin}
+.nav-item{flex-shrink:0;font-size:16px}
+.page-subtitle{font-size:16px;line-height:1.7;max-width:75ch}
+.page-heading h1,.pair-search-mode .page-heading h1{font-size:clamp(32px,3vw,44px);line-height:1.2}
+.eyebrow,.project-tag,.status-pill,.mini-tag,.evidence-small-tag{font-size:12px;letter-spacing:.5px;line-height:1.5}
+.text-link,.license-note,.source-note,.discovery-help,.discovery-footer,.workspace-footer{line-height:1.7}
+.workspace-footer{font-size:13px;flex-wrap:wrap;gap:10px 24px;color:#b0c3cf}
+.workspace-footer>button{font-size:14px}
+.discovery-footer{font-size:13px;align-items:start;flex-wrap:wrap}
+.discovery-footer>span{max-width:75%;color:#b0c3cf}
+.discovery-footer .text-link{font-size:14px;white-space:normal}
+.search-input-wrap input{font-size:16px;min-height:46px}
+.manual-search-form .button{font-size:14px;min-height:46px}
+.automatic-controls{flex-wrap:wrap;align-items:end}
+.automatic-controls>label{font-size:14px;min-width:160px}
+.automatic-controls select{font-size:15px}
+.pair-search-controls{flex-wrap:wrap;align-items:end;gap:18px 24px}
+.pair-search-controls>label{font-size:15px;flex-wrap:wrap;white-space:normal}
+.pair-search-controls select{font-size:15px;min-height:44px}
+.pair-body-buttons button{min-height:42px;font-size:14px}
+.pair-search-options{font-size:15px}
+.pair-search-options summary{padding:8px 0}
+.pair-search-mode .mission-panel{display:none}
+.mission-panel{line-height:1.6}
+.mission-panel .field-label{font-size:14px}
+.mission-panel select{font-size:15px}
+.mission-identity{align-items:start}
+.mission-identity h3{font-size:16px;line-height:1.5}
+.mission-identity p{font-size:14px}
+.globe-header-actions{flex-wrap:wrap}
+.globe-panel .globe-top{flex-wrap:wrap}
+.globe-scale-label{font-size:14px}
+.globe-panel .globe-source{font-size:13px;max-width:65%!important;text-align:left;color:#b0c3cf}
+.globe-panel .globe-bottom{flex-wrap:wrap;align-items:start}
+.candidate-card{min-width:235px;align-items:start}
+.candidate-card h3{font-size:15px}
+.candidate-card p,.candidate-card .candidate-link{font-size:13px;line-height:1.6}
+.candidate-rank{width:23px;height:23px;font-size:12px}
+.destination-title{gap:12px;flex-wrap:wrap}
+.destination-coordinate{text-align:left;font-size:13px}
+.destination-description,.destination-feature p{font-size:15px;line-height:1.7}
+.destination-image>span{font-size:12px;letter-spacing:.4px;max-width:calc(100% - 20px)}
+.destination-panel>.button{font-size:14px}
+.robot-preview-caption{font-size:12px;letter-spacing:.5px}
+.pair-search-mode .explore-workspace{grid-template-columns:minmax(0,1fr) minmax(360px,410px)}
+.pair-results .tray-heading{gap:12px;flex-wrap:wrap}
+.pair-results .tray-heading h2,.selected-match h2{font-size:22px}
+.pair-list{max-height:520px}
+.pair-row{padding:14px;row-gap:12px}
+.pair-area strong{font-size:15px;line-height:1.5}
+.pair-area small{font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.pair-index small,.pair-open{font-size:13px}
+.pair-index{font-variant-numeric:tabular-nums}
+.pair-coverage,.pair-footnote{font-size:14px}
+.pair-coverage .text-link{font-size:14px;margin-left:0}
+.pair-images figcaption{position:static;font-size:12px;line-height:1.5;letter-spacing:0;padding:8px}
+.selected-match .status-pill{font-size:12px;white-space:normal}
+.pair-selected-title h3{font-size:18px}
+.pair-selected-title p{font-size:14px;font-variant-numeric:tabular-nums}
+.selected-match section h3{font-size:18px}
+.pair-why p,.pair-source-note p,.pair-evidence>p{font-size:15px;line-height:1.7}
+.pair-measure h4{font-size:15px}
+.pair-measure>div{grid-template-columns:48px minmax(25px,1fr) 80px;font-size:14px}
+.pair-measure strong{font-size:14px;font-variant-numeric:tabular-nums}
+.pair-why>strong>span{font-size:14px}
+.pair-source-note>strong{font-size:16px}
+.pair-empty{padding:28px 8px;font-size:16px}
+.pair-source-note>.text-link,.pair-actions .button{font-size:14px}
+.pair-results-empty{font-size:16px}
+.evidence-area-heading p,.evidence-source-context,.evidence-pair-heading{font-size:14px}
+.evidence-takeaway{align-items:start;flex-wrap:wrap}
+.evidence-takeaway p{font-size:16px;flex:1;min-width:220px}
+.evidence-findings p,.evidence-measure>p{font-size:16px}
+.evidence-findings h3{font-size:18px}
+.evidence-visible-limit,.evidence-source-caveat,.evidence-source-card .evidence-source-caveat{font-size:14px}
+.evidence-scale,.evidence-index,.evidence-index>span{font-size:14px;flex-wrap:wrap}
+.evidence-bar-row{grid-template-columns:55px minmax(45px,1fr) 90px;font-size:14px}
+.evidence-bar-row strong,.planet-metric strong,.metric-value,.evidence-stat strong{font-variant-numeric:tabular-nums}
+.evidence-source-card dl{font-size:15px}
+.evidence-source-card dl>div{grid-template-columns:130px minmax(0,1fr)}
+.evidence-source-title p:not(.eyebrow),.evidence-steps p{font-size:15px}
+.evidence-source-title h3{font-size:17px}
+.evidence-source-card>a,.evidence-bottom-actions>.text-link{font-size:14px}
+.evidence-json,.pair-json,.planet-record pre{font-size:13px;line-height:1.8;tab-size:2}
+.evidence-disclosure>summary{font-size:16px;line-height:1.6}
+.data-table-wrap{max-width:100%;scrollbar-width:thin}
+.data-table{font-size:14px;white-space:normal;min-width:640px}
+.data-table th{font-size:14px;letter-spacing:0;color:#c8d9e3}
+.data-table td{font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+.candidate-comparison-table{min-width:900px}
+.source-card p,.comparison-notes p,.comparison-notes li,.method-grid p,.method-grid li{font-size:16px}
+.source-card .license-note{font-size:13px;color:#b0c3cf}
+.source-card a{font-size:14px}
+.comparison-chart{overflow-x:auto}
+.chart-svg{min-width:640px;max-height:none}
+.chart-axis{font-size:22px;fill:#b0c3cf}
+.thermal-card{overflow-x:auto}
+.thermal-chart{min-width:640px}
+.thermal-chart text{font-size:16px}
+.thermal-scene p,.thermal-scale,.thermal-scene .text-link{font-size:13px}
+.planet-panel p,.planet-explore-grid p,#planet-hero-content>p{font-size:16px}
+.planet-panel a,.planet-record summary{font-size:14px}
+.planet-metric>span,.planet-metric small,.planet-hero figcaption,.planet-hero-sizes>p{font-size:14px}
+.planet-hero-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+.planet-hero-metrics .planet-metric{min-width:0}
+.planet-hero-metrics .planet-metric strong{font-size:19px;overflow-wrap:anywhere}
+.planet-hero-sizes{display:block;overflow-x:auto}
+.planet-hero-sizes .planet-size-chart,.planet-size-chart{width:100%;min-width:480px;height:auto;max-height:none}
+.planet-size-chart text{font-size:20px}
+.planet-scale-note p,#planet-data-status{font-size:14px}
+.planet-explore-grid article{flex-wrap:wrap}
+.modal{width:760px;line-height:1.7}
+.modal>p,.modal ul,.modal h3{font-size:16px}
+.modal pre{font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.inspection-grid span{font-size:14px}
+.inspection-note{font-size:14px}
+.expedition-top-left{width:420px;max-width:calc(100% - 285px)}
+.expedition-location{min-width:0}
+.expedition-location>div{flex-wrap:wrap;gap:8px}
+.expedition-location h1{font-size:22px;line-height:1.35;overflow-wrap:anywhere}
+.terrain-layer-control{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%}
+.terrain-layer-control button{font-size:14px;min-width:0;padding:8px 5px}
+.surface-material-note{font-size:13px;line-height:1.6;color:#d2e5e7;background:#0b2029ed;padding:8px 12px;border-radius:6px;margin:8px 0}
+.terrain-legend{font-size:13px}
+.expedition-footnote{font-size:12px;line-height:1.6;left:0;right:0;bottom:0;padding:6px 14px;color:#d5e1e6;background:#07141ded;max-height:70px;overflow:auto;pointer-events:auto}
+.control-strip{bottom:68px;max-width:calc(100% - 44px);width:max-content;white-space:normal;flex-wrap:wrap;gap:8px 14px;background:#0b1a25ed}
+.control-strip>span{font-size:13px}
+.terrain-readout,.camera-button{bottom:138px}
+.terrain-readout>span:not(.eyebrow),.terrain-readout>.text-link{font-size:14px}
+.terrain-readout>.eyebrow{font-size:12px}
+.camera-button{font-size:14px}
+.arrival-banner{bottom:85px;max-width:calc(100% - 30px);min-width:0;flex-wrap:wrap;gap:16px}
+.arrival-steps>span{font-size:13px}
+.arrival-steps b,.arrival-banner .button{font-size:15px}
+.expedition-view.evidence-open .control-strip{left:22px;right:370px;max-width:none;width:auto;transform:none}
+@media(max-width:1250px){
+ .pair-search-mode .explore-workspace{grid-template-columns:minmax(0,1fr) 360px}
+ .pair-row{grid-template-columns:18px 40px minmax(85px,1fr) 18px minmax(85px,1fr) 72px}
+ .planet-hero-metrics{grid-template-columns:1fr}
+ .planet-hero-metrics .planet-metric{padding:12px 15px}
+ .planet-hero-metrics .planet-metric strong{margin:4px 0}
+ .expedition-view.evidence-open .expedition-top-right{display:none}
+}
+@media(max-width:1000px){
+ .pair-search-mode .explore-workspace{grid-template-columns:minmax(0,1fr)}
+ .selected-match{order:1}
+ .source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .evidence-findings{grid-template-columns:1fr}
+ .evidence-steps>div{grid-template-columns:1fr}
+ .planet-hero{grid-template-columns:1fr}
+ #planet-hero-content{padding:20px 0 0;border-left:0;border-top:1px solid var(--line)}
+ .planet-hero-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .planet-explore-grid{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+ .view:not(.expedition-view){padding-left:16px;padding-right:16px}
+ .page-heading h1,.pair-search-mode .page-heading h1{font-size:30px}
+ .main-nav .nav-item{font-size:14px;padding-left:10px;padding-right:10px}
+ .discovery-footer>span{max-width:100%}
+ .discovery-footer{gap:10px}
+ .pair-search-controls>label{align-items:start;gap:10px}
+ .pair-search-controls select{width:100%}
+ .pair-search-controls>.button{min-width:0;width:100%}
+ .pair-row{grid-template-columns:24px minmax(0,1fr) 72px;gap:8px;padding:14px}
+ .pair-row>img,.pair-row .pair-arrow{display:none}
+ .pair-rank{grid-column:1;grid-row:1/3;font-size:14px}
+ .pair-row .pair-area{grid-column:2}
+ .pair-row .pair-index{grid-column:3;grid-row:1/3;font-size:20px}
+ .pair-open{grid-column:2/-1;font-size:14px;margin-top:0}
+ .pair-area strong{font-size:15px}
+ .pair-area small{font-size:13px}
+ .pair-images img{height:120px}
+ .globe-panel .globe-source{max-width:100%!important;margin-left:0}
+ .evidence-bar-row{grid-template-columns:48px minmax(35px,1fr) 85px;gap:8px}
+ .evidence-source-card dl>div{grid-template-columns:1fr;gap:4px}
+ .evidence-source-title{gap:12px}
+ .evidence-takeaway p{min-width:0;flex-basis:100%;padding-left:0;border-left:0}
+ .source-grid,.method-grid,.planet-hero-metrics{grid-template-columns:1fr}
+ .modal-backdrop{padding:12px}
+ .modal{padding:22px 18px;max-height:90dvh}
+ .inspection-grid{gap:8px}
+ .inspection-grid>div{padding:12px}
+ .inspection-grid strong{font-size:19px}
+ .expedition-top-left{top:12px;left:12px;width:calc(100% - 165px);max-width:none}
+ .expedition-location{padding:10px}
+ .expedition-location h1{font-size:18px}
+ .expedition-top-right{right:12px;top:12px;width:130px}
+ .minimap canvas{height:90px}
+ .minimap.expanded{width:calc(100vw - 24px);margin-left:calc(154px - 100vw)}
+ .terrain-layer-control{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .surface-material-note{font-size:12px}
+ .deployment-progress{width:100%;padding:10px;margin-top:10px}
+ .deployment-step{font-size:13px;gap:7px;padding:6px 0}
+ .control-strip{bottom:82px;width:calc(100% - 24px);max-width:none;padding:8px}
+ .control-strip>span:nth-child(2),.control-strip>span:nth-child(3){display:none}
+ .terrain-readout{bottom:148px;left:12px;min-width:0;max-width:calc(100% - 155px);padding:10px}
+ .camera-button{bottom:148px;right:12px;max-width:125px}
+ .touch-controls{bottom:270px;left:12px}
+ .arrival-banner{width:calc(100% - 24px);padding:14px}
+ .arrival-steps{gap:8px}
+ .arrival-steps>i{width:12px}
+ .arrival-banner .button{margin-left:0;width:100%}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{animation:none}}

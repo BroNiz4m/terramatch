@@ -5,6 +5,10 @@ const required = ['dist/js/cargo-arrival.js','dist/js/lander-arrival.js','dist/j
 required.push('dist/js/reviewed-areas.js','dist/js/terrain-characterization.js','dist/js/candidate-overview.js','dist/js/place-names.js','dist/data/place-regions.json.gz');
 required.push('dist/js/planetary-search.js','dist/js/pair-dashboard.js','dist/pair-dashboard.css','dist/data/search-atlas/manifest.json');
 required.push('dist/js/pair-connector.js','dist/js/evidence-views.js','dist/js/planet-preview.js','dist/evidence-layout.css');
+
+required.push('dist/readability.css','dist/js/display-format.js','dist/assets/fonts/InterVariable.woff2','dist/assets/fonts/Inter-LICENSE.txt');
+const inter=fs.readFileSync('dist/assets/fonts/InterVariable.woff2');
+if(inter.toString('ascii',0,4)!=='wOF2'||inter.length<100000)throw Error('Invalid bundled Inter font.');
 for (const file of required) if (!fs.existsSync(file)) throw Error(`Missing ${file}`);
 for (const file of fs.readdirSync('dist/js').filter(f => f.endsWith('.js'))) {
   const result = spawnSync(process.execPath, ['--check', path.join('dist/js', file)], { encoding: 'utf8' });

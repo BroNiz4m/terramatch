@@ -7,14 +7,16 @@
   <meta name="description" content="Find Earth's next training ground. Explore Mars and Moon terrain with a six-legged robot and compare Earth analog candidates using open elevation data.">
   <title>TerraMatch — Find Earth's next training ground</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="search.css">
-  <link rel="stylesheet" href="thermal.css">
-  <link rel="stylesheet" href="planet.css">
-  <link rel="stylesheet" href="evidence-layout.css?v=20261115-evidence-1">
-  <link rel="stylesheet" href="globe-layout.css">
-  <link rel="stylesheet" href="pair-dashboard.css?v=20261115-pair-link-1">
+  <link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=20261115-readability-1">
+  <link rel="stylesheet" href="search.css?v=20261115-readability-1">
+  <link rel="stylesheet" href="thermal.css?v=20261115-readability-1">
+  <link rel="stylesheet" href="planet.css?v=20261115-readability-1">
+  <link rel="stylesheet" href="evidence-layout.css?v=20261115-readability-1">
+  <link rel="stylesheet" href="globe-layout.css?v=20261115-readability-1">
+  <link rel="stylesheet" href="pair-dashboard.css?v=20261115-readability-1">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+  <link rel="stylesheet" href="readability.css?v=20261115-readability-1">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to workspace</a>
@@ -30,11 +32,11 @@
     <div class="topbar-actions"><span class="project-tag"><span></span> SPACE APPS 2026</span><button class="button button-outline button-small" id="export-report"></button></div>
   </header>
   <main id="main">
-    <section id="explore-view" class="view explore-view">
+    <section id="explore-view" class="view explore-view pair-search-mode">
       <div class="page-heading"><div><p class="eyebrow">OUR PLANET. YOUR NEXT FRONTIER.</p><h1>Find Earth's next training ground<span>.</span></h1><p class="page-subtitle">Discover Earth analogs for lunar and Martian terrain.</p></div><div class="heading-note"><span class="live-dot"></span> Open data. Explainable comparisons.</div></div>
       <div class="explore-workspace">
         <aside class="panel mission-panel" aria-label="Mission setup">
-          <div class="panel-title"><h2>Your mission</h2><span class="step-number">01 / 03</span></div>
+          <div class="panel-title"><h2>Your mission</h2></div>
           <label class="field-label">Destination</label><div class="segmented destination-toggle"><button data-body="moon"><span class="planet-dot moon-dot"></span>Moon</button><button data-body="mars" class="active"><span class="planet-dot mars-dot"></span>Mars</button></div>
           <label class="field-label" for="target-select">Target region</label><select id="target-select"></select>
           <label class="field-label" for="task-select">Exploration task</label><select id="task-select"><option value="terrain">Terrain exploration</option><option value="navigation">Navigation training</option><option value="fieldwork">Field operations</option><option value="thermal">Thermal environment study</option></select>
@@ -46,7 +48,7 @@
           <button class="unavailable-row" id="material-note"><span class="empty-check"></span>Surface materials<span class="mini-tag">CONTEXT</span></button>
           <p class="micro-copy">Compare measurable terrain first. Geological context is reviewed separately.</p>
           <button class="button button-primary" id="find-analogs"></button>
-          <div class="mission-identity"><div class="mini-robot-icon" id="mission-robot-icon"></div><div><span class="eyebrow">MEET YOUR EXPLORER</span><h3>Six legs. One curious mind.</h3><p>Take control of a hexapod and get a different perspective.</p></div><span class="orbit-ring"></span></div>
+          <div class="mission-identity"><div class="mini-robot-icon" id="mission-robot-icon"></div><div><span class="eyebrow">MEET YOUR EXPLORER</span><h3>Explore from a new perspective.</h3><p>Navigate the selected terrain and inspect its evidence.</p></div><span class="orbit-ring"></span></div>
           <button class="text-link" id="method-link">How the matching works <span>↗</span></button>
         </aside>
         <section class="globe-panel" aria-label="Interactive planetary globe">
@@ -66,7 +68,7 @@
           <p id="destination-description" class="destination-description"></p>
           <div class="destination-features" id="destination-features"></div>
           <div class="source-chips" id="destination-source-chips"></div>
-          <div class="robot-preview" id="robot-preview"><div class="robot-preview-caption"><span>HEXAPOD EXPLORER</span><span class="live-dot"></span></div></div>
+          <div class="robot-preview" id="robot-preview"><div class="robot-preview-caption"><span>INTERACTIVE EXPLORER</span><span class="live-dot"></span></div></div>
           <p class="expedition-invite">Enter the terrain. Inspect the evidence.</p>
           <button class="button button-primary button-expedition" id="enter-expedition"></button>
           <button class="button button-outline" id="compare-selected"></button>
@@ -77,7 +79,7 @@
     <section id="expedition-view" class="view expedition-view hidden" aria-label="3D terrain expedition">
       <div id="expedition-canvas" class="canvas-host"></div>
       <div class="expedition-vignette"></div>
-      <div class="expedition-top-left"><div class="expedition-location"><span class="eyebrow" id="expedition-body">MARS EXPEDITION</span><div><h1 id="expedition-title">Jezero Crater</h1><span class="status-pill orange" id="expedition-stage">Approach</span></div></div><div class="terrain-layer-control segmented"><button data-layer="surface" class="active">Surface</button><button data-layer="slope">Slope</button><button data-layer="elevation">Elevation</button><button data-layer="temperature">Temperature</button></div><p id="surface-material-note" style="font-size:11px;color:#d2e5e7;background:#0b2029e8;padding:8px 12px;border-radius:6px;margin:6px 0">Surface texture: Illustration · Heights: source DEM</p><div class="terrain-legend hidden" id="terrain-legend"><span>Gentle</span><i></i><span>Steep</span></div><div class="thermal-scene hidden" id="thermal-scene" aria-live="polite"></div><div class="deployment-progress" id="deployment-progress"></div></div>
+      <div class="expedition-top-left"><div class="expedition-location"><span class="eyebrow" id="expedition-body">MARS EXPEDITION</span><div><h1 id="expedition-title">Jezero Crater</h1><span class="status-pill orange" id="expedition-stage">Approach</span></div></div><div class="terrain-layer-control segmented"><button data-layer="surface" class="active">Surface</button><button data-layer="slope">Slope</button><button data-layer="elevation">Elevation</button><button data-layer="temperature">Temperature</button></div><p id="surface-material-note" class="surface-material-note">Surface texture: Illustration · Heights: source DEM</p><div class="terrain-legend hidden" id="terrain-legend"><span>Gentle</span><i></i><span>Steep</span></div><div class="thermal-scene hidden" id="thermal-scene" aria-live="polite"></div><div class="deployment-progress" id="deployment-progress"></div></div>
       <div class="expedition-top-right"><div class="minimap"><div class="minimap-heading">Local terrain<button class="icon-button" id="expand-map" aria-label="Change map size">↗</button></div><canvas id="minimap" width="240" height="180" aria-label="Local terrain minimap"></canvas></div><button class="button button-glass button-small" id="toggle-expedition-evidence"></button></div>
       <aside class="expedition-evidence panel hidden" id="expedition-evidence"></aside>
       <div class="arrival-banner" id="arrival-banner"><div class="arrival-steps"><span data-phase="landing">01 <b>Land</b></span><i></i><span data-phase="deploy">02 <b>Deploy</b></span><i></i><span data-phase="explore">03 <b>Explore</b></span></div><button class="button button-primary" id="take-control">Skip arrival</button></div>
@@ -87,12 +89,12 @@
       <div class="expedition-loading hidden" id="expedition-loading"><span class="loader"></span><h2>Preparing your expedition</h2><p>Reading terrain. Preparing the explorer.</p></div>
       <div class="pause-overlay hidden" id="pause-overlay"><div class="panel"><p class="eyebrow">TAKE A BREATH</p><h2>Expedition paused</h2><p>Your explorer is right where you left it.</p><button class="button button-primary" id="resume-expedition">Continue exploring</button><button class="button button-outline" id="leave-expedition">Return to globe</button></div></div>
     </section>
-    <section id="compare-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SIMILARITIES WITH THE EVIDENCE ATTACHED</p><h1>Why do these places match<span>?</span></h1><p class="page-subtitle">Understand the selected pair before exploring the full analysis.</p></div><button class="button button-primary button-small" id="compare-export">Export comparison</button></div><div id="comparison-workspace"></div></section>
+    <section id="compare-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SIMILARITIES WITH THE EVIDENCE ATTACHED</p><h1>Compare these locations<span>.</span></h1><p class="page-subtitle">Review the similarities, differences and evidence for the selected pair.</p></div><button class="button button-primary button-small" id="compare-export">Export comparison</button></div><div id="comparison-workspace"></div></section>
     <section id="planet-view" class="view content-view hidden"><div id="planet-content"></div></section>
     <section id="sources-view" class="view content-view hidden"><div class="page-heading"><div><p class="eyebrow">SCIENCE YOU CAN TRACE</p><h1>Where does this comparison come from<span>?</span></h1><p class="page-subtitle">Follow the data used for your selected Earth–planet pair.</p></div></div><div id="sources-content"></div></section>
   </main>
   <div id="modal-root"></div><div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
   <noscript><div class="noscript">TerraMatch needs JavaScript to render interactive 3D terrain. Enable JavaScript to start exploring.</div></noscript>
-  <script type="module" src="js/app.js?v=20261115-surface-label-1"></script>
+  <script type="module" src="js/app.js?v=20261115-readability-1"></script>
 </body>
 </html>
