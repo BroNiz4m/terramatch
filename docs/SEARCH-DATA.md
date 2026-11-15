@@ -165,3 +165,61 @@ A real automatic regional scan was also completed against the bundled Jezero tar
 Coverage was two planned, two attempted, two completed, zero excluded and zero failed. Eight actual PNG GETs returned valid CORS responses. The default terrain weights were used. The Natural Earth land-mask hash retained by both results was `9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9`. This audit did not add generated terrain windows to the production catalogue or claim either coordinate is a scientifically established analog.
 
 Browser-host visual QA is separate from this source/decode/network verification.
+
+## Study-area names and comparison overview — 15 November 2026
+
+Automatic results and generic coordinate/globe selections receive regional names
+from the bundled `dist/data/place-regions.json.gz` asset. It contains 4,766 named
+administrative features derived from Natural Earth 1:10 million admin-1 polygons
+and 1:110 million country polygons at revision
+`ca96624a56bd078437bca8184e78163e5039ad19`. Source URLs and original SHA-256 values
+are retained inside the asset. The compressed asset is 4,061,269 bytes, with SHA-256
+`f3964abf334fcc039826efe9dad4627bbbb1ced18a046d94c2ed761aaec8d698`.
+Runtime loading and `npm run check` verify that hash.
+
+The derivative keeps names/countries, bounding boxes and polygons. Rings use
+Douglas–Peucker simplification with a 0.005-degree coordinate-space tolerance,
+rounded to five decimals. Dateline rings and rings that would collapse are
+retained. These parameters describe processing, not location accuracy. The
+existing hole-aware, longitude-aware polygon code identifies the center's
+mapped region. Country polygons provide a fallback where an admin-1 region is
+unavailable. Multiple ambiguous matches remain unresolved or use an unambiguous
+country match. Credit is Made with Natural Earth, public domain.
+
+These are approximate regional labels, such as `Idaho study area`, accompanied
+by the actual center coordinates. Generalized historical boundaries may be
+outdated or disputed, and the 32 km area can cross a regional boundary. They do
+not identify an exact settlement, geological unit or scientific analog. Existing
+named manual selections are retained. Failed/missing/hash-invalid label data
+leave a coordinate-based study-area name, with the reason in
+`data.source.placeName`. Name resolution never authorizes a terrain score.
+
+The static asset loads once on demand. Caller cancellation remains independent
+of another caller awaiting the same asset. Legacy generic cached labels are
+updated during startup rechecking, with existing terrain arrays and source tile
+records retained. Named manual cache entries need no additional name request.
+Verified label metadata records the coordinate, source revision and dataset hash.
+
+Reproduce the derivative with `node scripts/fetch-place-regions.mjs --fetch`,
+or use `--source-dir <directory>` containing the two original GeoJSON files.
+The builder verifies both pinned original source hashes before writing output.
+
+Compare now begins with a table of every eligible candidate in the session and
+the planetary target's measurements. Rows show coordinates, origin, shared rank,
+index, mean slope, relief and a component-distance explanation. The complete
+slope distribution still determines the slope component. Detailed charts and
+source evidence follow the overview. Automatic search offers Compare all
+candidates. The candidate overview is also included in evidence JSON and the
+Markdown report. Search controls say areas, and explain the 32 × 32 km footprint.
+
+Verification for this change passed 128 local automated tests and the syntax/data
+checks. Follow-up DOM checks exercised the all-candidates button, row measurements,
+selected-detail focus, source records and overview exports. Two live terrain
+requests through the production loader returned Idaho (43.25, −114.24), eligible
+with Jezero index 87.5, and Sarawak (1.5535, 110.3593), coverage review with a null
+score. All 4,225 heights per area and original tile hashes were retained. The
+homepage, new modules and compressed name asset returned HTTP 200 from localhost,
+with the served name-asset hash verified. Browser/GPU visual QA remains unverified:
+the browser host was unavailable and native Firefox did not provide a valid
+target-window observation. Local tests remain excluded from the public repository
+under its existing configuration.

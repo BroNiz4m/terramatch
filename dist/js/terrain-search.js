@@ -1,10 +1,12 @@
 import {assessLandCoverage,DETAILED_MASK_SHA256} from './land-coverage.js';
 import {isLand,landWindowCoverage} from './land-geometry.js';
+import {nameSearchWindow,PLACE_NAME_SOURCE,clearPlaceNameCache} from './place-names.js';
 export {isLand,landWindowCoverage} from './land-geometry.js';
 /** Runtime Earth terrain search. Fetches public elevation data; never substitutes generated heights. */
 import { SITES, analyzeTerrain, compareTerrains } from './science.js';
 
 export const SEARCH_SOURCES = [
+  PLACE_NAME_SOURCE,
   {id:'terrarium',title:'Mapzen Terrain Tiles — Terrarium elevation',agency:'Mapzen / Tilezen / AWS; underlying source agencies',url:'https://registry.opendata.aws/terrain-tiles/',license:'Retain Mapzen / Tilezen and underlying provider credits; see the Tilezen Joerd attribution documentation.',note:'On-demand Earth terrain fetched from public mixed-source Terrarium PNG tiles in EPSG:3857. RGB channels encode elevations, not colors to infer from a map. Not pure NASA data; original source accuracy varies by region, and 500 m sampling does not imply new native detail.'},
   {id:'natural-earth',title:'Natural Earth 1:110m and 1:10m land polygons',agency:'Natural Earth',url:'https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/',license:'Public domain. Made with Natural Earth. Terms: https://www.naturalearthdata.com/about/terms-of-use/',note:'Coarse 1:110 million polygons screen centers and 25 window points. Bundled 1:10 million land polygons add a 65 × 65 point screen and coastline/window intersections before runtime ranking. These are map scales, not metre resolution; small water bodies and current shoreline conditions remain unresolved.'},
   {id:'open-meteo-geocoding',title:'Place search — Open-Meteo Geocoding API / GeoNames',agency:'Open-Meteo / GeoNames',url:'https://open-meteo.com/en/docs/geocoding-api',license:'Open-Meteo free API for non-commercial use; data CC BY 4.0; geographical data from GeoNames (CC BY 4.0). Commercial use requires reviewing the provider terms.',note:'Called only after a user submits a place-name search. Coordinates and globe selection work without geocoding. Search names are sent to the provider; returned places are geographic locations, not validated analogs.'},
@@ -114,7 +116,7 @@ async function getTile(z,x,y,signal){
   });
 }
 
-export function clearSearchCaches(){tileCache.clear();cachedMask=null;maskProvenance=null;cachedDetailed=null;detailedProvenance=null;}
+export function clearSearchCaches(){tileCache.clear();cachedMask=null;maskProvenance=null;cachedDetailed=null;detailedProvenance=null;clearPlaceNameCache();}
 
 export async function loadLandMask({signal,landmask}={}){
   checkAbort(signal);if(landmask)return landmask;if(cachedMask)return cachedMask;
@@ -142,7 +144,7 @@ export async function recheckSearchWindow(record,options={}){
   const prior=copy.data.source.landScreening;
   if(!copy.data.source.previousLandScreening&&prior)copy.data.source.previousLandScreening=prior;
   copy.data.source.landScreening=coarse;copy.data.source.coverageAssessment=assessment;copy.data.comparisonEligible=eligible;copy.site.comparisonEligible=eligible;copy.data.coverageRecheckRequired=false;
-  return copy;
+  return nameSearchWindow(copy,options);
 }
 
 function windowBounds(lat,lon){const dlat=EXTENT/2/R/DEG,dlon=dlat/Math.cos(lat*DEG),west=lon-dlon,east=lon+dlon;return {north:lat+dlat,south:lat-dlat,west,east,crossesAntimeridian:west < -180||east>180};}
@@ -223,12 +225,14 @@ export async function loadEarthWindow({lat,lon,name,country='',origin='manual',s
   const nativePixelSpacing=2*Math.PI*WEB_MERCATOR_RADIUS*Math.cos(lat*DEG)/(256*2**zoom);
   const limitation='Coarse elevation cannot resolve individual rocks or robot-scale hazards; terrain resemblance does not establish material, thermal, biological or operational equivalence.';
   const coastal=assessment.reason||'Coverage review required before terrain ranking.';
-  const site={id,name:label,country:String(country).slice(0,100)||'Earth',body:'earth',lat,lon,category:origin==='automatic'?'Automatically sampled terrain window':'Manually selected terrain window',description:`A newly retrieved 32 km Earth elevation window centered at ${lat.toFixed(5)}°, ${lon.toFixed(5)}°. ${eligible?'Passed the coarse and detailed coastline screens; small water bodies and current field conditions remain unverified.':coastal}`,origin,comparisonEligible:eligible,sourceIds:['terrarium','natural-earth'],useCases:['Terrain reconnaissance','Slope and relief comparison','Field-training candidate assessment'],limitations:[limitation,...(!eligible?[coastal]:[]),'Land access, permits, environmental protection and field safety have not been assessed.'],terrainFile:null,dataFile:`runtime:${id}`,color:'#dfba85',image:null};
+  const site={id,name:label,country:String(country).slice(0,100)||'Earth',body:'earth',lat,lon,category:origin==='automatic'?'Automatically sampled study area':'Manually selected study area',description:`A newly retrieved 32 km Earth elevation window centered at ${lat.toFixed(5)}°, ${lon.toFixed(5)}°. ${eligible?'Passed the coarse and detailed coastline screens; small water bodies and current field conditions remain unverified.':coastal}`,origin,comparisonEligible:eligible,sourceIds:['terrarium','natural-earth'],useCases:['Terrain reconnaissance','Slope and relief comparison','Field-training candidate assessment'],limitations:[limitation,...(!eligible?[coastal]:[]),'Land access, permits, environmental protection and field safety have not been assessed.'],terrainFile:null,dataFile:`runtime:${id}`,color:'#dfba85',image:null};
   const source={id:'terrarium',title:'Mapzen / Tilezen Terrarium mixed-source elevation tiles',url:'https://registry.opendata.aws/terrain-tiles/',formatUrl:'https://github.com/tilezen/joerd/blob/master/docs/formats.md',attributionUrl:'https://github.com/tilezen/joerd/blob/master/docs/attribution.md',files:[...tiles.values()].map(tile=>({url:tile.url,sha256:tile.sha256,bytes:tile.bytes,retrievedAt:tile.retrievedAt,z:tile.z,x:tile.x,y:tile.y})),zoom,nativePixelSpacingMetersAtCenter:nativePixelSpacing,nativeResolutionMetersApprox:nativePixelSpacing,datum:'Source-dependent mixed DEM heights in metres; Web Mercator tile positioning (EPSG:3857). Consult original datasets for vertical datum and accuracy.',sampling:'Direct RGB Terrarium decode without colour conversion; pixel-center-correct bilinear samples across tile seams into a 500 m grid.',landScreening:coverage,coverageAssessment:assessment,landMask:mask===cachedMask?maskProvenance:{provided:true,note:'Caller-provided GeoJSON land mask.'},caveat:'Mixed elevation sources may include SRTM, USGS 3DEP/GMTED2010, Copernicus EU-DEM and NOAA bathymetry. Tile pixel spacing is not guaranteed source accuracy or effective resolution. Negative elevations are retained and are not used as an ocean classifier.'};
   const data={schemaVersion:1,siteId:id,name:label,body:'earth',center:{lat,lon},comparisonEligible:site.comparisonEligible,size:SIZE,widthMeters:EXTENT,depthMeters:EXTENT,gridSpacingMeters:SPACING,orientation:'Rows decrease latitude; columns increase continuous/unwrapped longitude.',units:'meters',origin,retrievedAt,bounds,projection:{type:'local-equirectangular',radiusMeters:R,centerLat:lat,centerLon:lon,wrapLongitude:true},heights,source};
   const stats=analyzeTerrain(data);data.summary={min:stats.min,max:stats.max,relief:stats.relief,slopeMean:stats.slopeMean,slopeP90:stats.slopeP90,slopeHistogram:stats.slopeHistogram,validCount:stats.validCount};
-  emit(onProgress,{phase:'complete',stage:'complete',loaded:keys.size,total:keys.size,message:eligible?'Terrain window loaded and analyzed.':'Terrain loaded; coverage review is required before ranking.'});
-  return {site,data,stats};
+  emit(onProgress,{phase:'names',stage:'names',message:'Identifying the study-area region…'});
+  const result=await nameSearchWindow({site,data,stats},{signal});
+  emit(onProgress,{phase:'complete',stage:'complete',loaded:keys.size,total:keys.size,message:eligible?'Study area loaded and analyzed.':'Terrain loaded; coverage review is required before ranking.'});
+  return result;
 }
 
 export async function scanEarthRegion({bounds,stepDegrees=2,maxCandidates=24,targetTerrain,weights,signal,onProgress,onResult,landmask,detailedLandmask}={}){
@@ -240,9 +244,9 @@ export async function scanEarthRegion({bounds,stepDegrees=2,maxCandidates=24,tar
     let detailed=null;try{detailed=await loadDetailedLandMask({signal,detailedLandmask});}catch(e){if(isAbort(e,signal))throw e;}
 
     for(const center of centers){
-      checkAbort(signal);coverage.attempted++;emit(onProgress,{phase:'scan',stage:'scan',...coverage,current:center,message:`Analyzing terrain window ${coverage.attempted}/${coverage.planned}.`});
+      checkAbort(signal);coverage.attempted++;emit(onProgress,{phase:'scan',stage:'scan',...coverage,current:center,message:`Analyzing study area ${coverage.attempted}/${coverage.planned}.`});
       try{
-        const item=await loadEarthWindow({...center,name:`Earth ${center.lat.toFixed(3)}°, ${center.lon.toFixed(3)}°`,origin:'automatic',signal,landmask:mask,detailedLandmask:detailed,onProgress:tileProgress=>emit(onProgress,{phase:'scan',stage:'scan',...coverage,current:center,tileProgress,message:tileProgress.message})});
+        const item=await loadEarthWindow({...center,origin:'automatic',signal,landmask:mask,detailedLandmask:detailed,onProgress:tileProgress=>emit(onProgress,{phase:'scan',stage:'scan',...coverage,current:center,tileProgress,message:tileProgress.message})});
         coverage.completed++;
         if(!item.site.comparisonEligible){coverage.excluded++;const review={...item,reason:item.data.source.coverageAssessment.reason};excluded.push(review);emit(onResult,review);}
         else{const result={...item,comparison:compareTerrains(targetTerrain,item.data,weights)};results.push(result);emit(onResult,result);}
@@ -250,6 +254,6 @@ export async function scanEarthRegion({bounds,stepDegrees=2,maxCandidates=24,tar
     }
   }catch(error){if(isAbort(error,signal))coverage.cancelled=true;else throw error;}
   results.sort((a,b)=>b.comparison.score-a.comparison.score||a.site.id.localeCompare(b.site.id));
-  emit(onProgress,{phase:coverage.cancelled?'cancelled':'complete',stage:coverage.cancelled?'cancelled':'complete',...coverage,message:coverage.cancelled?'Search cancelled; completed results are retained.':`${results.length} eligible windows compared; ${coverage.excluded} excluded; ${coverage.failed} failed.`});
+  emit(onProgress,{phase:coverage.cancelled?'cancelled':'complete',stage:coverage.cancelled?'cancelled':'complete',...coverage,message:coverage.cancelled?'Search cancelled; completed results are retained.':`${results.length} eligible study areas compared; ${coverage.excluded} excluded; ${coverage.failed} failed.`});
   return {results,excluded,coverage};
 }

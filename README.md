@@ -63,7 +63,7 @@ comparisons work without those services. Use HTTPS or localhost for source hashe
    are withheld; measurements describe the full DEM window and may include water
    or bathymetry. New searches record all 25 coarse land-screen sample locations
    for inspection. Earth candidates can also be explored in 3D.
-   **What separates these candidates?** explains the gap between the first two
+   **How to read this ranking** explains the gap between the first two
    displayed scores, the selected candidate's rank/gap, equal-score shared ranks,
    and any relief-distance cap. Only eligible loaded Earth windows are ranked;
    this is not an exhaustive Earth search. Point gaps are not confidence levels.
@@ -193,6 +193,18 @@ Coarse terrain resemblance supports a shortlist for further investigation; it is
 not a landing-site, permanent-base or field-safety certification.
 
 ## Verification
+
+Compare starts with a table of all ranked candidate areas against the selected
+planetary target, showing coordinates, search/reference origin, average slope,
+elevation range and the existing terrain index. Use **Review evidence** to jump
+to an individual area's charts and sources. Automatic search offers **Compare
+all candidates**. A study area is the 32 × 32 km square analyzed around a center.
+
+Coordinate-based searches use bundled Natural Earth polygons for approximate
+state/province and country labels, such as **Idaho study area**. Coordinates
+identify the actual center. These labels can span historical or disputed
+boundaries and do not identify an exact settlement or establish analog status.
+See [SEARCH-DATA.md](docs/SEARCH-DATA.md) for provenance and reproduction.
 
 ```sh
 npm ci
