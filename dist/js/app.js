@@ -3,7 +3,7 @@ import {createManualWorkspace} from './manual-workspace.js?v=20261115-manual-1';
 import {createTerrainPreviewRaster} from './terrain-preview.js';
 import {samplingLabels,sourceUsageLabel} from './display-format.js';
 import {comparisonIntroHTML,comparisonEmptyHTML,selectedSourceCardsHTML,comparisonStepsHTML} from './evidence-views.js?v=20261115-thumbnail-1';
-import {createPairDashboard} from './pair-dashboard.js?v=20261115-readability-1';
+import {createPairDashboard} from './pair-dashboard.js?v=20261115-startup-1';
 import {PAIR_SOURCES} from './planetary-search.js';
 import {resampleTerrain} from './science.js';
 import {recheckSearchWindow,loadDetailedLandMask} from './terrain-search.js';
@@ -11,7 +11,7 @@ import { GlobeView } from './globe.js?v=20261115-rover-1';
 import { Expedition } from './expedition.js?v=20261115-rover-1';
 import { SITES, TARGETS, EARTH_SITES, SOURCES, METHOD, TASK_PROFILES, taskProfile, taskMeasures, loadTerrain, analyzeTerrain, compareTerrains, sampleTerrain } from './science.js';
 import { icon, escapeHTML as esc } from './icons.js?v=20261115-readability-1';
-import {initSearchUI,SEARCH_SOURCES,earthBounds} from './search-ui.js?v=20261115-manual-1';
+import {initSearchUI,SEARCH_SOURCES,earthBounds} from './search-ui.js?v=20261115-startup-1';
 import {restoreSearchWindows,saveSearchWindows,validSearchWindow} from './search-cache.js';
 import {createThermalUI} from './thermal-ui.js?v=20261115-readability-1';
 import {EARTH_THERMAL_SOURCE} from './earth-thermal.js';
@@ -194,6 +194,13 @@ function registerSearchWindow(record,{select=true,persist=true,render=true}={}){
   if(persist){clearTimeout(persistSearchTimer);persistSearchTimer=setTimeout(persistSearchWindows,300);}
 }
 
+function completeStartup(failed=false){
+  $('#main').removeAttribute('inert');$('#main').removeAttribute('aria-busy');
+  $$('.main-nav button,#export-report').forEach(button=>button.disabled=false);
+  if(failed){const message=$('[data-startup-message]');if(message)message.textContent='Loading could not finish. Refresh the page to try again.';$$('[aria-busy="true"]').forEach(node=>node.setAttribute('aria-busy','false'));}
+  requestAnimationFrame(()=>globe?.resize());document.fonts?.ready?.then(()=>requestAnimationFrame(()=>globe?.resize()));
+}
+
 async function init(){
   thermalUI=createThermalUI({getTarget:target,getEarth:earth,getExpedition:()=>expedition,showCompare:()=>showView('compare'),toast});
   bind();expeditionUI=createExpeditionWorkspace({getExpedition:()=>expedition,thermal:thermalUI,isEvidenceOpen:()=>state.evidenceOpen,closeEvidence:toggleEvidence,selectLayer:value=>document.querySelector('[data-layer="'+value+'"]').click(),pause:setPaused,exit:()=>{setPaused(false);showView('explore');},provenance:showProvenance,thermalCompare:()=>{showView('compare');if($('#detailed-analysis'))$('#detailed-analysis').open=true;$('#thermal-workspace')?.scrollIntoView?.({block:'start',behavior:'smooth'});}});applyTaskWeights();thermalUI.setMission(state.task);renderTaskBrief();$('#enter-expedition').disabled=true;$('#find-analogs').disabled=true;
@@ -212,6 +219,7 @@ async function init(){
   pairDashboard=createPairDashboard({thumbnail:terrainThumb,projectSite:site=>globe?.projectSite(site),onEarth:record=>registerSearchWindow(record,{select:false,persist:false,render:false}),onPlanetary:registerPlanetaryWindow,onSelectPair:(pair,{compare=false}={})=>{state.task='terrain';state.weights={...pair.weights};$('#task-select').value='terrain';$('#metric-slope').checked=true;$('#metric-relief').checked=true;renderTaskBrief();setTarget(pair.target.site.id);setGlobeBody('earth');selectEarth(pair.earth.site.id);if(compare)showView('compare');},onBody:setGlobeBody,onExplore:startExpedition,onResize:()=>globe?.resize(),onMode:()=>{updateDataStatus();setGlobeBody('earth');},onSearchStart:()=>{state.pairCoverage=null;globe?.setSites([],null);$('#globe-caption-text').textContent='Searching Earth, Moon and Mars terrain.';},onComplete:result=>{state.pairCoverage=result.coverage;updateDataStatus();$('#globe-caption-text').textContent='Different worlds. Shared terrain.';persistSearchWindows();},onCoverage:coverage=>openModal('<p class="eyebrow">SEARCH COVERAGE</p><h2 id="modal-title">What was actually searched</h2><p>Planetary indexes use 3°-spaced centers from 73.5°S to 73.5°N. Earth uses the recorded bounded sample. Neither is exhaustive. Inspect all failures and exclusions below.</p><pre class="pair-json">'+esc(JSON.stringify(coverage,null,2))+'</pre>'),onProvenance:pair=>openModal('<p class="eyebrow">ORIGINAL NUMERIC SOURCES</p><h2 id="modal-title">Pair provenance</h2><p>Thumbnails are elevation-derived shaded relief. Raw source files, hashes, dates and transformations are recorded below.</p><pre class="pair-json">'+esc(JSON.stringify({earth:pair.earth.data.source,planetary:pair.target.data.source,method:pair.method},null,2))+'</pre>')});
   searchUI=initSearchUI({onAutomaticSearch:settings=>pairDashboard.run({...settings,weights:{slope:.65,relief:.35}}),onModeChange:mode=>{pairDashboard.setMode(mode);manualWorkspace?.setMode(mode);},onManualChange:()=>manualWorkspace?.refresh(),onCandidate:registerSearchWindow,onSelect:selectEarth,onCompare:id=>{selectEarth(id);showView('compare');},onExplore:startExpedition,onSources:()=>showView('sources'),getTargetTerrain:()=>dataFor(state.targetId),getTargetName:()=>target().name,getWeights:()=>({...state.weights}),onPickMode:(mode,callback)=>{if(mode){setGlobeBody('earth');globe?.setSelectionMode(mode,callback);}else globe?.setSelectionMode(null);},onPreview:place=>{setGlobeBody('earth');globe?.focusSite(place);globe?.showSearchBounds(place.bounds);},onRegionPreview:bounds=>{setGlobeBody('earth');globe?.showSearchBounds(bounds);},onScanComplete:coverage=>{state.searchCoverage=coverage;for(const id of coverage.candidateIds||[]){const site=state.customSites.find(item=>item.id===id);if(site)site.discovery={type:'sampled-grid',regionName:coverage.regionName,bounds:coverage.bounds,stepDegrees:coverage.stepDegrees,planned:coverage.planned,completed:coverage.completed,failed:coverage.failed,excluded:coverage.excluded,targetId:coverage.targetId,targetName:coverage.targetName,weights:coverage.weights,exhaustive:false,status:coverage.cancelled?'cancelled-partial':'complete'};}clearTimeout(persistSearchTimer);persistSearchTimer=setTimeout(persistSearchWindows,300);},toast});
   manualWorkspace=createManualWorkspace({mode:searchUI.mode,context:()=>({search:searchUI,target:target(),earth:earth(),targets:targetSites(),targetData:dataFor(state.targetId),earthData:dataFor(state.earthId),eligible:coverageFor(earth()).scoreEligible,spacing:comparisonSpacing(),weights:state.weights,chosen:state.comparisonChosen,globeBody:state.globeBody,coordinates}),thumbnail:terrainThumb,compare:()=>showView('compare'),explore:startExpedition,sources:()=>showView('sources'),resize:()=>globe?.resize(),clearSelection:()=>searchUI.clearManualSelection(),invalidate:()=>searchUI.invalidateManual(),onPins:(site,point,pending)=>{if(state.globeBody!=='earth')return;const pin=pending&&point?{...point,id:'manual-preview',body:'earth'}:site;globe?.setSites(pin?[pin]:[],pin?.id);globe?.showSearchBounds(pin?earthBounds(pin.lat,pin.lon):null);}});
+  completeStartup();
   window.__TERRAMATCH__={state,get expedition(){return expedition;},get searchUI(){return searchUI;},get pairDashboard(){return pairDashboard;},get thermalUI(){return thermalUI;},get planetUI(){return planetUI;},get globe(){return globe;},startExpedition,showView,exportEvidence,registerSearchWindow,registerPlanetaryWindow};
 }
-init().catch(error=>{console.error(error);toast('TerraMatch could not finish loading. Please reload the page.',true);$('#globe-loading').classList.add('hidden');});
+init().catch(error=>{console.error(error);toast('TerraMatch could not finish loading. Please reload the page.',true);$('#globe-loading').classList.add('hidden');completeStartup(true);});

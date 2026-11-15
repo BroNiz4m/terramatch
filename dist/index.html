@@ -25,17 +25,23 @@
   <header class="topbar">
     <a class="brand" href="#explore" aria-label="TerraMatch home"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="15" cy="19" r="13" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="15" cy="19" rx="6" ry="13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M3 14h24M3 23h24M15 6v26" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M26 2a8 8 0 0 0-8 8c0 6 8 14 8 14s8-8 8-14a8 8 0 0 0-8-8" fill="#ff8c36"/><circle cx="26" cy="10" r="3" fill="#07121c"/></svg><span>TerraMatch</span><span class="brand-divider"></span></a>
     <nav class="main-nav" aria-label="Main navigation">
-      <button data-view="explore" class="nav-item active">Explore</button>
-      <button data-view="compare" class="nav-item">Compare</button>
-      <button data-view="expedition" class="nav-item">Expedition<span class="nav-dot"></span></button>
-      <button data-view="planet" class="nav-item">Planet overview</button>
-      <button data-view="sources" class="nav-item">Sources</button>
+      <button data-view="explore" class="nav-item active" disabled>Explore</button>
+      <button data-view="compare" class="nav-item" disabled>Compare</button>
+      <button data-view="expedition" class="nav-item" disabled>Expedition<span class="nav-dot"></span></button>
+      <button data-view="planet" class="nav-item" disabled>Planet overview</button>
+      <button data-view="sources" class="nav-item" disabled>Sources</button>
     </nav>
-    <div class="topbar-actions"><span class="project-tag"><span></span> SPACE APPS 2026</span><button class="button button-outline button-small" id="export-report"></button></div>
+    <div class="topbar-actions"><span class="project-tag"><span></span> SPACE APPS 2026</span><button class="button button-outline button-small" id="export-report" disabled><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>Export report</button></div>
   </header>
-  <main id="main">
+  <main id="main" aria-busy="true" inert>
     <section id="explore-view" class="view explore-view pair-search-mode">
       <div class="page-heading"><div><p class="eyebrow">OUR PLANET. YOUR NEXT FRONTIER.</p><h1>Find Earth's next training ground<span>.</span></h1><p class="page-subtitle">Discover Earth analogs for lunar and Martian terrain.</p></div><div class="heading-note"><span class="live-dot"></span> Open data. Explainable comparisons.</div></div>
+      <section id="discovery-panel" class="discovery-panel panel" aria-label="Earth terrain discovery" aria-busy="true">
+        <div class="discovery-header"><div class="discovery-title"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><span>Discover matching locations</span></div><div class="segmented search-tabs" aria-label="Search mode"><button type="button" class="active" disabled>Automatic search</button><button type="button" disabled>Manual search</button></div></div>
+        <div class="pair-search-controls"><label>Find Earth analogs for<div class="pair-body-buttons"><button type="button" disabled>Moon</button><button type="button" disabled>Mars</button><button type="button" aria-pressed="true" disabled>Both</button></div></label><label>Terrain condition<select disabled aria-label="Terrain condition loading"><option>Balanced terrain</option></select></label><button type="button" class="button button-primary" disabled><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg> Find matching locations</button></div>
+        <div class="pair-search-options"><p>Compare slope patterns and elevation range.</p><details><summary>Advanced options</summary></details></div>
+        <div class="discovery-footer"><span data-startup-message role="status">Preparing search controls and saved terrain…</span><button type="button" class="text-link" disabled>Sources &amp; coverage ↗</button></div>
+      </section>
       <div class="explore-workspace">
         <aside class="panel mission-panel" aria-label="Mission setup">
           <div class="panel-title"><h2>Your mission</h2></div>
@@ -62,7 +68,9 @@
           <div class="globe-evidence"><span id="globe-event-key" class="globe-event-key hidden"></span><div class="globe-observation-key hidden" id="globe-observation-key"></div></div>
           <div class="globe-bottom"><div class="globe-caption"><span class="eyebrow">A WORLD OF POSSIBILITIES</span><p id="globe-caption-text">Different worlds. Shared terrain.</p></div><span class="globe-source">Loading original agency sources…</span></div>
           <div class="candidate-tray"><div class="tray-heading"><h2>Earth analog candidates</h2><span id="candidate-count">Loading terrain…</span></div><div class="candidate-cards" id="candidate-cards"></div></div>
+          <section id="pair-results" class="pair-results" aria-label="Matching location pairs" aria-busy="true"><div class="tray-heading"><h2>Matching location pairs</h2><span>Preparing…</span></div><p class="pair-coverage">Start a search to find Earth–Moon or Earth–Mars terrain matches. Use Manual Search to investigate a chosen Earth location.</p><div class="pair-results-empty">Your matching pairs will appear here after you start a search.</div></section>
         </section>
+        <aside id="selected-match" class="panel selected-match" aria-label="Selected location pair" aria-busy="true"><div class="panel-title"><h2>Selected match</h2><span class="status-pill">LOADING</span></div><div class="pair-empty"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg><h3>Preparing terrain discovery</h3><p>Search controls will be available when the source records and saved areas are ready.</p></div><div class="pair-source-note"><strong>Based on elevation data</strong><p>Earth elevation tiles · NASA MOLA · NASA LOLA</p><p>32 km areas · 2 km comparison grid · 4 km slope baseline</p></div></aside>
         <aside class="panel destination-panel" aria-label="Selected mission destination">
           <div class="panel-title"><h2>Your destination</h2><span class="status-pill">TARGET</span></div>
           <div class="destination-image" id="destination-image"><div class="image-scanline"></div><span id="destination-image-label">MARS / JEZERO</span></div>
@@ -109,6 +117,6 @@
   </main>
   <div id="modal-root"></div><div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
   <noscript><div class="noscript">TerraMatch needs JavaScript to render interactive 3D terrain. Enable JavaScript to start exploring.</div></noscript>
-  <script type="module" src="js/app.js?v=20261115-expedition-ui-1"></script>
+  <script type="module" src="js/app.js?v=20261115-startup-1"></script>
 </body>
 </html>
