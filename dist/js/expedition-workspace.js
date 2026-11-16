@@ -6,6 +6,24 @@ export function thermalViewAvailable(record){return record?.body==='earth'?!!rec
 export function createExpeditionWorkspace(options){
  const $=s=>document.querySelector(s),view=$('#expedition-view'),details=$('#expedition-details'),layer=$('#expedition-layer');
  let activePanel=null,request=0,lastTrigger=null;
+ const guideLayer=document.createElement('div');guideLayer.className='expedition-guide-layer';guideLayer.hidden=true;guideLayer.setAttribute('aria-hidden','true');$('#expedition-canvas').append(guideLayer);
+ const guideLegend=document.createElement('div');guideLegend.className='expedition-guide-legend';guideLegend.textContent='Example route · Optional guide points';guideLegend.hidden=true;guideLayer.append(guideLegend);
+ const sceneMarkers=[1,2,3].map(number=>{const node=document.createElement('div');node.className='expedition-guide-marker';node.innerHTML=`<b>${number}</b><span>Guide point ${number}</span>`;node.hidden=true;guideLayer.append(node);return node;});
+ const mapLayer=document.createElement('div');mapLayer.className='guide-map-layer';const map=$('#minimap');map.before(mapLayer);mapLayer.append(map);
+ const mapMarkers=[1,2,3].map(number=>{const node=document.createElement('span');node.className='guide-map-marker';node.textContent=number;node.hidden=true;node.setAttribute('aria-label','Guide point '+number);mapLayer.append(node);return node;});
+ const proximity=document.createElement('span');proximity.id='guide-proximity';proximity.hidden=true;proximity.setAttribute('role','status');proximity.setAttribute('aria-live','polite');$('.terrain-readout').prepend(proximity);
+ function guide(record){
+  const exp=options.getExpedition();if(record&&record.siteId!==exp?.site?.id)return;
+  const valid=record&&['moon','mars'].includes(exp.site.body)&&view.dataset.expeditionPhase==='explore';
+  guideLayer.hidden=!valid;guideLegend.hidden=!valid;
+  if(!valid){sceneMarkers.forEach(node=>node.hidden=true);mapMarkers.forEach(node=>node.hidden=true);proximity.hidden=true;proximity.textContent='';view.classList.remove('guide-near');return;}
+  for(const marker of record.markers){
+   const node=sceneMarkers[marker.number-1],badge=mapMarkers[marker.number-1];if(!node||!badge)continue;
+   node.hidden=!marker.visible;node.style.left=marker.x+'px';node.style.top=marker.y+'px';node.classList.toggle('nearest',marker.number===record.nearest?.number);node.classList.toggle('label-left',marker.x>(exp.viewport?.width||Infinity)-160);
+   badge.hidden=false;badge.style.left=(marker.u*100)+'%';badge.style.top=(marker.v*100)+'%';badge.classList.toggle('nearest',marker.number===record.nearest?.number);
+  }
+  const near=!!record.nearest?.near,label=near?'Near guide point '+record.nearest.number:'';proximity.hidden=!near;if(proximity.textContent!==label)proximity.textContent=label;view.classList.toggle('guide-near',near);
+ }
  function focusScene(){options.getExpedition()?.renderer?.domElement.focus({preventScroll:true});}
  function closeDetails({focus=true}={}){activePanel=null;details.classList.add('hidden');view.classList.remove('details-open');$('#expedition-layer-info').setAttribute('aria-expanded','false');$('#expedition-controls').setAttribute('aria-expanded','false');$('#expedition-notes').setAttribute('aria-expanded','false');if(focus)lastTrigger?.focus?.();options.getExpedition()?.resize();}
  function describeLayer(){
@@ -55,6 +73,7 @@ export function createExpeditionWorkspace(options){
  // Escape closes the requested panel first. Reading help must not drive the rover behind it.
  window.addEventListener('keydown',event=>{if(view.classList.contains('hidden')||!activePanel||document.querySelector('.modal-backdrop')||!$('#pause-overlay').classList.contains('hidden'))return;if(event.key==='Escape'){event.preventDefault();event.stopImmediatePropagation();closeDetails();return;}if(details.contains(document.activeElement)&&/^(w|a|s|d|shift|arrowup|arrowdown|arrowleft|arrowright)$/i.test(event.key))event.stopImmediatePropagation();},true);
  function reset(site,data,stats){
+  guide(null);
   ++request;layer.disabled=false;layer.value='surface';$('#expedition-layer-state').textContent='';closeDetails({focus:false});$('#expedition-surface-record')?.remove();
   $('#expedition-coordinates').textContent=`${Math.abs(site.lat).toFixed(3)}°${site.lat<0?'S':'N'}, ${Math.abs(site.lon).toFixed(3)}°${site.lon<0?'W':'E'}`;
   $('#expedition-title').textContent=site.id.startsWith('survey-')?({moon:'Lunar area',mars:'Martian area',earth:'Earth area'}[site.body]):site.name;$('#expedition-title').title=site.name;
@@ -74,6 +93,6 @@ export function createExpeditionWorkspace(options){
   section.innerHTML=record.status==='available'?`<h3>Location-specific surface image</h3><p>${esc(record.product)} · ${esc(record.period)}</p><p>${esc(record.credit)}</p><p>${esc(record.resolution||'Source resolution varies.')} · contrast adjusted for display.</p>${record.colourCaveat?`<p>${esc(record.colourCaveat)}</p>`:''}${record.deliveryFallback?.length?`<p>The imagery service required a lower display grid for the same footprint. Preview sampling: ${esc(Math.round(record.previewSamplingMeters||0))} m/px; no extra source detail is implied.</p>`:''}<p>Microdetail and decorative rocks are illustrative. Sunlight is chosen for readability; no present-day or permanent-shadow calculation is implied.</p><a class="text-link" href="${esc(record.sourceURL)}" target="_blank" rel="noopener noreferrer">Open ${esc(sourceName)} imagery source ↗</a>`:`<h3>Surface image availability</h3><p>${esc(record.reason||record.note||'Reading '+sourceName+' imagery for these coordinates.')}</p>`;
   describeLayer();
  }
- function stage(phase){view.dataset.expeditionPhase=phase;$('#touch-controls').classList.toggle('hidden',phase!=='explore'||!view.classList.contains('touch-mode'));}
- return{reset,stage,closeDetails,chooseLayer,openDetails,surface,get activePanel(){return activePanel;}};
+ function stage(phase){view.dataset.expeditionPhase=phase;if(phase!=='explore')guide(null);$('#touch-controls').classList.toggle('hidden',phase!=='explore'||!view.classList.contains('touch-mode'));}
+ return{reset,stage,closeDetails,chooseLayer,openDetails,surface,guide,get activePanel(){return activePanel;}};
 }

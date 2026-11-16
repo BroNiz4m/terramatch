@@ -1,4 +1,17 @@
 /* A toolbar, one scene, one telemetry dock and a source footer. */
+.expedition-guide-layer{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.expedition-guide-layer[hidden],.expedition-guide-layer [hidden],.guide-map-layer [hidden],#guide-proximity[hidden]{display:none!important}
+.expedition-guide-marker{position:absolute;display:flex;align-items:center;gap:7px;transform:translate(-50%,-100%);color:#d4fff4;filter:drop-shadow(0 2px 4px #000b);white-space:nowrap}
+.expedition-guide-marker b{display:grid;place-items:center;width:27px;height:27px;border:1px solid #8be8d5;border-radius:50%;background:#10332fec;font:600 14px/1 var(--font-body,Arial,sans-serif);flex:none}
+.expedition-guide-marker span{display:none;position:absolute;left:34px;padding:5px 8px;border:1px solid #4a837b;border-radius:5px;background:#0a2029ed;font:500 13px/1.35 var(--font-body,Arial,sans-serif)}
+.expedition-guide-marker.nearest span{display:block}.expedition-guide-marker.nearest b{background:#baffed;color:#092328;border-color:#d4fff4}.expedition-guide-marker.label-left span{left:auto;right:34px}
+.expedition-guide-legend{position:absolute;bottom:12px;left:16px;color:#d0e6e2;font-size:13px;line-height:1.5;padding:5px 9px;border-radius:5px;background:#0b2029d9}
+.touch-mode .expedition-guide-legend{bottom:120px}
+.guide-map-layer{position:relative;isolation:isolate}.guide-map-marker{position:absolute;z-index:1;display:grid;place-items:center;width:18px;height:18px;transform:translate(-28px,-50%);border:1px solid #82c7bb;border-radius:50%;background:#10332ff2;color:#e1fff5;font:600 12px/1 Arial,sans-serif;pointer-events:none;box-shadow:0 1px 3px #0008}
+.guide-map-marker::after{content:'';position:absolute;left:17px;top:8px;width:10px;border-top:1px solid #82c7bb}.guide-map-marker:nth-of-type(2){transform:translate(10px,-50%)}.guide-map-marker:nth-of-type(2)::after{left:auto;right:17px}.guide-map-marker.nearest{background:#baffed;color:#092328}
+.expedition-shell .terrain-readout>#guide-proximity{border-left:2px solid #69d5c4;color:#a0f1df;padding-left:9px;font-size:13px}
+@media(max-width:1250px){.expedition-shell.guide-near .control-strip .dock-move-hint{display:none!important}}
+@media(max-width:720px){.expedition-guide-marker b{width:24px;height:24px;font-size:13px}.expedition-guide-marker span{font-size:12px}.expedition-guide-legend{font-size:12px;left:10px;bottom:10px;max-width:calc(100% - 20px)}}
 #expedition-view.expedition-shell{height:calc(100dvh - var(--header));min-height:420px;display:grid;grid-template-rows:auto minmax(100px,1fr) auto auto;overflow:hidden;padding:0;background:#07121c}
 .expedition-toolbar{display:flex;gap:14px;align-items:center;padding:8px 18px;border-bottom:1px solid var(--line);background:#0a1b25;z-index:8;min-width:0}
 .expedition-site{display:flex;gap:12px;align-items:center;min-width:160px;flex:1}.expedition-site>img{width:32px;height:32px;object-fit:cover;border-radius:50%;flex:none}.expedition-site>div{min-width:0}

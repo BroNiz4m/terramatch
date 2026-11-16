@@ -1,7 +1,7 @@
 import {LUNAR_POLAR_SOURCE} from './lunar-surface.js?v=20261116-lunar-1';
 import {createLocationImageryUI} from './location-imagery-ui.js?v=20261116-observations-1';
 import {IMAGERY_SOURCES} from './location-imagery.js?v=20261116-observations-1';
-import {createExpeditionWorkspace} from './expedition-workspace.js?v=20261116-mars-1';
+import {createExpeditionWorkspace} from './expedition-workspace.js?v=20261116-guide-1';
 import {createManualWorkspace} from './manual-workspace.js?v=20261115-manual-1';
 import {createTerrainPreviewRaster} from './terrain-preview.js';
 import {samplingLabels,sourceUsageLabel} from './display-format.js';
@@ -11,7 +11,7 @@ import {PAIR_SOURCES} from './planetary-search.js';
 import {resampleTerrain} from './science.js';
 import {recheckSearchWindow,loadDetailedLandMask} from './terrain-search.js';
 import { GlobeView } from './globe.js?v=20261115-rover-1';
-import { Expedition } from './expedition.js?v=20261116-mars-1';
+import { Expedition } from './expedition.js?v=20261116-guide-1';
 import { SITES, TARGETS, EARTH_SITES, SOURCES, METHOD, TASK_PROFILES, taskProfile, taskMeasures, loadTerrain, analyzeTerrain, compareTerrains, sampleTerrain } from './science.js';
 import { icon, escapeHTML as esc } from './icons.js?v=20261115-readability-1';
 import {initSearchUI,SEARCH_SOURCES,earthBounds} from './search-ui.js?v=20261115-startup-1';
@@ -153,7 +153,7 @@ function showProvenance(site){const data=dataFor(site.id);openModal(`<p class="e
 
 async function startExpedition(site=target()){
   if(!state.ready||!dataFor(site.id)){toast('This terrain is not ready yet. Check Sources for availability.',true);return;}
-  if(!expedition){expedition=new Expedition({container:$('#expedition-canvas'),minimap:$('#minimap'),onTelemetry:updateTelemetry,onSurface:record=>expeditionUI?.surface(record),onStage:updateStage,onInspect:inspectTerrain,onCompare:toggleEvidence,onPause:setPaused,onError:()=>{webglError($('#expedition-canvas'));toast('This device could not start the 3D renderer.',true);}});}
+  if(!expedition){expedition=new Expedition({container:$('#expedition-canvas'),minimap:$('#minimap'),onTelemetry:updateTelemetry,onGuide:record=>expeditionUI?.guide(record),onSurface:record=>expeditionUI?.surface(record),onStage:updateStage,onInspect:inspectTerrain,onCompare:toggleEvidence,onPause:setPaused,onError:()=>{webglError($('#expedition-canvas'));toast('This device could not start the 3D renderer.',true);}});}
   if(!expedition.renderer)return;
   $('#expedition-loading').classList.remove('hidden');state.view='expedition';$$('.view').forEach(section=>section.classList.toggle('hidden',section.id!=='expedition-view'));$$('[data-view]').forEach(button=>button.classList.toggle('active',button.dataset.view==='expedition'));globe?.setActive(false);preview?.setActive(false);
   try{expedition.load(site,dataFor(site.id),state.stats.get(site.id));thermalUI?.hideLayer();$('#expedition-title').textContent=site.name;$('#surface-material-note').textContent=site.body==='earth'?'Surface details: illustrative · Heights: source DEM':'Surface texture: Illustration · Heights: source DEM';$('#expedition-body').textContent=`${site.country.toUpperCase()} EXPEDITION`;$('#expedition-footnote').textContent=`${site.body==='moon'?'NASA LOLA':site.body==='mars'?'NASA MOLA':'Skadi terrain'} · ${dataFor(site.id).gridSpacingMeters/1000} km grid · ${state.stats.get(site.id).gradientBaselineMeters.x/1000} km slope baseline`;$('#pause-overlay').classList.add('hidden');$('#expedition-evidence').classList.add('hidden');$('#expedition-view').classList.remove('evidence-open');state.evidenceOpen=false;$$('[data-layer]').forEach(button=>button.classList.toggle('active',button.dataset.layer==='surface'));$('#terrain-legend').classList.add('hidden');if(matchMedia('(pointer:coarse)').matches){$('#expedition-view').classList.add('touch-mode');$('#touch-controls').classList.remove('hidden');}expeditionUI?.reset(site,dataFor(site.id),state.stats.get(site.id));expedition.renderer.domElement.focus({preventScroll:true});}catch(error){toast(error.message,true);showView('explore');}finally{$('#expedition-loading').classList.add('hidden');}
