@@ -1,6 +1,7 @@
 import {analyzeTerrain,terrainCoordinates} from './science.js';
+import {readElevationCache,writeElevationCache,deleteElevationCache} from './elevation-cache.js';
 
-const ROOT='https://trek.nasa.gov/',cache=new WeakMap();
+const ROOT='https://trek.nasa.gov/',cache=new WeakMap(),inflight=new WeakMap();
 export const EXPEDITION_ELEVATION_SOURCES={
  mars:{id:'trek-mola-hrsc-200m',body:'mars',service:'Mars_MOLA_blend200ppx_HRSC_DEM_clon0dd_200mpp_lzw',title:'Mars MOLA / HRSC merged DEM · 200 m',nativeSpacingMeters:200,credit:'NASA/JPL/GSFC · ESA/DLR/FU Berlin · USGS',radius:3396190,datum:'Mars areoid; merged MOLA / HRSC elevation, metres'},
  moon:{id:'trek-lola-256',body:'moon',service:'LRO_LOLA_DEM_Global_256ppd_v06',title:'LRO LOLA global DEM · 256 pixels per degree',nativeSpacingMeters:118.45,credit:'NASA/GSFC · LOLA Science Team · NASA/JPL Moon Trek',radius:1737400,datum:'Elevation relative to lunar reference radius 1,737,400 m'},
@@ -8,13 +9,13 @@ export const EXPEDITION_ELEVATION_SOURCES={
 };
 export const EXPEDITION_ELEVATION_CREDITS=Object.values(EXPEDITION_ELEVATION_SOURCES).map(s=>({id:s.id,title:s.title,agency:s.credit,url:ROOT+s.body+'/trekarcgis/rest/services/'+s.service+'/ImageServer',license:'Public mission data; retain the named instrument and agency credits.',note:'Used for location-specific Expedition geometry only. Native source spacing varies. Comparison ranking uses its separately recorded grid; this is not rover-scale hazard or mobility validation.'}));
 const polarWKT='PROJCS["Moon2000_spole",GEOGCS["GCS_Moon",DATUM["D_Moon_2000",SPHEROID["Moon_2000_IAU_IAG",1737400.0,0.0]],PRIMEM["Reference_Meridian",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Stereographic_South_Pole"],PARAMETER["false_easting",0.0],PARAMETER["false_northing",0.0],PARAMETER["central_meridian",0.0],PARAMETER["standard_parallel_1",-90.0],UNIT["Meter",1.0]]';
-export function expeditionElevationPlan(site,data){
+export function expeditionElevationPlan(site,data,{size}={}){
  if(!['moon','mars'].includes(site?.body))return null;
  const center=terrainCoordinates(data,.5,.5),lonError=((center.lon-site.lon+540)%360)-180;
  if((data.body&&data.body!==site.body)||Math.abs(center.lat-site.lat)>1e-5||Math.abs(lonError)>1e-5||data.widthMeters!==data.depthMeters||data.widthMeters>64000)throw Error('Detailed DEM requires the selected site’s registered square footprint.');
  const polar=data.projection?.type==='south-polar-stereographic';
  if(polar&&(site.body!=='moon'||Math.abs(data.projection.radiusMeters-1737400)>.01||data.projection.centralMeridian!==0))throw Error('Unsupported detailed DEM polar registration.');
- const source=EXPEDITION_ELEVATION_SOURCES[polar?'south':site.body],size=polar?513:257;
+ const source=EXPEDITION_ELEVATION_SOURCES[polar?'south':site.body];size??=polar?513:257;if(![129,257,513].includes(size)||(!polar&&size>257))throw Error('Unsupported detailed elevation request size.');
  let bounds,crs;
  if(polar){const p=data.projection;bounds=[p.xWest,p.ySouth,p.xEast,p.yNorth];crs=JSON.stringify({wkt:polarWKT});if(bounds.some(v=>Math.abs(v)>457000))throw Error('Outside the registered south-polar detailed DEM.');}
  else{const b=data.bounds;bounds=[b.west,b.south,b.east,b.north];crs=site.body==='mars'?'104905':JSON.stringify({wkt:'GEOGCS["GCS_MOON",DATUM["D_MOON",SPHEROID["MOON_2000",1737400.0,0.0]],PRIMEM["Reference_Meridian",0.0],UNIT["Degree",0.0174532925199433]]'});}
@@ -40,20 +41,39 @@ export async function decodeElevationTIFF(bytes,plan,{decoder}={}){
 }
 
 /** A separate, source-backed Expedition grid. Never replaces the ranked comparison grid. */
-export async function loadExpeditionTerrain(site,data,{signal,fetchImpl=globalThis.fetch,decode=decodeElevationTIFF,timeout=20000,onProgress}={}){
+export async function loadExpeditionTerrain(site,data,{signal,onProgress,...options}={}){
  if(!['moon','mars'].includes(site.body))return {data,stats:analyzeTerrain(data),detail:{status:'original'}};
  if(signal?.aborted)throw signal.reason||new DOMException('Cancelled','AbortError');if(cache.has(data))return cache.get(data);
- const controller=new AbortController(),abort=()=>controller.abort(signal?.reason);if(signal?.aborted)throw signal.reason||new DOMException('Cancelled','AbortError');signal?.addEventListener('abort',abort,{once:true});const timer=setTimeout(()=>controller.abort(new Error('Detailed NASA elevation request timed out.')),timeout);
+ let flight=inflight.get(data);
+ if(flight?.controller.signal.aborted){inflight.delete(data);flight=null;}
+ if(!flight){flight={controller:new AbortController(),listeners:new Set(),users:0,done:false};inflight.set(data,flight);flight.promise=readTerrain(site,data,{...options,signal:flight.controller.signal,onProgress:message=>{flight.message=message;for(const listener of flight.listeners)try{listener(message);}catch{}}}).finally(()=>{flight.done=true;if(inflight.get(data)===flight)inflight.delete(data);});}
+ flight.users++;if(onProgress){flight.listeners.add(onProgress);if(flight.message)try{onProgress(flight.message);}catch{}}
+ return new Promise((resolve,reject)=>{let finished=false;const finish=(fn,value)=>{if(finished)return;finished=true;signal?.removeEventListener('abort',abort);flight.listeners.delete(onProgress);flight.users--;if(!flight.users&&!flight.done)flight.controller.abort(new DOMException('Cancelled','AbortError'));fn(value);},abort=()=>finish(reject,signal.reason||new DOMException('Cancelled','AbortError'));signal?.addEventListener('abort',abort,{once:true});flight.promise.then(value=>finish(resolve,value),error=>finish(reject,error));});
+}
+
+const digest=async bytes=>globalThis.crypto?.subtle?Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join(''):null;
+async function readTerrain(site,data,{signal,fetchImpl=globalThis.fetch,decode=decodeElevationTIFF,timeout=45000,retryTimeout=Math.min(timeout,30000),onProgress,storage=globalThis.caches,priority='auto'}={}){
+ const check=()=>{if(signal.aborted)throw signal.reason||new DOMException('Cancelled','AbortError');};
  try{
-  const plan=expeditionElevationPlan(site,data);onProgress?.('Reading location-specific NASA elevation…');
-  const response=await fetchImpl(plan.url,{signal:controller.signal,mode:'cors',cache:'force-cache'});if(!response.ok)throw Error('NASA elevation service returned HTTP '+response.status+'.');
-  const bytes=await response.arrayBuffer();if(controller.signal.aborted)throw controller.signal.reason;const heights=await decode(bytes,plan);if(controller.signal.aborted)throw controller.signal.reason;
-  const sha256=globalThis.crypto?.subtle?Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join(''):null;
-  const detail={status:'available',sourceId:plan.source.id,sourceURL:plan.serviceURL,credit:plan.source.credit,nativeSpacingMeters:plan.source.nativeSpacingMeters,gridSpacingMeters:plan.gridSpacingMeters,retrievedAt:new Date().toISOString(),request:{url:plan.url,sha256,bytes:bytes.byteLength},comparisonGridSpacingMeters:data.gridSpacingMeters,
+  const first=expeditionElevationPlan(site,data),plans=[first,expeditionElevationPlan(site,data,{size:first.size===513?257:129})],attempts=[];let plan,bytes,heights,sha256,retrievedAt,fromCache=false;
+  for(const candidate of plans){check();const saved=await readElevationCache(candidate.url,storage);if(!saved)continue;try{onProgress?.('Reading saved NASA elevation for this location…');const hash=await digest(saved.bytes);if(saved.sha256&&hash!==saved.sha256)throw Error('Cached elevation integrity mismatch.');heights=await decode(saved.bytes,candidate);check();plan=candidate;bytes=saved.bytes;sha256=hash;retrievedAt=saved.retrievedAt;fromCache=true;break;}catch(error){check();await deleteElevationCache(candidate.url,storage);}}
+  if(!plan)for(const [index,candidate]of plans.entries()){
+   check();onProgress?.(index?'Retrying NASA elevation with a smaller data request for the same area…':'Reading location-specific NASA elevation…');
+   const controller=new AbortController(),abort=()=>controller.abort(signal.reason);signal.addEventListener('abort',abort,{once:true});const budget=index?retryTimeout:timeout,timer=setTimeout(()=>controller.abort(new Error('Detailed NASA elevation request timed out after '+Math.round(budget/1000)+' seconds.')),budget);
+   try{
+    const response=await fetchImpl(candidate.url,{signal:controller.signal,mode:'cors',cache:index?'reload':'force-cache',priority});if(!response.ok)throw Error('NASA elevation service returned HTTP '+response.status+'.');
+    const downloaded=await response.arrayBuffer();if(controller.signal.aborted)throw controller.signal.reason;clearTimeout(timer);signal.removeEventListener('abort',abort);check();
+    // Decoding/import time must not consume the network timeout budget.
+    onProgress?.('Building terrain from the downloaded NASA elevation…');const decoded=await decode(downloaded,candidate);check();
+    plan=candidate;bytes=downloaded;heights=decoded;sha256=await digest(bytes);retrievedAt=new Date().toISOString();await writeElevationCache(plan.url,bytes,{sha256,retrievedAt},storage);break;
+   }catch(error){check();attempts.push({size:candidate.size,gridSpacingMeters:candidate.gridSpacingMeters,timeoutMilliseconds:budget,reason:error.message});if(index===plans.length-1||!/timed out|HTTP (429|5\d\d)|fetch|network|connection/i.test(error.message||''))throw error;}
+   finally{clearTimeout(timer);signal.removeEventListener('abort',abort);}
+  }
+  check();
+  const detail={status:'available',sourceId:plan.source.id,sourceURL:plan.serviceURL,credit:plan.source.credit,nativeSpacingMeters:plan.source.nativeSpacingMeters,gridSpacingMeters:plan.gridSpacingMeters,retrievedAt:retrievedAt||new Date().toISOString(),delivery:{fromCache,attempts},request:{url:plan.url,sha256,bytes:bytes.byteLength},comparisonGridSpacingMeters:data.gridSpacingMeters,
    note:'Location-specific source elevations, at 1× vertical scale. The output grid is not native measurement accuracy. Source interpolation and gaps may remain. Rover motion is not a validated mobility simulation.'};
   const refined={...data,size:plan.size,heights,gridSpacingMeters:plan.gridSpacingMeters,expeditionDetail:detail,source:{id:plan.source.id,title:plan.source.title,url:plan.serviceURL,datum:plan.source.datum,credit:plan.source.credit,nativeResolutionMetersApprox:plan.source.nativeSpacingMeters,
    sampling:'Unstretched, single-band Float32 DEM, bilinearly exported in the selected footprint. Half-pixel-expanded bounds align pixel centres with mesh nodes. Mesh triangles are used for ground contact and inspection.',request:detail.request,caveat:detail.note}};
   const stats=analyzeTerrain(refined);refined.summary={min:stats.min,max:stats.max,relief:stats.relief,slopeMean:stats.slopeMean,slopeP90:stats.slopeP90,validCount:stats.validCount};const result={data:refined,stats,detail};cache.set(data,result);return result;
- }catch(error){if(signal?.aborted)throw signal.reason||new DOMException('Cancelled','AbortError');return {data,stats:analyzeTerrain(data),detail:{status:'fallback',reason:error.message||'Detailed elevation is unavailable.',gridSpacingMeters:data.gridSpacingMeters,sourceURL:data.source?.url}};}
- finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
+ }catch(error){check();return {data,stats:analyzeTerrain(data),detail:{status:'fallback',reason:error.message||'Detailed elevation is unavailable.',gridSpacingMeters:data.gridSpacingMeters,sourceURL:data.source?.url}};}
 }
