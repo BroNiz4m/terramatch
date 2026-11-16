@@ -1,7 +1,7 @@
 {
   "generatedOn": "2026-11-15",
   "method": "built-in image_gen",
-  "status": "Mars assets remain illustrative albedo in Expedition. Legacy Moon concept assets are retained but no longer used: Moon now uses coordinate-specific LRO imagery where available, with display-only procedural regolith detail.",
+  "status": "Legacy Moon and Mars concept images are retained as assets but are no longer used by the Expedition surface renderer. Moon uses coordinate-aligned LRO imagery; Mars uses coordinate-aligned monochrome MRO CTX imagery, each where available, with illustrative display microdetail.",
   "scientificUse": "Not georeferenced imagery, elevation, measured geology, observed rock positions, or NASA data. Do not select a material as evidence based on coordinates.",
   "assets": [
     {
@@ -29,5 +29,5 @@
       "height": 1254
     }
   ],
-  "rendering": "Mars illustrative materials blend by DEM slope. Moon observed images use fixed DEM-aligned UVs; only unmeasured fine-grain detail repeats. No source-derived heights, terrain scores or rock abundance are inferred from these concept assets."
+  "rendering": "Observed orbital images use fixed DEM-aligned UVs. Only unmeasured fine-grain detail repeats. Mars warm-grey tint is illustrative because CTX is monochrome. No heights, terrain scores, material classes or observed rock abundance are inferred from the legacy concept assets."
 }

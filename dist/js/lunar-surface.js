@@ -55,27 +55,28 @@ export function lunarRegolithTextures(seed,{size=256,repeat=200}={}){
 }
 
 /** Contrast enhancement is for display, not an albedo/reflectance measurement. */
-export function prepareLunarImage(image,{createCanvas=()=>document.createElement('canvas')}={}){
- const canvas=createCanvas();canvas.width=image.width;canvas.height=image.height;const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)throw Error('Lunar image inspection is unavailable.');ctx.drawImage(image,0,0);
+export function prepareLunarImage(image,{createCanvas=()=>document.createElement('canvas'),sourceName='LRO',bodyName='lunar'}={}){
+ const canvas=createCanvas();canvas.width=image.width;canvas.height=image.height;const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)throw Error(bodyName+' image inspection is unavailable.');ctx.drawImage(image,0,0);
  const rgba=ctx.getImageData(0,0,canvas.width,canvas.height),pixels=rgba.data,histogram=new Uint32Array(256);let valid=0;
  for(let i=0;i<pixels.length;i+=4)if(pixels[i+3]>=250){histogram[pixels[i]]++;valid++;}
- if(valid/(pixels.length/4)<.98)throw Error('LRO imagery has incomplete coverage; illustrative detail retained.');
+ if(valid/(pixels.length/4)<.98)throw Error(sourceName+' imagery has incomplete coverage; illustrative detail retained.');
  const percentile=f=>{let count=0;for(let i=0;i<256;i++){count+=histogram[i];if(count>=valid*f)return i;}return 255;},low=percentile(.02),high=percentile(.98),median=percentile(.5);
- if(high-low<4)throw Error('No usable lunar image contrast in this footprint; illustrative detail retained.');
+ if(high-low<4)throw Error('No usable '+bodyName+' image contrast in this footprint; illustrative detail retained.');
  for(let i=0;i<pixels.length;i+=4){const value=pixels[i]<3?pixels[i]:Math.round(38+170*Math.pow(clamp((pixels[i]-low)/(high-low),0,1),.8));pixels[i]=pixels[i+1]=pixels[i+2]=value;}
  ctx.putImageData(rgba,0,0);
  return {image:canvas,display:{contrastPercentiles:[low,high],sourceMedian:median,blackShadowsRetained:true,operation:'Monochrome 2–98 percentile display stretch; not calibrated reflectance.'}};
 }
 
-export function installLunarSurface(exp,{loadImagery=loadLunarSurfaceImage,loader=new THREE.TextureLoader(),prepareImage=prepareLunarImage}={}){
+export function installLunarSurface(exp,{loadImagery=loadLunarSurfaceImage,loader=new THREE.TextureLoader(),prepareImage=prepareLunarImage,surfaceStyle='moon'}={}){
+ const mars=surfaceStyle==='mars',sourceName=mars?'MRO CTX':'LRO';
  const terrain=exp.terrain,material=exp.terrainMaterial,site=exp.site,data=exp.data,seed=seedFor(site,data),controller=new AbortController(),owned=[],urls=new Set();let cancelled=false;
  const detail=lunarRegolithTextures(seed,{repeat:(exp.width||500)/2.5});owned.push(...Object.values(detail));
  for(const t of owned)t.anisotropy=Math.min(8,exp.renderer?.capabilities?.getMaxAnisotropy?.()||1);
  const active=()=>!cancelled&&exp.terrain===terrain&&exp.site===site;
  const publish=record=>{if(active()){exp.surfaceRecord=record;exp.onSurface?.(record);}};
- const sync=()=>{material.bumpMap=exp.layer==='surface'?detail.height:null;material.roughnessMap=exp.layer==='surface'?detail.roughness:null;material.bumpScale=.045;material.needsUpdate=true;};
- exp.updateSurfaceLayer=sync;exp.surfaceTexture=detail.albedo;material.color.set('#c8c8c5');material.roughness=1;material.metalness=0;sync();exp.recolor();
- publish({siteId:site.id,status:'loading',mode:'illustrative-detail',note:'Looking for LRO imagery for this footprint. Fine grain, rocks and lighting are illustrations.'});
+ const sync=()=>{material.bumpMap=exp.layer==='surface'?detail.height:null;material.roughnessMap=exp.layer==='surface'?detail.roughness:null;material.bumpScale=mars?.028:.045;material.needsUpdate=true;};
+ exp.updateSurfaceLayer=sync;exp.surfaceTexture=detail.albedo;material.color.set(mars?'#b3a291':'#c8c8c5');material.roughness=1;material.metalness=0;sync();exp.recolor();
+ publish({siteId:site.id,status:'loading',mode:'illustrative-detail',note:'Looking for '+sourceName+' imagery for this footprint. Fine grain, rocks and lighting are illustrations.'});
  // Source image has fixed geographic UVs. Only the unmeasured fine grain repeats.
  material.onBeforeCompile=shader=>{
   shader.uniforms.lunarGrain={value:detail.albedo};
@@ -89,7 +90,7 @@ export function installLunarSurface(exp,{loadImagery=loadLunarSurfaceImage,loade
     diffuseColor *= vec4(observed.rgb * (0.84 + grain * 0.55) * (0.96 + broad * 0.10), observed.a);
   #endif`);
  };
- material.customProgramCacheKey=()=> 'lunar-observed-material-v1';material.needsUpdate=true;
+ material.customProgramCacheKey=()=> mars?'mars-observed-material-v1':'lunar-observed-material-v1';material.needsUpdate=true;
  void (async()=>{
   try{
    const result=await loadImagery(site,data,{signal:controller.signal,size:1024});if(!active())return;
@@ -102,11 +103,11 @@ export function installLunarSurface(exp,{loadImagery=loadLunarSurfaceImage,loade
       const prepared=prepareImage(imageTexture.image);imageTexture.image=prepared.image;imageTexture.wrapS=imageTexture.wrapT=THREE.ClampToEdgeWrapping;imageTexture.repeat.set(1,1);imageTexture.offset.set(0,0);imageTexture.rotation=0;imageTexture.colorSpace=THREE.SRGBColorSpace;imageTexture.anisotropy=Math.min(8,exp.renderer?.capabilities?.getMaxAnisotropy?.()||1);imageTexture.needsUpdate=true;
       exp.surfaceTexture=imageTexture;exp.groundTexture?.dispose();exp.groundTexture=null;exp.recolor();
       publish({siteId:site.id,status:'available',mode:'orbital-imagery-with-illustrative-detail',...result.metadata,display:prepared.display,
-       detail:'Fine regolith, rock shapes/placement and sunlight are illustrative. No added craters, no displaced DEM vertices, no inferred ice or material classification.'});resolve();
+       detail:(mars?'Surface tint is illustrative; CTX is monochrome. ':'')+'Fine regolith, rock shapes/placement and sunlight are illustrative. No added craters, no displaced DEM vertices, no inferred ice or material classification.'});resolve();
      }catch(error){reject(error);}
     },undefined,reject);owned.push(texture);
    });
-  }catch(error){if(active())publish({siteId:site.id,status:'unavailable',mode:'illustrative-detail',reason:error.message||'LRO imagery could not be loaded.',detail:'Fine regolith and rocks remain illustrative. DEM heights remain available.'});}
+  }catch(error){if(active())publish({siteId:site.id,status:'unavailable',mode:'illustrative-detail',reason:error.message||sourceName+' imagery could not be loaded.',detail:'Fine regolith and rocks remain illustrative. DEM heights remain available.'});}
  })();
  return ()=>{cancelled=true;controller.abort();if(exp.updateSurfaceLayer===sync)exp.updateSurfaceLayer=null;for(const url of urls)URL.revokeObjectURL(url);for(const t of owned)t.dispose();};
 }
