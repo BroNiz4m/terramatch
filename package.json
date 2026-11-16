@@ -9,9 +9,12 @@
     "start": "node scripts/server.mjs",
     "check": "node scripts/check.mjs",
     "test": "node --test tests/*.test.mjs",
-    "build": "node scripts/check.mjs"
+    "build": "node scripts/check.mjs",
+    "vendor:geotiff": "esbuild ./node_modules/geotiff/dist-module/geotiff.js --bundle --format=esm --platform=browser --outfile=dist/vendor/geotiff.module.js --minify --legal-comments=linked"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
+    "geotiff": "^3.0.5",
     "happy-dom": "^21.0.4"
   }
 }

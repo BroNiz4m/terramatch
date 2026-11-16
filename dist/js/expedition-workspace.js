@@ -66,7 +66,7 @@ export function createExpeditionWorkspace(options){
  $('#expedition-notes').onclick=()=>activePanel==='data'?closeDetails():openDetails('data',$('#expedition-notes'));
  $('#expedition-details-close').onclick=()=>closeDetails();
  details.querySelectorAll('[data-expedition-tab]').forEach(button=>button.onclick=()=>openDetails(button.dataset.expeditionTab,button));
- $('#expedition-thermal-records').onclick=options.thermalCompare;$('#expedition-provenance').onclick=()=>{const site=options.getExpedition()?.site;if(site)options.provenance(site);};
+ $('#expedition-thermal-records').onclick=options.thermalCompare;$('#expedition-provenance').onclick=()=>{const exp=options.getExpedition();if(exp?.site)options.provenance(exp.site,exp.data);};
  $('#expedition-map-toggle').onclick=()=>{const map=$('.expedition-minimap-slot'),obscured=!!activePanel||options.isEvidenceOpen(),visible=obscured||map.classList.contains('hidden');if(obscured){closeDetails({focus:false});if(options.isEvidenceOpen())options.closeEvidence();}map.classList.toggle('hidden',!visible);$('#expedition-map-toggle').setAttribute('aria-pressed',String(visible));};
  $('#expedition-pause').onclick=()=>options.pause(true);$('#expedition-exit').onclick=()=>{options.getExpedition()?.keys?.clear();closeDetails({focus:false});options.exit();};
  $('#camera-mode').onchange=()=>{const exp=options.getExpedition();if(!exp)return;if(exp.follow!==($('#camera-mode').value==='follow'))exp.changeCamera();focusScene();};
@@ -74,7 +74,7 @@ export function createExpeditionWorkspace(options){
  window.addEventListener('keydown',event=>{if(view.classList.contains('hidden')||!activePanel||document.querySelector('.modal-backdrop')||!$('#pause-overlay').classList.contains('hidden'))return;if(event.key==='Escape'){event.preventDefault();event.stopImmediatePropagation();closeDetails();return;}if(details.contains(document.activeElement)&&/^(w|a|s|d|shift|arrowup|arrowdown|arrowleft|arrowright)$/i.test(event.key))event.stopImmediatePropagation();},true);
  function reset(site,data,stats){
   guide(null);
-  ++request;layer.disabled=false;layer.value='surface';$('#expedition-layer-state').textContent='';closeDetails({focus:false});$('#expedition-surface-record')?.remove();
+  ++request;layer.disabled=false;layer.value='surface';$('#expedition-layer-state').textContent='';closeDetails({focus:false});$('#expedition-surface-record')?.remove();$('#expedition-elevation-record')?.remove();
   $('#expedition-coordinates').textContent=`${Math.abs(site.lat).toFixed(3)}°${site.lat<0?'S':'N'}, ${Math.abs(site.lon).toFixed(3)}°${site.lon<0?'W':'E'}`;
   $('#expedition-title').textContent=site.id.startsWith('survey-')?({moon:'Lunar area',mars:'Martian area',earth:'Earth area'}[site.body]):site.name;$('#expedition-title').title=site.name;
   $('#expedition-body').textContent=site.country;$('#expedition-world-icon').src='assets/official-'+site.body+'.jpg';$('#expedition-world-icon').alt=site.country;
@@ -94,5 +94,10 @@ export function createExpeditionWorkspace(options){
   describeLayer();
  }
  function stage(phase){view.dataset.expeditionPhase=phase;if(phase!=='explore')guide(null);$('#touch-controls').classList.toggle('hidden',phase!=='explore'||!view.classList.contains('touch-mode'));}
- return{reset,stage,closeDetails,chooseLayer,openDetails,surface,guide,get activePanel(){return activePanel;}};
+ function elevation(record){
+  if(!record||record.status==='original')return;
+  let section=$('#expedition-elevation-record');if(!section){section=document.createElement('div');section.id='expedition-elevation-record';$('#expedition-visual-description').after(section);}
+  section.innerHTML=record.status==='available'?`<h3>Detailed terrain geometry · 1× heights</h3><p>${esc(record.credit)}. Source spacing: about ${esc(Math.round(record.nativeSpacingMeters))} m; display grid: ${esc(record.gridSpacingMeters)} m.</p><p>Rover ground contact, the trail and Inspect use this same DEM surface. Comparison rankings retain their original analysis grid (${esc(record.comparisonGridSpacingMeters)} m).</p><p>${esc(record.note)}</p><a class="text-link" href="${esc(record.sourceURL)}" target="_blank" rel="noopener noreferrer">Open elevation dataset ↗</a>`:`<h3>Original terrain grid retained</h3><p>${esc(record.reason)}</p><p>Grid: ${esc(record.gridSpacingMeters)} m. No extra crater shapes or heights were generated.</p>`;
+ }
+ return{reset,stage,closeDetails,chooseLayer,openDetails,surface,elevation,guide,get activePanel(){return activePanel;}};
 }

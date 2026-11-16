@@ -1,15 +1,11 @@
+import {groundHeight} from './terrain-contact.js';
 import * as THREE from '../vendor/three.module.js';
 
 const clamp=THREE.MathUtils.clamp;
 export const GUIDE_NEAR_RADIUS=4; // Display units, not a field-safety or instrument footprint.
 
 /** Follow the rendered DEM triangles without adding heights to the source dataset. */
-export function guideSurfaceHeight(exp,x,z){
- const {size:n,heights}=exp.data,u=clamp(x/exp.width+.5,0,1)*(n-1),v=clamp(z/exp.depth+.5,0,1)*(n-1),ix=Math.min(n-2,Math.floor(u)),iz=Math.min(n-2,Math.floor(v)),a=u-ix,b=v-iz;
- const nw=heights[iz*n+ix],ne=heights[iz*n+ix+1],sw=heights[(iz+1)*n+ix],se=heights[(iz+1)*n+ix+1];
- const height=a+b<=1?nw+(ne-nw)*a+(sw-nw)*b:se+(sw-se)*(1-a)+(ne-se)*(1-b);
- return (height-exp.base)*exp.scale;
-}
+export const guideSurfaceHeight=groundHeight;
 
 export function nearestGuidePoint(waypoints,position,radius=GUIDE_NEAR_RADIUS){
  if(!position||!waypoints.length)return null;
